@@ -8,6 +8,7 @@ const Categories = () => {
 
   return (
     <>
+    
       <div className="w-[85%] flex flex-wrap mx-auto pt-10">
         <div className="w-full">
           <div className="flex font-bold relative  justify-center items-center flex-col text-4xl text-center text-slate-700 dark:text-slate-300">

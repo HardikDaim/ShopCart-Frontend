@@ -3,6 +3,7 @@ import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from "../Rating";
 import LoaderOverlay from "../LoaderOverlay";
+import { Link } from "react-router-dom";
 
 const ShopProducts = ({ products, loader, styles }) => {
   const [expandedStates, setExpandedStates] = useState({});
@@ -20,7 +21,7 @@ const ShopProducts = ({ products, loader, styles }) => {
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
-    handleResize(); 
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -63,21 +64,25 @@ const ShopProducts = ({ products, loader, styles }) => {
               >
                 {p.discount > 0 && (
                   <div className="flex justify-center items-center absolute text-white w-[30px] h-[20px] md:w-[38px] md:h-[38px] md:rounded-full bg-red-500 font-semibold text-xs -left-0 -top-1">
-                    {p.discount}%
+                    {p.discount}% off
                   </div>
                 )}
-                <img
-                  className="rounded-lg w-full h-28 md:w-full md:h-40 lg:h-60"
-                  src={p.images[0]}
-                  alt={p.name}
-                />
+                <Link to={`/product/details/${p.slug}`}>
+                  <img
+                    className="rounded-lg w-full h-28 md:w-full md:h-40 lg:h-60"
+                    src={p.images[0]}
+                    alt={p.name}
+                  />
+                </Link>
                 <ul className="flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
                   <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <FaRegHeart />
                   </li>
-                  <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
-                    <FaEye />
-                  </li>
+                  <Link to={`/product/details/${p.slug}`}>
+                    <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                      <FaEye />
+                    </li>
+                  </Link>
                   <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <RiShoppingCartLine />
                   </li>

@@ -41,6 +41,45 @@ export const price_range_product = createAsyncThunk(
   }
 );
 
+export const product_details = createAsyncThunk(
+  "home/product_details",
+  async (slug, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/product/details/${slug}`);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response?.data);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
+export const customer_review = createAsyncThunk(
+  "home/customer_review",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post(`/home/customer/submit-review`,info);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response?.data);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
+export const get_reviews = createAsyncThunk(
+  "home/get_reviews",
+  async ({productId}, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/customer/get-reviews/${productId}`);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response?.data);
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 export const query_products = createAsyncThunk(
   "home/query_products",
   async (query, { rejectWithValue, fulfillWithValue }) => {
@@ -70,6 +109,12 @@ const homeReducer = createSlice({
     priceRange: { low: 0, high: 50 },
     totalProducts: 0,
     perPage: 3,
+    product: {},
+    relatedProducts: [],
+    moreProducts: [],
+    totalReview: 0,
+    rating_review: [],
+    reviews: [],
   },
   reducers: {
     messageClear: (state) => {
@@ -142,6 +187,55 @@ const homeReducer = createSlice({
         state.perPage = action.payload?.perPage;
       })
       .addCase(query_products.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.error;
+      })
+      // Product details
+      .addCase(product_details.pending, (state) => {
+        state.loader = true;
+        state.errorMessage = "";
+        state.successMessage = "";
+      })
+      .addCase(product_details.fulfilled, (state, action) => {
+        state.loader = false;
+        state.successMessage = action.payload.message;
+        state.product = action.payload?.product;
+        state.relatedProducts = action.payload?.relatedProducts;
+        state.moreProducts = action.payload?.moreProducts;
+      })
+      .addCase(product_details.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.error;
+      })
+      // customer review
+      .addCase(customer_review.pending, (state) => {
+        state.loader = true;
+        state.errorMessage = "";
+        state.successMessage = "";
+      })
+      .addCase(customer_review.fulfilled, (state, action) => {
+        state.loader = false;
+        state.successMessage = action.payload.message;
+     
+      })
+      .addCase(customer_review.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.error;
+      })
+      // get reviews
+      .addCase(get_reviews.pending, (state) => {
+        state.loader = true;
+        state.errorMessage = "";
+        state.successMessage = "";
+      })
+      .addCase(get_reviews.fulfilled, (state, action) => {
+        state.loader = false;
+        state.successMessage = action.payload.message;
+        state.reviews = action.payload.reviews;
+        state.totalReview = action.payload.totalReview;
+        state.rating_review = action.payload.rating_review;
+      })
+      .addCase(get_reviews.rejected, (state, action) => {
         state.loader = false;
         state.errorMessage = action.payload?.error;
       });

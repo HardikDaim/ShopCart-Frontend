@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { place_order } from "../store/reducers/orderReducer";
 
 const Shipping = () => {
+  const {
+    state: { products = [], price = 0, shipping_fee = 0, items = 0 } = {},
+  } = useLocation();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -12,8 +23,9 @@ const Shipping = () => {
     postalCode: "",
     country: "",
     phone: "",
-    email: ""
+    email: "",
   });
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
@@ -34,8 +46,9 @@ const Shipping = () => {
       postalCode,
       country,
       phone,
-      email
+      email,
     } = formState;
+
     if (
       firstName &&
       lastName &&
@@ -51,42 +64,31 @@ const Shipping = () => {
     }
   };
 
-  const cartItems = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 49.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 19.99,
-      quantity: 2,
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 29.99,
-      quantity: 1,
-      image: "https://via.placeholder.com/150",
-    },
-  ];
-
-  const totalAmount = cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  );
+  const placeOrder = () => {
+    dispatch(
+      place_order({
+        price,
+        products,
+        shipping_fee,
+        items,
+        shippingInfo: formState,
+        customerId: userInfo.id,
+        navigate,
+      })
+    );
+  };
+  
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold mb-8 text-center">
-          Shipping Information
-        </h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">Shipping Information</h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-2/3">
             <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-8">
@@ -94,10 +96,7 @@ const Shipping = () => {
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="firstName"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="firstName">
                         First Name
                       </label>
                       <input
@@ -111,10 +110,7 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="lastName"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="lastName">
                         Last Name
                       </label>
                       <input
@@ -129,10 +125,7 @@ const Shipping = () => {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <label
-                      className="text-lg font-semibold mb-2"
-                      htmlFor="address"
-                    >
+                    <label className="text-lg font-semibold mb-2" htmlFor="address">
                       Address
                     </label>
                     <input
@@ -147,10 +140,7 @@ const Shipping = () => {
                   </div>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="city"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="city">
                         City
                       </label>
                       <input
@@ -164,10 +154,7 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="state"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="state">
                         State
                       </label>
                       <input
@@ -183,10 +170,7 @@ const Shipping = () => {
                   </div>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="postalCode"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="postalCode">
                         Postal Code
                       </label>
                       <input
@@ -200,10 +184,7 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label
-                        className="text-lg font-semibold mb-2"
-                        htmlFor="country"
-                      >
+                      <label className="text-lg font-semibold mb-2" htmlFor="country">
                         Country
                       </label>
                       <input
@@ -256,16 +237,17 @@ const Shipping = () => {
                 </form>
               ) : (
                 <div className="space-y-4">
-                  {/* Display Shipping Information */}
-                  <div className="flex flex-col gap-1 ">
+                  <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-semibold mb-2">
                       Deliver to: {formState.firstName} {formState.lastName}
                     </h2>
-                    <p> <span className="bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2 py-1 rounded">Home</span>
-                      {formState.address}, {formState.city}, {formState.state},{" "}
-                      {formState.postalCode}, {formState.country}
+                    <p>
+                      <span className="bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2 py-1 rounded">
+                        Home
+                      </span>
+                      {formState.address}, {formState.city}, {formState.state}, {formState.postalCode}, {formState.country}
                       <span
-                        className="ml-2 text-blue-600 cursor-pointer"
+                        className="ml-2 text-blue-600 dark:text-blue-400 cursor-pointer"
                         onClick={() => setIsSubmitted(false)}
                       >
                         Change Address
@@ -279,69 +261,89 @@ const Shipping = () => {
             </div>
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold mb-4">Your Cart</h3>
-              {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center bg-white dark:bg-slate-800 rounded-lg shadow-md p-4"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-20 h-20 object-cover rounded-lg"
-                  />
-                  <div className="ml-4 flex-1">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
-                    <p className="text-slate-600 dark:text-slate-400">
-                      ₹{item.price.toFixed(2)}
-                    </p>
-                    <div className="mt-2 flex items-center space-x-2">
-                      <button className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200">
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200">
-                        +
-                      </button>
+              {products.length > 0 ? (
+                products.map((p, i) => (
+                  <div key={i} className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
+                    <div className="flex justify-start items-center mb-4">
+                      <h2 className="text-sm md:text-md font-bold">{p.shopName}</h2>
                     </div>
+                    {p.products.map((pt) => (
+                      <div key={pt.productInfo.id} className="w-full flex flex-col sm:flex-row items-center mb-4">
+                        <img
+                          src={pt.productInfo.images[0]}
+                          alt={pt.productInfo.name}
+                          className="w-30 h-20 object-cover rounded-lg mb-4 sm:mb-0 sm:mr-4"
+                        />
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold">{pt.productInfo.name}</h3>
+                          <span className="text-sm text-gray-500 mr-2">Brand: {pt.productInfo?.brand}</span>
+                          {pt.productInfo?.discount > 0 ? (
+                            <>
+                              <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
+                                {formatPrice(pt.productInfo.price)}
+                              </span>
+                              <span className="text-blue-600 dark:text-blue-400">
+                                
+                                {formatPrice(
+                                  pt.productInfo.price -
+                                  Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)
+                                )}
+                              </span>
+                            </>
+                          ) : (
+                            <p className="text-blue-600 dark:text-blue-400">{formatPrice(pt.productInfo.price)}</p>
+                          )}
+                          <div className="flex items-center space-x-2">
+                            <span >Quantity: {pt.quantity}</span>
+                          </div>
+                        </div>
+                        <div className="ml-0 sm:ml-4 mt-4 sm:mt-0">
+                          <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                            
+                            {formatPrice(
+                              pt.productInfo.price -
+                              Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="ml-4">
-                    <p className="text-lg font-semibold">
-                      ₹{(item.price * item.quantity).toFixed(2)}
-                    </p>
-                    <button className="text-red-500 hover:text-red-700 dark:hover:text-red-400 mt-2">
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-gray-600">No products in cart.</p>
+              )}
             </div>
           </div>
           <div className="w-full lg:w-1/3 bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
             <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span>Total Items</span>
-                <span>5</span>
+                <span>Items</span>
+                <span>{items}</span>
               </div>
               <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>₹{totalAmount.toFixed(2)}</span>
+                <span>Discounted Price</span>
+                <span>{formatPrice(price)}</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping</span>
-                <span>₹5.00</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Tax</span>
-                <span>₹{(totalAmount * 0.1).toFixed(2)}</span>
+                <span>Delivery Charges</span>
+                <span>{formatPrice(shipping_fee)}</span>
               </div>
               <div className="border-t border-slate-300 dark:border-slate-700 my-2"></div>
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>₹{(totalAmount + 5 + totalAmount * 0.1).toFixed(2)}</span>
+                <span>{formatPrice(price + shipping_fee)}</span>
               </div>
             </div>
-            <button disabled={isSubmitted ? false : true} className={`w-full mt-6 py-2 bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500  text-white rounded ${isSubmitted ? 'cursor-pointer' : 'cursor-not-allowed'}`}>
+            <p className="pt-2">Note: The prices are inclusive of GST and other taxes.</p>
+            <button
+              disabled={!isSubmitted}
+              className={`w-full mt-6 py-2 text-white rounded ${
+                isSubmitted ? "cursor-pointer bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500" : "cursor-not-allowed bg-blue-300 dark:bg-blue-400"
+              }`}
+              onClick={placeOrder}
+            >
               Place Order
             </button>
           </div>
