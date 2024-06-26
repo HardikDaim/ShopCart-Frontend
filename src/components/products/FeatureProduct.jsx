@@ -3,37 +3,61 @@ import Rating from "../Rating";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
-import { useDispatch, useSelector } from 'react-redux';
-import { add_to_cart, messageClear } from "../../store/reducers/cartReducer";
-import { toast } from 'react-hot-toast';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  add_to_cart,
+  add_to_wishlist,
+  messageClear,
+} from "../../store/reducers/cartReducer";
+import { toast } from "react-hot-toast";
 
 const FeatureProduct = ({ products }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userInfo } = useSelector(state => state.auth);
-  const { successMessage, errorMessage } = useSelector(state => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+  const { successMessage, errorMessage } = useSelector((state) => state.cart);
 
   const add_cart = (id) => {
-    if(userInfo){
-      dispatch(add_to_cart({ userId: userInfo.id, quantity: 1, productId: id}))
-
+    if (userInfo) {
+      dispatch(
+        add_to_cart({ userId: userInfo.id, quantity: 1, productId: id })
+      );
     } else {
-      toast("Login to buy Products");
+      toast.error("Login to buy Products");
       navigate("/login");
     }
-  }
+  };
 
   useEffect(() => {
-    if(successMessage) {
+    if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
     }
-    if(errorMessage) {
+    if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-  }, [successMessage, errorMessage, messageClear,dispatch])
+  }, [successMessage, errorMessage, messageClear, dispatch]);
 
+  const add_wishlist = (p) => {
+    if (userInfo) {
+      dispatch(
+        add_to_wishlist({
+          userId: userInfo?.id,
+          productId: p?._id,
+          name: p?.name,
+          price: p?.price,
+          image: p?.images[0],
+          discount: p?.discount,
+          rating: p?.rating,
+          slug: p?.slug,
+        })
+      );
+    } else {
+      toast.error("Login to buy Products");
+      navigate("/login");
+    }
+  };
   return (
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-10">
@@ -60,7 +84,7 @@ const FeatureProduct = ({ products }) => {
               >
                 {product.discount > 0 && (
                   <div className="flex justify-center z-10 items-center absolute text-white w-[38px] h-[38px] p-2 rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
-                    {product.discount}%
+                    {product.discount}% off
                   </div>
                 )}
                 <div className="relative">
@@ -72,13 +96,21 @@ const FeatureProduct = ({ products }) => {
                     />
                   </Link>
                   <ul className="flex transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
-                    <li className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180">
+                    <li
+                      onClick={() => add_wishlist(product)}
+                      className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180"
+                    >
                       <FaRegHeart />
                     </li>
-                    <li className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180">
-                      <FaEye />
-                    </li>
-                    <li onClick={() => add_cart(product._id)} className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180">
+                    <Link to={`/product/details/${product.slug}`}>
+                      <li className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180">
+                        <FaEye />
+                      </li>
+                    </Link>
+                    <li
+                      onClick={() => add_cart(product._id)}
+                      className="w-10 h-10 md:w-12 md:h-12  cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white transition-all transform hover:rotate-180"
+                    >
                       <RiShoppingCartLine />
                     </li>
                   </ul>

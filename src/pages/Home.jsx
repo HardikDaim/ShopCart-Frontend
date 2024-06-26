@@ -12,7 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, latestProducts, topRatedProducts, discountProducts } =
     useSelector((state) => state.home);
-
+   
   useEffect(() => {
     dispatch(get_product());
   }, [dispatch]);

@@ -67,21 +67,23 @@ const Products = ({ title, products }) => {
                   pl.price - (pl.price * pl.discount) / 100;
 
                 return (
-                  <Link
+                  <Link to={`/product/details/${pl.slug}`}
                     key={j}
                     className="flex relative justify-start items-start overflow-x-auto"
-                    to="#"
+                  
                   >
                     {pl.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white bg-red-500 font-semibold text-xs -left-0 rounded-md -top-0 w-8 h-5  shadow-lg">
                         {pl.discount}%
                       </div>
                     )}
-                    <img
-                      className="w-36 h-28 md:w-32 md:h-28 lg:w-40 lg:h-auto rounded-md"
-                      src={pl.images[0]}
-                      alt={pl.name}
-                    />
+                    
+                      <img
+                        className="w-36 h-28 md:w-32 md:h-28 lg:w-40 lg:h-auto rounded-md"
+                        src={pl.images[0]}
+                        alt={pl.name}
+                      />
+                 
                     <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-700 dark:text-slate-400">
                       <h2>{pl.name}</h2>
                       <div className="flex gap-1">
