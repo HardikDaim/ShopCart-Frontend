@@ -5,14 +5,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { get_orders } from "../store/reducers/orderReducer";
+import LoaderOverlay from "../components/LoaderOverlay";
+import toast from "react-hot-toast";
+import { messageClear } from "../store/reducers/authReducer";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { orderId } = useParams();
-  const { userInfo } = useSelector((state) => state.auth);
-  const { myOrders } = useSelector((state) => state.order);
-
+  const { loader, userInfo, errorMessage } = useSelector((state) => state.auth);
+  const { loader: orderLoader, myOrders, errorMessage: orderError } = useSelector((state) => state.order); 
+  
   const [isOpen, setIsOpen] = useState(false);
   const options = [
     { value: "all", label: "Order Status" },
@@ -55,9 +58,21 @@ const Orders = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if(errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if(orderError) {
+      toast.error(orderError);
+      dispatch(messageClear());
+    }
+  },[errorMessage, dispatch, orderError])
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
       <Header />
+      {(loader || orderLoader) && <LoaderOverlay />}
       <main className="container mx-auto p-4">
         <div className="py-2 px-1 md:py-4 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
           <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">

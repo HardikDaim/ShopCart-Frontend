@@ -26,7 +26,7 @@ const SearchProducts = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category");
   const searchValue = searchParams.get("search");
-console.log(searchParams)
+  console.log(searchParams);
 
   const dispatch = useDispatch();
   const {

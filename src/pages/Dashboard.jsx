@@ -3,13 +3,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { get_dashboard_data } from "../store/reducers/dashboardReducer";
+import { get_dashboard_data, messageClear } from "../store/reducers/dashboardReducer";
+import LoaderOverlay from "../components/LoaderOverlay";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const {
+    loader,successMessage, errorMessage,
     recentOrders,
     totalOrders,
     pendingOrders,
@@ -38,9 +41,17 @@ const Dashboard = () => {
     });
   };
   
+  useEffect(() => {
+    if(errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear);
+    }
+  },[errorMessage, dispatch]);
+
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
       <Header />
+      {loader && <LoaderOverlay />}
       <main className="container mx-auto p-4">
         <h2 className="text-xl font-semibold mb-4">
           Welcome back, {userInfo.name}!
