@@ -15,7 +15,7 @@ import {
 import LoaderOverlay from "../components/LoaderOverlay";
 import { toast } from 'react-hot-toast';
 
-const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:4000");
+// const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:4000");
 
 const Chat = () => {
   const scrollRef = useRef();
@@ -30,11 +30,11 @@ const Chat = () => {
   const [receiverMessage, setReceiverMessage] = useState("");
   const [activeSeller, setActiveSeller] = useState([]);
 
-  useEffect(() => {
-    if (userInfo?.id) {
-      socket.emit("add_customer", userInfo.id, userInfo);
-    }
-  }, [userInfo]);
+  // useEffect(() => {
+  //   if (userInfo?.id) {
+  //     socket.emit("add_customer", userInfo.id, userInfo);
+  //   }
+  // }, [userInfo]);
 
   useEffect(() => {
     if (userInfo?.id) {
@@ -64,21 +64,21 @@ const Chat = () => {
     }
   };
 
-  useEffect(() => {
-    socket.on("seller_message", (msg) => {
-      setReceiverMessage(msg);
-    });
-    socket.on("activeSeller", (sellers) => {
-      setActiveSeller(sellers || []); // Ensure sellers is an array
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("seller_message", (msg) => {
+  //     setReceiverMessage(msg);
+  //   });
+  //   socket.on("activeSeller", (sellers) => {
+  //     setActiveSeller(sellers || []); // Ensure sellers is an array
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    if (successMessage) {
-      socket.emit("send_customer_message", fd_messages[fd_messages.length - 1]); // last message
-      dispatch(messageClear());
-    }
-  }, [dispatch, successMessage]);
+  // useEffect(() => {
+  //   if (successMessage) {
+  //     socket.emit("send_customer_message", fd_messages[fd_messages.length - 1]); // last message
+  //     dispatch(messageClear());
+  //   }
+  // }, [dispatch, successMessage]);
 
   useEffect(() => {
     if (receiverMessage) {
