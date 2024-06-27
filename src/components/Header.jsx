@@ -257,7 +257,7 @@ const Header = () => {
                       >
                         <button
                           type="button"
-                          className="inline-flex w-full px-4 py-2"
+                          className="inline-flex w-full px-1 py-2"
                         >
                           All categories
                         </button>
@@ -273,7 +273,7 @@ const Header = () => {
                         >
                           <button
                             type="button"
-                            className="inline-flex w-full px-4 py-2"
+                            className="inline-flex w-full px-1 py-2"
                           >
                             {cat.name}
                           </button>
