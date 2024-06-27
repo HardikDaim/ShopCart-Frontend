@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { FaList } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Header from "../components/Header";
@@ -10,17 +10,12 @@ import {
   add_customer_friend,
   messageClear,
   send_message,
-  updateMessage
+  updateMessage,
 } from "../store/reducers/chatReducer";
 import LoaderOverlay from "../components/LoaderOverlay";
 import { toast } from 'react-hot-toast';
-import { useRef } from "react";
 
-const socketUrl = process.env.NODE_ENV === 'production'
-  ? 'https://shop-cart-backend-green.vercel.app' 
-  : 'http://localhost:4000';
-
-const socket = io(socketUrl);
+const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:4000");
 
 const Chat = () => {
   const scrollRef = useRef();
@@ -33,7 +28,7 @@ const Chat = () => {
   );
   const [show, setShow] = useState(false);
   const [receiverMessage, setReceiverMessage] = useState("");
-  const [activeSeller, setActiveSeller] = useState("");
+  const [activeSeller, setActiveSeller] = useState([]);
 
   useEffect(() => {
     if (userInfo?.id) {
@@ -74,7 +69,7 @@ const Chat = () => {
       setReceiverMessage(msg);
     });
     socket.on("activeSeller", (sellers) => {
-      setActiveSeller(sellers);
+      setActiveSeller(sellers || []); // Ensure sellers is an array
     });
   }, []);
 
@@ -140,8 +135,7 @@ const Chat = () => {
                             src={f.image}
                             alt={f.name}
                           />
-
-                          {activeSeller.some((c) => c.sellerId === f.fdId) && (
+                          {Array.isArray(activeSeller) && activeSeller.some((c) => c.sellerId === f.fdId) && (
                             <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
                           )}
                         </div>
@@ -169,7 +163,7 @@ const Chat = () => {
                         className="w-[38px] h-[38px] border-2 max-w-[38px] p-[2px] rounded-full"
                         src={currentFd?.image}
                       />
-                      {activeSeller.some(
+                      {Array.isArray(activeSeller) && activeSeller.some(
                         (c) => c.sellerId === currentFd.fdId
                       ) && (
                         <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
@@ -224,7 +218,7 @@ const Chat = () => {
                                     />
                                   </div>
                                   {!isReceiver && (
-                                    <div className="flex justify-center items-start flex-col w-full bg-gray-300 dark:bg-gray-800 dark:text-white font-semibold py-1 px-2 rounded-md">
+                                    <div className="flex justify-center items-start flex-col w-full bg-slate-300 dark:bg-slate-600 text-slate-900 dark:text-slate-50 font-semibold py-1 px-2 rounded-md">
                                       <span>{m?.message}</span>
                                     </div>
                                   )}
@@ -232,36 +226,37 @@ const Chat = () => {
                               </div>
                             );
                           })
-                        : "no conversation yet!!!"}
-                        
+                        : ""}
                     </div>
                   </div>
-                  <form onSubmit={send} className="flex gap-3">
+                  <div className="flex gap-3 w-full">
                     <input
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       type="text"
-                      className="w-full flex justify-between px-2 border-2 border-slate-300 dark:border-slate-600 items-center py-[5px] focus:border-blue-500 rounded-md outline-none bg-transparent text-slate-900 dark:text-slate-50"
-                      placeholder="Type your Message..."
+                      className="w-full dark:bg-slate-700 dark:text-slate-100 outline-none py-2 px-3 rounded-full"
+                      placeholder="Type a message..."
                     />
                     <button
-                      type="submit"
-                      className="p-2 bg-blue-600 hover:bg-blue-400 text-white rounded-md font-semibold"
+                      onClick={send}
+                      className="py-2 px-5 bg-blue-600 text-white font-semibold rounded-full"
                     >
                       Send
                     </button>
-                  </form>
+                  </div>
                 </>
               ) : (
-                <div className="w-full h-full flex justify-center items-center text-lg font-bold">
-                  <span>Select Seller</span>
+                <div className="w-full h-full flex justify-center items-center">
+                  <h2 className="text-slate-900 dark:text-slate-50 text-xl font-semibold">
+                    Please select a seller to start chatting
+                  </h2>
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
-     
+      <Footer />
     </>
   );
 };
