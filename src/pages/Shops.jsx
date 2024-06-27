@@ -96,12 +96,11 @@ const Shops = () => {
   ]);
 
   useEffect(()=> {
-   
     if(errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-  },[dispatch,errorMessage,successMessage]);
+  },[dispatch,errorMessage]);
 
   const resetRating = () => {
     setRating('');
@@ -120,6 +119,7 @@ const Shops = () => {
   return (
     <div>
       <Header />
+      {loader && <LoaderOverlay />}
       <section className='bg-[url("https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-with-photo_23-2149000923.jpg")] h-40 md:h-80 lg:h-96 mt-4 bg-cover rounded-lg bg-no-repeat relative bg-left'>
         <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
           <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">

@@ -12,7 +12,7 @@ const Shipping = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userInfo } = useSelector((state) => state.auth);
+  const {loader, errorMessage, userInfo } = useSelector((state) => state.auth);
 
   const [formState, setFormState] = useState({
     firstName: "",

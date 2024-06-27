@@ -23,7 +23,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const { sellerId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-  const { currentFd, MyFriends, fd_messages, loader, successMessage } = useSelector(
+  const { currentFd, MyFriends, fd_messages, loader, successMessage, errorMessage } = useSelector(
     (state) => state.chat
   );
   const [show, setShow] = useState(false);

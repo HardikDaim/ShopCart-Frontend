@@ -22,6 +22,7 @@ import Wishlist from "./pages/Wishlist";
 import OrderDetails from "./pages/OrderDetails";
 import ScrollToTop from "./scrollToTop";
 import Chat from "./pages/Chat";
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
       />
       <BrowserRouter>
         <ScrollToTop />
+        <Analytics />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
