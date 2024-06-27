@@ -23,6 +23,7 @@ import OrderDetails from "./pages/OrderDetails";
 import ScrollToTop from "./scrollToTop";
 import Chat from "./pages/Chat";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Analytics />
+        <SpeedInsights />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
