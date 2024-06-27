@@ -6,19 +6,33 @@ import FeatureProduct from "../components/products/FeatureProduct";
 import Products from "../components/products/Products";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { get_product } from "../store/reducers/homeReducer";
+import { get_product, messageClear } from "../store/reducers/homeReducer";
+import toast from "react-hot-toast";
+import LoaderOverlay from '../components/LoaderOverlay';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products, latestProducts, topRatedProducts, discountProducts } =
+  const {loader, errorMessage, successMessage, products, latestProducts, topRatedProducts, discountProducts } =
     useSelector((state) => state.home);
    
   useEffect(() => {
     dispatch(get_product());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if (successMessage) {
+      dispatch(messageClear());
+    }
+  },[dispatch, errorMessage, successMessage]);
+
+
   return (
     <div className="w-full">
+      {loader && <LoaderOverlay />}
       <Header />
       <Banner />
       <Categoires />

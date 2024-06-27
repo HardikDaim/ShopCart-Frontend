@@ -40,8 +40,8 @@ const ShopProducts = ({ products, loader, styles }) => {
           : "flex flex-col gap-3"
       }`}
     >
-      {loader}
-      {products &&
+      {loader && <LoaderOverlay />}
+      {products.length > 0 ?
         products.map((p, i) => {
           const discountedPrice = p.price - (p.price * p.discount) / 100;
           const words = p.description.split(" ");
@@ -133,7 +133,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               </div>
             </div>
           );
-        })}
+        }): 'no Product with desired category found...'}
     </div>
   );
 };
