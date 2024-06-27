@@ -163,35 +163,41 @@ const Details = () => {
 
   const buyNow = () => {
     let price = 0;
-    if (product?.discount !== 0) {
-      price =
-        product?.price - Math.floor((product?.price * product?.discount) / 100);
+    if (userInfo) {
+      if (product?.discount !== 0) {
+        price =
+          product?.price -
+          Math.floor((product?.price * product?.discount) / 100);
+      } else {
+        price = product?.price;
+      }
+
+      const obj = [
+        {
+          sellerId: product?.sellerId,
+          shopName: product?.shopName,
+          price: quantity * price,
+          products: [
+            {
+              quantity,
+              productInfo: product,
+            },
+          ],
+        },
+      ];
+
+      navigate("/shipping", {
+        state: {
+          products: obj,
+          price: quantity * price,
+          shipping_fee: 50 * quantity,
+          items: quantity,
+        },
+      });
     } else {
-      price = product?.price;
+      toast.error("Log In to buy Products")
+      navigate("/login");
     }
-
-    const obj = [
-      {
-        sellerId: product?.sellerId,
-        shopName: product?.shopName,
-        price: quantity * price,
-        products: [
-          {
-            quantity,
-            productInfo: product,
-          },
-        ],
-      },
-    ];
-
-    navigate("/shipping", {
-      state: {
-        products: obj,
-        price: quantity * price,
-        shipping_fee: 50 * quantity,
-        items: quantity,
-      },
-    });
   };
 
   const reviewSubmit = (e) => {
@@ -272,10 +278,7 @@ const Details = () => {
                 {totalReview} reviews
               </span>
               <Link to={`/chat/${product?.sellerId}`}>
-              <span className="hover:underline cursor-pointer">
-                chat
-              </span>
-              
+                <span className="hover:underline cursor-pointer">chat</span>
               </Link>
             </div>
             <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
