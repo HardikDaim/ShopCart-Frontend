@@ -52,6 +52,8 @@ const Header = () => {
     }
   };
 
+
+
   return (
     <>
       <header className="bg-white  dark:bg-slate-900 text-slate-700 dark:text-slate-200">
@@ -332,7 +334,6 @@ const Header = () => {
                             : "max-h-0 opacity-0"
                         } overflow-hidden`}
                       >
-                      
                         <ul className="divide-y divide-gray-100 dark:divide-slate-600">
                           {searchValue.trim() === "" ? (
                             categories.map((cat, index) => (
@@ -350,8 +351,10 @@ const Header = () => {
                               </li>
                             ))
                           ) : products.length > 0 ? (
-                         
-                            products.map((suggestion) => (
+                            products.map((suggestion) => {
+                              const discountedPrice =
+                              suggestion.price - (suggestion.price * suggestion.discount) / 100;
+                              return (
                               <li
                                 key={suggestion.id}
                                 className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
@@ -370,11 +373,30 @@ const Header = () => {
                                     {suggestion.name}
                                   </p>
                                   <p className="text-xs text-gray-500 dark:text-slate-400">
-                                    ₹{suggestion.price}
+                                    {suggestion?.discount !== 0 ? (
+                                      <>
+                                        <span className="line-through text-slate-500">
+                                          ₹
+                                          {suggestion?.price.toLocaleString(
+                                            "en-IN"
+                                          )}
+                                        </span>{" "}
+                                        <span className="text-blue-700 dark:text-blue-500">
+                                          ₹
+                                          {discountedPrice.toLocaleString(
+                                            "en-IN"
+                                          )}{" "}
+                                          (-
+                                          {suggestion?.discount}%)
+                                        </span>
+                                      </>
+                                    ) : (
+                                      <span className="text-blue-700 dark:text-blue-500">₹{suggestion?.price}</span>
+                                    )}
                                   </p>
                                 </div>
                               </li>
-                            ))
+                            )})
                           ) : (
                             <div className="flex items-center justify-center py-2">
                               <p className="text-sm text-gray-900 dark:text-slate-300">

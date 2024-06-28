@@ -36,11 +36,13 @@ const Details = () => {
   const { product, relatedProducts, moreProducts, loader } = useSelector(
     (state) => state.home
   );
+  
   const {
     loader: cartLoader,
     errorMessage,
     successMessage,
   } = useSelector((state) => state.cart);
+
   const {
     loader: homeloader,
     errorMessage: homeErrorMessage,
