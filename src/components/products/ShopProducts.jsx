@@ -3,9 +3,16 @@ import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from "../Rating";
 import LoaderOverlay from "../LoaderOverlay";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { add_to_cart, add_to_wishlist, messageClear } from "../../store/reducers/cartReducer";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const ShopProducts = ({ products, loader, styles }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+  const { successMessage, errorMessage } = useSelector((state) => state.cart);
   const [expandedStates, setExpandedStates] = useState({});
   const [wordLimit, setWordLimit] = useState(20);
 
@@ -32,6 +39,46 @@ const ShopProducts = ({ products, loader, styles }) => {
     }));
   };
 
+  const add_cart = (id) => {
+    if (userInfo) {
+      dispatch(
+        add_to_cart({ userId: userInfo.id, quantity: 1, productId: id })
+      );
+    } else {
+      toast.error("Login to buy Products");
+      navigate("/login");
+    }
+  };
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage, messageClear, dispatch]);
+
+  const add_wishlist = (p) => {
+    if (userInfo) {
+      dispatch(
+        add_to_wishlist({
+          userId: userInfo?.id,
+          productId: p?._id,
+          name: p?.name,
+          price: p?.price,
+          image: p?.images[0],
+          discount: p?.discount,
+          rating: p?.rating,
+          slug: p?.slug,
+        })
+      );
+    } else {
+      toast.error("Login to buy Products");
+      navigate("/login");
+    }
+  };
   return (
     <div
       className={`w-full ${
@@ -64,7 +111,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               >
                 {p.discount > 0 && (
                   <div className="flex justify-center items-center absolute text-white w-[30px] h-[20px] md:w-[38px] md:h-[38px] md:rounded-full bg-red-500 font-semibold text-xs -left-0 -top-1">
-                    {p.discount}% off
+                    {p.discount}% 
                   </div>
                 )}
                 <Link to={`/product/details/${p.slug}`}>
@@ -75,7 +122,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                   />
                 </Link>
                 <ul className="flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
-                  <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                  <li   onClick={() => add_wishlist(p)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <FaRegHeart />
                   </li>
                   <Link to={`/product/details/${p.slug}`}>
@@ -83,7 +130,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                       <FaEye />
                     </li>
                   </Link>
-                  <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                  <li    onClick={() => add_cart(p._id)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <RiShoppingCartLine />
                   </li>
                 </ul>

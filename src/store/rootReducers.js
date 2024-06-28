@@ -5,6 +5,7 @@ import cartReducer from "./reducers/cartReducer";
 import orderReducer from "./reducers/orderReducer";
 import dashboardReducer from "./reducers/dashboardReducer";
 import chatReducer from "./reducers/chatReducer";
+import searchReducer from "./reducers/searchReducer";
 
 
 const rootReducers = {
@@ -15,5 +16,6 @@ const rootReducers = {
     order : orderReducer,
     dashboard : dashboardReducer,
     chat : chatReducer,
+    search : searchReducer,
 }
 export default rootReducers;
