@@ -13,29 +13,43 @@ import {
   FaAngleDown,
   FaAngleUp,
 } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { SiTheregister } from "react-icons/si";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useDispatch, useSelector } from "react-redux";
+import { search_products } from "../store/reducers/searchReducer";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { categories } = useSelector((state) => state.home);
+  const { products, loader } = useSelector((state) => state.search);
   const { pathname } = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showCategory, setShowCategory] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState("");
+  const [suggestions, setSuggestions] = useState("");
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const search = (e) => {
+  const handleSearchSubmit = (e) => {
     e.preventDefault();
     navigate(`/products/search?search=${searchValue}&&category=${category}`);
+  };
+
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setSearchValue(value);
+    if (value.trim() !== "") {
+      dispatch(search_products(value));
+    }
   };
 
   return (
@@ -49,11 +63,8 @@ const Header = () => {
           </div>
           <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
             {userInfo && (
-              <div className="font-medium">
-                Welcome, {userInfo.name}
-              </div>
+              <div className="font-medium">Welcome, {userInfo.name}</div>
             )}
-
             <span className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
               <FaGithub />
             </span>
@@ -229,45 +240,31 @@ const Header = () => {
                 </div>
               </div>
 
-              <form className="w-full mx-auto" onSubmit={search}>
-                <div className="flex">
-                  <button
-                    onClick={() => setShowDropdown(!showDropdown)}
-                    className="hidden lg:flex gap-1 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-slate-500 bg-gray-100 dark:bg-slate-600 border border-slate-300 rounded-s-lg dark:text-slate-300 dark:border-slate-700 hover:bg-gray-200 focus:outline-none"
-                    type="button"
-                  >
-                    {category || "All categories"}
-                    <span>
-                      <FaAngleDown />
-                    </span>
-                  </button>
-                  <div
-                    className={`z-20 transition-all duration-500 ease-in-out ${
-                      showDropdown ? "max-h-96" : "hidden"
-                    } overflow-auto absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700`}
-                  >
-                    <ul aria-labelledby="dropdown-button" className="text-sm">
-                      <li
-                        key="all-categories"
-                        className="inline-flex border-b dark:border-slate-900 w-full px-4 py-2 text-slate-500 dark:text-slate-300 dark:hover:bg-slate-900 hover:bg-gray-100"
-                        onClick={() => {
-                          setCategory("");
-                          setShowDropdown(false);
-                        }}
-                      >
-                        <button
-                          type="button"
-                          className="inline-flex w-full px-1 py-2"
-                        >
-                          All categories
-                        </button>
-                      </li>
-                      {categories.map((cat, index) => (
+              {/* search */}
+              <div className="w-full mx-auto relative">
+                <form className="w-full mx-auto" onSubmit={handleSearchSubmit}>
+                  <div className="flex">
+                    <button
+                      onClick={() => setShowDropdown(!showDropdown)}
+                      className="hidden lg:flex gap-1 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-slate-500 bg-gray-100 dark:bg-slate-600 border border-slate-300 rounded-s-lg dark:text-slate-300 dark:border-slate-700 hover:bg-gray-200 focus:outline-none"
+                      type="button"
+                    >
+                      {category || "All categories"}
+                      <span>
+                        <FaAngleDown />
+                      </span>
+                    </button>
+                    <div
+                      className={`z-20 transition-all duration-500 ease-in-out ${
+                        showDropdown ? "max-h-96" : "hidden"
+                      } overflow-auto absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700`}
+                    >
+                      <ul aria-labelledby="dropdown-button" className="text-sm">
                         <li
-                          key={index}
+                          key="all-categories"
                           className="inline-flex border-b dark:border-slate-900 w-full px-4 py-2 text-slate-500 dark:text-slate-300 dark:hover:bg-slate-900 hover:bg-gray-100"
                           onClick={() => {
-                            setCategory(cat.name);
+                            setCategory("");
                             setShowDropdown(false);
                           }}
                         >
@@ -275,44 +272,122 @@ const Header = () => {
                             type="button"
                             className="inline-flex w-full px-1 py-2"
                           >
-                            {cat.name}
+                            All categories
                           </button>
                         </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="relative w-full">
-                    <input
-                      onChange={(e) => setSearchValue(e.target.value)}
-                      type="search"
-                      className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 focus:ring-gray-300"
-                      placeholder="Search..."
-                    />
-                    <button
-                      type="submit"
-                      className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-                    >
-                      <svg
-                        className="w-4 h-4"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 20"
+                        {categories.map((cat, index) => (
+                          <li
+                            key={index}
+                            className="inline-flex border-b dark:border-slate-900 w-full px-4 py-2 text-slate-500 dark:text-slate-300 dark:hover:bg-slate-900 hover:bg-gray-100"
+                            onClick={() => {
+                              setCategory(cat.name);
+                              setShowDropdown(false);
+                            }}
+                          >
+                            <button
+                              type="button"
+                              className="inline-flex w-full px-1 py-2"
+                            >
+                              {cat.name}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="w-full">
+                      <input
+                        onChange={handleSearchChange}
+                        onClick={() => setShowSuggestions(true)}
+                        onBlur={() => setShowSuggestions(false)}
+                        type="search"
+                        className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 focus:ring-gray-300"
+                        placeholder="Search..."
+                        value={searchValue}
+                      />
+                      <button
+                        type="submit"
+                        className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                       >
-                        <path
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                        />
-                      </svg>
-                      <span className="sr-only">Search</span>
-                    </button>
+                        <svg
+                          className="w-4 h-4"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                          />
+                        </svg>
+                        <span className="sr-only">Search</span>
+                      </button>
+                      <div
+                        className={`absolute z-20 top-full left-0 w-full bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg shadow-lg mt-1 transition-all duration-300 ease-in-out ${
+                          showSuggestions
+                            ? "max-h-96 opacity-100"
+                            : "max-h-0 opacity-0"
+                        } overflow-hidden`}
+                      >
+                      
+                        <ul className="divide-y divide-gray-100 dark:divide-slate-600">
+                          {searchValue.trim() === "" ? (
+                            categories.map((cat, index) => (
+                              <li
+                                key={index}
+                                className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
+                                onClick={() => {
+                                  navigate(`/products?category=${cat.name}`);
+                                }}
+                              >
+                                <FaSearch className="mr-2" />
+                                <p className="text-sm text-gray-900 dark:text-slate-300">
+                                  {cat.name}
+                                </p>
+                              </li>
+                            ))
+                          ) : products.length > 0 ? (
+                         
+                            products.map((suggestion) => (
+                              <li
+                                key={suggestion.id}
+                                className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
+                                onClick={() => {
+                                  navigate(
+                                    `/product/details/${suggestion.slug}`
+                                  );
+                                }}
+                              >
+                                <img
+                                  className="w-10 h-10 rounded-md object-cover"
+                                  src={suggestion.images[0]}
+                                />
+                                <div className="ml-3">
+                                  <p className="text-sm text-gray-900 dark:text-slate-300">
+                                    {suggestion.name}
+                                  </p>
+                                  <p className="text-xs text-gray-500 dark:text-slate-400">
+                                    ₹{suggestion.price}
+                                  </p>
+                                </div>
+                              </li>
+                            ))
+                          ) : (
+                            <div className="flex items-center justify-center py-2">
+                              <p className="text-sm text-gray-900 dark:text-slate-300">
+                                No results found
+                              </p>
+                            </div>
+                          )}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
 
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-400">

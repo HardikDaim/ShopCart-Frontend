@@ -238,7 +238,7 @@ const homeReducer = createSlice({
       .addCase(get_reviews.rejected, (state, action) => {
         state.loader = false;
         state.errorMessage = action.payload?.error;
-      });
+      })
   },
 });
 

@@ -74,8 +74,8 @@ const CategoryShop = () => {
   useEffect(() => {
     dispatch(
       query_products({
-        low: state.values[0] || '',
-        high: state.values[1] || '',
+        low: state.values[0] || "",
+        high: state.values[1] || "",
         category,
         rating,
         selectedOption,
@@ -115,7 +115,7 @@ const CategoryShop = () => {
   return (
     <div>
       <Header />
-
+      {loader && <LoaderOverlay />}
       <section className="py-6 mx-4">
         <div className="h-full mx-auto">
           <div className="block md:hidden mb-6">

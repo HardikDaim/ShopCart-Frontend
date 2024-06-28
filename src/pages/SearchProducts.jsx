@@ -26,7 +26,6 @@ const SearchProducts = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   const category = searchParams.get("category");
   const searchValue = searchParams.get("search");
-  console.log(searchParams);
 
   const dispatch = useDispatch();
   const {
@@ -120,7 +119,7 @@ const SearchProducts = () => {
   return (
     <div>
       <Header />
-
+      {loader && <LoaderOverlay />}
       <section className="py-6 mx-4">
         <div className="h-full mx-auto">
           <div className="block md:hidden mb-6">

@@ -58,6 +58,7 @@ const FeatureProduct = ({ products }) => {
       navigate("/login");
     }
   };
+
   return (
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-10">
