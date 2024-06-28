@@ -6,15 +6,16 @@ import toast from "react-hot-toast";
 import Header from "../components/Header";
 import { SiTheregister } from "react-icons/si";
 import { customer_login, messageClear } from "../store/reducers/authReducer";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-    const { userInfo, loader, errorMessage, successMessage } = useSelector(
-      (state) => state.auth
-    );
+  const { userInfo, loader, errorMessage, successMessage } = useSelector(
+    (state) => state.auth
+  );
   const [state, setState] = useState({ email: "", password: "" });
-
+  const [showPassword, ssetShowPassword] = useState(false);
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -24,19 +25,19 @@ const Login = () => {
     dispatch(customer_login(state));
   };
 
-    useEffect(() => {
-      if (errorMessage) {
-        toast.error(errorMessage);
-        dispatch(messageClear());
-      }
-      if (successMessage) {
-        toast.success(successMessage);
-        dispatch(messageClear());
-      }
-      if (userInfo) {
-        navigate("/")
-      }
-    }, [errorMessage, successMessage, dispatch, navigate]);
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [errorMessage, successMessage, dispatch, navigate]);
 
   return (
     <>
@@ -86,16 +87,22 @@ const Login = () => {
               >
                 Password
               </label>
-              <div className="mt-2">
+              <div className="mt-2 relative">
                 <input
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   onChange={handleInput}
                   value={state.password}
                   required
                   className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
+                <div
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+                  onClick={() => ssetShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
             </div>
             <div>

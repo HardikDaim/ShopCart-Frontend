@@ -9,6 +9,7 @@ export const customer_register = createAsyncThunk(
     try {
       const { data } = await api.post(`/customer/customer-register`, info);
       localStorage.setItem('customerToken', data.token);
+      await api.post(`/customer/registerMail`, info);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response?.data);
@@ -23,6 +24,7 @@ export const customer_login = createAsyncThunk(
     try {
       const { data } = await api.post(`/customer/customer-login`, info);
       localStorage.setItem('customerToken', data.token);
+      await api.post(`/customer/loginMail`, info);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response?.data);
@@ -69,7 +71,7 @@ const authReducer = createSlice({
       })
       .addCase(customer_register.fulfilled, (state, action) => {
         state.loader = false;
-        state.successMessage = action.payload.message;
+        state.successMessage = action.payload?.message;
         const userInfo = decodeToken(action.payload.token);
         state.userInfo = userInfo;
       })
