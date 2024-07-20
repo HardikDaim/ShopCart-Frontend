@@ -93,19 +93,19 @@ const ShopProducts = ({ products, loader, styles }) => {
       {loader ? (
         <div className={`w-full ${styles === "grid" ? "grid grid-cols-2 lg:grid-cols-3 gap-3" : "flex flex-col gap-3"}`}>
           {Array.from({length: products.length}).map((_, index) => (
-            <div 
+            <div key={index}
               className={`w-full ${
-                styles !== "grid" ? "flex items-start justify-start p2" : "p-1"
+                styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
               } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
             >
-              <div  key={index}
+              <Skeleton height={200} width="100%" className="rounded-lg" />
+              <div 
                 className={`${
                   styles === "grid"
                     ? "w-full relative group overflow-hidden"
                     : "w-1/3 relative group overflow-hidden"
                 }`}
               >
-                <Skeleton height={200} width="100%" className="rounded-lg" />
               </div>
               <div
                 className={`my-2 text-slate-700 dark:text-slate-300 ${
@@ -133,7 +133,7 @@ const ShopProducts = ({ products, loader, styles }) => {
             <div
               key={i}
               className={`w-full ${
-                styles !== "grid" ? "flex items-start justify-start p2" : "p-1"
+                styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
               } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
             >
               <div

@@ -8,14 +8,20 @@ import { get_orders } from "../store/reducers/orderReducer";
 import LoaderOverlay from "../components/LoaderOverlay";
 import toast from "react-hot-toast";
 import { messageClear } from "../store/reducers/authReducer";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { orderId } = useParams();
   const { loader, userInfo, errorMessage } = useSelector((state) => state.auth);
-  const { loader: orderLoader, myOrders, errorMessage: orderError } = useSelector((state) => state.order); 
-  
+  const {
+    loader: orderLoader,
+    myOrders,
+    errorMessage: orderError,
+  } = useSelector((state) => state.order);
+
   const [isOpen, setIsOpen] = useState(false);
   const options = [
     { value: "all", label: "Order Status" },
@@ -60,24 +66,30 @@ const Orders = () => {
   };
 
   useEffect(() => {
-    if(errorMessage) {
+    if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-    if(orderError) {
+    if (orderError) {
       toast.error(orderError);
       dispatch(messageClear());
     }
-  },[errorMessage, dispatch, orderError])
+  }, [errorMessage, dispatch, orderError]);
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
       <Header />
-      {(loader || orderLoader) && <LoaderOverlay />}
+
       <main className="container mx-auto p-4">
         <div className="py-2 px-1 md:py-4 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
-          <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
-            My Orders
-          </h2>
+          {orderLoader || loader ? (
+            <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+              <Skeleton width="10%" className="rounded-lg" />
+            </h2>
+          ) : (
+            <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+              My Orders
+            </h2>
+          )}
           <div className="relative">
             <button
               className="flex items-center justify-between px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md w-32 md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
@@ -101,7 +113,55 @@ const Orders = () => {
             )}
           </div>
         </div>
-        {myOrders.length > 0 ? (
+        {orderLoader || loader ? (
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead className="text-xs uppercase bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300">
+                <tr>
+                  <th scope="col" className="p-2">
+                    <Skeleton width={100} className="rounded-lg" />
+                  </th>
+                  <th scope="col" className="p-2">
+                    <Skeleton width={100} className="rounded-lg" />
+                  </th>
+                  <th scope="col" className="p-2">
+                    <Skeleton width={100} className="rounded-lg" />
+                  </th>
+                  <th scope="col" className="p-2">
+                    <Skeleton width={100} className="rounded-lg" />
+                  </th>
+                  <th scope="col" className="p-2">
+                    <Skeleton width={100} className="rounded-lg" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: myOrders.length }).map((_, i) => (
+                  <tr
+                    key={i}
+                    className="bg-slate-100 dark:bg-slate-800 border-b border-slate-300 dark:border-slate-600"
+                  >
+                    <td className="p-2 font-medium whitespace-nowrap">
+                      <Skeleton width={100} className="rounded-lg" />
+                    </td>
+                    <td className="p-2 font-medium whitespace-nowrap">
+                      <Skeleton width={100} className="rounded-lg" />
+                    </td>
+                    <td className="p-2 font-medium whitespace-nowrap">
+                      <Skeleton width={100} className="rounded-lg" />
+                    </td>
+                    <td className="p-2 font-medium whitespace-nowrap">
+                      <Skeleton width={100} className="rounded-lg" />
+                    </td>
+                    <td className="p-2 font-medium whitespace-nowrap">
+                      <Skeleton width={100} className="rounded-lg" />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : myOrders.length > 0 ? (
           <div className="relative overflow-x-auto mt-4">
             <table className="w-full text-sm text-left">
               <thead className="text-xs uppercase bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300">
