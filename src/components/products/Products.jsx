@@ -77,7 +77,7 @@ const Products = ({ title, products, loader }) => {
           </div>
         ) : (
           products.map((p, i) => (
-            <div key={i} className="flex flex-col justify-start gap-4">
+            <div key={i} className="flex flex-col gap-4">
               {p.map((pl, j) => {
                 const discountedPrice =
                   pl.price - (pl.price * pl.discount) / 100;
@@ -89,16 +89,15 @@ const Products = ({ title, products, loader }) => {
                         {pl.discount}%
                       </div>
                     )}
-                    <div className="w-28 md:w-40 flex-shrink-0 ">
-                    <img
-                      className="w-full h-20 md:h-24  rounded-md"
-                      src={pl.images[0]}
-                      alt={pl.name}
-                    />
-
+                    <div className="w-28 md:w-40 flex-shrink-0">
+                      <img
+                        className="w-full h-20 md:h-24 rounded-md"
+                        src={pl.images[0]}
+                        alt={pl.name}
+                      />
                     </div>
                     <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs md:text-sm text-slate-700 dark:text-slate-400">
-                    <h2 className="font-bold">
+                      <h2 className="font-bold">
                         {pl.name.length > 75
                           ? `${pl.name.substring(0, 75)}...`
                           : pl.name}

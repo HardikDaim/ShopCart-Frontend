@@ -77,7 +77,7 @@ const FeatureProduct = ({ products, loader }) => {
       >
         <div className="flex space-x-6 md:space-x-12">
           {loader
-            ? [...Array(5)].map((_, index) => (
+            ? Array.from({length : products.length}).map((_, index) => (
                 <div
                   key={index}
                   className="relative mt-4 w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
