@@ -19,13 +19,17 @@ import {
   query_products,
 } from "../store/reducers/homeReducer";
 import LoaderOverlay from "../components/LoaderOverlay";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import Banner from "../components/Banner";
 
 const Shops = () => {
   const dispatch = useDispatch();
   const {
-    loader,errorMessage, successMessage,
+    loader,
+    errorMessage,
     products,
     categories,
     latestProducts,
@@ -95,47 +99,31 @@ const Shops = () => {
     pageNumber,
   ]);
 
-  useEffect(()=> {
-    if(errorMessage) {
+  useEffect(() => {
+    if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-  },[dispatch,errorMessage]);
+  }, [dispatch, errorMessage]);
 
   const resetRating = () => {
-    setRating('');
+    setRating("");
     dispatch(
       query_products({
         low: state.values[0],
         high: state.values[1],
         category,
-        rating: '',
+        rating: "",
         selectedOption,
         pageNumber,
       })
     );
-  }
+  };
 
   return (
     <div>
       <Header />
-      {loader && <LoaderOverlay />}
-      <section className='bg-[url("https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-with-photo_23-2149000923.jpg")] h-40 md:h-80 lg:h-96 mt-4 bg-cover rounded-lg bg-no-repeat relative bg-left'>
-        <div className="absolute left-0 top-0 w-full h-full bg-[#2422228a]">
-          <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto">
-            <div className="flex flex-col justify-center gap-1 items-center h-full w-full text-white">
-              <h2 className="text-3xl font-bold">Shop Page </h2>
-              <div className="flex justify-center items-center gap-2 text-2xl w-full">
-                <Link to="/">Home</Link>
-                <span className="pt-1">
-                  <IoIosArrowForward />
-                </span>
-                <span>Shop </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* <Banner loader={loader}/> */}
       <section className="py-6 mx-4">
         <div className="h-full mx-auto">
           <div className="block md:hidden mb-6">
@@ -153,13 +141,21 @@ const Shops = () => {
               }`}
             >
               <div className="flex justify-between items-center">
-              <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
-                Category
-              </h2>
-              <button onClick={() => setFilter(!filter)} className="text-xl p-2 hover:bg-slate-200 dark:hover:bg-slate-800 md:hidden rounded-full "><IoMdClose /></button>
+                <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
+                  Category
+                </h2>
+                <button
+                  onClick={() => setFilter(!filter)}
+                  className="text-xl p-2 hover:bg-slate-200 dark:hover:bg-slate-800 md:hidden rounded-full "
+                >
+                  <IoMdClose />
+                </button>
               </div>
               <div className="py-2">
-                {categories &&
+                {loader ? (
+                  <Skeleton count={10} height={20} width={100} className="my-2" />
+                ) : (
+                  categories &&
                   categories.map((c, i) => (
                     <div
                       key={i}
@@ -179,7 +175,8 @@ const Shops = () => {
                         {c.name}
                       </label>
                     </div>
-                  ))}
+                  ))
+                )}
               </div>
               <div className="flex flex-col py-2 gap-5">
                 <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
@@ -207,130 +204,158 @@ const Shops = () => {
                   )}
                 />
                 <div className="flex justify-between text-slate-700 dark:text-slate-300">
-                  <span>₹{state.values[0]}</span>
-                  <span>₹{state.values[1]}</span>
+                {loader ? (
+                    <>
+                      <Skeleton width={80} height={20} className="my-2" />
+                      <Skeleton width={80} height={20} className="my-2" />
+                    </>
+                  ) : (
+                    <>
+                      <span>₹{state.values[0]}</span>
+                      <span>₹{state.values[1]}</span>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col py-2 gap-5">
                 <div className="flex justify-between">
-                <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
-                  Rating
-                </h2>
-                <button onClick={resetRating} className="font-medium underline  mb-3 text-slate-700 dark:text-slate-300">Reset Rating</button>
+                  <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
+                    Rating
+                  </h2>
+                  <button
+                    onClick={resetRating}
+                    className="font-medium underline  mb-3 text-slate-700 dark:text-slate-300"
+                  >
+                    Reset Rating
+                  </button>
                 </div>
                 <div className="flex flex-col gap-3">
-                  <div
-                    onClick={() => setRating(5)}
-                    className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
-                  >
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                  </div>
-                  <div
-                    onClick={() => setRating(4)}
-                    className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
-                  >
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                  </div>
-                  <div
-                    onClick={() => setRating(3)}
-                    className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
-                  >
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                  </div>
-                  <div
-                    onClick={() => setRating(2)}
-                    className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
-                  >
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                  </div>
-                  <div
-                    onClick={() => setRating(1)}
-                    className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
-                  >
-                    <span>
-                      <AiFillStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                    <span>
-                      <CiStar />
-                    </span>
-                  </div>
+                  {loader ? (
+                    <Skeleton count={5} height={20} className="my-2" />
+                  ) : (
+                    <>
+                      <div
+                        onClick={() => setRating(5)}
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                      >
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                      </div>
+                      <div
+                        onClick={() => setRating(4)}
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                      >
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                      </div>
+                      <div
+                        onClick={() => setRating(3)}
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                      >
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                      </div>
+                      <div
+                        onClick={() => setRating(2)}
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                      >
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                      </div>
+                      <div
+                        onClick={() => setRating(1)}
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                      >
+                        <span>
+                          <AiFillStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                        <span>
+                          <CiStar />
+                        </span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
-              <div className="flex flex-col py-4   ">
-                <Products title="Latest Products" products={latestProducts} />
+              <div className="flex flex-col py-4">
+                <Products
+                  title="Latest Products"
+                  products={latestProducts}
+                  loader={loader}
+                />
               </div>
             </div>
             {/* Placeholder for product list */}
             <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out ">
               <div className=" py-2 px-1 md:py-4 mb-10 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
+                {loader ? <Skeleton height={24} width={100}
+                /> : 
                 <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
                   {totalProducts} Products
                 </h2>
+                
+                }
                 <div className="flex justify-center items-center gap-3">
                   <div className="relative">
                     <button
@@ -380,7 +405,11 @@ const Shops = () => {
                 </div>
               </div>
               <div className="pb-8">
-                <ShopProducts products={products} loader={loader} styles={styles} />
+                <ShopProducts
+                  products={products}
+                  loader={loader}
+                  styles={styles}
+                />
                 <div className="py-4 flex justify-end items-center">
                   {totalProducts > perPage && (
                     <Pagination

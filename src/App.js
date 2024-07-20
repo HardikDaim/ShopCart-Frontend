@@ -53,8 +53,8 @@ function App() {
   return (
     <div className={isDarkTheme ? "dark" : ""}>
       <SkeletonTheme
-        baseColor={isDarkTheme ? "#3a3a3a" : "#e0e0e0"}
-        highlightColor={isDarkTheme ? "#4a4a4a" : "#f5f5f5"}
+        baseColor={isDarkTheme ? "#1F2937" : "#E5E7EB"}  
+        highlightColor={isDarkTheme ? "#374151" : "#F3F4F6"}
       >
         <Toaster
           toastOptions={{

@@ -3,7 +3,7 @@ import { HashLoader } from "react-spinners";
 
 const LoaderOverlay = () => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-100 dark:bg-slate-900 bg-opacity-100">
-    <HashLoader color="#4F46E5" />
+    <HashLoader color="#1D4ED8" />
   </div>
 );
 

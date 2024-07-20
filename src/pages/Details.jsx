@@ -27,6 +27,8 @@ import {
   messageClear,
 } from "../store/reducers/cartReducer";
 import { IoChatbubbles } from "react-icons/io5";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Details = () => {
   const { slug } = useParams();
@@ -216,12 +218,15 @@ const Details = () => {
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <Header />
-      {(loader || homeloader || cartLoader) && <LoaderOverlay />}
       <div className="mx-auto  px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="w-full lg:w-1/2">
-            <div className="relative">
-              {product?.images && product?.images?.length > 0 ? (
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Image Section */}
+        <div className="w-full lg:w-1/2 relative">
+          {loader ? (
+            <Skeleton height="500px" width="100%" className="rounded-lg" />
+          ) : (
+            <>
+              {product?.images && product?.images?.length > 0 && (
                 <>
                   <img
                     src={product?.images[currentImageIndex]}
@@ -245,121 +250,139 @@ const Details = () => {
                     </>
                   )}
                 </>
-              ) : null}
-            </div>
-            {product?.images && product?.images?.length > 1 && (
-              <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
-                {product?.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={product?.name}
-                    className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
-                      index === currentImageIndex
-                        ? "border-2 border-blue-500"
-                        : "opacity-50"
-                    }`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="w-full lg:w-1/2 flex flex-col space-y-4">
-            <div className="flex justify-between items-center">
-              <h1 className="text-3xl font-bold">{product?.name}</h1>
-              <button className="text-2xl font-bold">
-                <IoShareSocialOutline />
-              </button>
-            </div>
-            <div className="flex justify-start items-center gap-4">
-              <div className="text-xl flex">
-                <Rating ratings={product?.rating} />
-              </div>
-              <span className="hover:underline cursor-pointer">
-                {totalReview} reviews
-              </span>
-              <Link to={`/chat/${product?.sellerId}`}>
-                <span className="hover:underline cursor-pointer">chat</span>
-              </Link>
-            </div>
-            <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
-              {product?.discount !== 0 ? (
-                <>
-                  <span className="line-through text-slate-500">
-                    {formatPrice(product?.price)}
-                  </span>{" "}
-                  <span>
-                    {formatPrice(discountedPrice)} (-{product?.discount}%)
-                  </span>
-                </>
-              ) : (
-                <>₹{product?.price}</>
               )}
-            </p>
-            <p className="text-lg">{product?.description}</p>
-            {product?.stock > 0 ? (
-              <div className="mt-2 flex items-center space-x-3">
-                <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
-                  In Stock
-                </button>
-                <button
-                  onClick={dec}
-                  className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
-                >
-                  -
-                </button>
-                <span>{quantity}</span>
-                <button
-                  onClick={inc}
-                  className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
-                >
-                  +
-                </button>
-                <button
-                  onClick={() => add_wishlist(product)}
-                  className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
-                >
-                  <FaHeart />
-                </button>
-              </div>
-            ) : (
-              <div className="mt-2 flex items-center space-x-3">
-                <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
-                  Out of Stock
-                </button>
-
-                <button
-                  onClick={() => add_wishlist(product)}
-                  className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
-                >
-                  <FaHeart />
-                </button>
-              </div>
-            )}
-            {product?.stock <= 10 && product?.stock > 0 ? (
-              <p className="text-red-600 dark:text-red-400">
-                Hurry up, only {product?.stock} piece(s) left
-              </p>
-            ) : (
-              ""
-            )}
-            <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => add_cart(product._id)}
-                className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
-              >
-                Add to Cart
-              </button>
-              <button
-                onClick={buyNow}
-                className="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
-              >
-                Buy Now
-              </button>
+            </>
+          )}
+          {product?.images && product?.images?.length > 1 && !loader && (
+            <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
+              {product?.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={product?.name}
+                  className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
+                    index === currentImageIndex
+                      ? "border-2 border-blue-500"
+                      : "opacity-50"
+                  }`}
+                  onClick={() => setCurrentImageIndex(index)}
+                />
+              ))}
             </div>
-          </div>
+          )}
         </div>
+
+        {/* Details Section */}
+        <div className="w-full lg:w-1/2 flex flex-col space-y-4">
+          {loader ? (
+            <div className="flex flex-col space-y-4">
+              <Skeleton height={40} width="100%" className="rounded-lg" />
+              <Skeleton height={30} width="60%" className="rounded-lg" />
+              <Skeleton height={20} width="30%" className="rounded-lg" />
+              <Skeleton height={20} width="40%" className="rounded-lg" />
+              <Skeleton height={20} width="100%" className="rounded-lg" />
+              <Skeleton height={20} width="100%" className="rounded-lg" />
+              <Skeleton height={40} width="100%" className="rounded-lg" />
+              <Skeleton height={40} width="100%" className="rounded-lg" />
+            </div>
+          ) : (
+            <>
+              <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold">{product?.name}</h1>
+                <button className="text-2xl font-bold">
+                  <IoShareSocialOutline />
+                </button>
+              </div>
+              <div className="flex justify-start items-center gap-4">
+                <div className="text-xl flex">
+                  <Rating ratings={product?.rating} />
+                </div>
+                <span className="hover:underline cursor-pointer">
+                  {totalReview} reviews
+                </span>
+                <Link to={`/chat/${product?.sellerId}`}>
+                  <span className="hover:underline cursor-pointer">chat</span>
+                </Link>
+              </div>
+              <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
+                {product?.discount !== 0 ? (
+                  <>
+                    <span className="line-through text-slate-500">
+                      {formatPrice(product?.price)}
+                    </span>{" "}
+                    <span>
+                      {formatPrice(discountedPrice)} (-{product?.discount}%)
+                    </span>
+                  </>
+                ) : (
+                  <>₹{product?.price}</>
+                )}
+              </p>
+              <p className="text-lg">{product?.description}</p>
+              {product?.stock > 0 ? (
+                <div className="mt-2 flex items-center space-x-3">
+                  <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                    In Stock
+                  </button>
+                  <button
+                    onClick={dec}
+                    className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                  >
+                    -
+                  </button>
+                  <span>{quantity}</span>
+                  <button
+                    onClick={inc}
+                    className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => add_wishlist(product)}
+                    className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                  >
+                    <FaHeart />
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-2 flex items-center space-x-3">
+                  <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                    Out of Stock
+                  </button>
+
+                  <button
+                    onClick={() => add_wishlist(product)}
+                    className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                  >
+                    <FaHeart />
+                  </button>
+                </div>
+              )}
+              {product?.stock <= 10 && product?.stock > 0 ? (
+                <p className="text-red-600 dark:text-red-400">
+                  Hurry up, only {product?.stock} piece(s) left
+                </p>
+              ) : (
+                ""
+              )}
+              <div className="flex flex-col space-y-4">
+                <button
+                  onClick={() => add_cart(product._id)}
+                  className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                >
+                  Add to Cart
+                </button>
+                <button
+                  onClick={buyNow}
+                  className="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
+                >
+                  Buy Now
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
         <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
           <h2 className="text-2xl font-semibold">Details & Specifications</h2>
         </div>
