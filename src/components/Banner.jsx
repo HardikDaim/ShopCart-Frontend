@@ -35,7 +35,6 @@ const Banner = ({ loader }) => {
           <Skeleton
             height="100%"
             width="100%"
-            className="absolute top-0 left-0 object-cover"
           />
         ) : (
           <video

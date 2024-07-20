@@ -92,7 +92,7 @@ const ShopProducts = ({ products, loader, styles }) => {
     >
       {loader && (
         <div className={`w-full ${styles === "grid" ? "grid grid-cols-2 lg:grid-cols-3 gap-3" : "flex flex-col gap-3"}`}>
-          {[...Array(6)].map((_, index) => (
+          {[...Array(9)].map((_, index) => (
             <div
               key={index}
               className={`w-full ${
@@ -216,7 +216,11 @@ const ShopProducts = ({ products, loader, styles }) => {
               </div>
             </div>
           );
-        }) : 'No Product with desired Category found...'}
+        }) :
+        <div className={`${loader ? "hidden" : 'flex'}`}>
+          'No Product with desired Category found...'
+        </div>
+         }
     </div>
   );
 };
