@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Rating from "../Rating";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const Products = ({ title, products }) => {
+const Products = ({ title, products, loader }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -24,9 +26,10 @@ const Products = ({ title, products }) => {
       items: 1,
     },
   };
+
   const ButtonGroup = ({ next, previous }) => {
     return (
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center">
         <div className="text-xl font-bold text-slate-700 dark:text-slate-300">
           {title}
         </div>
@@ -59,31 +62,38 @@ const Products = ({ title, products }) => {
         renderButtonGroupOutside={true}
         customButtonGroup={<ButtonGroup />}
       >
-        {products.map((p, i) => {
-          return (
+        {loader ? (
+          <div className="flex flex-col gap-4">
+            {[...Array(3)].map((_, index) => (
+              <div key={index} className="flex gap-4">
+                <Skeleton width={150} height={120} className="rounded-md" />
+                <div className="flex flex-col justify-between">
+                  <Skeleton width={100} height={20} className="mb-2" />
+                  <Skeleton width={80} height={20} className="mb-2" />
+                  <Skeleton width={100} height={20} />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          products.map((p, i) => (
             <div key={i} className="flex flex-col justify-start gap-4">
               {p.map((pl, j) => {
                 const discountedPrice =
                   pl.price - (pl.price * pl.discount) / 100;
 
                 return (
-                  <Link to={`/product/details/${pl.slug}`}
-                    key={j}
-                    className="flex relative justify-start items-start overflow-x-auto"
-                  
-                  >
+                  <Link to={`/product/details/${pl.slug}`} key={j} className="flex relative justify-start items-start overflow-x-auto">
                     {pl.discount > 0 && (
-                      <div className="flex justify-center items-center absolute text-white bg-red-500 font-semibold text-xs -left-0 rounded-md -top-0 w-8 h-5  shadow-lg">
+                      <div className="flex justify-center items-center absolute text-white bg-red-500 font-semibold text-xs -left-0 rounded-md -top-0 w-8 h-5 shadow-lg">
                         {pl.discount}%
                       </div>
                     )}
-                    
-                      <img
-                        className="w-36 h-28 md:w-32 md:h-28 lg:w-40 lg:h-auto rounded-md"
-                        src={pl.images[0]}
-                        alt={pl.name}
-                      />
-                 
+                    <img
+                      className="w-36 h-28 md:w-32 md:h-28 lg:w-40 lg:h-auto rounded-md"
+                      src={pl.images[0]}
+                      alt={pl.name}
+                    />
                     <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-700 dark:text-slate-400">
                       <h2>{pl.name}</h2>
                       <div className="flex gap-1">
@@ -110,8 +120,8 @@ const Products = ({ title, products }) => {
                 );
               })}
             </div>
-          );
-        })}
+          ))
+        )}
       </Carousel>
     </div>
   );

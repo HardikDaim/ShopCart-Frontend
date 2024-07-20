@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ThemeToggle from "./components/ThemeToggle";
 import Shops from "./pages/Shops";
 import Cart from "./pages/Cart";
 import Shipping from "./pages/Shipping";
@@ -22,8 +21,10 @@ import Wishlist from "./pages/Wishlist";
 import OrderDetails from "./pages/OrderDetails";
 import ScrollToTop from "./scrollToTop";
 import Chat from "./pages/Chat";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import  { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,48 +48,53 @@ function App() {
 
   useEffect(() => {
     dispatch(get_category());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={isDarkTheme ? "dark" : ""}>
-      <Toaster
-        toastOptions={{
-          position: "top-center",
-          style: {
-            background: isDarkTheme
-              ? "rgba(55, 65, 81, 0.9)"
-              : "rgba(255, 255, 255, 0.9)",
-            color: isDarkTheme ? "#F9FAFB" : "#1F2937",
-          },
-        }}
-      />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Analytics />
-        <SpeedInsights />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/shops" element={<Shops />} />
-          <Route path="/product/details/:slug" element={<Details />} />
-          <Route path="/products?" element={<CategoryShop />} />
-          <Route path="/products/search?" element={<SearchProducts />} />
-          {/* Protected Routes */}
-          <Route element={<ProtectUser />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/my-orders" element={<Orders />} />
-            <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/my-wishlist" element={<Wishlist />} />
-            <Route path="/order/details/:orderId" element={<OrderDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/shipping" element={<Shipping />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/chat/:sellerId" element={<Chat />} />
-            <Route path="/payment" element={<Payment />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <SkeletonTheme
+        baseColor={isDarkTheme ? "#3a3a3a" : "#e0e0e0"}
+        highlightColor={isDarkTheme ? "#4a4a4a" : "#f5f5f5"}
+      >
+        <Toaster
+          toastOptions={{
+            position: "top-center",
+            style: {
+              background: isDarkTheme
+                ? "rgba(55, 65, 81, 0.9)"
+                : "rgba(255, 255, 255, 0.9)",
+              color: isDarkTheme ? "#F9FAFB" : "#1F2937",
+            },
+          }}
+        />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Analytics />
+          <SpeedInsights />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/shops" element={<Shops />} />
+            <Route path="/product/details/:slug" element={<Details />} />
+            <Route path="/products?" element={<CategoryShop />} />
+            <Route path="/products/search?" element={<SearchProducts />} />
+            {/* Protected Routes */}
+            <Route element={<ProtectUser />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/my-orders" element={<Orders />} />
+              <Route path="/change-password" element={<ChangePassword />} />
+              <Route path="/my-wishlist" element={<Wishlist />} />
+              <Route path="/order/details/:orderId" element={<OrderDetails />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/shipping" element={<Shipping />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/chat/:sellerId" element={<Chat />} />
+              <Route path="/payment" element={<Payment />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </SkeletonTheme>
     </div>
   );
 }
