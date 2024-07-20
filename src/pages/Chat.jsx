@@ -13,9 +13,8 @@ import {
   updateMessage,
 } from "../store/reducers/chatReducer";
 import LoaderOverlay from "../components/LoaderOverlay";
-import { toast } from 'react-hot-toast';
-
-// const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:4000");
+import { toast } from "react-hot-toast";
+import { socket } from "../utils/utils";
 
 const Chat = () => {
   const scrollRef = useRef();
@@ -23,18 +22,23 @@ const Chat = () => {
   const dispatch = useDispatch();
   const { sellerId } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
-  const { currentFd, MyFriends, fd_messages, loader, successMessage, errorMessage } = useSelector(
-    (state) => state.chat
-  );
+  const {
+    currentFd,
+    MyFriends,
+    fd_messages,
+    loader,
+    successMessage,
+    errorMessage,
+  } = useSelector((state) => state.chat);
   const [show, setShow] = useState(false);
   const [receiverMessage, setReceiverMessage] = useState("");
   const [activeSeller, setActiveSeller] = useState([]);
 
-  // useEffect(() => {
-  //   if (userInfo?.id) {
-  //     socket.emit("add_customer", userInfo.id, userInfo);
-  //   }
-  // }, [userInfo]);
+  useEffect(() => {
+    if (userInfo?.id) {
+      socket.emit("add_customer", userInfo.id, userInfo);
+    }
+  }, []);
 
   useEffect(() => {
     if (userInfo?.id) {
@@ -64,41 +68,45 @@ const Chat = () => {
     }
   };
 
-  // useEffect(() => {
-  //   socket.on("seller_message", (msg) => {
-  //     setReceiverMessage(msg);
-  //   });
-  //   socket.on("activeSeller", (sellers) => {
-  //     setActiveSeller(sellers || []); // Ensure sellers is an array
-  //   });
-  // }, []);
+  useEffect(() => {
+    socket.on("seller_message", (msg) => {
+      setReceiverMessage(msg);
+    });
+    socket.on("activeSeller", (sellers) => {
+      setActiveSeller(sellers); 
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   if (successMessage) {
-  //     socket.emit("send_customer_message", fd_messages[fd_messages.length - 1]); // last message
-  //     dispatch(messageClear());
-  //   }
-  // }, [dispatch, successMessage]);
+  useEffect(() => {
+    if (successMessage) {
+      socket.emit("send_customer_message", fd_messages[fd_messages.length - 1]); // last message
+      dispatch(messageClear());
+    }
+  }, [dispatch, successMessage]);
 
   useEffect(() => {
     if (receiverMessage) {
-      if (sellerId === receiverMessage.senderId && userInfo.id === receiverMessage.receiverId) {
+      if (
+        sellerId === receiverMessage.senderId &&
+        userInfo.id === receiverMessage.receiverId
+      ) {
         dispatch(updateMessage(receiverMessage));
       } else {
         toast.success(receiverMessage.senderName + " " + "Send a message");
         dispatch(messageClear());
       }
     }
-  },[receiverMessage])
-  
+    }
+,[receiverMessage]);
+
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [fd_messages]);
-  
+
   return (
     <>
       <Header />
-      <div className="px-2 lg:px-7 py-3">
+      <div className="px-2 lg:px-7 py-2">
         {loader && <LoaderOverlay />}
         <div className="w-full bg-slate-50 dark:bg-slate-800 my-6 lg:my-0 p-4 rounded-lg border-2 dark:border-slate-600 h-[calc(100vh-140px)]">
           <div className="w-full h-full relative flex">
@@ -135,9 +143,10 @@ const Chat = () => {
                             src={f.image}
                             alt={f.name}
                           />
-                          {Array.isArray(activeSeller) && activeSeller.some((c) => c.sellerId === f.fdId) && (
-                            <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
-                          )}
+                          {Array.isArray(activeSeller) &&
+                            activeSeller.some((c) => c.sellerId === f.fdId) && (
+                              <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
+                            )}
                         </div>
                         <div className="flex justify-between items-center w-full">
                           <h2 className="font-semibold text-slate-900 dark:text-slate-50">
@@ -163,11 +172,12 @@ const Chat = () => {
                         className="w-[38px] h-[38px] border-2 max-w-[38px] p-[2px] rounded-full"
                         src={currentFd?.image}
                       />
-                      {Array.isArray(activeSeller) && activeSeller.some(
-                        (c) => c.sellerId === currentFd.fdId
-                      ) && (
-                        <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
-                      )}
+                      {Array.isArray(activeSeller) &&
+                        activeSeller.some(
+                          (c) => c.sellerId === currentFd.fdId
+                        ) && (
+                          <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
+                        )}
                     </div>
                     <h2 className="font-semibold text-slate-900 dark:text-slate-50">
                       {currentFd?.name}
@@ -189,47 +199,51 @@ const Chat = () => {
                 <>
                   <div className="py-4">
                     <div className="bg-slate-200 dark:bg-slate-700 h-[calc(100vh-290px)] rounded-lg p-3 overflow-y-auto">
-                      {fd_messages.length > 0
-                        ? fd_messages.map((m, i) => {
-                            const isReceiver =
-                              currentFd?.fdId === m?.receiverId;
-                            return (
-                              <div 
-                                key={i} ref={scrollRef}
-                                className={`w-full flex ${
-                                  isReceiver ? "justify-end" : "justify-start"
-                                } items-center`}
-                              >
-                                <div className="flex gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]">
-                                  {isReceiver && (
-                                    <div className="flex justify-center items-start flex-col w-full bg-blue-600 text-white font-semibold py-1 px-2 rounded-md">
-                                      <span>{m?.message}</span>
-                                    </div>
-                                  )}
-                                  <div>
-                                    <img
-                                      className="w-[38px] h-[38px] border-2 rounded-full max-w-[38px] p-[3px]"
-                                      src={
-                                        isReceiver
-                                          ? "/images/user.png"
-                                          : currentFd?.image
-                                      }
-                                      alt="User"
-                                    />
+                      {fd_messages.length > 0 ? (
+                        fd_messages.map((m, i) => {
+                          const isReceiver = currentFd?.fdId === m?.receiverId; // customer message
+                          return (
+                            <div
+                              key={i}
+                              ref={scrollRef}
+                              className={`w-full flex ${
+                                isReceiver ? "justify-end" : "justify-start"
+                              } items-center`}
+                            >
+                              <div className="flex gap-2 md:px-3 py-2 max-w-full lg:max-w-[85%]">
+                                {isReceiver && (
+                                  <div className="flex justify-center items-start flex-col w-full bg-blue-600 text-white font-semibold py-1 px-2 rounded-md">
+                                    <span>{m?.message}</span>
                                   </div>
-                                  {!isReceiver && (
-                                    <div className="flex justify-center items-start flex-col w-full bg-slate-300 dark:bg-slate-600 text-slate-900 dark:text-slate-50 font-semibold py-1 px-2 rounded-md">
-                                      <span>{m?.message}</span>
-                                    </div>
-                                  )}
+                                )}
+                                <div>
+                                  <img
+                                    className="w-[38px] h-[38px] border-2 rounded-full max-w-[38px] p-[3px]"
+                                    src={
+                                      isReceiver
+                                        ? "/images/user.png"
+                                        : currentFd?.image
+                                    }
+                                    alt="User"
+                                  />
                                 </div>
+                                {!isReceiver && (
+                                  <div className="flex justify-center items-start flex-col w-full bg-slate-300 dark:bg-slate-600 text-slate-900 dark:text-slate-50 font-semibold py-1 px-2 rounded-md">
+                                    <span>{m?.message}</span>
+                                  </div>
+                                )}
                               </div>
-                            );
-                          })
-                        : ""}
+                            </div>
+                          );
+                        })
+                      ) : (
+                        <div className="text-center text-slate-900 dark:text-slate-50">
+                          No conversation yet!
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className="flex gap-3 w-full">
+                  <form onClick={send} className="flex gap-3 w-full">
                     <input
                       value={text}
                       onChange={(e) => setText(e.target.value)}
@@ -238,16 +252,16 @@ const Chat = () => {
                       placeholder="Type a message..."
                     />
                     <button
-                      onClick={send}
+                      type="submit"
                       className="py-2 px-5 bg-blue-600 text-white font-semibold rounded-full"
                     >
                       Send
                     </button>
-                  </div>
+                  </form>
                 </>
               ) : (
                 <div className="w-full h-full flex justify-center items-center">
-                  <h2 className="text-slate-900 dark:text-slate-50 text-xl font-semibold">
+                  <h2 className="text-slate-900 dark:text-slate-50 md:text-xl font-semibold">
                     Please select a seller to start chatting
                   </h2>
                 </div>
@@ -256,7 +270,7 @@ const Chat = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </>
   );
 };

@@ -108,7 +108,7 @@ const Profile = () => {
 
             <button
               onClick={redirect_cart_page}
-              className="flex items-center block px-4 py-2 text-sm w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700 relative"
+              className="flex items-center  px-4 py-2 text-sm w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700 relative"
             >
               <IoCart className="mr-2" />
               Cart
