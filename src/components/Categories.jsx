@@ -6,14 +6,13 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Categories = ({ categories, loader }) => {
-
   return (
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-10">
         <div className="w-full">
           <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
             <h2>{loader ? <Skeleton width={150} /> : 'Top Categories'}</h2>
-            <div className=" w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
+            <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
           </div>
         </div>
       </div>
@@ -23,17 +22,17 @@ const Categories = ({ categories, loader }) => {
       >
         <div className="flex space-x-6 md:space-x-12">
           {loader ? (
-            [...Array(5)].map((_, index) => (
-              <div key={index} className="flex-shrink-0 w-60 text-center">
+            Array.from({length: categories.length}).map((_, index) => (
+              <div key={index} className="flex-shrink-0 w-28 md:w-60 text-center">
                 <Skeleton height={160} className="w-full h-40 rounded-lg" />
-                <Skeleton width={120} height={20} className="mt-2" />
+                <Skeleton width="60%" height={20} className="mt-2 mx-auto" />
               </div>
             ))
           ) : (
             categories.map((category, index) => (
               <Link to={`/products?category=${category.name}`} key={index}>
                 <div
-                  className="flex-shrink-0 w-28  md:w-60 text-center transition-all duration-500 hover:transform hover:scale-110 cursor-pointer"
+                  className="flex-shrink-0 w-28 md:w-60 text-center transition-all duration-500 hover:transform hover:scale-110 cursor-pointer"
                 >
                   <img
                     src={category.image}

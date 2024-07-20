@@ -220,10 +220,11 @@ const Details = () => {
       <Header />
       <div className="mx-auto  px-4 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Image Section */}
         <div className="w-full lg:w-1/2 relative">
           {loader ? (
-            <Skeleton height="500px" width="100%" className="rounded-lg" />
+            <>
+            <Skeleton height="500px" width="100%" className="rounded-lg" />            
+            </>
           ) : (
             <>
               {product?.images && product?.images?.length > 0 && (
@@ -253,23 +254,32 @@ const Details = () => {
               )}
             </>
           )}
-          {product?.images && product?.images?.length > 1 && !loader && (
-            <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
-              {product?.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={product?.name}
-                  className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
-                    index === currentImageIndex
-                      ? "border-2 border-blue-500"
-                      : "opacity-50"
-                  }`}
-                  onClick={() => setCurrentImageIndex(index)}
-                />
-              ))}
-            </div>
-          )}
+          {product?.images && product?.images.length > 1 && (
+          <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
+            {loader
+              ? Array.from({ length: product.images.length }).map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    width={64}
+                    height={64}
+                    className="rounded-lg"
+                  />
+                ))
+              : product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={product.name}
+                    className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
+                      index === currentImageIndex
+                        ? "border-2 border-blue-500"
+                        : "opacity-50"
+                    }`}
+                    onClick={() => setCurrentImageIndex(index)}
+                  />
+                ))}
+          </div>
+        )}
         </div>
 
         {/* Details Section */}
@@ -277,13 +287,13 @@ const Details = () => {
           {loader ? (
             <div className="flex flex-col space-y-4">
               <Skeleton height={40} width="100%" className="rounded-lg" />
-              <Skeleton height={30} width="60%" className="rounded-lg" />
-              <Skeleton height={20} width="30%" className="rounded-lg" />
-              <Skeleton height={20} width="40%" className="rounded-lg" />
-              <Skeleton height={20} width="100%" className="rounded-lg" />
-              <Skeleton height={20} width="100%" className="rounded-lg" />
-              <Skeleton height={40} width="100%" className="rounded-lg" />
-              <Skeleton height={40} width="100%" className="rounded-lg" />
+              <Skeleton height={30} width="20%" className="rounded-lg" />
+              <Skeleton height={20} width="25%" className="rounded-lg" />
+              <Skeleton height={140} width="100%" className="rounded-lg" />
+              <Skeleton height={40} width="20%" className="rounded-lg" />
+              <Skeleton height={20} width="20%" className="rounded-lg" />
+              <Skeleton height={50} width="100%" className="rounded-lg" />
+              <Skeleton height={50} width="100%" className="rounded-lg" />
             </div>
           ) : (
             <>
@@ -295,6 +305,7 @@ const Details = () => {
               </div>
               <div className="flex justify-start items-center gap-4">
                 <div className="text-xl flex">
+                  
                   <Rating ratings={product?.rating} />
                 </div>
                 <span className="hover:underline cursor-pointer">

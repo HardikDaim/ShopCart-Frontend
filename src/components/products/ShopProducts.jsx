@@ -90,27 +90,27 @@ const ShopProducts = ({ products, loader, styles }) => {
           : "flex flex-col gap-3"
       }`}
     >
-      {loader && (
+      {loader ? (
         <div className={`w-full ${styles === "grid" ? "grid grid-cols-2 lg:grid-cols-3 gap-3" : "flex flex-col gap-3"}`}>
-          {[...Array(9)].map((_, index) => (
+          {Array.from({length: products.length}).map((_, index) => (
             <div
               key={index}
               className={`w-full ${
-                styles !== "grid" ? "flex items-start justify-start p2" : "p-1"
+                styles !== "grid" ? "flex flex-col p-2" : "p-1"
               } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
             >
-              <div
+              <div 
                 className={`${
                   styles === "grid"
                     ? "w-full relative group overflow-hidden"
-                    : "w-1/3 relative group overflow-hidden"
+                    : "w-full relative group overflow-hidden"
                 }`}
               >
-                <Skeleton height="100%" width="100%" className="rounded-lg" />
+                <Skeleton height={200} width="100%" className="rounded-lg" />
               </div>
               <div
                 className={`my-2 text-slate-700 dark:text-slate-300 ${
-                  styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
+                  styles === "grid" ? "w-full" : "w-full pl-2 md:pl-4"
                 }`}
               >
                 <Skeleton height={20} width="60%" className="mb-2" />
@@ -123,8 +123,7 @@ const ShopProducts = ({ products, loader, styles }) => {
             </div>
           ))}
         </div>
-      )}
-      {!loader && products.length > 0 ?
+      ) : products.length > 0 ? (
         products.map((p, i) => {
           const discountedPrice = p.price - (p.price * p.discount) / 100;
           const words = p.description.split(" ");
@@ -135,14 +134,14 @@ const ShopProducts = ({ products, loader, styles }) => {
             <div
               key={i}
               className={`w-full ${
-                styles !== "grid" ? "flex items-start justify-start p2" : "p-1"
+                styles !== "grid" ? "flex flex-col p-2" : "p-1"
               } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
             >
               <div
                 className={`${
                   styles === "grid"
                     ? "w-full relative group overflow-hidden"
-                    : "w-1/3 relative group overflow-hidden"
+                    : "w-full relative group overflow-hidden"
                 }`}
               >
                 {p.discount > 0 && (
@@ -173,7 +172,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               </div>
               <div
                 className={`my-2 text-slate-700 dark:text-slate-300 ${
-                  styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
+                  styles === "grid" ? "w-full" : "w-full pl-2 md:pl-4"
                 }`}
               >
                 <h2 className="font-bold text-xs lg:text-sm">{p.name}</h2>
@@ -216,11 +215,12 @@ const ShopProducts = ({ products, loader, styles }) => {
               </div>
             </div>
           );
-        }) :
+        })
+      ) : (
         <div className={`${loader ? "hidden" : 'flex'}`}>
-          'No Product with desired Category found...'
+          No Product with desired Category found...
         </div>
-         }
+      )}
     </div>
   );
 };
