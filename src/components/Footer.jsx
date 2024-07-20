@@ -29,16 +29,16 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">Useful Links</h2>
               <ul className="text-slate-500 dark:text-slate-400 font-medium">
                 <li className="mb-4">
-                  <Link to="/about-us" className="hover:underline">About Us</Link>
+                  <Link to="/" className="hover:underline">About Us</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/our-shop" className="hover:underline">About Our Shop</Link>
+                  <Link to="/" className="hover:underline">About Our Shop</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/delivery" className="hover:underline">Delivery Information</Link>
+                  <Link to="/" className="hover:underline">Delivery Information</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+                  <Link to="/" className="hover:underline">Privacy Policy</Link>
                 </li>
               </ul>
             </div>
@@ -46,16 +46,16 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">About Us</h2>
               <ul className="text-slate-500 dark:text-slate-400 font-medium">
                 <li className="mb-4">
-                  <Link to="/about-us" className="hover:underline">About Us</Link>
+                  <Link to="/" className="hover:underline">About Us</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/our-shop" className="hover:underline">About Our Shop</Link>
+                  <Link to="/" className="hover:underline">About Our Shop</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/delivery" className="hover:underline">Delivery Information</Link>
+                  <Link to="/" className="hover:underline">Delivery Information</Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+                  <Link to="/" className="hover:underline">Privacy Policy</Link>
                 </li>
               </ul>
             </div>
