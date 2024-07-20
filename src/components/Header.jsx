@@ -52,35 +52,50 @@ const Header = () => {
     }
   };
 
-
-
   return (
     <>
       <header className="bg-white  dark:bg-slate-900 text-slate-700 dark:text-slate-200">
         <div className="header-top hidden md:flex flex justify-between items-center p-2 bg-slate-200 dark:bg-slate-800 text-sm px-4">
           <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
-            <span>Email: info@company.com</span>
+            <span>
+              This project is purely made by <strong>Hardik Daim</strong>. You
+              can visit to my <strong>GitHub</strong>, <strong>LinkedIn</strong>{" "}
+              and <strong>Instagram</strong> profile by clicking here...
+            </span>{" "}
+            <span
+              onClick={() =>
+                window.open("https://github.com/HardikDaim", "_blank")
+              }
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            >
+              <FaGithub />
+            </span>
             <span>|</span>
-            <span>Phone: +1234567890</span>
+            <span
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/in/hardik-daim-ab0b07251",
+                  "_blank"
+                )
+              }
+              className="text-blue-700 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              <FaLinkedin />
+            </span>
+            <span>|</span>
+            <span
+              onClick={() =>
+                window.open("https://www.instagram.com/hardikdaim_17", "_blank")
+              }
+              className="text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
+            >
+              <FaInstagram />
+            </span>
           </div>
           <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
             {userInfo && (
               <div className="font-medium">Welcome, {userInfo.name}</div>
             )}
-            <span className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-              <FaGithub />
-            </span>
-            <span>|</span>
-
-            <span className="text-blue-700 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-              <FaLinkedin />
-            </span>
-
-            <span>|</span>
-
-            <span className="text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300">
-              <FaInstagram />
-            </span>
           </div>
         </div>
         <div className="main-header flex justify-between items-center p-4 ">
@@ -201,7 +216,7 @@ const Header = () => {
             <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
               <div
                 onClick={() => setShowCategory(!showCategory)}
-                className="relative "
+                className="relative hidden md:block"
               >
                 <div className="flex bg-blue-700 rounded-md dark:bg-blue-700 items-center p-4 justify-center gap-2 text-sm font-medium cursor-pointer">
                   <span className="text-slate-100 dark:text-slate-200">
@@ -353,50 +368,54 @@ const Header = () => {
                           ) : products.length > 0 ? (
                             products.map((suggestion) => {
                               const discountedPrice =
-                              suggestion.price - (suggestion.price * suggestion.discount) / 100;
+                                suggestion.price -
+                                (suggestion.price * suggestion.discount) / 100;
                               return (
-                              <li
-                                key={suggestion.id}
-                                className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
-                                onClick={() => {
-                                  navigate(
-                                    `/product/details/${suggestion.slug}`
-                                  );
-                                }}
-                              >
-                                <img
-                                  className="w-10 h-10 rounded-md object-cover"
-                                  src={suggestion.images[0]}
-                                />
-                                <div className="ml-3">
-                                  <p className="text-sm text-gray-900 dark:text-slate-300">
-                                    {suggestion.name}
-                                  </p>
-                                  <p className="text-xs text-gray-500 dark:text-slate-400">
-                                    {suggestion?.discount !== 0 ? (
-                                      <>
-                                        <span className="line-through text-slate-500">
-                                          ₹
-                                          {suggestion?.price.toLocaleString(
-                                            "en-IN"
-                                          )}
-                                        </span>{" "}
+                                <li
+                                  key={suggestion.id}
+                                  className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer"
+                                  onClick={() => {
+                                    navigate(
+                                      `/product/details/${suggestion.slug}`
+                                    );
+                                  }}
+                                >
+                                  <img
+                                    className="w-10 h-10 rounded-md object-cover"
+                                    src={suggestion.images[0]}
+                                  />
+                                  <div className="ml-3">
+                                    <p className="text-sm text-gray-900 dark:text-slate-300">
+                                      {suggestion.name}
+                                    </p>
+                                    <p className="text-xs text-gray-500 dark:text-slate-400">
+                                      {suggestion?.discount !== 0 ? (
+                                        <>
+                                          <span className="line-through text-slate-500">
+                                            ₹
+                                            {suggestion?.price.toLocaleString(
+                                              "en-IN"
+                                            )}
+                                          </span>{" "}
+                                          <span className="text-blue-700 dark:text-blue-500">
+                                            ₹
+                                            {discountedPrice.toLocaleString(
+                                              "en-IN"
+                                            )}{" "}
+                                            (-
+                                            {suggestion?.discount}%)
+                                          </span>
+                                        </>
+                                      ) : (
                                         <span className="text-blue-700 dark:text-blue-500">
-                                          ₹
-                                          {discountedPrice.toLocaleString(
-                                            "en-IN"
-                                          )}{" "}
-                                          (-
-                                          {suggestion?.discount}%)
+                                          ₹{suggestion?.price}
                                         </span>
-                                      </>
-                                    ) : (
-                                      <span className="text-blue-700 dark:text-blue-500">₹{suggestion?.price}</span>
-                                    )}
-                                  </p>
-                                </div>
-                              </li>
-                            )})
+                                      )}
+                                    </p>
+                                  </div>
+                                </li>
+                              );
+                            })
                           ) : (
                             <div className="flex items-center justify-center py-2">
                               <p className="text-sm text-gray-900 dark:text-slate-300">

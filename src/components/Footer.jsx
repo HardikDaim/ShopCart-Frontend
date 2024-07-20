@@ -16,14 +16,12 @@ const Footer = () => {
             </div>
             <div className="my-4">
               <p className="text-slate-500 dark:text-slate-400">
-                1234 Main Street, City, Country
+              This project is purely made by <strong>Hardik Daim</strong>. 
               </p>
               <p className="text-slate-500 dark:text-slate-400">
-                Tel: +123 456 7890
+                For any query contact me at <strong>hardikdaim@gmail.com</strong>
               </p>
-              <p className="text-slate-500 dark:text-slate-400">
-                Email: info@shopcart.com
-              </p>
+              
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3">

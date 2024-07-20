@@ -25,6 +25,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import  { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ function App() {
           <SpeedInsights />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/shops" element={<Shops />} />
