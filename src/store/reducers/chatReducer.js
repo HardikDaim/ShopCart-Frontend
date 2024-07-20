@@ -7,10 +7,9 @@ export const add_customer_friend = createAsyncThunk(
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.post(
-        `/chat/customer/add-customer-seller`,
+        `/chat/customer/add-customer-friend`,
         info
       );
-
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response?.data);
@@ -27,7 +26,6 @@ export const send_message = createAsyncThunk(
         `/chat/customer/send-message-to-seller`,
         info
       );
-      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response?.data);
