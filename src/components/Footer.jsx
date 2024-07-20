@@ -15,16 +15,16 @@ const Footer = () => {
               <span className="ml-1">ShopCart</span>
             </div>
             <div className="my-4">
-              <p className="text-slate-500 dark:text-slate-400">
+              <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm">
               This project is purely made by <strong>Hardik Daim</strong>. 
               </p>
-              <p className="text-slate-500 dark:text-slate-400">
+              <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm">
                 For any query contact me at <strong>hardikdaim@gmail.com</strong>
               </p>
               
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3 text-xs md:text-sm">
           <div>
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">Useful Links</h2>
               <ul className="text-slate-500 dark:text-slate-400 font-medium">
@@ -59,11 +59,11 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-span-2 md:col-span-1">
+            <div className="col-span-2 md:col-span-1 hidden md:block">
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">Newsletter</h2>
               <form>
                 <input type="email" className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md py-2 px-4 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Email Address" />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">Subscribe</button>
+                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ">Subscribe</button>
               </form>
             </div>
           </div>

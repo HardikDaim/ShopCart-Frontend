@@ -44,7 +44,7 @@ const Home = () => {
       <Categoires categories={categories} loader={loader}/>
       <FeatureProduct products={products} loader={loader} />
       <div className="flex flex-wrap mx-auto">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mx-4 my-10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mx-4 mt-0 mb-10 md:my-10">
           <div className="overflow-hidden">
             <Products title="Latest Products" products={latestProducts} loader={loader} />
           </div>

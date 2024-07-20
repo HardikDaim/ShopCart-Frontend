@@ -89,13 +89,20 @@ const Products = ({ title, products, loader }) => {
                         {pl.discount}%
                       </div>
                     )}
+                    <div className="w-28 md:w-40 flex-shrink-0 ">
                     <img
-                      className="w-36 h-28 md:w-32 md:h-28 lg:w-40 lg:h-auto rounded-md"
+                      className="w-full h-20 md:h-24  rounded-md"
                       src={pl.images[0]}
                       alt={pl.name}
                     />
-                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-700 dark:text-slate-400">
-                      <h2>{pl.name}</h2>
+
+                    </div>
+                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs md:text-sm text-slate-700 dark:text-slate-400">
+                    <h2 className="font-bold">
+                        {pl.name.length > 75
+                          ? `${pl.name.substring(0, 75)}...`
+                          : pl.name}
+                      </h2>
                       <div className="flex gap-1">
                         <Rating ratings={pl.rating} />
                       </div>

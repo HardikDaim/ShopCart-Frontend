@@ -55,7 +55,7 @@ const Header = () => {
   return (
     <>
       <header className="bg-white  dark:bg-slate-900 text-slate-700 dark:text-slate-200">
-        <div className="header-top hidden md:flex flex justify-between items-center p-2 bg-slate-200 dark:bg-slate-800 text-sm px-4">
+        <div className="header-top hidden md:flex  justify-between items-center p-2 bg-slate-200 dark:bg-slate-800  text-[8px] lg:text-sm px-4">
           <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
             <span>
               This project is purely made by <strong>Hardik Daim</strong>. You
@@ -211,7 +211,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white  dark:bg-slate-900 py-4 shadow-md">
+        <div className="bg-white  dark:bg-slate-900 pb-2 md:py-4 shadow-md">
           <div className="w-full mx-auto px-4">
             <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
               <div
@@ -432,10 +432,10 @@ const Header = () => {
 
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Customer Care Support 24/7:
+                  Made by <b>Hardik Daim</b>
                 </span>
                 <span className="text-sm text-slate-600 dark:text-slate-400">
-                  1-800-123-4567
+                  E-Mail: hardikdaim@gmail.com
                 </span>
               </div>
             </div>

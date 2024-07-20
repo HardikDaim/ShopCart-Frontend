@@ -51,7 +51,7 @@ const Banner = ({ loader }) => {
             <Link
               to="/shops"
               type="button"
-              className={`px-8 py-3 mt-4 rounded-lg bg-blue-600 text-white font-semibold hover:bg-red-700 transition duration-300 hover:-translate-y-1 hover:scale-105 dark:bg-blue-600 dark:hover:bg-red-600 ${
+              className={`p-2 md:px-6 md:py-3 mt-4 text-xs rounded-lg bg-blue-600 text-white font-semibold hover:bg-red-700 transition duration-300 hover:-translate-y-1 hover:scale-105 dark:bg-blue-600 dark:hover:bg-red-600 ${
                 loader ? "hidden" : "flex"
               }`}
             >
