@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from "../Rating";
-import LoaderOverlay from "../LoaderOverlay";
 import { Link, useNavigate } from "react-router-dom";
 import { add_to_cart, add_to_wishlist, messageClear } from "../../store/reducers/cartReducer";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const ShopProducts = ({ products, loader, styles }) => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const ShopProducts = ({ products, loader, styles }) => {
       navigate("/login");
     }
   };
+
   useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
@@ -79,6 +81,7 @@ const ShopProducts = ({ products, loader, styles }) => {
       navigate("/login");
     }
   };
+
   return (
     <div
       className={`w-full ${
@@ -87,8 +90,41 @@ const ShopProducts = ({ products, loader, styles }) => {
           : "flex flex-col gap-3"
       }`}
     >
-      {loader && <LoaderOverlay />}
-      {products.length > 0 ?
+      {loader && (
+        <div className={`w-full ${styles === "grid" ? "grid grid-cols-2 lg:grid-cols-3 gap-3" : "flex flex-col gap-3"}`}>
+          {[...Array(6)].map((_, index) => (
+            <div
+              key={index}
+              className={`w-full ${
+                styles !== "grid" ? "flex items-start justify-start p2" : "p-1"
+              } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
+            >
+              <div
+                className={`${
+                  styles === "grid"
+                    ? "w-full relative group overflow-hidden"
+                    : "w-1/3 relative group overflow-hidden"
+                }`}
+              >
+                <Skeleton height="100%" width="100%" className="rounded-lg" />
+              </div>
+              <div
+                className={`my-2 text-slate-700 dark:text-slate-300 ${
+                  styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
+                }`}
+              >
+                <Skeleton height={20} width="60%" className="mb-2" />
+                <Skeleton height={15} width="40%" />
+                <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg mt-2">
+                  <Skeleton height={20} width="30%" />
+                </div>
+                <Skeleton count={2} height={15} width="90%" className="mt-2" />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      {!loader && products.length > 0 ?
         products.map((p, i) => {
           const discountedPrice = p.price - (p.price * p.discount) / 100;
           const words = p.description.split(" ");
@@ -111,7 +147,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               >
                 {p.discount > 0 && (
                   <div className="flex justify-center items-center absolute text-white w-[30px] h-[20px] md:w-[38px] md:h-[38px] md:rounded-full bg-red-500 font-semibold text-xs -left-0 -top-1">
-                    {p.discount}% 
+                    {p.discount}%
                   </div>
                 )}
                 <Link to={`/product/details/${p.slug}`}>
@@ -122,7 +158,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                   />
                 </Link>
                 <ul className="flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
-                  <li   onClick={() => add_wishlist(p)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                  <li onClick={() => add_wishlist(p)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <FaRegHeart />
                   </li>
                   <Link to={`/product/details/${p.slug}`}>
@@ -130,7 +166,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                       <FaEye />
                     </li>
                   </Link>
-                  <li    onClick={() => add_cart(p._id)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                  <li onClick={() => add_cart(p._id)} className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                     <RiShoppingCartLine />
                   </li>
                 </ul>
@@ -180,7 +216,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               </div>
             </div>
           );
-        }): 'no Product with desired category found...'}
+        }) : 'No Product with desired Category found...'}
     </div>
   );
 };
