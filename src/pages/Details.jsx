@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Rating from "../components/Rating";
@@ -38,7 +38,7 @@ const Details = () => {
   const { product, relatedProducts, moreProducts, loader } = useSelector(
     (state) => state.home
   );
-  
+
   const {
     loader: cartLoader,
     errorMessage,
@@ -199,205 +199,247 @@ const Details = () => {
         },
       });
     } else {
-      toast.error("Log In to buy Products")
+      toast.error("Log In to buy Products");
       navigate("/login");
     }
   };
 
   const reviewSubmit = (e) => {
     e.preventDefault();
-    const obj = {
-      name: userInfo.name,
-      review: re,
-      rating: rat,
-      productId: product?._id,
-    };
-    dispatch(customer_review(obj));
+    if(rat === 0) {
+      toast.error("Please provide a rating.")
+    }
+    else if (re.trim() === '') {
+      toast.error('Please write a review.');
+      return;
+    } else {
+      const obj = {
+        name: userInfo.name,
+        review: re,
+        rating: rat,
+        productId: product?._id,
+      };
+      dispatch(customer_review(obj));
+    }
+  };
+
+  const share = async () => {
+    const productUrl = window.location.href; // current url
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Check out this product!",
+          text: "I found this amazing product, have a look:",
+          url: productUrl,
+        });
+        console.log("Product shared successfully");
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
+        "Check out this product: " + productUrl
+      )}`;
+      window.open(whatsappUrl, "_blank");
+    }
+  };
+
+  const reviewSectionRef = useRef(null);
+
+  const scrollToReviews = () => {
+    reviewSectionRef.current.scrollIntoView({ behaviour: "smooth" });
   };
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <Header />
       <div className="mx-auto  px-4 py-8">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="w-full lg:w-1/2 relative">
-          {loader ? (
-            <>
-            <Skeleton height="500px" width="100%" className="rounded-lg" />            
-            </>
-          ) : (
-            <>
-              {product?.images && product?.images?.length > 0 && (
-                <>
-                  <img
-                    src={product?.images[currentImageIndex]}
-                    alt={product?.name}
-                    className="w-full h-auto max-h-[500px] rounded-lg shadow-lg object-contain"
-                  />
-                  {product?.images?.length > 1 && (
-                    <>
-                      <button
-                        onClick={handlePrevImage}
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
-                      >
-                        &lt;
-                      </button>
-                      <button
-                        onClick={handleNextImage}
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
-                      >
-                        &gt;
-                      </button>
-                    </>
-                  )}
-                </>
-              )}
-            </>
-          )}
-          {product?.images && product?.images.length > 1 && (
-          <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
-            {loader
-              ? Array.from({ length: product.images.length }).map((_, index) => (
-                  <Skeleton
-                    key={index}
-                    width={64}
-                    height={64}
-                    className="rounded-lg"
-                  />
-                ))
-              : product.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={product.name}
-                    className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
-                      index === currentImageIndex
-                        ? "border-2 border-blue-500"
-                        : "opacity-50"
-                    }`}
-                    onClick={() => setCurrentImageIndex(index)}
-                  />
-                ))}
-          </div>
-        )}
-        </div>
-
-        {/* Details Section */}
-        <div className="w-full lg:w-1/2 flex flex-col space-y-4">
-          {loader ? (
-            <div className="flex flex-col space-y-4">
-              <Skeleton height={40} width="100%" className="rounded-lg" />
-              <Skeleton height={30} width="20%" className="rounded-lg" />
-              <Skeleton height={20} width="25%" className="rounded-lg" />
-              <Skeleton height={140} width="100%" className="rounded-lg" />
-              <Skeleton height={40} width="20%" className="rounded-lg" />
-              <Skeleton height={20} width="20%" className="rounded-lg" />
-              <Skeleton height={50} width="100%" className="rounded-lg" />
-              <Skeleton height={50} width="100%" className="rounded-lg" />
-            </div>
-          ) : (
-            <>
-              <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">{product?.name}</h1>
-                <button className="text-2xl font-bold">
-                  <IoShareSocialOutline />
-                </button>
-              </div>
-              <div className="flex justify-start items-center gap-4">
-                <div className="text-xl flex">
-                  
-                  <Rating ratings={product?.rating} />
-                </div>
-                <span className="hover:underline cursor-pointer">
-                  {totalReview} reviews
-                </span>
-                <Link to={`/chat/${product?.sellerId}`}>
-                  <span className="hover:underline cursor-pointer">chat</span>
-                </Link>
-              </div>
-              <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
-                {product?.discount !== 0 ? (
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="w-full lg:w-1/2 relative">
+            {loader ? (
+              <>
+                <Skeleton height="500px" width="100%" className="rounded-lg" />
+              </>
+            ) : (
+              <>
+                {product?.images && product?.images?.length > 0 && (
                   <>
-                    <span className="line-through text-slate-500">
-                      {formatPrice(product?.price)}
-                    </span>{" "}
-                    <span>
-                      {formatPrice(discountedPrice)} (-{product?.discount}%)
-                    </span>
+                    <img
+                      src={product?.images[currentImageIndex]}
+                      alt={product?.name}
+                      className="w-full h-auto max-h-[500px] rounded-lg shadow-lg object-contain"
+                    />
+                    {product?.images?.length > 1 && (
+                      <>
+                        <button
+                          onClick={handlePrevImage}
+                          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                        >
+                          &lt;
+                        </button>
+                        <button
+                          onClick={handleNextImage}
+                          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                        >
+                          &gt;
+                        </button>
+                      </>
+                    )}
                   </>
-                ) : (
-                  <>₹{product?.price}</>
                 )}
-              </p>
-              <p className="text-lg">{product?.description}</p>
-              {product?.stock > 0 ? (
-                <div className="mt-2 flex items-center space-x-3">
-                  <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
-                    In Stock
-                  </button>
-                  <button
-                    onClick={dec}
-                    className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
-                  >
-                    -
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    onClick={inc}
-                    className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => add_wishlist(product)}
-                    className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
-                  >
-                    <FaHeart />
-                  </button>
-                </div>
-              ) : (
-                <div className="mt-2 flex items-center space-x-3">
-                  <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
-                    Out of Stock
-                  </button>
-
-                  <button
-                    onClick={() => add_wishlist(product)}
-                    className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
-                  >
-                    <FaHeart />
-                  </button>
-                </div>
-              )}
-              {product?.stock <= 10 && product?.stock > 0 ? (
-                <p className="text-red-600 dark:text-red-400">
-                  Hurry up, only {product?.stock} piece(s) left
-                </p>
-              ) : (
-                ""
-              )}
-              <div className="flex flex-col space-y-4">
-                <button
-                  onClick={() => add_cart(product._id)}
-                  className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
-                >
-                  Add to Cart
-                </button>
-                <button
-                  onClick={buyNow}
-                  className="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
-                >
-                  Buy Now
-                </button>
+              </>
+            )}
+            {product?.images && product?.images.length > 1 && (
+              <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
+                {loader
+                  ? Array.from({ length: product.images.length }).map(
+                      (_, index) => (
+                        <Skeleton
+                          key={index}
+                          width={64}
+                          height={64}
+                          className="rounded-lg"
+                        />
+                      )
+                    )
+                  : product.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={product.name}
+                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
+                          index === currentImageIndex
+                            ? "border-2 border-blue-500"
+                            : "opacity-50"
+                        }`}
+                        onClick={() => setCurrentImageIndex(index)}
+                      />
+                    ))}
               </div>
-            </>
-          )}
+            )}
+          </div>
+
+          {/* Details Section */}
+          <div className="w-full lg:w-1/2 flex flex-col space-y-4">
+            {loader ? (
+              <div className="flex flex-col space-y-4">
+                <Skeleton height={40} width="100%" className="rounded-lg" />
+                <Skeleton height={30} width="20%" className="rounded-lg" />
+                <Skeleton height={20} width="25%" className="rounded-lg" />
+                <Skeleton height={140} width="100%" className="rounded-lg" />
+                <Skeleton height={40} width="20%" className="rounded-lg" />
+                <Skeleton height={20} width="20%" className="rounded-lg" />
+                <Skeleton height={50} width="100%" className="rounded-lg" />
+                <Skeleton height={50} width="100%" className="rounded-lg" />
+              </div>
+            ) : (
+              <>
+                <div className="flex justify-between items-center">
+                  <h1 className="text-3xl font-bold">{product?.name}</h1>
+                  <button onClick={share} className="text-2xl font-bold">
+                    <IoShareSocialOutline />
+                  </button>
+                </div>
+                <div className="flex justify-start items-center gap-4">
+                  <div className="text-xl flex">
+                    <Rating ratings={product?.rating} />
+                  </div>
+                  <span
+                    onClick={scrollToReviews}
+                    className="hover:underline cursor-pointer"
+                  >
+                    {totalReview} reviews
+                  </span>
+                  <Link to={`/chat/${product?.sellerId}`}>
+                    <span className="hover:underline cursor-pointer">chat</span>
+                  </Link>
+                </div>
+                <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
+                  {product?.discount !== 0 ? (
+                    <>
+                      <span className="line-through text-slate-500">
+                        {formatPrice(product?.price)}
+                      </span>{" "}
+                      <span>
+                        {formatPrice(discountedPrice)} (-{product?.discount}%)
+                      </span>
+                    </>
+                  ) : (
+                    <>₹{product?.price}</>
+                  )}
+                </p>
+                <p className="text-xs md:text-sm">{product?.description}</p>
+                {product?.stock > 0 ? (
+                  <div className="mt-2 flex items-center space-x-3">
+                    <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                      In Stock
+                    </button>
+                    <button
+                      onClick={dec}
+                      className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                    >
+                      -
+                    </button>
+                    <span>{quantity}</span>
+                    <button
+                      onClick={inc}
+                      className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                    >
+                      +
+                    </button>
+                    <button
+                      onClick={() => add_wishlist(product)}
+                      className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                    >
+                      <FaHeart />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="mt-2 flex items-center space-x-3">
+                    <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                      Out of Stock
+                    </button>
+
+                    <button
+                      onClick={() => add_wishlist(product)}
+                      className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                    >
+                      <FaHeart />
+                    </button>
+                  </div>
+                )}
+                {product?.stock <= 10 && product?.stock > 0 ? (
+                  <p className="text-red-600 dark:text-red-400">
+                    Hurry up, only {product?.stock} piece(s) left
+                  </p>
+                ) : (
+                  ""
+                )}
+                <div className="flex flex-col space-y-4">
+                  <button
+                    onClick={() => add_cart(product._id)}
+                    className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                  >
+                    Add to Cart
+                  </button>
+                  <button
+                    onClick={buyNow}
+                    className="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </div>
         <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
           <h2 className="text-2xl font-semibold">Details & Specifications</h2>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+        <div
+          ref={reviewSectionRef}
+          className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8"
+        >
           <h2 className="text-2xl font-semibold">Customer's Ratings</h2>
           <div className="mt-8">
             <div className="flex flex-col md:flex-row md:justify-between gap-10 md-lg:flex-col">
@@ -551,28 +593,28 @@ const Details = () => {
                 <h2 className="text-lg md:text-3xl font-semibold">
                   Submit your Review
                 </h2>
-                <div className="flex gap-1">
-                  <RatingReact
-                    onChange={(e) => setRat(e)}
-                    value={rat}
-                    initialRating={rat}
-                    emptySymbol={
-                      <span className="text-4xl">
-                        <CiStar />
-                      </span>
-                    }
-                    fullSymbol={
-                      <span className="text-yellow-500 dark:text-yellow-300 text-4xl">
-                        <FaStar />
-                      </span>
-                    }
-                  />
-                </div>
                 <form onSubmit={reviewSubmit}>
+                  <div className="flex gap-1">
+                    <RatingReact
+                      onChange={(e) => setRat(e)}
+                      value={rat}          
+                      initialRating={rat}
+                      emptySymbol={
+                        <span className="text-4xl">
+                          <CiStar />
+                        </span>
+                      }
+                      fullSymbol={
+                        <span className="text-yellow-500 dark:text-yellow-300 text-4xl">
+                          <FaStar />
+                        </span>
+                      }
+                    />
+                  </div>
+
                   <textarea
                     value={re}
                     onChange={(e) => setRe(e.target.value)}
-                    required
                     className="border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-colors duration-300"
                     name=""
                     id=""
@@ -582,7 +624,7 @@ const Details = () => {
                   ></textarea>
 
                   <div className="mt-2 flex items-center justify-center">
-                    <button className="py-1 px-5 bg-blue-600 text-white rounded-lg">
+                    <button type="submit" className="py-1 px-5 bg-blue-600 text-white rounded-lg">
                       Submit
                     </button>
                   </div>
@@ -602,68 +644,137 @@ const Details = () => {
           </div>
         </div>
         <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-          <h2 className="text-2xl font-semibold">Related Products</h2>
-          <div>
-            <Swiper
-              spaceBetween={25}
-              slidesPerView="auto"
-              breakpoints={{
-                1280: { slidesPerView: 3 },
-                565: { slidesPerView: 2 },
-              }}
-              loop={true}
-              pagination={{ clickable: true, el: ".custom_bullet" }}
-              modules={[Pagination]}
-              className="mySwipper"
-            >
-              {relatedProducts.map((relatedProduct, i) => (
-                <SwiperSlide key={i}>
-                  <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
-                    {relatedProduct?.discount > 0 && (
-                      <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
-                        {relatedProduct?.discount}%
-                      </div>
-                    )}
-                    <Link to={`/product/details/${relatedProduct.slug}`}>
-                      <img
-                        className="w-full h-[200px] lg:h-80 object-cover cursor-pointer rounded-lg mb-4"
-                        src={relatedProduct.images[0]}
-                        alt={relatedProduct.name}
-                      />
-                    </Link>
-                    <h3 className="text-lg font-semibold mb-2">
-                      {relatedProduct?.name}
-                    </h3>
-                    <span className="flex ">
-                      <Rating ratings={relatedProduct?.rating} />
-                    </span>
-                    <div className="flex justify-start items-center gap-2">
-                      <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
-                        {relatedProduct?.discount > 0 ? (
-                          <>
-                            <span className="line-through text-slate-500">
-                              ₹{relatedProduct?.price}
-                            </span>{" "}
-                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹{discountedPrice.toFixed(2)}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="text-black font-semibold dark:text-slate-300">
-                            ₹{relatedProduct?.price}
-                          </span>
-                        )}
-                      </span>
+        <h2 className="text-2xl font-semibold">Related Products</h2>
+        <div>
+          <Swiper
+            spaceBetween={25}
+            slidesPerView="auto"
+            breakpoints={{
+              1280: { slidesPerView: 3 },
+              565: { slidesPerView: 2 },
+            }}
+            loop={true}
+            pagination={{ clickable: true, el: ".custom_bullet" }}
+            modules={[Pagination]}
+            className="mySwipper"
+          >
+            {relatedProducts.map((relatedProduct, i) => (
+              <SwiperSlide key={i}>
+                <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                  {relatedProduct?.discount > 0 && (
+                    <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
+                      {relatedProduct?.discount}%
                     </div>
+                  )}
+                  <Link
+                    className="w-full flex-shrink-0"
+                    to={`/product/details/${relatedProduct.slug}`}
+                  >
+                    <img
+                      className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                      src={relatedProduct.images[0]}
+                      alt={relatedProduct.name}
+                    />
+                  </Link>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {relatedProduct?.name}
+                  </h3>
+                  <span className="flex">
+                    <Rating ratings={relatedProduct?.rating} />
+                  </span>
+                  <div className="flex justify-start items-center gap-2">
+                    <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                      {relatedProduct?.discount > 0 ? (
+                        <>
+                          <span className="line-through text-slate-500">
+                            ₹{relatedProduct?.price}
+                          </span>{" "}
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                            ₹{(relatedProduct.price - (relatedProduct.price * relatedProduct.discount) / 100).toFixed(2)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-black font-semibold dark:text-slate-300">
+                          ₹{relatedProduct?.price}
+                        </span>
+                      )}
+                    </span>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-          <div className="w-full flex justify-center items-center py-8">
-            <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
-          </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
+        <div className="w-full flex justify-center items-center">
+          <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+        </div>
+      </div>
+      <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+        <h2 className="text-2xl font-semibold">More Products</h2>
+        <div>
+          <Swiper
+            spaceBetween={25}
+            slidesPerView="auto"
+            breakpoints={{
+              1280: { slidesPerView: 3 },
+              565: { slidesPerView: 2 },
+            }}
+            loop={true}
+            pagination={{ clickable: true, el: ".custom_bullet" }}
+            modules={[Pagination]}
+            className="mySwipper"
+          >
+            {moreProducts.map((relatedProduct, i) => (
+              <SwiperSlide key={i}>
+                <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                  {relatedProduct?.discount > 0 && (
+                    <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
+                      {relatedProduct?.discount}%
+                    </div>
+                  )}
+                  <Link
+                    className="w-28 flex-shrink-0"
+                    to={`/product/details/${relatedProduct.slug}`}
+                  >
+                    <img
+                      className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                      src={relatedProduct.images[0]}
+                      alt={relatedProduct.name}
+                    />
+                  </Link>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {relatedProduct?.name}
+                  </h3>
+                  <span className="flex">
+                    <Rating ratings={relatedProduct?.rating} />
+                  </span>
+                  <div className="flex justify-start items-center gap-2">
+                    <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                      {relatedProduct?.discount > 0 ? (
+                        <>
+                          <span className="line-through text-slate-500">
+                            ₹{relatedProduct?.price}
+                          </span>{" "}
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                            ₹{(relatedProduct.price - (relatedProduct.price * relatedProduct.discount) / 100).toFixed(2)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-black font-semibold dark:text-slate-300">
+                          ₹{relatedProduct?.price}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="w-full flex justify-center items-center ">
+          <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+        </div>
+      </div>
       </div>
       <Footer />
     </div>
