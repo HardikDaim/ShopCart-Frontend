@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 // Thunks
 export const customer_register = createAsyncThunk(
@@ -8,7 +8,7 @@ export const customer_register = createAsyncThunk(
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.post(`/customer/customer-register`, info);
-      localStorage.setItem('customerToken', data.token);
+      localStorage.setItem("customerToken", data.token);
       await api.post(`/customer/registerMail`, info);
       return fulfillWithValue(data);
     } catch (error) {
@@ -23,7 +23,7 @@ export const customer_login = createAsyncThunk(
   async (info, { rejectWithValue, fulfillWithValue }) => {
     try {
       const { data } = await api.post(`/customer/customer-login`, info);
-      localStorage.setItem('customerToken', data.token);
+      localStorage.setItem("customerToken", data.token);
       await api.post(`/customer/loginMail`, info);
       return fulfillWithValue(data);
     } catch (error) {
@@ -33,16 +33,26 @@ export const customer_login = createAsyncThunk(
   }
 );
 
+export const change_password = createAsyncThunk(
+  "auth/change_password",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/customer/change-password", info);
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response?.data);
+    }
+  }
+);
+
 const decodeToken = (token) => {
-  if(token) {
+  if (token) {
     const userInfo = jwtDecode(token);
     return userInfo;
   } else {
     return null;
   }
-}
-
-
+};
 
 const authReducer = createSlice({
   name: "auth",
@@ -50,7 +60,7 @@ const authReducer = createSlice({
     successMessage: "",
     errorMessage: "",
     loader: false,
-    userInfo: decodeToken(localStorage.getItem('customerToken')),
+    userInfo: decodeToken(localStorage.getItem("customerToken")),
   },
   reducers: {
     messageClear: (state) => {
@@ -59,7 +69,7 @@ const authReducer = createSlice({
     },
     user_reset: (state) => {
       state.userInfo = "";
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -95,7 +105,21 @@ const authReducer = createSlice({
         state.loader = false;
         state.errorMessage = action.payload?.error;
       })
-      
+      // change customer password
+      .addCase(change_password.pending, (state) => {
+        state.loader = true;
+        state.errorMessage = "";
+        state.successMessage = "";
+      })
+      .addCase(change_password.fulfilled, (state, action) => {
+        state.loader = false;
+        state.successMessage = action.payload?.message;
+        state.userInfo = action.payload?.userInfo;
+      })
+      .addCase(change_password.rejected, (state, action) => {
+        state.loader = false;
+        state.errorMessage = action.payload?.error;
+      });
   },
 });
 

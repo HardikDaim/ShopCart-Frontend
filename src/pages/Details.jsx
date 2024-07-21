@@ -19,15 +19,12 @@ import {
   get_reviews,
   product_details,
 } from "../store/reducers/homeReducer";
-import LoaderOverlay from "../components/LoaderOverlay";
 import toast from "react-hot-toast";
 import {
   add_to_cart,
   add_to_wishlist,
   messageClear,
 } from "../store/reducers/cartReducer";
-import { IoChatbubbles } from "react-icons/io5";
-import { Helmet } from "react-helmet";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -264,32 +261,7 @@ const Details = () => {
               <>
                 {product?.images && product?.images?.length > 0 && (
                   <>
-                    <Helmet>
-                      <meta property="og:title" content={product?.name} />
-                      <meta
-                        property="og:description"
-                        content={product?.description?.length > 30
-                          ? `${product.description.slice(0, 30)}...`
-                          : product?.description}
-                      />
-                      <meta property="og:image" content={product?.images[0]} />
-                      <meta property="og:url" content={window.location.href} />
-                      <meta
-                        property="twitter:card"
-                        content="summary_large_image"
-                      />
-                      <meta property="twitter:title" content={product?.name} />
-                      <meta
-                        property="twitter:description"
-                        content={product?.description?.length > 30
-                          ? `${product.description.slice(0, 30)}...`
-                          : product?.description}
-                      />
-                      <meta
-                        property="twitter:image"
-                        content={product?.images[0]}
-                      />
-                    </Helmet>
+                
                     <img
                       src={product?.images[currentImageIndex]}
                       alt={product?.name}

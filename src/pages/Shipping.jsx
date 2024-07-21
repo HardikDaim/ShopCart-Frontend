@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { place_order } from "../store/reducers/orderReducer";
+import { toast } from "react-hot-toast";
 
 const Shipping = () => {
   const {
@@ -12,7 +13,7 @@ const Shipping = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {loader, errorMessage, userInfo } = useSelector((state) => state.auth);
+  const { loader, errorMessage, userInfo } = useSelector((state) => state.auth);
 
   const [formState, setFormState] = useState({
     firstName: "",
@@ -65,19 +66,23 @@ const Shipping = () => {
   };
 
   const placeOrder = () => {
-    dispatch(
-      place_order({
-        price,
-        products,
-        shipping_fee,
-        items,
-        shippingInfo: formState,
-        customerId: userInfo.id,
-        navigate,
-      })
-    );
+    if (!isSubmitted) {
+      toast.error("Fill the Shipping Information");
+    } else {
+      dispatch(
+        place_order({
+          price,
+          products,
+          shipping_fee,
+          items,
+          shippingInfo: formState,
+          customerId: userInfo.id,
+          navigate,
+        })
+      );
+    }
   };
-  
+
   const formatPrice = (price) => {
     return price
       ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
@@ -88,7 +93,9 @@ const Shipping = () => {
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold mb-8 text-center">Shipping Information</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Shipping Information
+        </h2>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-2/3">
             <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-8">
@@ -96,8 +103,11 @@ const Shipping = () => {
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="firstName">
-                        First Name
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="firstName"
+                      >
+                        First Name <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -110,8 +120,11 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="lastName">
-                        Last Name
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="lastName"
+                      >
+                        Last Name <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -125,8 +138,11 @@ const Shipping = () => {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2" htmlFor="address">
-                      Address
+                    <label
+                      className="text-lg font-semibold mb-2"
+                      htmlFor="address"
+                    >
+                      Address <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -140,8 +156,11 @@ const Shipping = () => {
                   </div>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="city">
-                        City
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="city"
+                      >
+                        City <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -154,8 +173,11 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="state">
-                        State
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="state"
+                      >
+                        State <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -170,8 +192,11 @@ const Shipping = () => {
                   </div>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="postalCode">
-                        Postal Code
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="postalCode"
+                      >
+                        Postal Code <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -184,8 +209,11 @@ const Shipping = () => {
                       />
                     </div>
                     <div className="flex flex-col">
-                      <label className="text-lg font-semibold mb-2" htmlFor="country">
-                        Country
+                      <label
+                        className="text-lg font-semibold mb-2"
+                        htmlFor="country"
+                      >
+                        Country <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -199,8 +227,11 @@ const Shipping = () => {
                     </div>
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2" htmlFor="phone">
-                      Phone Number
+                    <label
+                      className="text-lg font-semibold mb-2"
+                      htmlFor="phone"
+                    >
+                      Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -213,8 +244,11 @@ const Shipping = () => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2" htmlFor="email">
-                      Email
+                    <label
+                      className="text-lg font-semibold mb-2"
+                      htmlFor="email"
+                    >
+                      Email <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -245,7 +279,8 @@ const Shipping = () => {
                       <span className="bg-blue-200 text-blue-800 text-sm font-medium mr-2 px-2 py-1 rounded">
                         Home
                       </span>
-                      {formState.address}, {formState.city}, {formState.state}, {formState.postalCode}, {formState.country}
+                      {formState.address}, {formState.city}, {formState.state},{" "}
+                      {formState.postalCode}, {formState.country}
                       <span
                         className="ml-2 text-blue-600 dark:text-blue-400 cursor-pointer"
                         onClick={() => setIsSubmitted(false)}
@@ -263,46 +298,66 @@ const Shipping = () => {
               <h3 className="text-2xl font-semibold mb-4">Your Cart</h3>
               {products.length > 0 ? (
                 products.map((p, i) => (
-                  <div key={i} className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
+                  <div
+                    key={i}
+                    className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4"
+                  >
                     <div className="flex justify-start items-center mb-4">
-                      <h2 className="text-sm md:text-md font-bold">{p.shopName}</h2>
+                      <h2 className="text-sm md:text-md font-bold">
+                        {p.shopName}
+                      </h2>
                     </div>
                     {p.products.map((pt) => (
-                      <div key={pt.productInfo.id} className="w-full flex flex-col sm:flex-row items-center mb-4">
+                      <div
+                        key={pt.productInfo.id}
+                        className="w-full flex flex-col sm:flex-row items-center mb-4"
+                      >
                         <img
                           src={pt.productInfo.images[0]}
                           alt={pt.productInfo.name}
                           className="w-30 h-20 object-cover rounded-lg mb-4 sm:mb-0 sm:mr-4"
                         />
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold">{pt.productInfo.name}</h3>
-                          <span className="text-sm text-gray-500 mr-2">Brand: {pt.productInfo?.brand}</span>
+                          <h3 className="text-lg font-semibold">
+                            {pt.productInfo.name}
+                          </h3>
+                          <span className="text-sm text-gray-500 mr-2">
+                            Brand: {pt.productInfo?.brand}
+                          </span>
                           {pt.productInfo?.discount > 0 ? (
                             <>
                               <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
                                 {formatPrice(pt.productInfo.price)}
                               </span>
                               <span className="text-blue-600 dark:text-blue-400">
-                                
                                 {formatPrice(
                                   pt.productInfo.price -
-                                  Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)
+                                    Math.floor(
+                                      (pt.productInfo.price *
+                                        pt.productInfo.discount) /
+                                        100
+                                    )
                                 )}
                               </span>
                             </>
                           ) : (
-                            <p className="text-blue-600 dark:text-blue-400">{formatPrice(pt.productInfo.price)}</p>
+                            <p className="text-blue-600 dark:text-blue-400">
+                              {formatPrice(pt.productInfo.price)}
+                            </p>
                           )}
                           <div className="flex items-center space-x-2">
-                            <span >Quantity: {pt.quantity}</span>
+                            <span>Quantity: {pt.quantity}</span>
                           </div>
                         </div>
                         <div className="ml-0 sm:ml-4 mt-4 sm:mt-0">
                           <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
-                            
                             {formatPrice(
                               pt.productInfo.price -
-                              Math.floor((pt.productInfo.price * pt.productInfo.discount) / 100)
+                                Math.floor(
+                                  (pt.productInfo.price *
+                                    pt.productInfo.discount) /
+                                    100
+                                )
                             )}
                           </p>
                         </div>
@@ -336,11 +391,15 @@ const Shipping = () => {
                 <span>{formatPrice(price + shipping_fee)}</span>
               </div>
             </div>
-            <p className="pt-2">Note: The prices are inclusive of GST and other taxes.</p>
+            <p className="pt-2">
+              Note: The prices are inclusive of GST and other taxes.
+            </p>
             <button
-              disabled={!isSubmitted}
+            
               className={`w-full mt-6 py-2 text-white rounded ${
-                isSubmitted ? "cursor-pointer bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500" : "cursor-not-allowed bg-blue-300 dark:bg-blue-400"
+                isSubmitted
+                  ? "cursor-pointer bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500"
+                  : "cursor-not-allowed bg-blue-600 dark:bg-blue-500 hover:bg-blue-700"
               }`}
               onClick={placeOrder}
             >
