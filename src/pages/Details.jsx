@@ -27,6 +27,7 @@ import {
   messageClear,
 } from "../store/reducers/cartReducer";
 import { IoChatbubbles } from "react-icons/io5";
+import { Helmet } from "react-helmet";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -206,11 +207,10 @@ const Details = () => {
 
   const reviewSubmit = (e) => {
     e.preventDefault();
-    if(rat === 0) {
-      toast.error("Please provide a rating.")
-    }
-    else if (re.trim() === '') {
-      toast.error('Please write a review.');
+    if (rat === 0) {
+      toast.error("Please provide a rating.");
+    } else if (re.trim() === "") {
+      toast.error("Please write a review.");
       return;
     } else {
       const obj = {
@@ -264,6 +264,32 @@ const Details = () => {
               <>
                 {product?.images && product?.images?.length > 0 && (
                   <>
+                    <Helmet>
+                      <meta property="og:title" content={product?.name} />
+                      <meta
+                        property="og:description"
+                        content={product?.description?.length > 30
+                          ? `${product.description.slice(0, 30)}...`
+                          : product?.description}
+                      />
+                      <meta property="og:image" content={product?.images[0]} />
+                      <meta property="og:url" content={window.location.href} />
+                      <meta
+                        property="twitter:card"
+                        content="summary_large_image"
+                      />
+                      <meta property="twitter:title" content={product?.name} />
+                      <meta
+                        property="twitter:description"
+                        content={product?.description?.length > 30
+                          ? `${product.description.slice(0, 30)}...`
+                          : product?.description}
+                      />
+                      <meta
+                        property="twitter:image"
+                        content={product?.images[0]}
+                      />
+                    </Helmet>
                     <img
                       src={product?.images[currentImageIndex]}
                       alt={product?.name}
@@ -597,7 +623,7 @@ const Details = () => {
                   <div className="flex gap-1">
                     <RatingReact
                       onChange={(e) => setRat(e)}
-                      value={rat}          
+                      value={rat}
                       initialRating={rat}
                       emptySymbol={
                         <span className="text-4xl">
@@ -624,7 +650,10 @@ const Details = () => {
                   ></textarea>
 
                   <div className="mt-2 flex items-center justify-center">
-                    <button type="submit" className="py-1 px-5 bg-blue-600 text-white rounded-lg">
+                    <button
+                      type="submit"
+                      className="py-1 px-5 bg-blue-600 text-white rounded-lg"
+                    >
                       Submit
                     </button>
                   </div>
@@ -644,137 +673,149 @@ const Details = () => {
           </div>
         </div>
         <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-        <h2 className="text-2xl font-semibold">Related Products</h2>
-        <div>
-          <Swiper
-            spaceBetween={25}
-            slidesPerView="auto"
-            breakpoints={{
-              1280: { slidesPerView: 3 },
-              565: { slidesPerView: 2 },
-            }}
-            loop={true}
-            pagination={{ clickable: true, el: ".custom_bullet" }}
-            modules={[Pagination]}
-            className="mySwipper"
-          >
-            {relatedProducts.map((relatedProduct, i) => (
-              <SwiperSlide key={i}>
-                <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
-                  {relatedProduct?.discount > 0 && (
-                    <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
-                      {relatedProduct?.discount}%
-                    </div>
-                  )}
-                  <Link
-                    className="w-full flex-shrink-0"
-                    to={`/product/details/${relatedProduct.slug}`}
-                  >
-                    <img
-                      className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
-                      src={relatedProduct.images[0]}
-                      alt={relatedProduct.name}
-                    />
-                  </Link>
-                  <h3 className="text-lg font-semibold mb-2">
-                    {relatedProduct?.name}
-                  </h3>
-                  <span className="flex">
-                    <Rating ratings={relatedProduct?.rating} />
-                  </span>
-                  <div className="flex justify-start items-center gap-2">
-                    <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
-                      {relatedProduct?.discount > 0 ? (
-                        <>
-                          <span className="line-through text-slate-500">
-                            ₹{relatedProduct?.price}
-                          </span>{" "}
-                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                            ₹{(relatedProduct.price - (relatedProduct.price * relatedProduct.discount) / 100).toFixed(2)}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-black font-semibold dark:text-slate-300">
-                          ₹{relatedProduct?.price}
-                        </span>
-                      )}
+          <h2 className="text-2xl font-semibold">Related Products</h2>
+          <div>
+            <Swiper
+              spaceBetween={25}
+              slidesPerView="auto"
+              breakpoints={{
+                1280: { slidesPerView: 3 },
+                565: { slidesPerView: 2 },
+              }}
+              loop={true}
+              pagination={{ clickable: true, el: ".custom_bullet" }}
+              modules={[Pagination]}
+              className="mySwipper"
+            >
+              {relatedProducts.map((relatedProduct, i) => (
+                <SwiperSlide key={i}>
+                  <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                    {relatedProduct?.discount > 0 && (
+                      <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
+                        {relatedProduct?.discount}%
+                      </div>
+                    )}
+                    <Link
+                      className="w-full flex-shrink-0"
+                      to={`/product/details/${relatedProduct.slug}`}
+                    >
+                      <img
+                        className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                        src={relatedProduct.images[0]}
+                        alt={relatedProduct.name}
+                      />
+                    </Link>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {relatedProduct?.name}
+                    </h3>
+                    <span className="flex">
+                      <Rating ratings={relatedProduct?.rating} />
                     </span>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-        <div className="w-full flex justify-center items-center">
-          <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
-        </div>
-      </div>
-      <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-        <h2 className="text-2xl font-semibold">More Products</h2>
-        <div>
-          <Swiper
-            spaceBetween={25}
-            slidesPerView="auto"
-            breakpoints={{
-              1280: { slidesPerView: 3 },
-              565: { slidesPerView: 2 },
-            }}
-            loop={true}
-            pagination={{ clickable: true, el: ".custom_bullet" }}
-            modules={[Pagination]}
-            className="mySwipper"
-          >
-            {moreProducts.map((relatedProduct, i) => (
-              <SwiperSlide key={i}>
-                <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
-                  {relatedProduct?.discount > 0 && (
-                    <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
-                      {relatedProduct?.discount}%
-                    </div>
-                  )}
-                  <Link
-                    className="w-28 flex-shrink-0"
-                    to={`/product/details/${relatedProduct.slug}`}
-                  >
-                    <img
-                      className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
-                      src={relatedProduct.images[0]}
-                      alt={relatedProduct.name}
-                    />
-                  </Link>
-                  <h3 className="text-lg font-semibold mb-2">
-                    {relatedProduct?.name}
-                  </h3>
-                  <span className="flex">
-                    <Rating ratings={relatedProduct?.rating} />
-                  </span>
-                  <div className="flex justify-start items-center gap-2">
-                    <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
-                      {relatedProduct?.discount > 0 ? (
-                        <>
-                          <span className="line-through text-slate-500">
+                    <div className="flex justify-start items-center gap-2">
+                      <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                        {relatedProduct?.discount > 0 ? (
+                          <>
+                            <span className="line-through text-slate-500">
+                              ₹{relatedProduct?.price}
+                            </span>{" "}
+                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                              ₹
+                              {(
+                                relatedProduct.price -
+                                (relatedProduct.price *
+                                  relatedProduct.discount) /
+                                  100
+                              ).toFixed(2)}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-black font-semibold dark:text-slate-300">
                             ₹{relatedProduct?.price}
-                          </span>{" "}
-                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                            ₹{(relatedProduct.price - (relatedProduct.price * relatedProduct.discount) / 100).toFixed(2)}
                           </span>
-                        </>
-                      ) : (
-                        <span className="text-black font-semibold dark:text-slate-300">
-                          ₹{relatedProduct?.price}
-                        </span>
-                      )}
-                    </span>
+                        )}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          <div className="w-full flex justify-center items-center">
+            <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+          </div>
         </div>
-        <div className="w-full flex justify-center items-center ">
-          <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+          <h2 className="text-2xl font-semibold">More Products</h2>
+          <div>
+            <Swiper
+              spaceBetween={25}
+              slidesPerView="auto"
+              breakpoints={{
+                1280: { slidesPerView: 3 },
+                565: { slidesPerView: 2 },
+              }}
+              loop={true}
+              pagination={{ clickable: true, el: ".custom_bullet" }}
+              modules={[Pagination]}
+              className="mySwipper"
+            >
+              {moreProducts.map((relatedProduct, i) => (
+                <SwiperSlide key={i}>
+                  <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                    {relatedProduct?.discount > 0 && (
+                      <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
+                        {relatedProduct?.discount}%
+                      </div>
+                    )}
+                    <Link
+                      className="w-28 flex-shrink-0"
+                      to={`/product/details/${relatedProduct.slug}`}
+                    >
+                      <img
+                        className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                        src={relatedProduct.images[0]}
+                        alt={relatedProduct.name}
+                      />
+                    </Link>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {relatedProduct?.name}
+                    </h3>
+                    <span className="flex">
+                      <Rating ratings={relatedProduct?.rating} />
+                    </span>
+                    <div className="flex justify-start items-center gap-2">
+                      <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                        {relatedProduct?.discount > 0 ? (
+                          <>
+                            <span className="line-through text-slate-500">
+                              ₹{relatedProduct?.price}
+                            </span>{" "}
+                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                              ₹
+                              {(
+                                relatedProduct.price -
+                                (relatedProduct.price *
+                                  relatedProduct.discount) /
+                                  100
+                              ).toFixed(2)}
+                            </span>
+                          </>
+                        ) : (
+                          <span className="text-black font-semibold dark:text-slate-300">
+                            ₹{relatedProduct?.price}
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          <div className="w-full flex justify-center items-center ">
+            <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+          </div>
         </div>
-      </div>
       </div>
       <Footer />
     </div>
