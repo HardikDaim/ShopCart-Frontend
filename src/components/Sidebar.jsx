@@ -58,9 +58,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             Shop
           </Link>
           <Link
-            to="/about"
+            to="/about-us"
             className={`${
-              pathname === "/about"
+              pathname === "/about-us"
                 ? "text-blue-500 dark:text-blue-300"
                 : "text-slate-600 dark:text-slate-400"
             } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
@@ -68,9 +68,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             About
           </Link>
           <Link
-            to="/contact"
+            to="/contact-us"
             className={`${
-              pathname === "/contact"
+              pathname === "/contact-us"
                 ? "text-blue-500 dark:text-blue-300"
                 : "text-slate-600 dark:text-slate-400"
             } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
