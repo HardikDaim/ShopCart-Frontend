@@ -133,9 +133,9 @@ const Header = () => {
               Shop
             </Link>
             <Link
-              to="/about"
+              to="/about-us"
               className={`${
-                pathname === "/about"
+                pathname === "/about-us"
                   ? "text-blue-700 dark:text-blue-300"
                   : "text-slate-600 dark:text-slate-400"
               } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
@@ -143,9 +143,9 @@ const Header = () => {
               About
             </Link>
             <Link
-              to="/contact"
+              to="/contact-us"
               className={`${
-                pathname === "/contact"
+                pathname === "/contact-us"
                   ? "text-blue-700 dark:text-blue-300"
                   : "text-slate-600 dark:text-slate-400"
               } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}

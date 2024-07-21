@@ -23,9 +23,11 @@ import ScrollToTop from "./scrollToTop";
 import Chat from "./pages/Chat";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import  { SkeletonTheme } from "react-loading-skeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import NotFound from "./pages/NotFound";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ function App() {
   return (
     <div className={isDarkTheme ? "dark" : ""}>
       <SkeletonTheme
-        baseColor={isDarkTheme ? "#1F2937" : "#E5E7EB"}  
+        baseColor={isDarkTheme ? "#1F2937" : "#E5E7EB"}
         highlightColor={isDarkTheme ? "#374151" : "#F3F4F6"}
       >
         <Toaster
@@ -75,6 +77,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/shops" element={<Shops />} />
@@ -87,7 +91,10 @@ function App() {
               <Route path="/my-orders" element={<Orders />} />
               <Route path="/change-password" element={<ChangePassword />} />
               <Route path="/my-wishlist" element={<Wishlist />} />
-              <Route path="/order/details/:orderId" element={<OrderDetails />} />
+              <Route
+                path="/order/details/:orderId"
+                element={<OrderDetails />}
+              />
               <Route path="/cart" element={<Cart />} />
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/chat" element={<Chat />} />
