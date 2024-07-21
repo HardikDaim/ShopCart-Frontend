@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SiTheregister } from "react-icons/si";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
@@ -9,61 +10,101 @@ const Footer = () => {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0 mr-10 ">
             <div className="logo text-2xl font-bold flex items-center">
-              <span className="text-blue-700">
+              <motion.span
+                className="text-blue-700 dark:text-blue-600"
+                animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
+              >
                 <SiTheregister />
-              </span>
+              </motion.span>
               <span className="ml-1">ShopCart</span>
             </div>
             <div className="my-4">
               <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm">
-              This project is purely made by <strong>Hardik Daim</strong>. 
+                This project is purely made by <strong>Hardik Daim</strong>.
               </p>
               <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm">
-                For any query contact me at <strong>hardikdaim@gmail.com</strong>
+                For any query contact me at{" "}
+                <strong>hardikdaim@gmail.com</strong>
               </p>
-              
             </div>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 md:grid-cols-3 text-xs md:text-sm">
-          <div>
-              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">Useful Links</h2>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">
+                Useful Links
+              </h2>
               <ul className="text-slate-500 dark:text-slate-400 font-medium">
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">About Us</Link>
+                  <Link to="/" className="hover:underline">
+                    About Us
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">About Our Shop</Link>
+                  <Link to="/" className="hover:underline">
+                    About Our Shop
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">Delivery Information</Link>
+                  <Link to="/" className="hover:underline">
+                    Delivery Information
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">Privacy Policy</Link>
+                  <Link to="/" className="hover:underline">
+                    Privacy Policy
+                  </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">About Us</h2>
+              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">
+                About Us
+              </h2>
               <ul className="text-slate-500 dark:text-slate-400 font-medium">
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">About Us</Link>
+                  <Link to="/" className="hover:underline">
+                    About Us
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">About Our Shop</Link>
+                  <Link to="/" className="hover:underline">
+                    About Our Shop
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">Delivery Information</Link>
+                  <Link to="/" className="hover:underline">
+                    Delivery Information
+                  </Link>
                 </li>
                 <li className="mb-4">
-                  <Link to="/" className="hover:underline">Privacy Policy</Link>
+                  <Link to="/" className="hover:underline">
+                    Privacy Policy
+                  </Link>
                 </li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1 hidden md:block">
-              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">Newsletter</h2>
+              <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase dark:text-white">
+                Newsletter
+              </h2>
               <form>
-                <input type="email" className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md py-2 px-4 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Email Address" />
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ">Subscribe</button>
+                <input
+                  type="email"
+                  className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-md py-2 px-4 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Your Email Address"
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                >
+                  Subscribe
+                </button>
               </form>
             </div>
           </div>

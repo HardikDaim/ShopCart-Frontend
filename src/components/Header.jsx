@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import ThemeToggle from "./ThemeToggle";
-import { IoPerson } from "react-icons/io5";
-import { IoLogOut } from "react-icons/io5";
-import { LuLogIn } from "react-icons/lu";
-import { IoIosSearch } from "react-icons/io";
 import {
   FaGithub,
   FaLinkedin,
@@ -19,6 +15,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { search_products } from "../store/reducers/searchReducer";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -100,9 +97,18 @@ const Header = () => {
         </div>
         <div className="main-header flex justify-between items-center p-4 ">
           <Link to="/" className="logo text-2xl font-bold flex items-center">
-            <span className="text-blue-700">
+            <motion.span
+              className="text-blue-700 dark:text-blue-600"
+              animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
+              transition={{
+                duration: 2,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+            >
               <SiTheregister />
-            </span>
+            </motion.span>
             <span className="ml-1">ShopCart</span>
           </Link>
           <nav className="hidden md:flex space-x-4 text-sm font-medium">
@@ -429,7 +435,6 @@ const Header = () => {
                   </div>
                 </form>
               </div>
-
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
                   Made by <b>Hardik Daim</b>
