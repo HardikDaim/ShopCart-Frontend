@@ -3,9 +3,7 @@ import { FaList } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Header from "../components/Header";
 import { Link, useLocation, useParams } from "react-router-dom";
-import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import io from "socket.io-client";
 import {
   add_customer_friend,
   messageClear,
