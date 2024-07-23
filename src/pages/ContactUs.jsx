@@ -34,9 +34,8 @@ const ContactUs = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen  text-slate-900 dark:text-slate-200 p-6">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
+      <div className="text-slate-900 dark:text-slate-200 p-6 md:p-12 min-h-screen">
+      <div className="border dark:border-slate-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
           <div className="text-lg">
             <p className="mb-4">
               We would love to hear from you! Whether you have a question about
