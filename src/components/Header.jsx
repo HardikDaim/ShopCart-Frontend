@@ -91,7 +91,7 @@ const Header = () => {
           </div>
           <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
             {userInfo && (
-              <div className="font-medium">Welcome, {userInfo.name}</div>
+              <div className="font-medium"> Welcome, {userInfo.name}</div>
             )}
           </div>
         </div>
@@ -437,10 +437,10 @@ const Header = () => {
               </div>
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
                 <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                  Made by <b>Hardik Daim</b>
+                  Founder & CEO - <strong>Hardik Daim</strong>
                 </span>
                 <span className="text-sm text-slate-600 dark:text-slate-400">
-                  E-Mail: hardikdaim@gmail.com
+                 <strong> E-Mail: hardikdaim@gmail.com</strong>
                 </span>
               </div>
             </div>

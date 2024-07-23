@@ -28,6 +28,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 import NotFound from "./pages/NotFound";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import DeliveryInformation from "./pages/DeliveryInformation";
+import HelpCenter from "./pages/HelpCenter";
+import ReturnsAndRefunds from "./pages/ReturnsAndRefunds";
+import FAQ from "./pages/FAQ";
 
 function App() {
   const dispatch = useDispatch();
@@ -79,6 +84,11 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/delivery-information" element={<DeliveryInformation />} />
+            <Route path="/help-center" element={<HelpCenter />} />
+            <Route path="/returns-and-refunds" element={<ReturnsAndRefunds />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/shops" element={<Shops />} />
