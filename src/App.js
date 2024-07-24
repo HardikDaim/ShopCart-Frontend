@@ -123,8 +123,6 @@ function App() {
             adClient="ca-pub-2161322477877336"
             adSlot="7045718367"
             adFormat="auto"
-            adWidth="100%"
-            adHeight="90px"
           />
         </BrowserRouter>
       </SkeletonTheme>
