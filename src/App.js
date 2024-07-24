@@ -119,11 +119,11 @@ function App() {
               <Route path="/payment" element={<Payment />} />
             </Route>
           </Routes>
-          <GoogleAd
+          {/* <GoogleAd
             adClient="ca-pub-2161322477877336"
             adSlot="7045718367"
             adFormat="auto"
-          />
+          /> */}
         </BrowserRouter>
       </SkeletonTheme>
     </div>

@@ -170,6 +170,8 @@ const OrderDetails = () => {
                 onClick={() =>
                   navigate(`/payment`, {
                     state: {
+                      products: orderDetails.products,
+                      customerId: orderDetails.customerId,
                       orderId: orderDetails?._id,
                       price: orderDetails?.price,
                     },

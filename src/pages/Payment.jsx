@@ -27,7 +27,6 @@ const PaymentPage = () => {
     toast.success(`Card payment initiated for Order ID: ${orderId}`);
   };
 
-  
   const formatPrice = (price) => {
     return price
       ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
@@ -37,97 +36,103 @@ const PaymentPage = () => {
   return (
     <>
       <Header />
-      <div className="bg-white dark:bg-slate-900 p-6 md:p-12">
+      <div className="bg-white dark:bg-slate-900 p-6 md:p-12 min-h-screen">
         <div className="border dark:border-slate-700 shadow-lg rounded-2xl p-4 md:p-6 lg:p-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
             Payment Page
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-          <div className="bg-gradient-to-r from-blue-800 via-blue-500 to-blue-700 text-white p-4 rounded-xl relative">
-      <p className="text-sm md:text-lg">
-        Order ID: <span className="font-semibold">{orderId}</span>
-      </p>
-      <p className="text-sm md:text-lg">
-        Customer ID: <span className="font-semibold">{customerId}</span>
-      </p>
-      <p className="text-sm md:text-lg">Items: {items}</p>
-      <p className="text-sm md:text-lg">
-        Products:
-        <div className="">
-          {products?.length > 0 ? (
-            products?.map((p, i) => (
-              <div key={i} className="mb-6">
-                <h2 className="text-sm md:text-md font-bold mb-2">
-                  {i + 1}. Seller Name: {p.shopName}
-                </h2>
-                {p.products.map((pt) => (
-                  <div
-                    key={pt.productInfo.id}
-                    className="w-full flex flex-col sm:flex-row items-center mb-4"
-                  >
-                    <img
-                      src={pt.productInfo.images[0]}
-                      alt={pt.productInfo.name}
-                      className="w-30 h-20 object-cover rounded-lg mb-4 sm:mb-0 sm:mr-4"
-                    />
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold">
-                        {pt.productInfo.name}
-                      </h3>
-                      <span className="text-sm text-gray-500 mr-2">
-                        Brand: {pt.productInfo?.brand}
-                      </span>
-                      {pt.productInfo?.discount > 0 ? (
-                        <>
-                          <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
-                            {formatPrice(pt.productInfo.price)}
-                          </span>
-                          <span className="text-blue-600 dark:text-blue-400">
-                            {formatPrice(
-                              pt.productInfo.price -
-                                Math.floor(
-                                  (pt.productInfo.price *
-                                    pt.productInfo.discount) /
-                                    100
-                                )
-                            )}
-                          </span>
-                        </>
-                      ) : (
-                        <p className="text-blue-600 dark:text-blue-400">
-                          {formatPrice(pt.productInfo.price)}
-                        </p>
-                      )}
-                      <div className="flex items-center space-x-2 mt-2">
-                        <span className="text-sm">Quantity: {pt.quantity}</span>
+            <div className="bg-gradient-to-r from-blue-800 via-blue-500 to-blue-700 text-white p-4 rounded-xl relative">
+              <p className="text-sm md:text-lg">
+                Order ID: <span className="font-semibold">{orderId}</span>
+              </p>
+              <p className="text-sm md:text-lg">
+                Customer ID: <span className="font-semibold">{customerId}</span>
+              </p>
+              <p className="text-sm md:text-lg">Items: {items}</p>
+              <p className="text-sm md:text-lg">
+                Products:
+                <div className="">
+                  {products?.length > 0 ? (
+                    products?.map((p, i) => (
+                      <div key={i} className="mb-6">
+                        <h2 className="text-sm md:text-md font-bold mb-2">
+                          {i + 1}. Seller Name: {p.shopName || "N/A"}
+                        </h2>
+                        {(p.products ? p.products : [p]).map((pt, index) => (
+                          <div
+                            key={pt.productInfo?.id || pt.id}
+                            className="w-full flex flex-col sm:flex-row items-center mb-4"
+                          >
+                            <img
+                              src={pt.productInfo?.images[0] || p.images[0]}
+                              alt={pt.productInfo?.name || pt.name || p.name}
+                              className="w-30 h-20 object-cover rounded-lg mb-4 sm:mb-0 sm:mr-4"
+                            />
+                            <div className="flex-1">
+                              <h3 className="text-lg font-semibold">
+                                {pt.productInfo?.name || pt.name || p.name}
+                              </h3>
+                              <span className="text-sm text-gray-500 mr-2">
+                                Brand:{" "}
+                                {pt.productInfo?.brand || pt.brand || p.brand}
+                              </span>
+                              {(pt.productInfo?.discount || p.discount) > 0 ? (
+                                <>
+                                  <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
+                                    {formatPrice(
+                                      pt.productInfo?.price ||
+                                        pt.price ||
+                                        p.price
+                                    )}
+                                  </span>
+                                  <span className="text-blue-600 dark:text-blue-400">
+                                    {formatPrice(
+                                      (pt.productInfo?.price ||
+                                        pt.price ||
+                                        p.price) -
+                                        Math.floor(
+                                          ((pt.productInfo?.price ||
+                                            pt.price ||
+                                            p.price) *
+                                            (pt.productInfo?.discount ||
+                                              pt.discount ||
+                                              p.discount)) /
+                                            100
+                                        )
+                                    )}
+                                  </span>
+                                </>
+                              ) : (
+                                <p className="text-blue-600 dark:text-blue-400">
+                                  {formatPrice(
+                                    pt.productInfo?.price || pt.price || p.price
+                                  )}
+                                </p>
+                              )}
+                              <div className="flex items-center space-x-2 mt-2">
+                                <span className="text-sm">
+                                  Quantity: {pt.quantity || p.quantity}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                    <div className="ml-0 sm:ml-4 mt-4 sm:mt-0 text-lg font-semibold text-blue-600 dark:text-blue-400">
-                      {formatPrice(
-                        pt.productInfo.price -
-                          Math.floor(
-                            (pt.productInfo.price * pt.productInfo.discount) /
-                              100
-                          )
-                      )}
-                    </div>
-                  </div>
-                ))}
+                    ))
+                  ) : (
+                    <p className="">No products in cart.</p>
+                  )}
+                </div>
+              </p>
+              <div className="absolute bottom-4 right-4 text-center">
+                <p className="text-sm md:text-base">To be Paid now</p>
+                <h1 className="text-xl md:text-4xl lg:text-5xl font-bold">
+                  <sup>₹</sup>
+                  {price.toLocaleString("en-IN")}
+                </h1>
               </div>
-            ))
-          ) : (
-            <p className="">No products in cart.</p>
-          )}
-        </div>
-      </p>
-      <div className="absolute bottom-4 right-4 text-center">
-        <p className="text-sm md:text-base">To be Paid now</p>
-        <h1 className="text-xl md:text-4xl lg:text-5xl font-bold">
-          <sup>₹</sup>
-          {price.toLocaleString("en-IN")}
-        </h1>
-      </div>
-    </div>
+            </div>
             <div className="flex flex-col gap-6">
               <div
                 className={`p-4 rounded-xl ${
