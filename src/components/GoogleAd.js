@@ -5,7 +5,7 @@ const GoogleAd = ({ adClient, adSlot, adFormat = 'auto', adWidth = 'auto', adHei
   const adRef = useRef(null);
 
   useEffect(() => {
-    if (window && adRef.current) {
+    if (process.env.NODE_ENV === 'production' && window && adRef.current) {
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch (e) {
@@ -16,14 +16,16 @@ const GoogleAd = ({ adClient, adSlot, adFormat = 'auto', adWidth = 'auto', adHei
 
   return (
     <div>
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block', width: adWidth, height: adHeight }}
-        data-ad-client={adClient}
-        data-ad-slot={adSlot}
-        data-ad-format={adFormat}
-        ref={adRef}
-      ></ins>
+      {process.env.NODE_ENV === 'production' && (
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', width: adWidth, height: adHeight }}
+          data-ad-client={adClient}
+          data-ad-slot={adSlot}
+          data-ad-format={adFormat}
+          ref={adRef}
+        ></ins>
+      )}
     </div>
   );
 };

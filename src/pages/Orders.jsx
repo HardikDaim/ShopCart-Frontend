@@ -5,7 +5,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { get_orders } from "../store/reducers/orderReducer";
-import LoaderOverlay from "../components/LoaderOverlay";
 import toast from "react-hot-toast";
 import { messageClear } from "../store/reducers/authReducer";
 import Skeleton from "react-loading-skeleton";
@@ -58,6 +57,8 @@ const Orders = () => {
     }
     navigate("/payment", {
       state: {
+        products: order.products,
+        customerId: order.customerId,
         price: order.price,
         items: items,
         orderId: order._id,
@@ -76,6 +77,8 @@ const Orders = () => {
     }
   }, [errorMessage, dispatch, orderError]);
   return (
+    <>
+    
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
       <Header />
 
@@ -231,6 +234,8 @@ const Orders = () => {
         )}
       </main>
     </div>
+    <Footer />
+    </>
   );
 };
 
