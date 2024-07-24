@@ -33,6 +33,7 @@ import DeliveryInformation from "./pages/DeliveryInformation";
 import HelpCenter from "./pages/HelpCenter";
 import ReturnsAndRefunds from "./pages/ReturnsAndRefunds";
 import FAQ from "./pages/FAQ";
+import GoogleAd from "./components/GoogleAd";
 
 function App() {
   const dispatch = useDispatch();
@@ -85,9 +86,15 @@ function App() {
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/delivery-information" element={<DeliveryInformation />} />
+            <Route
+              path="/delivery-information"
+              element={<DeliveryInformation />}
+            />
             <Route path="/help-center" element={<HelpCenter />} />
-            <Route path="/returns-and-refunds" element={<ReturnsAndRefunds />} />
+            <Route
+              path="/returns-and-refunds"
+              element={<ReturnsAndRefunds />}
+            />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -112,6 +119,13 @@ function App() {
               <Route path="/payment" element={<Payment />} />
             </Route>
           </Routes>
+          <GoogleAd
+            adClient="ca-pub-2161322477877336"
+            adSlot="7045718367"
+            adFormat="auto"
+            adWidth="100%"
+            adHeight="90px"
+          />
         </BrowserRouter>
       </SkeletonTheme>
     </div>
