@@ -64,7 +64,7 @@ const Products = ({ title, products, loader }) => {
       >
         {loader ? (
           <div className="flex flex-col gap-4">
-            {[...Array(3)].map((_, index) => (
+            {[...Array(10)].map((_, index) => (
               <div key={index} className="flex gap-4">
                 <Skeleton width={150} height={120} className="rounded-md" />
                 <div className="flex flex-col justify-between">
