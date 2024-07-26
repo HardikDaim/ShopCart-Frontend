@@ -80,9 +80,9 @@ const FeatureProduct = ({ products, loader }) => {
             ? Array.from({length : products.length}).map((_, index) => (
                 <div
                   key={index}
-                  className="relative mt-4 w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
+                  className="relative mt-4 w-28  md:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
                 >
-                  <Skeleton height={160} className="w-full h-40 rounded-lg" />
+                  <Skeleton height={160} className="w-full h-20 md:h-40 rounded-lg" />
                   <div className="my-2 text-slate-700 dark:text-slate-300">
                     <Skeleton width={120} height={20} className="font-bold" />
                     <Skeleton width={80} height={20} className="mt-2" />

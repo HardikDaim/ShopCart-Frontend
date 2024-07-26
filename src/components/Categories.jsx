@@ -11,7 +11,7 @@ const Categories = ({ categories, loader }) => {
       <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-10">
         <div className="w-full">
           <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
-            <h2>{loader ? <Skeleton width={150} /> : 'Top Categories'}</h2>
+            <h2>{loader ? <Skeleton width={150} /> : "Top Categories"}</h2>
             <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
           </div>
         </div>
@@ -21,31 +21,37 @@ const Categories = ({ categories, loader }) => {
         style={{ WebkitOverflowScrolling: "touch" }}
       >
         <div className="flex space-x-6 md:space-x-12">
-          {loader ? (
-            Array.from({length: categories.length}).map((_, index) => (
-              <div key={index} className="flex-shrink-0 w-28 md:w-60 text-center">
-                <Skeleton height={160} className="w-full h-40 rounded-lg" />
-                <Skeleton width="60%" height={20} className="mt-2 mx-auto" />
-              </div>
-            ))
-          ) : (
-            categories.map((category, index) => (
-              <Link to={`/products?category=${category.name}`} key={index}>
+          {loader
+            ? Array.from({ length: categories.length }).map((_, index) => (
                 <div
-                  className="flex-shrink-0 w-28 md:w-60 text-center transition-all duration-500 hover:transform hover:scale-110 cursor-pointer"
+                  key={index}
+                  className="flex-shrink-0 w-28 md:w-60 text-center"
                 >
-                  <img
-                    src={category.image}
-                    alt={category.name}
+                  <Skeleton
+                    height={160}
                     className="w-full h-20 md:h-40 rounded-lg"
                   />
-                  <div className="mt-2 text-xs md:text-sm text-slate-700 dark:text-slate-300">
-                    {category.name}
-                  </div>
+                  <Skeleton
+                    width="60%"
+                    height={20}
+                    className="mt-2 mx-auto text-xs md:text-sm"
+                  />
                 </div>
-              </Link>
-            ))
-          )}
+              ))
+            : categories.map((category, index) => (
+                <Link to={`/products?category=${category.name}`} key={index}>
+                  <div className="flex-shrink-0 w-28 md:w-60 text-center transition-all duration-500 hover:transform hover:scale-110 cursor-pointer">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-full h-20 md:h-40 rounded-lg"
+                    />
+                    <div className="mt-2 text-xs md:text-sm text-slate-700 dark:text-slate-300">
+                      {category.name}
+                    </div>
+                  </div>
+                </Link>
+              ))}
         </div>
       </div>
     </>

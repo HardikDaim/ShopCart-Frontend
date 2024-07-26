@@ -188,7 +188,10 @@ const ShopProducts = ({ products, loader, styles }) => {
                             ₹{p.price}
                           </span>
                           <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                          ₹{Math.round(discountedPrice).toLocaleString("en-IN")}
+                            ₹
+                            {Math.round(discountedPrice).toLocaleString(
+                              "en-IN"
+                            )}
                           </span>
                         </>
                       ) : (
