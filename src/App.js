@@ -34,6 +34,8 @@ import HelpCenter from "./pages/HelpCenter";
 import ReturnsAndRefunds from "./pages/ReturnsAndRefunds";
 import FAQ from "./pages/FAQ";
 import GoogleAd from "./components/GoogleAd";
+import Success from "./pages/Success";
+import Failed from "./pages/Failed";
 
 function App() {
   const dispatch = useDispatch();
@@ -117,6 +119,8 @@ function App() {
               <Route path="/chat" element={<Chat />} />
               <Route path="/chat/:sellerId" element={<Chat />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="/failed" element={<Failed />} />
             </Route>
           </Routes>
           {/* <GoogleAd

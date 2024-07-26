@@ -440,7 +440,7 @@ const Header = () => {
                   Founder & CEO - <strong>Hardik Daim</strong>
                 </span>
                 <span className="text-sm text-slate-600 dark:text-slate-400">
-                 <strong> E-Mail: hardikdaim@gmail.com</strong>
+                E-Mail - <strong> hardikdaim@gmail.com</strong>
                 </span>
               </div>
             </div>

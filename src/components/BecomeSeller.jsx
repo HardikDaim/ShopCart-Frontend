@@ -24,7 +24,7 @@ const BecomeSeller = () => {
       </div>
       <div className="flex items-center space-x-2 md:space-x-4">
         <a
-          href="https://shop-cart-dashboard.vercel.app"
+          href= {process.env.NODE_ENV === 'production' ? 'https://shop-cart-dashboard.vercel.app': 'http://localhost:3001'}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-0 bg-white text-xs md:text-sm py-1 px-2 lg:text-md lg:py-2 lg:px-4 rounded-md text-blue-700 font-semibold transition-all duration-300 hover:bg-blue-100"
