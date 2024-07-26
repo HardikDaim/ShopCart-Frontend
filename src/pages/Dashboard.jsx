@@ -39,6 +39,8 @@ const Dashboard = () => {
     }
     navigate("/payment", {
       state: {
+        products: order.products,
+        customerId: order.customerId,
         price: order.price,
         items: items,
         orderId: order._id,

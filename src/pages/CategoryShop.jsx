@@ -115,7 +115,6 @@ const CategoryShop = () => {
   return (
     <div>
       <Header />
-      {loader && <LoaderOverlay />}
       <section className="py-6 mx-4">
         <div className="h-full mx-auto">
           <div className="block md:hidden mb-6">

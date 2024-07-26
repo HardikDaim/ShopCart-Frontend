@@ -27,6 +27,7 @@ import {
 } from "../store/reducers/cartReducer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import "../components/styles.css";
 
 const Details = () => {
   const { slug } = useParams();
@@ -261,7 +262,6 @@ const Details = () => {
               <>
                 {product?.images && product?.images?.length > 0 && (
                   <>
-                
                     <img
                       src={product?.images[currentImageIndex]}
                       alt={product?.name}
@@ -288,7 +288,10 @@ const Details = () => {
               </>
             )}
             {product?.images && product?.images.length > 1 && (
-              <div className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-hidden">
+              <div
+                className="flex flex-shrink-0 mt-4 space-x-2 justify-center lg:justify-start overflow-x-auto hide-scrollbar"
+                style={{ WebkitOverflowScrolling: "touch" }}
+              >
                 {loader
                   ? Array.from({ length: product.images.length }).map(
                       (_, index) => (
@@ -305,7 +308,7 @@ const Details = () => {
                         key={index}
                         src={image}
                         alt={product.name}
-                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
+                        className={`w-16 h-16 ml-6 md:ml-0 object-cover rounded-lg cursor-pointer ${
                           index === currentImageIndex
                             ? "border-2 border-blue-500"
                             : "opacity-50"
@@ -348,9 +351,9 @@ const Details = () => {
                   >
                     {totalReview} reviews
                   </span>
-                  <Link to={`/chat/${product?.sellerId}`}>
+                  {/* <Link to={`/chat/${product?.sellerId}`}>
                     <span className="hover:underline cursor-pointer">chat</span>
-                  </Link>
+                  </Link> */}
                 </div>
                 <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
                   {product?.discount !== 0 ? (
@@ -366,7 +369,7 @@ const Details = () => {
                     <>₹{product?.price}</>
                   )}
                 </p>
-                <p className="text-xs md:text-sm">{product?.description}</p>
+                <p className="text-xs md:text-sm text-justify">{product?.description}</p>
                 {product?.stock > 0 ? (
                   <div className="mt-2 flex items-center space-x-3">
                     <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
@@ -413,6 +416,15 @@ const Details = () => {
                 ) : (
                   ""
                 )}
+                <div className="flex gap-1 font-semibold">
+                  <span>Seller:</span>
+                  <span className="hover:underline cursor-pointer">
+                    {product?.shopName}
+                  </span>
+                  <span className="rounded-full text-white bg-blue-700 px-2">
+                    4.1⭐️
+                  </span>
+                </div>
                 <div className="flex flex-col space-y-4">
                   <button
                     onClick={() => add_cart(product._id)}
