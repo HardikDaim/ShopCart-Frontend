@@ -13,6 +13,7 @@ import {
 import LoaderOverlay from "../components/LoaderOverlay";
 import { FaShoppingCart } from "react-icons/fa";
 import { toast } from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -78,11 +79,31 @@ const Cart = () => {
   return (
     <>
       <Header />
-
       <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
-        {loader && <LoaderOverlay />}
         <div className="container mx-auto px-4 py-8">
           <h2 className="text-4xl font-bold mb-6 text-center">Shopping Cart</h2>
+          {cart_products.length === 0 && (
+            <>
+              <motion.div
+                animate={{ opacity: 1, y: [0, -10, 0] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
+                className="flex flex-col items-center mt-10"
+              >
+                <img
+                  src="/images/empty-cart.png"
+                  alt="No orders"
+                  className="w-64 h-64 mb-4"
+                />
+              </motion.div>
+              <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 text-center">
+                Your cart is empty! Add Products to Cart to see them here.
+              </p>
+            </>
+          )}
           {successMessage && (
             <div className="text-green-500 text-center mb-4">
               {successMessage}
@@ -94,19 +115,7 @@ const Cart = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="w-full lg:w-2/3">
               {cart_products.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-[500px]">
-                  <FaShoppingCart className="text-4xl text-gray-500 mb-4" />
-                  <p className="text-lg text-center text-gray-600">
-                    Your cart is empty.
-                  </p>
-                  <Link
-                    type="button"
-                    to="/shops"
-                    className="bg-blue-600 dark:bg-blue-400 p-2 rounded-lg text-white mt-4"
-                  >
-                    Shop Now
-                  </Link>
-                </div>
+                <></>
               ) : (
                 <div className="space-y-4">
                   <h2 className="text-lg font-semibold mb-4 text-green-600">
