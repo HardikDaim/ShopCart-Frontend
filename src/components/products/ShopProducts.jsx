@@ -115,7 +115,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               const discountedPrice = p.price - (p.price * p.discount) / 100;
               return (
                 <div
-                  key={i}
+                  key={i} onClick={() => navigate(`/product/details/${p.slug}`)}
                   className={`w-full ${
                     styles !== "grid"
                       ? "flex items-start justify-start p-2"
