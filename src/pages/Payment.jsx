@@ -4,9 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
+import LoaderOverlay from '../components/LoaderOverlay';
 import {
   generateQRCode,
-  handlePaymentCallback,
+  checkPaymentStatus,
   messageClear,
 } from "../store/reducers/paymentReducer";
 
@@ -14,12 +15,20 @@ const PaymentPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const { qrImage, successMessage, errorMessage } = useSelector((state) => state.payment);
-  const { userInfo } = useSelector((state) => state.auth);
+  const { qrImage, successMessage, errorMessage } = useSelector(
+    (state) => state.payment
+  );
   const {
-    state: { products = [], customerId = "", orderId = "", price = 0, items = 0 } = {},
+    state: {
+      products = [],
+      customerId = "",
+      orderId = "",
+      price = 0,
+      items = 0,
+    } = {},
   } = location;
   const [isUPI, setIsUPI] = useState(true); // Default to UPI payment
+  const [showQr, setShowQr] = useState(false);
 
   const handlePaymentToggle = () => {
     setIsUPI(!isUPI);
@@ -29,34 +38,17 @@ const PaymentPage = () => {
     // Implement card payment logic here
     toast.success(`Card payment initiated for Order ID: ${orderId}`);
   };
-
+  const upiId = "hardikdaim-3@okhdfcbank";
   useEffect(() => {
-    if (orderId && price && userInfo) {
+    if (orderId !== "" && price !== "") {
       const obj = {
         orderId,
         amount: price,
-        upiId: process.env.UPI_ID,
+        upiId,
       };
       dispatch(generateQRCode(obj));
     }
-  }, [dispatch, orderId, price, userInfo]);
-
-  const handlePayment = async () => {
-    // Mock payment callback, replace with actual payment verification logic
-    const paymentStatus = "SUCCESS"; // This should be determined by your payment gateway
-    const obj = {
-      orderId,
-      status: paymentStatus
-    }
-    await dispatch(handlePaymentCallback(obj));
-
-    if (paymentStatus === "SUCCESS") {
-      // Redirect to success page
-       navigate("/success");
-    } else {
-      navigate("/failed");
-    }
-  };
+  }, [orderId, price]);
 
   useEffect(() => {
     if (successMessage) {
@@ -74,6 +66,16 @@ const PaymentPage = () => {
       ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
       : "N/A";
   };
+
+  // useEffect(() => {
+  //   if(orderId !== '' && isUPI) {
+  //     const checkStatusInterval = setInterval(() => {
+  //       dispatch(checkPaymentStatus({orderId, navigate}));
+  //     }, 10000)
+  //    return () => clearInterval(checkStatusInterval)
+  //   }
+
+  // },[orderId, isUPI, navigate, dispatch])
 
   return (
     <>
@@ -176,7 +178,7 @@ const PaymentPage = () => {
               </div>
             </div>
             <div className="flex flex-col gap-6">
-              <div
+              <div 
                 className={`p-4 rounded-xl ${
                   isUPI
                     ? "bg-slate-200 dark:bg-slate-700"
@@ -187,12 +189,12 @@ const PaymentPage = () => {
                   <input
                     type="radio"
                     id="upi"
+                    onChange={handlePaymentToggle}
                     name="paymentMethod"
                     checked={isUPI}
-                    onChange={handlePaymentToggle}
                     className="mr-2"
                   />
-                  <label htmlFor="upi" className="text-lg font-semibold">
+                  <label htmlFor="upi" className="text-lg font-semibold cursor-pointer">
                     Scan and Pay using UPI
                   </label>
                 </div>
@@ -207,20 +209,27 @@ const PaymentPage = () => {
                     </div>
                     <div className="flex flex-col md:flex-row items-start gap-4">
                       {qrImage && (
-                        <div className="flex flex-col items-center w-full md:w-auto">
+                        <div className="relative flex flex-col items-center w-full md:w-auto">
+                          {!showQr && (
+                            <div className="absolute inset-0  backdrop-blur-md text-white flex items-center justify-center z-10">
+                              <button
+                                onClick={() => setShowQr(true)}
+                                className="px-2 py-1 bg-blue-700 rounded-lg"
+                              >
+                                Show QR
+                              </button>
+                            </div>
+                          )}
                           <img
                             src={qrImage}
                             alt="UPI QR Code"
-                            className="w-full h-72 md:w-40 md:h-40"
+                            className={`w-full h-72 md:w-40 md:h-40 ${
+                              !showQr ? "opacity-100" : "opacity-100"
+                            } transition-opacity duration-300`}
                           />
-                          <button
-                            onClick={handlePayment}
-                            className="bg-blue-700 dark:bg-blue-600 text-white py-2 px-4 rounded-md mt-4"
-                          >
-                            I have paid
-                          </button>
                         </div>
                       )}
+
                       <div className="flex flex-col w-full md:w-auto">
                         <p className="text-lg md:text-xl lg:text-2xl font-semibold">
                           Steps:
@@ -229,39 +238,34 @@ const PaymentPage = () => {
                           1. Open your UPI App
                         </p>
                         <p className="text-sm md:text-base">2. Scan QR Code</p>
-                        <p className="text-sm md:text-base">3. Enter Pin and Pay</p>
+                        <p className="text-sm md:text-base">
+                          3. Enter Pin and Pay
+                        </p>
                         <div className="flex flex-wrap gap-2 md:gap-6 items-center justify-start mt-4">
                           <div className="flex items-center gap-1">
                             <img
                               src="/images/gpay.svg"
                               alt="GPay"
-                              className="w-6 h-6"
+                              className=" md:w-6 md:h-6"
                             />
-                            <p>GPay</p>
+                            <p className="text-sm">GPay</p>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <img
-                              src="/images/bhim.svg"
-                              alt="BHIM"
-                              className="w-6 h-6"
-                            />
-                            <p>BHIM</p>
-                          </div>
+                         
                           <div className="flex items-center gap-1">
                             <img
                               src="/images/phonepe.svg"
                               alt="PhonePe"
-                              className="w-6 h-6"
+                              className="md:w-6 md:h-6"
                             />
-                            <p>PhonePe</p>
+                            <p className="text-sm"> PhonePe</p>
                           </div>
                           <div className="flex items-center gap-1">
                             <img
                               src="/images/paytm.svg"
                               alt="Paytm"
-                              className="w-6 h-6"
+                              className="md:w-6 md:h-6"
                             />
-                            <p>Paytm</p>
+                            <p className="text-sm">Paytm</p>
                           </div>
                         </div>
                       </div>
@@ -269,7 +273,7 @@ const PaymentPage = () => {
                   </div>
                 )}
               </div>
-              <div
+              <div 
                 className={`p-4 rounded-xl ${
                   !isUPI
                     ? "bg-slate-200 dark:bg-slate-700"
@@ -279,13 +283,13 @@ const PaymentPage = () => {
                 <div className="flex items-center mb-2">
                   <input
                     type="radio"
+                    onChange={handlePaymentToggle}
                     id="card"
                     name="paymentMethod"
                     checked={!isUPI}
-                    onChange={handlePaymentToggle}
                     className="mr-2"
                   />
-                  <label htmlFor="card" className="text-lg font-semibold">
+                  <label htmlFor="card" className="text-lg font-semibold cursor-pointer">
                     Pay using Card
                   </label>
                 </div>
