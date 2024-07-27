@@ -80,8 +80,12 @@ function App() {
         />
         <BrowserRouter>
           <ScrollToTop />
-          <Analytics />
-          <SpeedInsights />
+          {process.env.NODE_ENV === "production" && (
+            <>
+              <Analytics />
+              <SpeedInsights />
+            </>
+          )}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
@@ -104,6 +108,9 @@ function App() {
             <Route path="/product/details/:slug" element={<Details />} />
             <Route path="/products?" element={<CategoryShop />} />
             <Route path="/products/search?" element={<SearchProducts />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/failed" element={<Failed />} />
+
             {/* Protected Routes */}
             <Route element={<ProtectUser />}>
               <Route path="/dashboard" element={<Dashboard />} />
@@ -119,8 +126,6 @@ function App() {
               <Route path="/chat" element={<Chat />} />
               <Route path="/chat/:sellerId" element={<Chat />} />
               <Route path="/payment" element={<Payment />} />
-              <Route path="/success" element={<Success />} />
-              <Route path="/failed" element={<Failed />} />
             </Route>
           </Routes>
           {/* <GoogleAd
