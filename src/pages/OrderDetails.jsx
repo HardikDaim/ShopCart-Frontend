@@ -44,7 +44,7 @@ const OrderDetails = () => {
         {loader ? (
           <LoaderOverlay />
         ) : orderDetails ? (
-          <div className="bg-white dark:bg-slate-700 p-6 rounded-lg shadow">
+          <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 px-2 py-4 md:p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-bold mb-2">
               Order ID: {orderDetails?._id}
             </h3>
@@ -61,14 +61,18 @@ const OrderDetails = () => {
                 </p>
                 <p className="text-slate-700 dark:text-slate-300">
                   <span className="font-semibold">Payment Status:</span>{" "}
-                  <span className={`${orderDetails?.payment_status === 'paid' ? 'text-green-800 dark:text-green-400': 'text-red-800 dark:text-red-500'}`}>
+                  <span className={`capitalize ${orderDetails?.payment_status === 'paid' ? 'text-green-600 dark:text-green-500': 'text-red-600 dark:text-red-500'}`}>
                   {orderDetails?.payment_status}
 
                   </span>
                 </p>
                 <p className="text-slate-700 dark:text-slate-300">
                   <span className="font-semibold">Order Status:</span>{" "}
-                  <span className={`${orderDetails?.delivery_status === 'delivered' ? 'text-green-800 dark:text-green-400': 'text-red-800 dark:text-red-500'}`}>
+                  <span className={`capitalize ${
+                        ["placed", "warehouse"].includes(orderDetails?.delivery_status)
+                          ? "text-green-600 dark:text-green-500"
+                          : "text-red-600 dark:text-red-500"
+                      }`}>
 
                   {orderDetails?.delivery_status}
                   </span>
@@ -128,7 +132,7 @@ const OrderDetails = () => {
                     >
                       <span className="font-semibold">{product?.name}</span> -{" "}
                       <span className="line-through mr-2">₹{product?.price}</span>
-                      <span className="text-blue-600 dark:text-blue-400">
+                      <span className="text-blue-700 dark:text-blue-600">
                       {formatPrice(
                         (
                           product?.price -
@@ -166,7 +170,7 @@ const OrderDetails = () => {
             </div>
             <div className="mt-4 flex justify-center items-center">
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
+                className="bg-blue-700 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
                 onClick={() =>
                   navigate(`/payment`, {
                     state: {

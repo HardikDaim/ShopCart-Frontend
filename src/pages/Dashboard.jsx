@@ -10,6 +10,7 @@ import {
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -30,22 +31,6 @@ const Dashboard = () => {
 
   const formatPrice = (price) => {
     return "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 });
-  };
-
-  const redirect = (order) => {
-    let items = 0;
-    for (let i = 0; i < order.products.length; i++) {
-      items += order.products[i].quantity;
-    }
-    navigate("/payment", {
-      state: {
-        products: order.products,
-        customerId: order.customerId,
-        price: order.price,
-        items: items,
-        orderId: order._id,
-      },
-    });
   };
 
   useEffect(() => {
@@ -70,7 +55,7 @@ const Dashboard = () => {
             </h2>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
@@ -89,7 +74,7 @@ const Dashboard = () => {
                 </>
               )}
             </div>
-            <div className="bg-white dark:bg-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
@@ -108,7 +93,7 @@ const Dashboard = () => {
                 </>
               )}
             </div>
-            <div className="bg-white dark:bg-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
@@ -130,125 +115,126 @@ const Dashboard = () => {
           </div>
         </main>
         <div className="container mx-auto p-4">
-          <div className="bg-white dark:bg-slate-700 p-6 rounded-lg shadow">
+          <div>
             {loader ? (
               <Skeleton width="8%" className="rounded-lg" />
             ) : (
-              <h3 className="text-lg font-bold mb-2">Recent Orders</h3>
+              <div className="flex justify-between">
+                <h3 className="text-lg font-bold mb-2">Recent Orders</h3>
+                <button
+                  onClick={() => navigate(`/my-orders`)}
+                  className="text-blue-700 font-medium dark:text-blue-600 hover:underline cursor-pointer"
+                >
+                  View All
+                </button>
+              </div>
             )}
             {loader ? (
-              <div className="relative overflow-x-auto">
-                <table className="w-full text-sm text-left">
-                  <thead className="text-xs uppercase bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300">
-                    <tr>
-                      <th scope="col" className="p-2">
-                        <Skeleton width={100} className="rounded-lg"/>
-                      </th>
-                      <th scope="col" className="p-2">
-                        <Skeleton width={100} className="rounded-lg"/>
-                      </th>
-                      <th scope="col" className="p-2">
-                        <Skeleton width={100} className="rounded-lg"/>
-                      </th>
-                      <th scope="col" className="p-2">
-                        <Skeleton width={100} className="rounded-lg"/>
-                      </th>
-                      <th scope="col" className="p-2">
-                        <Skeleton width={100} className="rounded-lg"/>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Array.from({length : recentOrders.length}).map((_, i) => (
-                      <tr
-                        key={i}
-                        className="bg-slate-100 dark:bg-slate-800 border-b border-slate-300 dark:border-slate-600"
-                      >
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          <Skeleton width={100} className="rounded-lg" />
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          <Skeleton width={100} className="rounded-lg" />
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          <Skeleton width={100} className="rounded-lg" />
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          <Skeleton width={100} className="rounded-lg" />
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          <Skeleton width={100} className="rounded-lg" />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                  >
+                    <Skeleton height={60} className="mb-4 rounded-lg" />
+                  </div>
+                ))}
               </div>
             ) : recentOrders.length > 0 ? (
-              <div className="relative overflow-x-auto">
-                <table className="w-full text-sm text-left">
-                  <thead className="text-xs uppercase bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-300">
-                    <tr>
-                      <th scope="col" className="p-2">
-                        Order Id
-                      </th>
-                      <th scope="col" className="p-2">
-                        Price
-                      </th>
-                      <th scope="col" className="p-2">
-                        Payment Status
-                      </th>
-                      <th scope="col" className="p-2">
-                        Order Status
-                      </th>
-                      <th scope="col" className="p-2">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentOrders.map((o, i) => (
-                      <tr
-                        key={i}
-                        className="bg-slate-100 dark:bg-slate-800 border-b border-slate-300 dark:border-slate-600"
-                      >
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          #{o._id}
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap">
-                          {formatPrice(o.price)}
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap capitalize">
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  {recentOrders.map((o, i) => (
+                    <div
+                      key={i}
+                      onClick={() => navigate(`/order/details/${o._id}`)}
+                      className="relative cursor-pointer bg-white border dark:border-slate-700 dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                    >
+                      {i === 0 && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{
+                            opacity: 1,
+                            backgroundColor: [
+                              "#1E40AF",
+                              "#9333EA",
+                              "#EF4444",
+                              "#F59E0B",
+                              "#10B981",
+                              "#1E40AF",
+                            ],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                          }}
+                          className="absolute top-0 right-0 text-white px-2 py-1 rounded-tr-lg rounded-bl-lg text-xs font-medium"
+                        >
+                          Latest
+                        </motion.div>
+                      )}
+                      <h3 className="text-sm md:text-lg font-medium text-slate-700 dark:text-slate-300">
+                        Order ID: #{o._id}
+                      </h3>
+                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300">
+                        Price: {formatPrice(o.price)}
+                      </p>
+                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                        Payment Status:{" "}
+                        <span
+                          className={`${
+                            o.payment_status === "paid"
+                              ? "text-green-600 dark:text-green-500"
+                              : "text-red-600 dark:text-red-500"
+                          }`}
+                        >
                           {o.payment_status}
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap capitalize">
+                        </span>
+                      </p>
+                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                        Order Status:{" "}
+                        <span
+                          className={`${
+                            ["placed", "warehouse"].includes(o.delivery_status)
+                              ? "text-green-600 dark:text-green-500"
+                              : "text-red-600 dark:text-red-500"
+                          }`}
+                        >
                           {o.delivery_status}
-                        </td>
-                        <td className="p-2 font-medium whitespace-nowrap capitalize">
-                          <Link
-                            to={`/order/details/${o._id}`}
-                            className="text-blue-500 hover:underline"
-                          >
-                            View
-                          </Link>
-                          {o.paymentStatus !== "paid" && (
-                            <button
-                              onClick={() => redirect(o)}
-                              className="text-blue-500 hover:underline ml-2"
-                            >
-                              Pay Now
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                        </span>{" "}
+                      </p>
+                      <div className="absolute bottom-2 right-2 flex flex-col gap-0 items-end ">
+                        <p className="text-xs ">You have to Pay:</p>
+                        <h1 className="text-xl md:text-3xl font-semibold text-blue-700 dark:text-blue-600">
+                          {formatPrice(o.price)}
+                        </h1>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
             ) : (
-              <p className="text-slate-700 dark:text-slate-300">
-                No orders have been purchased yet! Go and purchase now....
-              </p>
+              <>
+                <motion.div
+                  animate={{ opacity: 1, y: [0, -10, 0] }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="flex flex-col items-center mt-10"
+                >
+                  <img
+                    src="/images/no-orders.webp"
+                    alt="No orders"
+                    className="w-64 h-64 mb-4"
+                  />
+                </motion.div>
+                <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 text-center">
+                  You haven't placed any orders yet! Start shopping and your
+                  orders will appear here.
+                </p>
+              </>
             )}
           </div>
         </div>
