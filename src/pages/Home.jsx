@@ -46,7 +46,7 @@ const Home = () => {
       <Banner loader={loader} />
       <Categoires categories={categories} loader={loader} />
       <FeatureProduct products={products} loader={loader} />
-      <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-10">
+      <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-0">
         <div className="w-full">
           <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
             <h2>{loader ? <Skeleton width={150} /> : "Top Picks for You!"}</h2>
