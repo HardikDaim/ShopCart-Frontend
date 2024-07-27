@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.css";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -20,33 +19,33 @@ const Categories = ({ categories, loader }) => {
         className="w-full overflow-x-auto pl-4 py-4 hide-scrollbar"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
-        <div className="flex space-x-6 md:space-x-12">
+        <div className="flex space-x-4 md:space-x-8 lg:space-x-12">
           {loader
             ? Array.from({ length: categories.length }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 w-28 md:w-60 text-center"
+                  className="flex-shrink-0 w-24 md:w-40 lg:w-60 text-center"
                 >
                   <Skeleton
-                    height={160}
-                    className="w-full h-20 md:h-40 rounded-lg"
+                    height={80}
+                    className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                   />
                   <Skeleton
                     width="60%"
                     height={20}
-                    className="mt-2 mx-auto text-xs md:text-sm"
+                    className="mt-2 mx-auto text-xs md:text-sm lg:text-base"
                   />
                 </div>
               ))
             : categories.map((category, index) => (
                 <Link to={`/products?category=${category.name}`} key={index}>
-                  <div className="flex-shrink-0 w-28 md:w-60 text-center transition-all duration-500 hover:transform hover:scale-110 cursor-pointer">
+                  <div className="flex-shrink-0 w-24 md:w-40 lg:w-60 text-center transition-transform duration-500 hover:scale-110 cursor-pointer">
                     <img
                       src={category.image}
                       alt={category.name}
-                      className="w-full h-20 md:h-40 rounded-lg"
+                      className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                     />
-                    <div className="mt-2 text-xs md:text-sm text-slate-700 dark:text-slate-300">
+                    <div className="mt-2 text-xs md:text-sm lg:text-base text-slate-700 dark:text-slate-300">
                       {category.name}
                     </div>
                   </div>

@@ -75,14 +75,17 @@ const FeatureProduct = ({ products, loader }) => {
         className="w-full overflow-x-auto pl-4 py-4 hide-scrollbar"
         style={{ WebkitOverflowScrolling: "touch" }}
       >
-        <div className="flex space-x-6 md:space-x-12">
+        <div className="flex space-x-4 md:space-x-8 lg:space-x-12">
           {loader
-            ? Array.from({length : products.length}).map((_, index) => (
+            ? Array.from({ length: products.length }).map((_, index) => (
                 <div
                   key={index}
-                  className="relative mt-4 w-28  md:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
+                  className="relative mt-4 w-24 md:w-40 lg:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
                 >
-                  <Skeleton height={160} className="w-full h-20 md:h-40 rounded-lg" />
+                  <Skeleton
+                    height={80}
+                    className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
+                  />
                   <div className="my-2 text-slate-700 dark:text-slate-300">
                     <Skeleton width={120} height={20} className="font-bold" />
                     <Skeleton width={80} height={20} className="mt-2" />
@@ -97,7 +100,7 @@ const FeatureProduct = ({ products, loader }) => {
                 return (
                   <div
                     key={index}
-                    className="relative mt-4 w-28  md:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
+                    className="relative mt-4 w-24 md:w-40 lg:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
                   >
                     {product.discount > 0 && (
                       <div className="flex justify-center z-10 items-center absolute text-white w-[25px] h-[25px] md:w-[38px] md:h-[38px] p-2 rounded-full bg-red-500 font-semibold text-[7px] md:text-xs -left-4 -top-4">
@@ -109,7 +112,7 @@ const FeatureProduct = ({ products, loader }) => {
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="w-full h-20 md:h-40 rounded-lg"
+                          className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                         />
                       </Link>
                       <ul className="flex transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
