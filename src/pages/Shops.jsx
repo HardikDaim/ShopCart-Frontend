@@ -18,12 +18,10 @@ import {
   price_range_product,
   query_products,
 } from "../store/reducers/homeReducer";
-import LoaderOverlay from "../components/LoaderOverlay";
 import { toast } from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import Banner from "../components/Banner";
 
 const Shops = () => {
   const dispatch = useDispatch();
