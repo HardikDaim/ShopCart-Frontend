@@ -149,11 +149,11 @@ const FeatureProduct = ({ products, loader }) => {
                       <div className="flex justify-start items-center gap-2">
                         {product.discount > 0 ? (
                           <>
-                            <span className="line-through text-slate-500">
+                            <span className="line-through text-slate-500 hidden md:flex">
                               ₹{product.price}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹{discountedPrice.toFixed(2)}
+                              ₹{discountedPrice.toLocaleString("en-IN")}
                             </span>
                           </>
                         ) : (

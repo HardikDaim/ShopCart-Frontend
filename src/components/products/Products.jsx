@@ -112,7 +112,7 @@ const Products = ({ title, products, loader }) => {
                               ₹{pl.price}
                             </span>
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹{discountedPrice.toFixed(2)}
+                              ₹{discountedPrice.toLocaleString("en-IN")}
                             </span>
                           </>
                         ) : (
