@@ -41,7 +41,7 @@ const AboutUs = () => {
               </a>{" "}
               or visit my{" "}
               <a
-                href="https://hardikdaim.netlify.app"
+                href="https://hardik-daim.vercel.app"
                 className="text-blue-700 dark:text-blue-400 underline"
               >
                 personal website
