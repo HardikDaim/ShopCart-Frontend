@@ -38,7 +38,7 @@ const ThemeToggle = () => {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        className="inline-flex justify-center w-full px-4 py-2 text-xl font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
+        className="inline-flex justify-center w-full px-4 py-2 text-lg font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         <FaMoon />
@@ -50,7 +50,7 @@ const ThemeToggle = () => {
               onClick={() => handleThemeChange('light')}
               className={`${
                 theme === 'light' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-sm text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
             >
               Light
             </button>
@@ -58,7 +58,7 @@ const ThemeToggle = () => {
               onClick={() => handleThemeChange('dark')}
               className={`${
                 theme === 'dark' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-sm text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
             >
               Dark
             </button>
@@ -66,7 +66,7 @@ const ThemeToggle = () => {
               onClick={() => handleThemeChange('system')}
               className={`${
                 theme === 'system' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-sm text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
             >
               System
             </button>
