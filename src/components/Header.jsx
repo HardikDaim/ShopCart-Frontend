@@ -101,7 +101,7 @@ const Header = () => {
             </div>
           </div>
         )}
-        <div className="main-header flex justify-between items-center px-4 py-2 ">
+        <div className="main-header flex justify-between items-center px-4 pt-3 pb-2">
           <Link to="/" className="logo text-2xl font-bold flex items-center">
             <motion.span
               className="text-blue-700 dark:text-blue-600"
@@ -223,7 +223,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white  dark:bg-slate-900 pb-2 md:pb-2 shadow-md">
+        <div className="bg-white dark:bg-slate-900 pb-3  shadow-md">
           <div className="w-full mx-auto px-4">
             <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
               <div
