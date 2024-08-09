@@ -136,7 +136,7 @@ const FeatureProduct = ({ products, loader }) => {
                       </ul>
                     </div>
 
-                    <div className="my-2 text-slate-700 dark:text-slate-300 text-xs md:text-sm">
+                    <div className="my-2 text-slate-700 dark:text-slate-300 text-xs">
                       <h2 className="font-bold">
                         {product.name.length > 30
                           ? `${product.name.substring(0, 30)}...`

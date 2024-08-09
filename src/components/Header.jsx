@@ -52,50 +52,56 @@ const Header = () => {
   return (
     <>
       <header className="bg-white  dark:bg-slate-900 text-slate-700 dark:text-slate-200">
-        <div className="header-top hidden md:flex  justify-between items-center p-2 bg-slate-200 dark:bg-slate-800  text-[8px] lg:text-sm px-4">
-          <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
-            <span>
-              This project is purely made by <strong>Hardik Daim</strong>. You
-              can visit to my <strong>GitHub</strong>, <strong>LinkedIn</strong>{" "}
-              and <strong>Instagram</strong> profile by clicking here...
-            </span>{" "}
-            <span
-              onClick={() =>
-                window.open("https://github.com/HardikDaim", "_blank")
-              }
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-            >
-              <FaGithub />
-            </span>
-            <span>|</span>
-            <span
-              onClick={() =>
-                window.open(
-                  "https://www.linkedin.com/in/hardik-daim-ab0b07251",
-                  "_blank"
-                )
-              }
-              className="text-blue-700 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-            >
-              <FaLinkedin />
-            </span>
-            <span>|</span>
-            <span
-              onClick={() =>
-                window.open("https://www.instagram.com/hardikdaim_17", "_blank")
-              }
-              className="text-pink-500 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
-            >
-              <FaInstagram />
-            </span>
+        {userInfo && (
+          <div className="header-top hidden md:flex  justify-between items-center p-2 bg-slate-200 dark:bg-slate-800  text-[9px] px-4">
+            <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
+              <span>
+                This project is purely made by <strong>Hardik Daim</strong>. You
+                can visit to my <strong>GitHub</strong>,{" "}
+                <strong>LinkedIn</strong> and <strong>Instagram</strong> profile
+                by clicking here...
+              </span>{" "}
+              <span
+                onClick={() =>
+                  window.open("https://github.com/HardikDaim", "_blank")
+                }
+                className="text-gray-500 cursor-pointer hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+              >
+                <FaGithub />
+              </span>
+              <span>|</span>
+              <span
+                onClick={() =>
+                  window.open(
+                    "https://www.linkedin.com/in/hardik-daim-ab0b07251",
+                    "_blank"
+                  )
+                }
+                className="text-blue-700 cursor-pointer hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                <FaLinkedin />
+              </span>
+              <span>|</span>
+              <span
+                onClick={() =>
+                  window.open(
+                    "https://www.instagram.com/hardikdaim_17",
+                    "_blank"
+                  )
+                }
+                className="text-pink-500 cursor-pointer hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300"
+              >
+                <FaInstagram />
+              </span>
+            </div>
+            <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
+              {userInfo && (
+                <div className="font-medium"> Welcome, {userInfo.name}</div>
+              )}
+            </div>
           </div>
-          <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
-            {userInfo && (
-              <div className="font-medium"> Welcome, {userInfo.name}</div>
-            )}
-          </div>
-        </div>
-        <div className="main-header flex justify-between items-center p-4 ">
+        )}
+        <div className="main-header flex justify-between items-center px-4 py-2 ">
           <Link to="/" className="logo text-2xl font-bold flex items-center">
             <motion.span
               className="text-blue-700 dark:text-blue-600"
@@ -111,7 +117,7 @@ const Header = () => {
             </motion.span>
             <span className="ml-1">ShopCart</span>
           </Link>
-          <nav className="hidden md:flex space-x-4 text-sm font-medium">
+          <nav className="hidden md:flex space-x-4 text-xs font-medium">
             <Link
               to="/"
               className={`${
@@ -167,14 +173,14 @@ const Header = () => {
                 <Link
                   to="/login"
                   type="button"
-                  className="md:flex justify-center items-center gap-2 px-4 py-2 text-sm font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600  shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
+                  className="md:flex justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600  shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   type="button"
-                  className="md:flex  justify-center items-center gap-2 px-4 py-2 text-sm font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
+                  className="md:flex  justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
                 >
                   Register
                 </Link>
@@ -191,7 +197,7 @@ const Header = () => {
               <Link
                 to="/login"
                 type="button"
-                className="md:flex  justify-center items-center gap-2 px-4 py-2 text-sm font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
+                className="md:flex  justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
               >
                 Login
               </Link>
@@ -217,14 +223,14 @@ const Header = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white  dark:bg-slate-900 pb-2 md:py-4 shadow-md">
+        <div className="bg-white  dark:bg-slate-900 pb-2 md:pb-2 shadow-md">
           <div className="w-full mx-auto px-4">
             <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
               <div
                 onClick={() => setShowCategory(!showCategory)}
                 className="relative hidden md:block"
               >
-                <div className="flex bg-blue-700 rounded-md dark:bg-blue-700 items-center p-4 justify-center gap-2 text-sm font-medium cursor-pointer">
+                <div className="flex bg-blue-700 rounded-md dark:bg-blue-700 items-center p-4 justify-center gap-2 text-xs font-medium cursor-pointer">
                   <span className="text-slate-100 dark:text-slate-200">
                     <FaList />
                   </span>
@@ -253,7 +259,7 @@ const Header = () => {
                               alt={c.name}
                               className="w-8 h-8 mr-4"
                             />
-                            <button className="text-sm text-slate-700 dark:text-slate-200">
+                            <button className="text-xs text-slate-700 dark:text-slate-200">
                               {c.name}
                             </button>
                           </li>
@@ -269,7 +275,7 @@ const Header = () => {
                   <div className="flex">
                     <button
                       onClick={() => setShowDropdown(!showDropdown)}
-                      className="hidden lg:flex gap-1 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-slate-500 bg-gray-100 dark:bg-slate-600 border border-slate-300 rounded-s-lg dark:text-slate-300 dark:border-slate-700 hover:bg-gray-200 focus:outline-none"
+                      className="hidden lg:flex gap-1 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-slate-500 bg-gray-100 dark:bg-slate-600 border border-slate-300 rounded-s-lg dark:text-slate-300 dark:border-slate-700 hover:bg-gray-200 focus:outline-none"
                       type="button"
                     >
                       {category || "All categories"}
@@ -282,7 +288,7 @@ const Header = () => {
                         showDropdown ? "max-h-96" : "hidden"
                       } overflow-auto absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700`}
                     >
-                      <ul aria-labelledby="dropdown-button" className="text-sm">
+                      <ul aria-labelledby="dropdown-button" className="text-xs">
                         <li
                           key="all-categories"
                           className="inline-flex border-b dark:border-slate-900 w-full px-4 py-2 text-slate-500 dark:text-slate-300 dark:hover:bg-slate-900 hover:bg-gray-100"
@@ -323,13 +329,13 @@ const Header = () => {
                         onClick={() => setShowSuggestions(true)}
                         onBlur={() => setShowSuggestions(false)}
                         type="search"
-                        className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 focus:ring-gray-300"
+                        className="block p-2.5 w-full z-20 text-xs text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 focus:ring-gray-300"
                         placeholder="Search..."
                         value={searchValue}
                       />
                       <button
                         type="submit"
-                        className="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                        className="absolute top-0 end-0 p-2.5 text-xs font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                       >
                         <svg
                           className="w-4 h-4"
@@ -366,7 +372,7 @@ const Header = () => {
                                 }}
                               >
                                 <FaSearch className="mr-2" />
-                                <p className="text-sm text-gray-900 dark:text-slate-300">
+                                <p className="text-xs text-gray-900 dark:text-slate-300">
                                   {cat.name}
                                 </p>
                               </li>
@@ -391,7 +397,7 @@ const Header = () => {
                                     src={suggestion.images[0]}
                                   />
                                   <div className="ml-3">
-                                    <p className="text-sm text-gray-900 dark:text-slate-300">
+                                    <p className="text-xs text-gray-900 dark:text-slate-300">
                                       {suggestion.name}
                                     </p>
                                     <p className="text-xs text-gray-500 dark:text-slate-400">
@@ -424,7 +430,7 @@ const Header = () => {
                             })
                           ) : (
                             <div className="flex items-center justify-center py-2">
-                              <p className="text-sm text-gray-900 dark:text-slate-300">
+                              <p className="text-xs text-gray-900 dark:text-slate-300">
                                 No results found
                               </p>
                             </div>
@@ -436,11 +442,11 @@ const Header = () => {
                 </form>
               </div>
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
                   Founder & CEO - <strong>Hardik Daim</strong>
                 </span>
-                <span className="text-sm text-slate-600 dark:text-slate-400">
-                E-Mail - <strong> hardikdaim@gmail.com</strong>
+                <span className="text-xs text-slate-600 dark:text-slate-400">
+                  E-Mail - <strong> hardikdaim@gmail.com</strong>
                 </span>
               </div>
             </div>

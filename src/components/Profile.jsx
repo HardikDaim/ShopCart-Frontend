@@ -50,7 +50,7 @@ const Profile = () => {
     <div className="relative block text-left">
       <button
         type="button"
-        className="relative flex items-center justify-center w-full px-4 py-2 text-xl font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none"
+        className="relative flex items-center justify-center w-full px-4 py-2 text-lg font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         <IoPerson className="mr-2" />
@@ -67,7 +67,7 @@ const Profile = () => {
             <Link
               to="/dashboard"
               type="button"
-              className={`flex items-center block px-4 py-2 text-sm w-full text-left ${
+              className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/dashboard"
                   ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
                   : ""
@@ -79,7 +79,7 @@ const Profile = () => {
             <Link
               to="/my-orders"
               type="button"
-              className={`flex items-center block px-4 py-2 text-sm w-full text-left ${
+              className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/my-orders"
                   ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
                   : ""
@@ -91,7 +91,7 @@ const Profile = () => {
             <Link
               to="/my-wishlist"
               type="button"
-              className={`flex items-center block px-4 py-2 text-sm w-full text-left ${
+              className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/my-wishlist"
                   ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
                   : ""
@@ -108,7 +108,7 @@ const Profile = () => {
 
             <button
               onClick={redirect_cart_page}
-              className="flex items-center  px-4 py-2 text-sm w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700 relative"
+              className="flex items-center  px-4 py-2 text-xs w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700 relative"
             >
               <IoCart className="mr-2" />
               Cart
@@ -122,7 +122,7 @@ const Profile = () => {
             <Link
               to="/chat"
               type="button"
-              className={`flex items-center block px-4 py-2 text-sm w-full text-left ${
+              className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/chat"
                   ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
                   : ""
@@ -143,7 +143,7 @@ const Profile = () => {
             <Link
               to="/change-password"
               type="button"
-              className={`flex items-center block px-4 py-2 text-sm w-full text-left ${
+              className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/change-password"
                   ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
                   : ""
@@ -152,7 +152,7 @@ const Profile = () => {
               {" "}
               <IoKey className="mr-2" /> Change Password
             </Link>
-            <button onClick={logout} className="flex items-center block px-4 py-2 text-sm w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700">
+            <button onClick={logout} className="flex items-center block px-4 py-2 text-xs w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700">
               <IoLogOut className="mr-2" /> Logout
             </button>
          

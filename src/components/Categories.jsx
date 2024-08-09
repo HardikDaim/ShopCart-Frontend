@@ -45,7 +45,7 @@ const Categories = ({ categories, loader }) => {
                       alt={category.name}
                       className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                     />
-                    <div className="mt-2 text-xs md:text-sm lg:text-base text-slate-700 dark:text-slate-300">
+                    <div className="mt-2 text-xs  text-slate-700 dark:text-slate-300">
                       {category.name}
                     </div>
                   </div>

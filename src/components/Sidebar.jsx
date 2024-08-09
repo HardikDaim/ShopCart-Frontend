@@ -36,7 +36,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             ></path>
           </svg>
         </button>
-        <nav className="flex flex-col space-y-4">
+        <nav className="flex flex-col space-y-4 text-xs">
           <Link
             to="/"
             className={`${

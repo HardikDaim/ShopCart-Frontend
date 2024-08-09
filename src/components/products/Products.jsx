@@ -96,7 +96,7 @@ const Products = ({ title, products, loader }) => {
                         alt={pl.name}
                       />
                     </div>
-                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs md:text-sm text-slate-700 dark:text-slate-400">
+                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs text-slate-700 dark:text-slate-400">
                       <h2 className="font-bold">
                         {pl.name.length > 75
                           ? `${pl.name.substring(0, 75)}...`

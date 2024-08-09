@@ -29,7 +29,7 @@ const Banner = ({ loader }) => {
   }, []);
 
   return (
-    <div className="relative h-96 lg:h-[600px] w-full overflow-hidden rounded-lg">
+    <div className="relative h-96 md:h-[400px] w-full overflow-hidden rounded-lg">
       {loader ? (
         <Skeleton
           height="100%"
@@ -39,7 +39,7 @@ const Banner = ({ loader }) => {
       ) : (
         <video
           ref={videoRef}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  w-full h-auto object-cover rounded-lg"
           src="/videos/banner.mp4"
           autoPlay
           loop
