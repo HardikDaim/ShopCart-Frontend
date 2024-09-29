@@ -336,8 +336,13 @@ const Details = () => {
             ) : (
               <>
                 <div className="flex justify-between items-center">
-                  <h1 className="text-3xl font-bold">{product?.name}</h1>
-                  <button onClick={share} className="text-2xl font-bold">
+                  <h1 className="text-xl md:text-3xl font-bold">{product?.name}</h1>
+                  <button
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content="Share"
+                    onClick={share}
+                    className="text-2xl font-bold"
+                  >
                     <IoShareSocialOutline />
                   </button>
                 </div>
@@ -369,10 +374,16 @@ const Details = () => {
                     <>₹{product?.price}</>
                   )}
                 </p>
-                <p className="text-xs md:text-sm text-justify">{product?.description}</p>
+                <p className="text-xs md:text-sm text-justify">
+                  {product?.description}
+                </p>
                 {product?.stock > 0 ? (
                   <div className="mt-2 flex items-center space-x-3">
-                    <button className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                    <button
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Stock"
+                      className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl"
+                    >
                       In Stock
                     </button>
                     <button
@@ -389,6 +400,8 @@ const Details = () => {
                       +
                     </button>
                     <button
+                      data-tooltip-id="my-tooltip"
+                      data-tooltip-content="Add to Wishlist"
                       onClick={() => add_wishlist(product)}
                       className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
                     >
