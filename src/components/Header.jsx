@@ -359,7 +359,7 @@ const Header = () => {
                           showSuggestions
                             ? "max-h-96 opacity-100"
                             : "max-h-0 opacity-0"
-                        } overflow-hidden`}
+                        } overflow-y-scroll`}
                       >
                         <ul className="divide-y divide-gray-100 dark:divide-slate-600">
                           {searchValue.trim() === "" ? (

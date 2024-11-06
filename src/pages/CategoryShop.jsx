@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Header from "../components/Header";
 import { Link, useSearchParams } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
@@ -10,7 +10,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import Footer from "../components/Footer";
-import ShopProducts from "../components/products/ShopProducts";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,6 +20,7 @@ import {
 import LoaderOverlay from "../components/LoaderOverlay";
 import { toast } from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
+const ShopProducts = lazy(() => import("../components/products/ShopProducts"));
 
 const CategoryShop = () => {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -343,11 +343,42 @@ const CategoryShop = () => {
                 </div>
               </div>
               <div className="pb-8">
-                <ShopProducts
-                  products={products}
-                  loader={loader}
-                  styles={styles}
-                />
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center p-2 mb-8 bg-yellow-200 text-blue-700 dark:text-blue-700 font-semibold rounded-lg">
+                      <svg
+                        className="w-6 h-6 mr-2 animate-spin text-blue-700"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          d="M4 12a8 8 0 1 0 16 0A8 8 0 0 0 4 12z"
+                        ></path>
+                      </svg>
+                      Loading...
+                    </div>
+                  }
+                >
+                  <ShopProducts
+                    products={products}
+                    loader={loader}
+                    styles={styles}
+                  />
+                </Suspense>
                 <div className="py-4 flex justify-end items-center">
                   {totalProducts > perPage && (
                     <Pagination

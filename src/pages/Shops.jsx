@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
@@ -10,7 +10,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import Footer from "../components/Footer";
-import ShopProducts from "../components/products/ShopProducts";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,6 +21,7 @@ import { toast } from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+const ShopProducts = lazy(() => import("../components/products/ShopProducts"));
 
 const Shops = () => {
   const dispatch = useDispatch();
@@ -151,7 +151,12 @@ const Shops = () => {
               </div>
               <div className="py-2">
                 {loader ? (
-                  <Skeleton count={10} height={20} width={100} className="my-2" />
+                  <Skeleton
+                    count={10}
+                    height={20}
+                    width={100}
+                    className="my-2"
+                  />
                 ) : (
                   categories &&
                   categories.map((c, i) => (
@@ -202,7 +207,7 @@ const Shops = () => {
                   )}
                 />
                 <div className="flex justify-between text-slate-700 dark:text-slate-300">
-                {loader ? (
+                  {loader ? (
                     <>
                       <Skeleton width={80} height={20} className="my-2" />
                       <Skeleton width={80} height={20} className="my-2" />
@@ -347,13 +352,13 @@ const Shops = () => {
             {/* Placeholder for product list */}
             <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out ">
               <div className=" py-2 px-1 md:py-4 mb-10 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
-                {loader ? <Skeleton height={24} width={100}
-                /> : 
-                <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
-                  {totalProducts} Products
-                </h2>
-                
-                }
+                {loader ? (
+                  <Skeleton height={24} width={100} />
+                ) : (
+                  <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+                    {totalProducts} Products
+                  </h2>
+                )}
                 <div className="flex justify-center items-center gap-3">
                   <div className="relative">
                     <button
@@ -403,11 +408,42 @@ const Shops = () => {
                 </div>
               </div>
               <div className="pb-8">
-                <ShopProducts
-                  products={products}
-                  loader={loader}
-                  styles={styles}
-                />
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center p-2 mb-8 bg-yellow-200 text-blue-700 dark:text-blue-700 font-semibold rounded-lg">
+                      <svg
+                        className="w-6 h-6 mr-2 animate-spin text-blue-700"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          d="M4 12a8 8 0 1 0 16 0A8 8 0 0 0 4 12z"
+                        ></path>
+                      </svg>
+                      Loading...
+                    </div>
+                  }
+                >
+                  <ShopProducts
+                    products={products}
+                    loader={loader}
+                    styles={styles}
+                  />
+                </Suspense>
                 <div className="py-4 flex justify-end items-center">
                   {totalProducts > perPage && (
                     <Pagination

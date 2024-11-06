@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy } from "react";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import Categoires from "../components/Categories";
 import FeatureProduct from "../components/products/FeatureProduct";
-import Products from "../components/products/Products";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { get_product, messageClear } from "../store/reducers/homeReducer";
@@ -11,6 +10,7 @@ import toast from "react-hot-toast";
 import BecomeSeller from "../components/BecomeSeller";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+const Products = lazy(() => import("../components/products/Products"));
 
 const Home = () => {
   const dispatch = useDispatch();

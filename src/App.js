@@ -1,46 +1,67 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import Shops from "./pages/Shops";
-import Cart from "./pages/Cart";
-import Shipping from "./pages/Shipping";
-import Details from "./pages/Details";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import { get_category } from "./store/reducers/homeReducer";
-import CategoryShop from "./pages/CategoryShop";
-import SearchProducts from "./pages/SearchProducts";
-import Payment from "./pages/Payment";
 import ProtectUser from "./utils/ProtectUser";
-import Dashboard from "./pages/Dashboard";
-import Orders from "./pages/Orders";
-import ChangePassword from "./pages/ChangePassword";
-import Wishlist from "./pages/Wishlist";
-import OrderDetails from "./pages/OrderDetails";
 import ScrollToTop from "./scrollToTop";
-import Chat from "./pages/Chat";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import NotFound from "./pages/NotFound";
-import AboutUs from "./pages/AboutUs";
-import ContactUs from "./pages/ContactUs";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import DeliveryInformation from "./pages/DeliveryInformation";
-import HelpCenter from "./pages/HelpCenter";
-import ReturnsAndRefunds from "./pages/ReturnsAndRefunds";
-import FAQ from "./pages/FAQ";
-import GoogleAd from "./components/GoogleAd";
-import Success from "./pages/Success";
-import Failed from "./pages/Failed";
+
+// Lazy-loaded pages
+const Home = lazy(() => import("./pages/Home"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Shipping = lazy(() => import("./pages/Shipping"));
+const Details = lazy(() => import("./pages/Details"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const CategoryShop = lazy(() => import("./pages/CategoryShop"));
+const SearchProducts = lazy(() => import("./pages/SearchProducts"));
+const Payment = lazy(() => import("./pages/Payment"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Orders = lazy(() => import("./pages/Orders"));
+const ChangePassword = lazy(() => import("./pages/ChangePassword"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
+const Chat = lazy(() => import("./pages/Chat"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const DeliveryInformation = lazy(() => import("./pages/DeliveryInformation"));
+const HelpCenter = lazy(() => import("./pages/HelpCenter"));
+const ReturnsAndRefunds = lazy(() => import("./pages/ReturnsAndRefunds"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Success = lazy(() => import("./pages/Success"));
+const Failed = lazy(() => import("./pages/Failed"));
+const Shops = lazy(() => import("./pages/Shops"));
+const GoogleAd = lazy(() => import("./components/GoogleAd"));
+const NetworkStatusPopup = lazy(() => import("./components/NetworkStatusPopup"));
 
 function App() {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.theme);
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOffline(false);
+      window.location.reload(); // Refresh the page when online
+    };
+
+    const handleOffline = () => setIsOffline(true);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
 
   useEffect(() => {
     if (theme === "system") {
@@ -80,11 +101,7 @@ function App() {
           }}
         />
 
-        <ReactTooltip
-          id="my-tooltip"
-          place="top"
-          effect="solid"
-        />
+        <ReactTooltip id="my-tooltip" place="top" effect="solid" />
 
         <BrowserRouter>
           <ScrollToTop />
@@ -94,53 +111,145 @@ function App() {
               <SpeedInsights />
             </>
           )}
+
+          <NetworkStatusPopup isVisible={isOffline} />
+
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route
-              path="/delivery-information"
-              element={<DeliveryInformation />}
-            />
-            <Route path="/help-center" element={<HelpCenter />} />
-            <Route
-              path="/returns-and-refunds"
-              element={<ReturnsAndRefunds />}
-            />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/shops" element={<Shops />} />
-            <Route path="/product/details/:slug" element={<Details />} />
-            <Route path="/products?" element={<CategoryShop />} />
-            <Route path="/products/search?" element={<SearchProducts />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="/failed" element={<Failed />} />
+            <Route path="/" element={
+              <Suspense fallback={<div></div>}>
+                <Home />
+              </Suspense>
+            } />
+            <Route path="*" element={
+              <Suspense fallback={<div></div>}>
+                <NotFound />
+              </Suspense>
+            } />
+            <Route path="/about-us" element={
+              <Suspense fallback={<div></div>}>
+                <AboutUs />
+              </Suspense>
+            } />
+            <Route path="/contact-us" element={
+              <Suspense fallback={<div></div>}>
+                <ContactUs />
+              </Suspense>
+            } />
+            <Route path="/privacy-policy" element={
+              <Suspense fallback={<div></div>}>
+                <PrivacyPolicy />
+              </Suspense>
+            } />
+            <Route path="/delivery-information" element={
+              <Suspense fallback={<div></div>}>
+                <DeliveryInformation />
+              </Suspense>
+            } />
+            <Route path="/help-center" element={
+              <Suspense fallback={<div></div>}>
+                <HelpCenter />
+              </Suspense>
+            } />
+            <Route path="/returns-and-refunds" element={
+              <Suspense fallback={<div></div>}>
+                <ReturnsAndRefunds />
+              </Suspense>
+            } />
+            <Route path="/faq" element={
+              <Suspense fallback={<div></div>}>
+                <FAQ />
+              </Suspense>
+            } />
+            <Route path="/login" element={
+              <Suspense fallback={<div></div>}>
+                <Login />
+              </Suspense>
+            } />
+            <Route path="/register" element={
+              <Suspense fallback={<div></div>}>
+                <Register />
+              </Suspense>
+            } />
+            <Route path="/shops" element={
+              <Suspense fallback={<div></div>}>
+                <Shops />
+              </Suspense>
+            } />
+            <Route path="/product/details/:slug" element={
+              <Suspense fallback={<div></div>}>
+                <Details />
+              </Suspense>
+            } />
+            <Route path="/products?" element={
+              <Suspense fallback={<div></div>}>
+                <CategoryShop />
+              </Suspense>
+            } />
+            <Route path="/products/search?" element={
+              <Suspense fallback={<div></div>}>
+                <SearchProducts />
+              </Suspense>
+            } />
+            <Route path="/success" element={
+              <Suspense fallback={<div></div>}>
+                <Success />
+              </Suspense>
+            } />
+            <Route path="/failed" element={
+              <Suspense fallback={<div></div>}>
+                <Failed />
+              </Suspense>
+            } />
 
             {/* Protected Routes */}
             <Route element={<ProtectUser />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/my-orders" element={<Orders />} />
-              <Route path="/change-password" element={<ChangePassword />} />
-              <Route path="/my-wishlist" element={<Wishlist />} />
-              <Route
-                path="/order/details/:orderId"
-                element={<OrderDetails />}
-              />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/chat/:sellerId" element={<Chat />} />
-              <Route path="/payment" element={<Payment />} />
+              <Route path="/dashboard" element={
+                <Suspense fallback={<div></div>}>
+                  <Dashboard />
+                </Suspense>
+              } />
+              <Route path="/my-orders" element={
+                <Suspense fallback={<div></div>}>
+                  <Orders />
+                </Suspense>
+              } />
+              <Route path="/change-password" element={
+                <Suspense fallback={<div></div>}>
+                  <ChangePassword />
+                </Suspense>
+              } />
+              <Route path="/my-wishlist" element={
+                <Suspense fallback={<div></div>}>
+                  <Wishlist />
+                </Suspense>
+              } />
+              <Route path="/order/details/:orderId" element={
+                <Suspense fallback={<div></div>}>
+                  <OrderDetails />
+                </Suspense>
+              } />
+              <Route path="/cart" element={
+                <Suspense fallback={<div></div>}>
+                  <Cart />
+                </Suspense>
+              } />
+              <Route path="/shipping" element={
+                <Suspense fallback={<div></div>}>
+                  <Shipping />
+                </Suspense>
+              } />
+              <Route path="/chat" element={
+                <Suspense fallback={<div></div>}>
+                  <Chat />
+                </Suspense>
+              } />
+              <Route path="/payment" element={
+                <Suspense fallback={<div></div>}>
+                  <Payment />
+                </Suspense>
+              } />
             </Route>
           </Routes>
-          {/* <GoogleAd
-            adClient="ca-pub-2161322477877336"
-            adSlot="7045718367"
-            adFormat="auto"
-          /> */}
         </BrowserRouter>
       </SkeletonTheme>
     </div>
