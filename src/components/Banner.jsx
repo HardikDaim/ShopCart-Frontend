@@ -79,7 +79,7 @@ const Banner = ({ loader }) => {
         <video
           ref={videoRef}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg"
-          src="/videos/banner-2.mp4"
+          src="/videos/banner.mov"
           loop
           muted={isMuted}
           autoPlay // Ensure autoplay on load
