@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { toast } from "react-hot-toast";
-import LoaderOverlay from '../components/LoaderOverlay';
 import {
   generateQRCode,
   checkPaymentStatus,
@@ -21,6 +20,8 @@ const PaymentPage = () => {
   const {
     state: {
       products = [],
+      sellerId = [],
+      shippingInfo = [],
       customerId = "",
       orderId = "",
       price = 0,
@@ -38,17 +39,14 @@ const PaymentPage = () => {
     // Implement card payment logic here
     toast.success(`Card payment initiated for Order ID: ${orderId}`);
   };
+
   const upiId = "hardikdaim-3@okhdfcbank";
+
   useEffect(() => {
-    if (orderId !== "" && price !== "") {
-      const obj = {
-        orderId,
-        amount: price,
-        upiId,
-      };
-      dispatch(generateQRCode(obj));
+    if (orderId && price) {
+      dispatch(generateQRCode({ orderId, amount: price, upiId }));
     }
-  }, [orderId, price]);
+  }, [orderId, price, dispatch]);
 
   useEffect(() => {
     if (successMessage) {
@@ -59,7 +57,7 @@ const PaymentPage = () => {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-  }, [dispatch, successMessage, errorMessage]);
+  }, [successMessage, errorMessage, dispatch]);
 
   const formatPrice = (price) => {
     return price
@@ -67,15 +65,27 @@ const PaymentPage = () => {
       : "N/A";
   };
 
+  // Poll payment status every 10 seconds until it is "paid"
   // useEffect(() => {
-  //   if(orderId !== '' && isUPI) {
-  //     const checkStatusInterval = setInterval(() => {
-  //       dispatch(checkPaymentStatus({orderId, navigate}));
-  //     }, 10000)
-  //    return () => clearInterval(checkStatusInterval)
+  //   let checkStatusInterval;
+
+  //   if (orderId && isUPI) {
+  //     checkStatusInterval = setInterval(() => {
+  //       dispatch(checkPaymentStatus({ orderId }))
+  //         .unwrap()
+  //         .then((status) => {
+  //           if (status === "paid") {
+  //             clearInterval(checkStatusInterval);
+  //             toast.success("Payment Successful! Order placed.");
+  //             navigate("/order-success", { state: { orderId } });
+  //           }
+  //         })
+  //         .catch((err) => console.error("Error checking payment status:", err));
+  //     }, 10000); // Poll every 10 seconds
   //   }
 
-  // },[orderId, isUPI, navigate, dispatch])
+  //   return () => clearInterval(checkStatusInterval);
+  // }, [orderId, isUPI, dispatch, navigate]);
 
   return (
     <>
@@ -85,6 +95,7 @@ const PaymentPage = () => {
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
             Payment Page
           </h1>
+          <p className="text-center mb-4 text-red-500 font-semibold">This page is under Maintainance don't pay, we'll shortly make it working.</p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12">
             <div className="bg-gradient-to-r from-blue-800 via-blue-500 to-blue-700 text-white p-4 rounded-xl relative">
               <p className="text-sm md:text-lg">
@@ -290,7 +301,7 @@ const PaymentPage = () => {
                     className="mr-2"
                   />
                   <label htmlFor="card" className="text-lg font-semibold cursor-pointer">
-                    Pay using Card
+                    Pay using Debit/Credit Card
                   </label>
                 </div>
                 {!isUPI && (

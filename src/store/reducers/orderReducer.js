@@ -12,6 +12,7 @@ export const place_order = createAsyncThunk(
       items,
       shippingInfo,
       customerId,
+      sellerId,
       navigate,
     },
     { rejectWithValue, fulfillWithValue }
@@ -24,18 +25,20 @@ export const place_order = createAsyncThunk(
         items,
         shippingInfo,
         customerId,
+        sellerId,
         navigate,
       });
       navigate("/payment", {
         state: {
           products,
+          shippingInfo,
           customerId,
+          sellerId,
           price: price + shipping_fee,
           items,
           orderId: data.orderId,
         },
       });
-      console.log(data)
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response?.data);

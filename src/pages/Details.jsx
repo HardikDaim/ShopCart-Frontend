@@ -193,7 +193,7 @@ const Details = () => {
         state: {
           products: obj,
           price: quantity * price,
-          shipping_fee: 50 * quantity,
+          shipping_fee: 0 * quantity,
           items: quantity,
         },
       });
