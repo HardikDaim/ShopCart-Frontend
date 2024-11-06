@@ -19,6 +19,14 @@ const ShopProducts = ({ products, loader, styles }) => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
+  const [loading, setLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    // Set loading to false only after products are received
+    if (products && products.length > 0) {
+      setLoading(false);
+    }
+  }, [products]);
 
   const add_cart = (id) => {
     if (userInfo) {
@@ -64,7 +72,7 @@ const ShopProducts = ({ products, loader, styles }) => {
 
   return (
     <>
-      {loader ? (
+      {(loading || loader) ? ( // Show skeleton if loading or loader is true
         <div
           className={`w-full ${
             styles === "grid"
@@ -72,7 +80,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               : "flex flex-col gap-3"
           }`}
         >
-          {Array.from({ length: products.length }).map((_, index) => (
+          {Array.from({ length: products.length || 4 }).map((_, index) => (
             <div
               key={index}
               className={`w-full ${
@@ -103,7 +111,7 @@ const ShopProducts = ({ products, loader, styles }) => {
           ))}
         </div>
       ) : (
-        products.length > 0 && (
+        products.length > 0 ? (
           <div
             className={`w-full ${
               styles === "grid"
@@ -115,7 +123,8 @@ const ShopProducts = ({ products, loader, styles }) => {
               const discountedPrice = p.price - (p.price * p.discount) / 100;
               return (
                 <div
-                  key={i} onClick={() => navigate(`/product/details/${p.slug}`)}
+                  key={i}
+                  onClick={() => navigate(`/product/details/${p.slug}`)}
                   className={`w-full ${
                     styles !== "grid"
                       ? "flex items-start justify-start p-2"
@@ -202,58 +211,32 @@ const ShopProducts = ({ products, loader, styles }) => {
                     </div>
                     <p className="text-xs text-slate-600 dark:text-slate-400">
                       {p.description &&
-                        (styles === "grid" && p.description.length > 80 ? (
-                          `${p.description
-                            .substring(0, 80)
-                            .replace(/\s+/g, " ")
-                            .trim()}...`
-                        ) : (
-                          <>
-                            <span className="block md:hidden">
-                              {p.description.length > 80
-                                ? `${p.description
-                                    .substring(0, 80)
-                                    .replace(/\s+/g, " ")
-                                    .trim()}...`
-                                : p.description}
-                            </span>
-                            <span className="hidden md:block lg:hidden">
-                              {p.description.length > 120
-                                ? `${p.description
-                                    .substring(0, 120)
-                                    .replace(/\s+/g, " ")
-                                    .trim()}...`
-                                : p.description}
-                            </span>
-
-                            <span className="hidden lg:block">
-                              {p.description}
-                            </span>
-                          </>
-                        ))}
+                        (p.description.length > 20
+                          ? `${p.description.substring(0, 80)}...`
+                          : p.description)}
                     </p>
                   </div>
                 </div>
               );
             })}
           </div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col justify-center items-center gap-4"
+          >
+            <img
+              className="w-52 h-52 md:w-80 md:h-80 object-cover"
+              src="/images/noproducts.png"
+              alt="Empty Feature Image"
+            />
+            <h4 className="font-bold text-lg md:text-2xl text-center text-gray-600">
+              No Products found
+            </h4>
+          </motion.div>
         )
-      )}
-
-      {products.length <= 0 && (
-        <div className="flex flex-col items-center justify-center w-full py-10">
-          <motion.img
-            src="/images/noproducts.png"
-            alt="No Product"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5}}
-            className="rounded-lg  mb-4"
-          />
-          <p className="text-slate-600 dark:text-slate-300 text-center">
-            No Products found. Please try again later.
-          </p>
-        </div>
       )}
     </>
   );
