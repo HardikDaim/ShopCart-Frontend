@@ -15,14 +15,42 @@ const Login = () => {
     (state) => state.auth
   );
   const [state, setState] = useState({ email: "", password: "" });
-  const [showPassword, ssetShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formErrors, setFormErrors] = useState({ email: "", password: "" });
+
   const handleInput = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setState({ ...state, [name]: value });
+
+    // Clear error message on input change
+    setFormErrors({ ...formErrors, [name]: "" });
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!state.email) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(state.email)) {
+      errors.email = "Please enter a valid email";
+    }
+
+    if (!state.password) {
+      errors.password = "Password is required";
+    } else if (state.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(customer_login(state));
+    if (validateForm()) {
+      dispatch(customer_login(state));
+    }
   };
 
   useEffect(() => {
@@ -37,7 +65,7 @@ const Login = () => {
     if (userInfo) {
       navigate("/");
     }
-  }, [errorMessage, successMessage, dispatch, navigate]);
+  }, [errorMessage, successMessage, dispatch, navigate, userInfo]);
 
   return (
     <>
@@ -75,9 +103,11 @@ const Login = () => {
                   id="email"
                   onChange={handleInput}
                   value={state.email}
-                  required
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
+                {formErrors.email && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                )}
               </div>
             </div>
             <div>
@@ -94,12 +124,14 @@ const Login = () => {
                   id="password"
                   onChange={handleInput}
                   value={state.password}
-                  required
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
+                {formErrors.password && (
+                  <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
+                )}
                 <div
                   className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                  onClick={() => ssetShowPassword(!showPassword)}
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>

@@ -15,14 +15,33 @@ const Register = () => {
     (state) => state.auth
   );
   const [state, setState] = useState({ name: "", email: "", password: "" });
-  const [showPassword, ssetShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [errors, setErrors] = useState({});
+
   const handleInput = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    const errors = {};
+    if (!state.name) errors.name = "Name is required";
+    if (!state.email) {
+      errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(state.email)) {
+      errors.email = "Invalid email address";
+    }
+    if (state.password.length < 6) errors.password = "Password must be at least 6 characters";
+    if (!agreedToTerms) errors.terms = "You must agree to the Terms and Privacy Policy";
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(customer_register(state));
+    if (validateForm()) {
+      dispatch(customer_register(state));
+    }
   };
 
   useEffect(() => {
@@ -80,9 +99,10 @@ const Register = () => {
                   id="name"
                   onChange={handleInput}
                   value={state.name}
-                  required
                   className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  aria-describedby="name-error"
                 />
+                {errors.name && <p id="name-error" className="text-red-600 text-sm">{errors.name}</p>}
               </div>
             </div>
             <div>
@@ -99,9 +119,10 @@ const Register = () => {
                   id="email"
                   onChange={handleInput}
                   value={state.email}
-                  required
                   className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  aria-describedby="email-error"
                 />
+                {errors.email && <p id="email-error" className="text-red-600 text-sm">{errors.email}</p>}
               </div>
             </div>
             <div>
@@ -118,16 +139,17 @@ const Register = () => {
                   id="password"
                   onChange={handleInput}
                   value={state.password}
-                  required
                   className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600  focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  aria-describedby="password-error"
                 />
                 <div
                   className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                  onClick={() => ssetShowPassword(!showPassword)}
+                  onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
+                {errors.password && <p id="password-error" className="text-red-600 text-sm">{errors.password}</p>}
             </div>
             <div className="mt-2 flex items-center">
               <input
@@ -135,31 +157,28 @@ const Register = () => {
                 name="checkbox"
                 id="checkbox"
                 className="w-4 h-4 mr-2"
+                checked={agreedToTerms}
+                onChange={() => setAgreedToTerms(!agreedToTerms)}
               />
               <label
                 htmlFor="checkbox"
                 className="text-sm text-gray-700 dark:text-gray-300"
-                required
               >
-                I agree to Terms and Privacy Policy
+                I agree to <Link className="text-blue-700 hover:underline cursor-pointer" to="/returns-and-refunds">Terms</Link> and <Link className="text-blue-700 hover:underline cursor-pointer" to="/privacy-policy">Privacy Policy</Link>
               </label>
             </div>
+            {errors.terms && <p className="text-red-600 text-sm">{errors.terms}</p>}
             <div>
               <button
                 type="submit"
                 className="transition w-full flex justify-center duration-500 outline-none ease-in-out text-white font-semibold rounded-md leading-6 shadow-sm bg-blue-600 dark:bg-blue-500 hover:bg-red-600 dark:hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 px-3 py-2 sm:px-4 sm:py-3"
-                // disabled={loader}
+                disabled={loader}
               >
-                Create Now
+                {loader ? 'Creating...' : 'Create Now'}
               </button>
               <p className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300 py-2">
                 Already have an account?
-                <Link
-                  to="/login"
-                  className="font-semibold text-blue-600 dark:text-blue-400 ml-1"
-                >
-                  Log in now
-                </Link>
+                <Link to="/login" className="text-blue-600 dark:text-blue-400"> Login Now</Link>
               </p>
             </div>
           </form>
