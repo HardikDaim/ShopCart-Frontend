@@ -233,7 +233,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               alt="Empty Feature Image"
             />
             <h4 className="font-bold text-lg md:text-2xl text-center text-gray-600">
-              No Products found
+              Try refreshing again
             </h4>
           </motion.div>
         )
