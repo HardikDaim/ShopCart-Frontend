@@ -126,16 +126,16 @@ const Login = () => {
                   value={state.password}
                   className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
-                {formErrors.password && (
-                  <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
-                )}
                 <div
                   className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
-                >
+                  >
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
+                  {formErrors.password && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
+                  )}
             </div>
             <div>
               <button
