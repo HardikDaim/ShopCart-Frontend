@@ -20,16 +20,6 @@ const NetworkStatusPopup = ({ isVisible }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 w-80 md:w-96 text-center transform transition-all duration-300 ease-in-out scale-95 sm:scale-100">
-        
-        {/* Animated 404 Image */}
-        <motion.img
-          src="/images/no-orders.webp"
-          alt="Connection lost illustration"
-          className="w-1/2 mx-auto"
-          animate={{ opacity: 1, y: [0, -10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-        />
-
         {/* Title */}
         <h2 className="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
           Connection Lost

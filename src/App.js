@@ -124,7 +124,14 @@ function App() {
           <NetworkStatusPopup isVisible={isOffline} />
 
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Home />
+                </Suspense>
+              }
+            />
             <Route path="*" element={<NotFound />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
@@ -165,7 +172,14 @@ function App() {
                 </Suspense>
               }
             />
-            <Route path="/products/search?" element={<SearchProducts />} />
+            <Route
+              path="/products/search?"
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <SearchProducts />
+                </Suspense>
+              }
+            />
             <Route path="/success" element={<Success />} />
             <Route path="/failed" element={<Failed />} />
 
@@ -183,7 +197,14 @@ function App() {
               <Route path="/shipping" element={<Shipping />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/chat/:sellerId" element={<Chat />} />
-              <Route path="/payment" element={<Payment />} />
+              <Route
+                path="/payment"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Payment />
+                  </Suspense>
+                }
+              />
             </Route>
           </Routes>
           {/* <GoogleAd
