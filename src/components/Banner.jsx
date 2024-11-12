@@ -10,6 +10,7 @@ const Banner = ({ loader }) => {
   const [isPlaying, setIsPlaying] = useState(true); // Control video playback based on scroll
   const videoRef = useRef(null);
   const bannerRef = useRef(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
 
   // Load mute state from localStorage on component mount
   useEffect(() => {
@@ -68,7 +69,10 @@ const Banner = ({ loader }) => {
   }, []);
 
   return (
-    <div ref={bannerRef} className="relative h-96 w-full overflow-hidden rounded-lg">
+    <div
+      ref={bannerRef}
+      className="relative h-96 lg:h-[600px] w-full overflow-hidden rounded-lg"
+    >
       {loader ? (
         <Skeleton
           height="100%"
@@ -76,14 +80,26 @@ const Banner = ({ loader }) => {
           className="absolute top-0 left-0 w-full h-full rounded-lg"
         />
       ) : (
-        <video
-          ref={videoRef}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg"
-          src="/videos/banner.mp4"
-          loop
-          muted={isMuted}
-          autoPlay // Ensure autoplay on load
-        />
+        <>
+          {!isVideoReady && (
+            <img
+              src="/images/banner-image.jpg" // Your fallback banner image
+              alt="Banner"
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+            />
+          )}
+          <video
+            ref={videoRef}
+            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg ${
+              isVideoReady ? "" : "hidden"
+            }`}
+            src="/videos/banner.mp4"
+            loop
+            muted={isMuted}
+            autoPlay // Ensure autoplay on load
+            onCanPlay={() => setIsVideoReady(true)} // Set video as ready when it can play
+          />
+        </>
       )}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/60 via-transparent to-black/60 flex items-end justify-center rounded-lg dark:from-black/80 dark:via-transparent dark:to-black/80">
         <div className="text-center p-4 md:p-8">
