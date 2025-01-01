@@ -154,7 +154,7 @@ const FeatureProduct = ({ products, loader }) => {
                             className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                           />
                         </Link>
-                        <ul className="hidden md:flex transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
+                        <ul className="hidden transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
                           <li
                             onClick={() => add_wishlist(product)}
                             className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg"
