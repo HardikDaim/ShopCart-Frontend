@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
@@ -6,6 +6,31 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const Categories = ({ categories, loader }) => {
   const scrollRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollButtons = () => {
+    const { current } = scrollRef;
+    if (current) {
+      setCanScrollLeft(current.scrollLeft > 0);
+      setCanScrollRight(
+        current.scrollLeft + current.offsetWidth < current.scrollWidth
+      );
+    }
+  };
+
+  useEffect(() => {
+    const { current } = scrollRef;
+    if (current) {
+      updateScrollButtons();
+      current.addEventListener("scroll", updateScrollButtons);
+    }
+    return () => {
+      if (current) {
+        current.removeEventListener("scroll", updateScrollButtons);
+      }
+    };
+  }, []);
 
   const scroll = (direction) => {
     const { current } = scrollRef;
@@ -30,25 +55,27 @@ const Categories = ({ categories, loader }) => {
       </div>
       <div className="relative group">
         {/* Left Scroll Button */}
-        <button
-          onClick={() => scroll("left")}
-          className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6 md:w-8 md:h-8"
+        {canScrollLeft && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+        )}
         {/* Categories Container */}
         <div
           ref={scrollRef}
@@ -91,25 +118,27 @@ const Categories = ({ categories, loader }) => {
         </div>
 
         {/* Right Scroll Button */}
-        <button
-          onClick={() => scroll("right")}
-          className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6 md:w-8 md:h-8"
+        {canScrollRight && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        )}
       </div>
     </>
   );

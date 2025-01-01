@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Rating from "../Rating";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaRegHeart } from "react-icons/fa";
@@ -20,6 +20,42 @@ const FeatureProduct = ({ products, loader }) => {
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
 
   const scrollRef = useRef(null); // Create a reference for the scroll container
+ const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollButtons = () => {
+    const { current } = scrollRef;
+    if (current) {
+      setCanScrollLeft(current.scrollLeft > 0);
+      setCanScrollRight(
+        current.scrollLeft + current.offsetWidth < current.scrollWidth
+      );
+    }
+  };
+
+  useEffect(() => {
+    const { current } = scrollRef;
+    if (current) {
+      updateScrollButtons();
+      current.addEventListener("scroll", updateScrollButtons);
+    }
+    return () => {
+      if (current) {
+        current.removeEventListener("scroll", updateScrollButtons);
+      }
+    };
+  }, []);
+   // Function to scroll left
+   const scroll = (direction) => {
+    const { current } = scrollRef;
+    if (current) {
+      if (direction === "left") {
+        current.scrollLeft -= 1000;
+      } else {
+        current.scrollLeft += 1000;
+      }
+    }
+  };
 
   const add_cart = (id) => {
     if (userInfo) {
@@ -63,19 +99,7 @@ const FeatureProduct = ({ products, loader }) => {
     }
   };
 
-  // Function to scroll left
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -1200, behavior: "smooth" });
-    }
-  };
 
-  // Function to scroll right
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 1200, behavior: "smooth" });
-    }
-  };
 
   return (
     <>
@@ -89,8 +113,10 @@ const FeatureProduct = ({ products, loader }) => {
       </div>
 
       <div className="relative w-full overflow-hidden group">
+        {/* Left Scroll Button */}
+        {canScrollLeft && (
         <button
-          onClick={scrollLeft}
+          onClick={() => scroll("left")}
           className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
@@ -108,6 +134,8 @@ const FeatureProduct = ({ products, loader }) => {
             />
           </svg>
         </button>
+
+        )}
 
         <div
           ref={scrollRef}
@@ -209,8 +237,10 @@ const FeatureProduct = ({ products, loader }) => {
         </div>
 
         {/* Right Scroll Button */}
+        {canScrollRight && (
+
         <button
-          onClick={scrollRight}
+          onClick={() => scroll("right")}
           className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
@@ -228,6 +258,8 @@ const FeatureProduct = ({ products, loader }) => {
             />
           </svg>
         </button>
+
+        )}
       </div>
     </>
   );
