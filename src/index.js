@@ -6,14 +6,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <Suspense>
-        <App />
-       
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </Suspense>
     </Provider>
   </React.StrictMode>

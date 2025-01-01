@@ -28,6 +28,7 @@ import {
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../components/styles.css";
+import { Helmet } from 'react-helmet-async';
 
 const Details = () => {
   const { slug } = useParams();
@@ -37,7 +38,6 @@ const Details = () => {
   const { product, relatedProducts, moreProducts, loader } = useSelector(
     (state) => state.home
   );
-  const [startTouchX, setStartTouchX] = useState(null);
 
   const {
     loader: cartLoader,
@@ -77,23 +77,6 @@ const Details = () => {
     );
   };
 
-  const handleTouchStart = (e) => {
-    setStartTouchX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    if (!startTouchX) return;
-    const endTouchX = e.changedTouches[0].clientX;
-
-    if (startTouchX - endTouchX > 50) {
-      // Swipe left
-      handleNextImage();
-    } else if (endTouchX - startTouchX > 50) {
-      // Swipe right
-      handlePrevImage();
-    }
-    setStartTouchX(null);
-  };
 
   const [quantity, setQuantity] = useState(1);
   const inc = () => {
@@ -269,6 +252,43 @@ const Details = () => {
 
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+
+      <Helmet>
+        <title>{product.name ? product.name : 'Loading...'}</title>
+        <meta
+          name="description"
+          content={
+            product.description?.length > 150
+              ? product.description.slice(0, 150).concat('...')
+              : product.description
+          }
+        />
+        <meta
+          name="keywords"
+          content={
+            product.name
+              ? product.name.split(' ').join(', ')
+              : 'product, ecommerce, shop'
+          }
+        />
+        <meta
+          property="og:title"
+          content={product ? product.name : 'Loading...'}
+        />
+        <meta
+          property="og:description"
+          content={
+            product.description?.length > 150
+              ? product.description.slice(0, 150).concat('...')
+              : product.description
+          }
+        />
+        <meta property="og:image" content={product?.images?.[0]} />
+        <meta
+          property="og:url"
+          content={`https://shop-cart-ten-chi.app/product/details/${slug}`}
+        />
+      </Helmet>
       <Header />
       <div className="mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
