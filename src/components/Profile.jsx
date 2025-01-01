@@ -55,7 +55,7 @@ const Profile = () => {
       >
         <IoPerson className="mr-2" />
         {(cart_product_count > 0 || wishlist_count > 0) && (
-          <span className="absolute top-0 right-0 transform tranzinc-x-1/2 -tranzinc-y-1/2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+          <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
             {cart_product_count + wishlist_count}
           </span>
         )}

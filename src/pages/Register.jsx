@@ -171,7 +171,7 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className="transition w-full flex justify-center duration-500 outline-none ease-in-out text-white font-semibold rounded-md leading-6 shadow-sm bg-blue-600 dark:bg-blue-500 hover:bg-red-600 dark:hover:bg-red-500 transform hover:-tranzinc-y-1 hover:scale-110 px-3 py-2 sm:px-4 sm:py-3"
+                className="transition w-full flex justify-center duration-500 outline-none ease-in-out text-white font-semibold rounded-md leading-6 shadow-sm bg-blue-600 dark:bg-blue-500 hover:bg-red-600 dark:hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 px-3 py-2 sm:px-4 sm:py-3"
                 disabled={loader}
               >
                 {loader ? 'Creating...' : 'Create Now'}

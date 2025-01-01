@@ -37,6 +37,7 @@ const Details = () => {
   const { product, relatedProducts, moreProducts, loader } = useSelector(
     (state) => state.home
   );
+  const [startTouchX, setStartTouchX] = useState(null);
 
   const {
     loader: cartLoader,
@@ -74,6 +75,24 @@ const Details = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
     );
+  };
+
+  const handleTouchStart = (e) => {
+    setStartTouchX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!startTouchX) return;
+    const endTouchX = e.changedTouches[0].clientX;
+
+    if (startTouchX - endTouchX > 50) {
+      // Swipe left
+      handleNextImage();
+    } else if (endTouchX - startTouchX > 50) {
+      // Swipe right
+      handlePrevImage();
+    }
+    setStartTouchX(null);
   };
 
   const [quantity, setQuantity] = useState(1);
@@ -251,45 +270,61 @@ const Details = () => {
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
       <Header />
-      <div className="mx-auto  px-4 py-8">
+      <div className="mx-auto px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
-          <div className="w-full lg:w-1/2 relative">
+          <div className="w-full lg:w-1/2">
             {loader ? (
-              <>
-                <Skeleton height="500px" width="100%" className="rounded-lg" />
-              </>
+              <Skeleton height="600px" width="100%" className="rounded-lg" />
             ) : (
               <>
                 {product?.images && product?.images?.length > 0 && (
-                  <>
-                    <img
-                      src={product?.images[currentImageIndex]}
-                      alt={product?.name}
-                      className="w-full h-auto max-h-[500px] rounded-lg shadow-lg object-contain"
-                    />
-                    {product?.images?.length > 1 && (
+                  <div className="relative overflow-hidden">
+                    <div
+                      className="flex transition-transform duration-500"
+                      style={{
+                        transform: `translateX(-${currentImageIndex * 100}%)`,
+                      }}
+                    >
+                      {product.images.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={product.name}
+                          className="w-full h-auto max-h-[600px] rounded-lg shadow-lg object-contain flex-shrink-0"
+                        />
+                      ))}
+                    </div>
+                    {product.images.length > 1 && (
                       <>
                         <button
                           onClick={handlePrevImage}
-                          className="absolute left-0 top-1/2 transform -tranzinc-y-1/2 -tranzinc-x-4 lg:-tranzinc-x-4 bg-zinc-800 hover:bg-zinc-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          className={`${
+                            currentImageIndex === 0
+                              ? "hidden"
+                              : "absolute left-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          }`}
                         >
                           &lt;
                         </button>
                         <button
                           onClick={handleNextImage}
-                          className="absolute right-0 top-1/2 transform -tranzinc-y-1/2 tranzinc-x-4 lg:tranzinc-x-4 bg-zinc-800 hover:bg-zinc-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          className={`${
+                            currentImageIndex === product.images.length - 1
+                              ? "hidden"
+                              : "absolute right-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          }`}
                         >
                           &gt;
                         </button>
                       </>
                     )}
-                  </>
+                  </div>
                 )}
               </>
             )}
             {product?.images && product?.images.length > 1 && (
               <div
-                className="flex flex-shrink-0 mt-4 space-x-2 justify-center lg:justify-start overflow-x-auto hide-scrollbar"
+                className="flex mt-4 space-x-2 justify-center lg:justify-start overflow-x-auto hide-scrollbar"
                 style={{ WebkitOverflowScrolling: "touch" }}
               >
                 {loader
@@ -308,7 +343,7 @@ const Details = () => {
                         key={index}
                         src={image}
                         alt={product.name}
-                        className={`w-16 h-16 ml-6 md:ml-0 object-cover rounded-lg cursor-pointer ${
+                        className={`w-16 h-16 object-cover rounded-lg cursor-pointer ${
                           index === currentImageIndex
                             ? "border-2 border-blue-500"
                             : "opacity-50"
@@ -336,7 +371,9 @@ const Details = () => {
             ) : (
               <>
                 <div className="flex justify-between items-center">
-                  <h1 className="text-xl md:text-3xl font-bold">{product?.name}</h1>
+                  <h1 className="text-xl md:text-3xl font-bold">
+                    {product?.name}
+                  </h1>
                   <button
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Share"

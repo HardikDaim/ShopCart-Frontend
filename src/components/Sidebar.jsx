@@ -14,7 +14,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     >
       <div
         className={`fixed inset-y-0 left-0 bg-white dark:bg-zinc-800 w-64 p-4 transition-transform duration-300 transform ${
-          isOpen ? "tranzinc-x-0" : "-tranzinc-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <button

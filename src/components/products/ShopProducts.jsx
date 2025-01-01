@@ -85,7 +85,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               key={index}
               className={`w-full ${
                 styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
-              } rounded-md transition-all duration-1000 hover:shadow-md hover:-tranzinc-y-3`}
+              } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
             >
               <Skeleton height={200} width="100%" className="rounded-lg" />
               <div
@@ -129,7 +129,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                     styles !== "grid"
                       ? "flex items-start justify-start p-2"
                       : "p-1"
-                  } rounded-md transition-all duration-1000 hover:shadow-md hover:-tranzinc-y-3`}
+                  } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
                 >
                   <div
                     className={`${
@@ -150,7 +150,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                         alt={p.name}
                       />
                     </Link>
-                    <ul className="flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
+                    <ul className="hidden lg:flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
                       <li
                         onClick={() => add_wishlist(p)}
                         className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
