@@ -81,7 +81,7 @@ const FeatureProduct = ({ products, loader }) => {
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-0 md:pt-10">
         <div className="w-full">
-          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
+          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-zinc-700 dark:text-zinc-300">
             <h2>{loader ? <Skeleton width={150} /> : "Featured Products"}</h2>
             <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
           </div>
@@ -91,7 +91,7 @@ const FeatureProduct = ({ products, loader }) => {
       <div className="relative w-full overflow-hidden group">
         <button
           onClick={scrollLeft}
-          className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          className="absolute hidden md:block left-0 top-1/2 transform -tranzinc-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ const FeatureProduct = ({ products, loader }) => {
                       height={80}
                       className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                     />
-                    <div className="my-2 text-slate-700 dark:text-slate-300">
+                    <div className="my-2 text-zinc-700 dark:text-zinc-300">
                       <Skeleton width={120} height={20} className="font-bold" />
                       <Skeleton width={80} height={20} className="mt-2" />
                       <Skeleton width={60} height={20} className="mt-2" />
@@ -157,25 +157,25 @@ const FeatureProduct = ({ products, loader }) => {
                         <ul className="hidden md:flex transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
                           <li
                             onClick={() => add_wishlist(product)}
-                            className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg"
+                            className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg"
                           >
                             <FaRegHeart />
                           </li>
                           <Link to={`/product/details/${product.slug}`}>
-                            <li className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg">
+                            <li className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-green-400 to-blue-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg">
                               <FaEye />
                             </li>
                           </Link>
                           <li
                             onClick={() => add_cart(product._id)}
-                            className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-yellow-400 to-orange-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg"
+                            className="w-10 h-10 md:w-12 md:h-12 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-gradient-to-r from-yellow-400 to-orange-500 hover:text-white transition-all transform hover:rotate-180 shadow-lg"
                           >
                             <RiShoppingCartLine />
                           </li>
                         </ul>
                       </div>
 
-                      <div className="my-2 text-slate-700 dark:text-slate-300 text-xs">
+                      <div className="my-2 text-zinc-700 dark:text-zinc-300 text-xs">
                         <h2 className="font-bold">
                           {product.name.length > 30
                             ? `${product.name.substring(0, 30)}...`
@@ -188,7 +188,7 @@ const FeatureProduct = ({ products, loader }) => {
                         <div className="flex justify-start items-center gap-2">
                           {product.discount > 0 ? (
                             <>
-                              <span className="line-through text-slate-500 hidden md:flex">
+                              <span className="line-through text-zinc-500 hidden md:flex">
                                 ₹{product.price}
                               </span>{" "}
                               <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -196,7 +196,7 @@ const FeatureProduct = ({ products, loader }) => {
                               </span>
                             </>
                           ) : (
-                            <span className="text-black font-semibold dark:text-slate-300">
+                            <span className="text-black font-semibold dark:text-zinc-300">
                               ₹{product.price}
                             </span>
                           )}
@@ -211,7 +211,7 @@ const FeatureProduct = ({ products, loader }) => {
         {/* Right Scroll Button */}
         <button
           onClick={scrollRight}
-          className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          className="absolute hidden md:block right-0 top-1/2 transform -tranzinc-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

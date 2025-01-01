@@ -48,7 +48,7 @@ const Home = () => {
       <FeatureProduct products={products} loader={loader} />
       <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-0">
         <div className="w-full">
-          <div className="flex mb-6  font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
+          <div className="flex mb-6  font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-zinc-700 dark:text-zinc-300">
             <h2>{loader ? <Skeleton width={150} /> : "Top Picks for You!"}</h2>
             <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
           </div>

@@ -22,7 +22,7 @@ const Categories = ({ categories, loader }) => {
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-10">
         <div className="w-full">
-          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-slate-700 dark:text-slate-300">
+          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-zinc-700 dark:text-zinc-300">
             <h2>{loader ? <Skeleton width={150} /> : "Top Categories"}</h2>
             <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
           </div>
@@ -32,7 +32,7 @@ const Categories = ({ categories, loader }) => {
         {/* Left Scroll Button */}
         <button
           onClick={() => scroll("left")}
-          className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          className="absolute hidden md:block left-0 top-1/2 transform -tranzinc-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ const Categories = ({ categories, loader }) => {
                         alt={category.name}
                         className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                       />
-                      <div className="mt-2 text-xs text-slate-700 dark:text-slate-300">
+                      <div className="mt-2 text-xs text-zinc-700 dark:text-zinc-300">
                         {category.name}
                       </div>
                     </div>
@@ -93,7 +93,7 @@ const Categories = ({ categories, loader }) => {
         {/* Right Scroll Button */}
         <button
           onClick={() => scroll("right")}
-          className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
+          className="absolute hidden md:block right-0 top-1/2 transform -tranzinc-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

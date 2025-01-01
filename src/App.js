@@ -95,17 +95,17 @@ function App() {
   return (
     <div className={isDarkTheme ? "dark" : ""}>
       <SkeletonTheme
-        baseColor={isDarkTheme ? "#1F2937" : "#E5E7EB"}
-        highlightColor={isDarkTheme ? "#374151" : "#F3F4F6"}
+        baseColor={isDarkTheme ? "#18181B" : "#FAFAFA"}
+        highlightColor={isDarkTheme ? "#3F3F46" : "#F4F4F5"}
       >
         <Toaster
           toastOptions={{
             position: "top-center",
             style: {
               background: isDarkTheme
-                ? "rgba(55, 65, 81, 0.9)"
-                : "rgba(255, 255, 255, 0.9)",
-              color: isDarkTheme ? "#F9FAFB" : "#1F2937",
+                ? "rgba(63, 63, 70, 0.9)"
+                : "rgba(244, 244, 245, 0.9)",
+              color: isDarkTheme ? "#FAFAFA" : "#18181B",
             },
           }}
         />

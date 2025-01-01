@@ -38,35 +38,35 @@ const ThemeToggle = () => {
     <div className="relative inline-block text-left">
       <button
         type="button"
-        className="inline-flex justify-center w-full px-4 py-2 text-lg font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-200 dark:hover:bg-slate-700 focus:outline-none"
+        className="inline-flex justify-center w-full px-4 py-2 text-lg font-medium text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-full shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         <FaMoon />
       </button>
       {dropdownOpen && (
-        <div className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 divide-y divide-gray-100 dark:divide-slate-700 rounded-md shadow-lg outline-none">
+        <div className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 divide-y divide-zinc-100 dark:divide-zinc-700 rounded-md shadow-lg outline-none">
           <div className="py-1">
             <button
               onClick={() => handleThemeChange('light')}
               className={`${
-                theme === 'light' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+                theme === 'light' ? 'bg-zinc-100 dark:bg-zinc-700' : ''
+              } block px-4 py-2 text-xs text-zinc-700 dark:text-zinc-100 w-full text-left  hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               Light
             </button>
             <button
               onClick={() => handleThemeChange('dark')}
               className={`${
-                theme === 'dark' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+                theme === 'dark' ? 'bg-zinc-100 dark:bg-zinc-700' : ''
+              } block px-4 py-2 text-xs text-zinc-700 dark:text-zinc-100 w-full text-left  hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               Dark
             </button>
             <button
               onClick={() => handleThemeChange('system')}
               className={`${
-                theme === 'system' ? 'bg-gray-100 dark:bg-slate-700' : ''
-              } block px-4 py-2 text-xs text-gray-700 dark:text-slate-100 w-full text-left  hover:bg-gray-50 dark:hover:bg-slate-700`}
+                theme === 'system' ? 'bg-zinc-100 dark:bg-zinc-700' : ''
+              } block px-4 py-2 text-xs text-zinc-700 dark:text-zinc-100 w-full text-left  hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               System
             </button>

@@ -35,7 +35,7 @@ const Wishlist = () => {
   }, [errorMessage, successMessage, dispatch]);
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200">
       <Header />
       {loader && <LoaderOverlay />}
       <main className="container mx-auto p-4">
@@ -45,7 +45,7 @@ const Wishlist = () => {
             wishlist.map((item) => (
               <div
                 key={item.id}
-                className="relative bg-white dark:bg-slate-700 p-6 rounded-lg shadow transition-all duration-500"
+                className="relative bg-white dark:bg-zinc-700 p-6 rounded-lg shadow transition-all duration-500"
               >
                 {item.discount > 0 && (
                   <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
@@ -61,10 +61,10 @@ const Wishlist = () => {
                 
                 </Link>
                 ̀<h3 className="text-lg font-bold mb-2">{item.name}</h3>
-                <p className="text-slate-700 dark:text-slate-300 mb-4">
+                <p className="text-zinc-700 dark:text-zinc-300 mb-4">
                   {item.discount > 0 ? (
                     <>
-                      <span className="line-through text-slate-500">
+                      <span className="line-through text-zinc-500">
                         ₹{item.price}
                       </span>{" "}
                       <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -76,12 +76,12 @@ const Wishlist = () => {
                       </span>
                     </>
                   ) : (
-                    <span className="text-black font-semibold dark:text-slate-300">
+                    <span className="text-black font-semibold dark:text-zinc-300">
                       ₹{item.price}
                     </span>
                   )}
                 </p>
-                <button onClick={() => dispatch(remove_wishlist(item._id))} className="w-full p-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                <button onClick={() => dispatch(remove_wishlist(item._id))} className="w-full p-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-zinc-800">
                   Remove from Wishlist
                 </button>
               </div>

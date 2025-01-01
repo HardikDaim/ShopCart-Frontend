@@ -106,21 +106,21 @@ const Chat = () => {
       <Header />
       <div className="px-2 lg:px-7 py-2">
         {loader && <LoaderOverlay />}
-        <div className="w-full bg-slate-50 dark:bg-slate-800 my-6 lg:my-0 p-4 rounded-lg border-2 dark:border-slate-600 h-[calc(100vh-140px)]">
+        <div className="w-full bg-zinc-50 dark:bg-zinc-800 my-6 lg:my-0 p-4 rounded-lg border-2 dark:border-zinc-600 h-[calc(100vh-140px)]">
           <div className="w-full h-full relative flex">
             <div
               className={`w-[280px] h-full absolute z-10 ${
                 show ? "left-0" : "-left-[336px]"
               } md:relative md:left-0 transition-all`}
             >
-              <div className="w-full h-[calc(100vh-177px)] bg-slate-100 dark:bg-slate-700 md:bg-transparent overflow-y-auto">
+              <div className="w-full h-[calc(100vh-177px)] bg-zinc-100 dark:bg-zinc-700 md:bg-transparent overflow-y-auto">
                 <div className="flex text-xl justify-between items-center p-4 md:p-0 md:px-3 md:pb-3">
-                  <h2 className="text-slate-900 dark:text-slate-50 mt-2">
+                  <h2 className="text-zinc-900 dark:text-zinc-50 mt-2">
                     Sellers
                   </h2>
                   <span
                     onClick={() => setShow(!show)}
-                    className="block cursor-pointer md:hidden text-slate-900 dark:text-slate-50"
+                    className="block cursor-pointer md:hidden text-zinc-900 dark:text-zinc-50"
                   >
                     <IoClose />
                   </span>
@@ -129,9 +129,9 @@ const Chat = () => {
                   MyFriends.map((f, i) => (
                     <Link to={`/chat/${f.fdId}`} key={i}>
                       <div
-                        className={`h-[60px] flex justify-start gap-2 my-2 items-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-600 dark:hover:bg-slate-500 ${
+                        className={`h-[60px] flex justify-start gap-2 my-2 items-center bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-600 dark:hover:bg-zinc-500 ${
                           pathname === `/chat/${f.fdId}`
-                            ? "bg-slate-200 dark:bg-slate-400"
+                            ? "bg-zinc-200 dark:bg-zinc-400"
                             : ""
                         } p-2 rounded-md cursor-pointer`}
                       >
@@ -147,7 +147,7 @@ const Chat = () => {
                             )}
                         </div>
                         <div className="flex justify-between items-center w-full">
-                          <h2 className="font-semibold text-slate-900 dark:text-slate-50">
+                          <h2 className="font-semibold text-zinc-900 dark:text-zinc-50">
                             {f.name}
                           </h2>
                         </div>
@@ -155,7 +155,7 @@ const Chat = () => {
                     </Link>
                   ))
                 ) : (
-                  <div className="p-4 text-center text-slate-900 dark:text-slate-50">
+                  <div className="p-4 text-center text-zinc-900 dark:text-zinc-50">
                     No sellers found
                   </div>
                 )}
@@ -177,7 +177,7 @@ const Chat = () => {
                           <div className="w-[10px] h-[10px] bg-green-500 rounded-full absolute right-0 bottom-0"></div>
                         )}
                     </div>
-                    <h2 className="font-semibold text-slate-900 dark:text-slate-50">
+                    <h2 className="font-semibold text-zinc-900 dark:text-zinc-50">
                       {currentFd?.name}
                     </h2>
                   </div>
@@ -186,7 +186,7 @@ const Chat = () => {
                 )}
                 <div
                   onClick={() => setShow(!show)}
-                  className="flex w-[35px] md:hidden h-[35px] rounded-md bg-slate-200 dark:bg-slate-600 justify-center items-center text-slate-900 dark:text-slate-50"
+                  className="flex w-[35px] md:hidden h-[35px] rounded-md bg-zinc-200 dark:bg-zinc-600 justify-center items-center text-zinc-900 dark:text-zinc-50"
                 >
                   <span>
                     <FaList />
@@ -196,7 +196,7 @@ const Chat = () => {
               {currentFd ? (
                 <>
                   <div className="py-4">
-                    <div className="bg-slate-200 dark:bg-slate-700 h-[calc(100vh-290px)] rounded-lg p-3 overflow-y-auto">
+                    <div className="bg-zinc-200 dark:bg-zinc-700 h-[calc(100vh-290px)] rounded-lg p-3 overflow-y-auto">
                       {fd_messages.length > 0 ? (
                         fd_messages.map((m, i) => {
                           const isReceiver = currentFd?.fdId === m?.receiverId; // customer message
@@ -226,7 +226,7 @@ const Chat = () => {
                                   />
                                 </div>
                                 {!isReceiver && (
-                                  <div className="flex justify-center items-start flex-col w-full bg-slate-300 dark:bg-slate-600 text-slate-900 dark:text-slate-50 font-semibold py-1 px-2 rounded-md">
+                                  <div className="flex justify-center items-start flex-col w-full bg-zinc-300 dark:bg-zinc-600 text-zinc-900 dark:text-zinc-50 font-semibold py-1 px-2 rounded-md">
                                     <span>{m?.message}</span>
                                   </div>
                                 )}
@@ -235,7 +235,7 @@ const Chat = () => {
                           );
                         })
                       ) : (
-                        <div className="text-center text-slate-900 dark:text-slate-50">
+                        <div className="text-center text-zinc-900 dark:text-zinc-50">
                           No conversation yet!
                         </div>
                       )}
@@ -246,7 +246,7 @@ const Chat = () => {
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       type="text"
-                      className="w-full dark:bg-slate-700 dark:text-slate-100 outline-none py-2 px-3 rounded-full"
+                      className="w-full dark:bg-zinc-700 dark:text-zinc-100 outline-none py-2 px-3 rounded-full"
                       placeholder="Type a message..."
                     />
                     <button
@@ -259,7 +259,7 @@ const Chat = () => {
                 </>
               ) : (
                 <div className="w-full h-full flex justify-center items-center">
-                  <h2 className="text-slate-900 dark:text-slate-50 md:text-xl font-semibold">
+                  <h2 className="text-zinc-900 dark:text-zinc-50 md:text-xl font-semibold">
                     Please select a seller to start chatting
                   </h2>
                 </div>

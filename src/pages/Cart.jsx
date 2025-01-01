@@ -79,7 +79,7 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
         <div className="container mx-auto px-4 py-8">
           <h2 className="text-4xl font-bold mb-6 text-center">Shopping Cart</h2>
           {cart_products.length === 0 && (
@@ -99,7 +99,7 @@ const Cart = () => {
                   className="w-64 h-64 mb-4"
                 />
               </motion.div>
-              <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 text-center">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
                 Your cart is empty! Add Products to Cart to see them here.
               </p>
             </>
@@ -124,7 +124,7 @@ const Cart = () => {
                   {cart_products.map((p, i) => (
                     <div
                       key={i}
-                      className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4"
+                      className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4"
                     >
                       <div className="flex justify-start items-center mb-4">
                         <h2 className="text-sm md:text-md font-bold">
@@ -152,7 +152,7 @@ const Cart = () => {
                             </span>
                             {pt.productInfo?.discount > 0 ? (
                               <>
-                                <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
+                                <span className="text-zinc-600 mr-2 text-sm dark:text-zinc-400 line-through">
                                   ₹{pt.productInfo.price.toFixed(2)}
                                 </span>
                                 <span className="text-blue-600 dark:text-blue-400">
@@ -175,7 +175,7 @@ const Cart = () => {
                             <div className="mt-2 flex items-center space-x-2">
                               <button
                                 onClick={() => dec(pt.quantity, pt._id)}
-                                className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200"
+                                className="px-2 py-1 bg-zinc-300 dark:bg-zinc-700 rounded text-zinc-800 dark:text-zinc-200"
                               >
                                 -
                               </button>
@@ -184,7 +184,7 @@ const Cart = () => {
                                 onClick={() =>
                                   inc(pt.quantity, pt.productInfo.stock, pt._id)
                                 }
-                                className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200"
+                                className="px-2 py-1 bg-zinc-300 dark:bg-zinc-700 rounded text-zinc-800 dark:text-zinc-200"
                               >
                                 +
                               </button>
@@ -225,7 +225,7 @@ const Cart = () => {
                   {outofstock_products.map((p) => (
                     <div
                       key={p.id}
-                      className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4 mb-4"
+                      className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4 mb-4"
                     >
                       <div className="flex justify-start items-center mb-4">
                         <h2 className="text-md font-bold">
@@ -247,10 +247,10 @@ const Cart = () => {
                           <span className="text-sm text-gray-500 mr-2">
                             Brand: {p.products[0].brand}
                           </span>
-                          <span className="text-slate-600 dark:text-slate-400">
+                          <span className="text-zinc-600 dark:text-zinc-400">
                             {p.products[0]?.discount > 0 ? (
                               <>
-                                <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
+                                <span className="text-zinc-600 mr-2 text-sm dark:text-zinc-400 line-through">
                                   ₹{p.products[0].price.toFixed(2)}
                                 </span>
                                 <span className="text-blue-600 dark:text-blue-400">
@@ -273,13 +273,13 @@ const Cart = () => {
                           </span>
                           <div className="mt-2 flex items-center space-x-2">
                             <button
-                              className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200"
+                              className="px-2 py-1 bg-zinc-300 dark:bg-zinc-700 rounded text-zinc-800 dark:text-zinc-200"
                               onClick={() => dec(p.quantity, p._id)}
                             >
                               -
                             </button>
                             <span>{p.quantity}</span>
-                            <button className="px-2 py-1 bg-slate-300 dark:bg-slate-700 rounded text-slate-800 dark:text-slate-200">
+                            <button className="px-2 py-1 bg-zinc-300 dark:bg-zinc-700 rounded text-zinc-800 dark:text-zinc-200">
                               +
                             </button>
                           </div>
@@ -311,7 +311,7 @@ const Cart = () => {
             {cart_products.length === 0 ? (
               <div className="hidden"></div>
             ) : (
-              <div className="w-full lg:w-1/3 bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
+              <div className="w-full lg:w-1/3 bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
                 <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -326,7 +326,7 @@ const Cart = () => {
                     <span>Delivery Charges</span>
                     <span>₹{shipping_fee.toFixed(2)}</span>
                   </div>
-                  <div className="border-t border-slate-300 dark:border-slate-700 my-2"></div>
+                  <div className="border-t border-zinc-300 dark:border-zinc-700 my-2"></div>
                   <div className="flex justify-between font-semibold">
                     <span>Total</span>
                     <span>₹{(price + shipping_fee).toFixed(2)}</span>

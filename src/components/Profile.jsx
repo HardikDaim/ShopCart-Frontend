@@ -50,28 +50,28 @@ const Profile = () => {
     <div className="relative block text-left">
       <button
         type="button"
-        className="relative flex items-center justify-center w-full px-4 py-2 text-lg font-medium text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-full shadow-sm hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none"
+        className="relative flex items-center justify-center w-full px-4 py-2 text-lg font-medium text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-full shadow-sm hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none"
         onClick={() => setDropdownOpen(!dropdownOpen)}
       >
         <IoPerson className="mr-2" />
         {(cart_product_count > 0 || wishlist_count > 0) && (
-          <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+          <span className="absolute top-0 right-0 transform tranzinc-x-1/2 -tranzinc-y-1/2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
             {cart_product_count + wishlist_count}
           </span>
         )}
       </button>
 
       {dropdownOpen && (
-        <div className="absolute right-0 mt-2 w-56 origin-top-right bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 divide-y divide-slate-100 dark:divide-slate-700 rounded-md shadow-lg outline-none transition duration-300 ease-in-out z-10">
+        <div className="absolute right-0 mt-2 w-56 origin-top-right bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 divide-y divide-zinc-100 dark:divide-zinc-700 rounded-md shadow-lg outline-none transition duration-300 ease-in-out z-10">
           <div className="py-1">
             <Link
               to="/dashboard"
               type="button"
               className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/dashboard"
-                  ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
+                  ? "bg-zinc-100 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-600"
                   : ""
-              } hover:bg-slate-50 dark:hover:bg-slate-700`}
+              } hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               {" "}
               <IoPersonCircle className="mr-2" /> Dashboard
@@ -81,9 +81,9 @@ const Profile = () => {
               type="button"
               className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/my-orders"
-                  ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
+                  ? "bg-zinc-100 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-600"
                   : ""
-              } hover:bg-slate-50 dark:hover:bg-slate-700`}
+              } hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               {" "}
               <IoClipboard className="mr-2" /> My Orders
@@ -93,9 +93,9 @@ const Profile = () => {
               type="button"
               className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/my-wishlist"
-                  ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
+                  ? "bg-zinc-100 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-600"
                   : ""
-              } hover:bg-slate-50 dark:hover:bg-slate-700`}
+              } hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               {" "}
               <IoHeart className="mr-2" /> Wishlist
@@ -108,7 +108,7 @@ const Profile = () => {
 
             <button
               onClick={redirect_cart_page}
-              className="flex items-center  px-4 py-2 text-xs w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700 relative"
+              className="flex items-center  px-4 py-2 text-xs w-full text-left hover:bg-zinc-50 dark:hover:bg-zinc-700 relative"
             >
               <IoCart className="mr-2" />
               Cart
@@ -124,9 +124,9 @@ const Profile = () => {
               type="button"
               className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/chat"
-                  ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
+                  ? "bg-zinc-100 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-600"
                   : ""
-              } hover:bg-slate-50 dark:hover:bg-slate-700`}
+              } hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               {" "}
               <IoChatbubbles className="mr-2" /> Chat
@@ -145,14 +145,14 @@ const Profile = () => {
               type="button"
               className={`flex items-center block px-4 py-2 text-xs w-full text-left ${
                 pathname === "/change-password"
-                  ? "bg-slate-100 hover:bg-slate-100 dark:bg-slate-600 dark:hover:bg-slate-600"
+                  ? "bg-zinc-100 hover:bg-zinc-100 dark:bg-zinc-600 dark:hover:bg-zinc-600"
                   : ""
-              } hover:bg-slate-50 dark:hover:bg-slate-700`}
+              } hover:bg-zinc-50 dark:hover:bg-zinc-700`}
             >
               {" "}
               <IoKey className="mr-2" /> Change Password
             </Link>
-            <button onClick={logout} className="flex items-center block px-4 py-2 text-xs w-full text-left hover:bg-slate-50 dark:hover:bg-slate-700">
+            <button onClick={logout} className="flex items-center block px-4 py-2 text-xs w-full text-left hover:bg-zinc-50 dark:hover:bg-zinc-700">
               <IoLogOut className="mr-2" /> Logout
             </button>
          

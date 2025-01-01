@@ -31,7 +31,7 @@ const BecomeSeller = () => {
         >
           Get Started
         </a>
-        <button onClick={close} className="text-white hover:text-gray-200">
+        <button onClick={close} className="text-white hover:text-zinc-200">
           <IoClose size={20} />
         </button>
       </div>

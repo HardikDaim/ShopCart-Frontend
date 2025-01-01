@@ -19,14 +19,14 @@ const NetworkStatusPopup = ({ isVisible }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-md">
-      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl p-6 w-80 md:w-96 text-center transform transition-all duration-300 ease-in-out scale-95 sm:scale-100">
+      <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-xl p-6 w-80 md:w-96 text-center transform transition-all duration-300 ease-in-out scale-95 sm:scale-100">
         {/* Title */}
-        <h2 className="text-lg md:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">
+        <h2 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
           Connection Lost
         </h2>
 
         {/* Message */}
-        <p className="text-slate-600 dark:text-slate-300 mb-6 text-sm md:text-base">
+        <p className="text-zinc-600 dark:text-zinc-300 mb-6 text-sm md:text-base">
           It seems you're offline. Check your connection and try again.
         </p>
 

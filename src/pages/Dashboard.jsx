@@ -43,7 +43,7 @@ const Dashboard = () => {
   return (
     <>
       <Header />
-      <div className="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200 min-h-screen">
+      <div className="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 min-h-screen">
         <main className="container mx-auto p-4">
           {loader ? (
             <h2 className="text-xl font-semibold mb-4">
@@ -55,58 +55,58 @@ const Dashboard = () => {
             </h2>
           )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <Skeleton width="40%" className="rounded-lg" />
                   </p>
                 </>
               ) : (
                 <>
                   <h3 className="text-lg font-bold mb-2">Total Orders</h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     You have {totalOrders} total orders.
                   </p>
                 </>
               )}
             </div>
-            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <Skeleton width="40%" className="rounded-lg" />
                   </p>
                 </>
               ) : (
                 <>
                   <h3 className="text-lg font-bold mb-2">Pending Orders</h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     You have {pendingOrders} pending orders.
                   </p>
                 </>
               )}
             </div>
-            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 p-6 rounded-lg shadow">
+            <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
                   <h3 className="text-lg font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <Skeleton width="50%" className="rounded-lg" />
                   </p>
                 </>
               ) : (
                 <>
                   <h3 className="text-lg font-bold mb-2">Cancelled Orders</h3>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     You have {cancelledOrders} cancelled orders.
                   </p>
                 </>
@@ -134,7 +134,7 @@ const Dashboard = () => {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                    className="bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-md"
                   >
                     <Skeleton height={60} className="mb-4 rounded-lg" />
                   </div>
@@ -147,7 +147,7 @@ const Dashboard = () => {
                     <div
                       key={i}
                       onClick={() => navigate(`/order/details/${o._id}`)}
-                      className="relative cursor-pointer bg-white border dark:border-slate-700 dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                      className="relative cursor-pointer bg-white border dark:border-zinc-700 dark:bg-zinc-800 p-4 rounded-lg shadow-md"
                     >
                       {i === 0 && (
                         <motion.div
@@ -173,13 +173,13 @@ const Dashboard = () => {
                           Latest
                         </motion.div>
                       )}
-                      <h3 className="text-sm md:text-lg font-medium text-slate-700 dark:text-slate-300">
+                      <h3 className="text-sm md:text-lg font-medium text-zinc-700 dark:text-zinc-300">
                         Order ID: #{o._id}
                       </h3>
-                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300">
+                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300">
                         Price: {formatPrice(o.price)}
                       </p>
-                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                         Payment Status:{" "}
                         <span
                           className={`${
@@ -191,7 +191,7 @@ const Dashboard = () => {
                           {o.payment_status}
                         </span>
                       </p>
-                      <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                         Order Status:{" "}
                         <span
                           className={`${
@@ -230,7 +230,7 @@ const Dashboard = () => {
                     className="w-64 h-64 mb-4"
                   />
                 </motion.div>
-                <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 text-center">
+                <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
                   You haven't placed any orders yet! Start shopping and your
                   orders will appear here.
                 </p>

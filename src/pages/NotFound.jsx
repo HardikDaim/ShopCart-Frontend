@@ -8,7 +8,7 @@ const NotFound = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center justify-center h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+      <div className="flex flex-col items-center justify-center h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
         <motion.img
           src='/images/404-error.png'
           alt="Page not found"

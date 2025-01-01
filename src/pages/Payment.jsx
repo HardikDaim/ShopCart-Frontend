@@ -90,8 +90,8 @@ const PaymentPage = () => {
   return (
     <>
       <Header />
-      <div className="bg-white dark:bg-slate-900 p-6 md:p-12 min-h-screen">
-        <div className="border dark:border-slate-700 shadow-lg rounded-2xl p-4 md:p-6 lg:p-8">
+      <div className="bg-white dark:bg-zinc-900 p-6 md:p-12 min-h-screen">
+        <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-4 md:p-6 lg:p-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
             Payment Page
           </h1>
@@ -192,8 +192,8 @@ const PaymentPage = () => {
               <div 
                 className={`p-4 rounded-xl ${
                   isUPI
-                    ? "bg-slate-200 dark:bg-slate-700"
-                    : "bg-white dark:bg-slate-600"
+                    ? "bg-zinc-200 dark:bg-zinc-700"
+                    : "bg-white dark:bg-zinc-600"
                 }`}
               >
                 <div className="flex items-center mb-2">
@@ -287,8 +287,8 @@ const PaymentPage = () => {
               <div 
                 className={`p-4 rounded-xl ${
                   !isUPI
-                    ? "bg-slate-200 dark:bg-slate-700"
-                    : "bg-white dark:bg-slate-600"
+                    ? "bg-zinc-200 dark:bg-zinc-700"
+                    : "bg-white dark:bg-zinc-600"
                 }`}
               >
                 <div className="flex items-center mb-2">
@@ -311,23 +311,23 @@ const PaymentPage = () => {
                     </p>
                     <input
                       type="text"
-                      className="py-2 px-4 rounded-md border dark:bg-slate-800 dark:border-slate-600"
+                      className="py-2 px-4 rounded-md border dark:bg-zinc-800 dark:border-zinc-600"
                       placeholder="Card Number"
                     />
                     <input
                       type="text"
-                      className="py-2 px-4 rounded-md border dark:bg-slate-800 dark:border-slate-600"
+                      className="py-2 px-4 rounded-md border dark:bg-zinc-800 dark:border-zinc-600"
                       placeholder="Card Holder Name"
                     />
                     <div className="grid grid-cols-2 gap-4">
                       <input
                         type="text"
-                        className="py-2 px-4 rounded-md border dark:bg-slate-800 dark:border-slate-600"
+                        className="py-2 px-4 rounded-md border dark:bg-zinc-800 dark:border-zinc-600"
                         placeholder="Expiry Date"
                       />
                       <input
                         type="text"
-                        className="py-2 px-4 rounded-md border dark:bg-slate-800 dark:border-slate-600"
+                        className="py-2 px-4 rounded-md border dark:bg-zinc-800 dark:border-zinc-600"
                         placeholder="CVV"
                       />
                     </div>

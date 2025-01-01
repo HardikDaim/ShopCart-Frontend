@@ -31,8 +31,8 @@ const Pagination = ({
           key={i}
           className={`${
             pageNumber === i
-              ? "bg-blue-600 text-slate-200"
-              : "bg-slate-200 text-slate-800"
+              ? "bg-blue-600 text-zinc-200"
+              : "bg-zinc-200 text-zinc-800"
           } flex rounded-full justify-center w-[33px] h-[33px] items-center cursor-pointer`}
           onClick={() => setPageNumber(i)}
         >
@@ -48,7 +48,7 @@ const Pagination = ({
       <ul className="flex gap-3">
         {pageNumber > 1 && (
           <li
-            className="flex rounded-full bg-slate-50 text-slate-600 justify-center w-[33px] h-[33px] items-center cursor-pointer"
+            className="flex rounded-full bg-zinc-50 text-zinc-600 justify-center w-[33px] h-[33px] items-center cursor-pointer"
             onClick={() => setPageNumber(pageNumber - 1)}
           >
             <FaArrowLeft />

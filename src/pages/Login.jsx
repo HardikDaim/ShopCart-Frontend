@@ -70,12 +70,12 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-gray-900">
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 dark:bg-zinc-900">
         {loader && <LoaderOverlay />}
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Link
             to="/"
-            className="logo text-5xl py-4 font-bold flex items-center justify-center text-slate-700 dark:text-slate-100 "
+            className="logo text-5xl py-4 font-bold flex items-center justify-center text-zinc-700 dark:text-zinc-100 "
           >
             <span className="text-blue-700">
               <SiTheregister />
@@ -92,7 +92,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium leading-6 text-zinc-700 dark:text-zinc-300"
               >
                 E-Mail
               </label>
@@ -103,7 +103,7 @@ const Login = () => {
                   id="email"
                   onChange={handleInput}
                   value={state.email}
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
                 {formErrors.email && (
                   <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
@@ -113,7 +113,7 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium leading-6 text-zinc-700 dark:text-zinc-300"
               >
                 Password
               </label>
@@ -124,7 +124,7 @@ const Login = () => {
                   id="password"
                   onChange={handleInput}
                   value={state.password}
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-gray-900 dark:text-gray-300 dark:bg-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
                 />
                 <div
                   className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -144,7 +144,7 @@ const Login = () => {
               >
                 Login Now
               </button>
-              <p className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-300 py-2">
+              <p className="block text-sm font-medium leading-6 text-zinc-900 dark:text-zinc-300 py-2">
                 Don't have an account?
                 <Link
                   to="/register"

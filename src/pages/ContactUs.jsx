@@ -34,8 +34,8 @@ const ContactUs = () => {
   return (
     <>
       <Header />
-      <div className="text-slate-900 dark:text-slate-200 p-6 md:p-12 min-h-screen">
-      <div className="border dark:border-slate-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
+      <div className="text-zinc-900 dark:text-zinc-200 p-6 md:p-12 min-h-screen">
+      <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
           <div className="text-lg">
             <p className="mb-4">
               We would love to hear from you! Whether you have a question about
@@ -56,7 +56,7 @@ const ContactUs = () => {
                   name="name"
                   value={input.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded"
+                  className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-600 rounded"
                   required
                 />
               </div>
@@ -73,7 +73,7 @@ const ContactUs = () => {
                   name="email"
                   value={input.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded"
+                  className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-600 rounded"
                   required
                 />
               </div>
@@ -89,7 +89,7 @@ const ContactUs = () => {
                   value={input.message}
                   name="message"
                   onChange={handleChange}
-                  className="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-200 border border-slate-300 dark:border-slate-600 rounded"
+                  className="w-full px-3 py-2 bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-200 border border-zinc-300 dark:border-zinc-600 rounded"
                   rows="5"
                   required
                 ></textarea>

@@ -79,23 +79,23 @@ const Orders = () => {
   }, [errorMessage, dispatch, orderError]);
   return (
     <>
-      <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200">
         <Header />
 
         <main className="container mx-auto p-4">
-          <div className="py-2 px-1 md:py-4 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
+          <div className="py-2 px-1 md:py-4 md:px-3 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
             {orderLoader || loader ? (
-              <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+              <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
                 <Skeleton width="10%" className="rounded-lg" />
               </h2>
             ) : (
-              <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+              <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
                 My Orders
               </h2>
             )}
             <div className="relative">
               <button
-                className="flex items-center justify-between px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md w-32 md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
+                className="flex items-center justify-between px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md w-32 md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                 onClick={toggleDropdown}
               >
                 <span className="text-xs md:text-sm">
@@ -104,11 +104,11 @@ const Orders = () => {
                 {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </button>
               {isOpen && (
-                <div className="absolute z-10 mt-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md shadow-md">
+                <div className="absolute z-10 mt-1 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-md">
                   {options.map((option) => (
                     <div
                       key={option.value}
-                      className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-slate-100 dark:hover:bg-slate-700"
+                      className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       onClick={() => handleOptionClick(option)}
                     >
                       {option.label}
@@ -124,7 +124,7 @@ const Orders = () => {
                 {Array.from({ length: myOrders.length }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                    className="bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-md"
                   >
                     <Skeleton height={60} className="mb-4 rounded-lg" />
                   </div>
@@ -137,7 +137,7 @@ const Orders = () => {
                 <div
                   key={i}
                   onClick={() => navigate(`/order/details/${o._id}`)}
-                  className="relative cursor-pointer bg-white border dark:border-slate-700 dark:bg-slate-800 p-4 rounded-lg shadow-md"
+                  className="relative cursor-pointer bg-white border dark:border-zinc-700 dark:bg-zinc-800 p-4 rounded-lg shadow-md"
                 >
                   {i === 0 && (
                     <motion.div
@@ -163,13 +163,13 @@ const Orders = () => {
                       Latest
                     </motion.div>
                   )}
-                  <h3 className="text-sm md:text-lg font-medium text-slate-700 dark:text-slate-300">
+                  <h3 className="text-sm md:text-lg font-medium text-zinc-700 dark:text-zinc-300">
                     Order ID: #{o._id}
                   </h3>
-                  <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300">
+                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300">
                     Price: {formatPrice(o.price)}
                   </p>
-                  <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                     Payment Status:{" "}
                     <span
                       className={`${
@@ -181,7 +181,7 @@ const Orders = () => {
                       {o.payment_status}
                     </span>
                   </p>
-                  <p className="text-sm md:text-md font-medium text-slate-700 dark:text-slate-300 capitalize">
+                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                     Order Status:{" "}
                     <span
                       className={`${
@@ -219,7 +219,7 @@ const Orders = () => {
                   className="w-64 h-64 mb-4"
                 />
               </motion.div>
-              <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 text-center">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
                 You haven't placed any orders yet! Start shopping and your
                 orders will appear here.
               </p>

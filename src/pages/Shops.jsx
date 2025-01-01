@@ -127,7 +127,7 @@ const Shops = () => {
           <div className="block md:hidden mb-6">
             <button
               onClick={() => setFilter(!filter)}
-              className="text-center rounded-full font-medium w-full py-2 px-3 bg-blue-600 text-white dark:text-slate-300"
+              className="text-center rounded-full font-medium w-full py-2 px-3 bg-blue-600 text-white dark:text-zinc-300"
             >
               Filter Products
             </button>
@@ -139,12 +139,12 @@ const Shops = () => {
               }`}
             >
               <div className="flex justify-between items-center">
-                <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
+                <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
                   Category
                 </h2>
                 <button
                   onClick={() => setFilter(!filter)}
-                  className="text-xl p-2 hover:bg-slate-200 dark:hover:bg-slate-800 md:hidden rounded-full "
+                  className="text-xl p-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 md:hidden rounded-full "
                 >
                   <IoMdClose />
                 </button>
@@ -172,7 +172,7 @@ const Shops = () => {
                         id={c.name}
                       />
                       <label
-                        className="text-slate-700 dark:text-slate-300 block cursor-pointer"
+                        className="text-zinc-700 dark:text-zinc-300 block cursor-pointer"
                         htmlFor={c.name}
                       >
                         {c.name}
@@ -182,7 +182,7 @@ const Shops = () => {
                 )}
               </div>
               <div className="flex flex-col py-2 gap-5">
-                <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
+                <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
                   Price
                 </h2>
                 <Range
@@ -194,7 +194,7 @@ const Shops = () => {
                   renderTrack={({ props, children }) => (
                     <div
                       {...props}
-                      className="w-full h-[6px] bg-slate-200 dark:bg-slate-700 rounded-full cursor-pointer"
+                      className="w-full h-[6px] bg-zinc-200 dark:bg-zinc-700 rounded-full cursor-pointer"
                     >
                       {children}
                     </div>
@@ -206,7 +206,7 @@ const Shops = () => {
                     />
                   )}
                 />
-                <div className="flex justify-between text-slate-700 dark:text-slate-300">
+                <div className="flex justify-between text-zinc-700 dark:text-zinc-300">
                   {loader ? (
                     <>
                       <Skeleton width={80} height={20} className="my-2" />
@@ -222,12 +222,12 @@ const Shops = () => {
               </div>
               <div className="flex flex-col py-2 gap-5">
                 <div className="flex justify-between">
-                  <h2 className="text-3xl font-bold mb-3 text-slate-700 dark:text-slate-300">
+                  <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
                     Rating
                   </h2>
                   <button
                     onClick={resetRating}
-                    className="font-medium underline  mb-3 text-slate-700 dark:text-slate-300"
+                    className="font-medium underline  mb-3 text-zinc-700 dark:text-zinc-300"
                   >
                     Reset Rating
                   </button>
@@ -351,18 +351,18 @@ const Shops = () => {
             </div>
             {/* Placeholder for product list */}
             <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out ">
-              <div className=" py-2 px-1 md:py-4 mb-10 md:px-3 rounded-md flex justify-between items-center border dark:border-slate-600 bg-white dark:bg-slate-800">
+              <div className=" py-2 px-1 md:py-4 mb-10 md:px-3 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
                 {loader ? (
                   <Skeleton height={24} width={100} />
                 ) : (
-                  <h2 className="text-sm md:text-lg font-semibold text-slate-700 dark:text-slate-300">
+                  <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
                     {totalProducts} Products
                   </h2>
                 )}
                 <div className="flex justify-center items-center gap-3">
                   <div className="relative">
                     <button
-                      className="flex items-center justify-between  px-4 py-2 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
+                      className="flex items-center justify-between  px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                       onClick={toggleDropdown}
                     >
                       <span className="text-xs md:text-sm">
@@ -371,11 +371,11 @@ const Shops = () => {
                       {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
                     </button>
                     {isOpen && (
-                      <div className="absolute z-10 mt-1 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md shadow-md">
+                      <div className="absolute z-10 mt-1 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md shadow-md">
                         {options.map((option) => (
                           <div
                             key={option.value}
-                            className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-slate-100 dark:hover:bg-slate-700"
+                            className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700"
                             onClick={() => handleOptionClick(option)}
                           >
                             {option.label}
@@ -388,8 +388,8 @@ const Shops = () => {
                     <button
                       onClick={() => setStyles("grid")}
                       className={`p-2 ${
-                        styles === "grid" && "bg-slate-300 dark:bg-slate-500"
-                      } rounded-md text-slate-600 text-xs md:text-sm dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-500`}
+                        styles === "grid" && "bg-zinc-300 dark:bg-zinc-500"
+                      } rounded-md text-zinc-600 text-xs md:text-sm dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
                     >
                       <BsFillGridFill />
                     </button>
@@ -398,8 +398,8 @@ const Shops = () => {
                     <button
                       onClick={() => setStyles("list")}
                       className={`p-2 ${
-                        styles === "list" && "bg-slate-300 dark:bg-slate-500"
-                      } rounded-md text-slate-600 text-xs md:text-sm dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-500`}
+                        styles === "list" && "bg-zinc-300 dark:bg-zinc-500"
+                      } rounded-md text-zinc-600 text-xs md:text-sm dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
                     >
                       {" "}
                       <FaThList />

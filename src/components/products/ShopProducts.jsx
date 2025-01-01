@@ -85,7 +85,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               key={index}
               className={`w-full ${
                 styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
-              } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
+              } rounded-md transition-all duration-1000 hover:shadow-md hover:-tranzinc-y-3`}
             >
               <Skeleton height={200} width="100%" className="rounded-lg" />
               <div
@@ -96,7 +96,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                 }`}
               ></div>
               <div
-                className={`my-2 text-slate-700 dark:text-slate-300 ${
+                className={`my-2 text-zinc-700 dark:text-zinc-300 ${
                   styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
                 }`}
               >
@@ -129,7 +129,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                     styles !== "grid"
                       ? "flex items-start justify-start p-2"
                       : "p-1"
-                  } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
+                  } rounded-md transition-all duration-1000 hover:shadow-md hover:-tranzinc-y-3`}
                 >
                   <div
                     className={`${
@@ -153,25 +153,25 @@ const ShopProducts = ({ products, loader, styles }) => {
                     <ul className="flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
                       <li
                         onClick={() => add_wishlist(p)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                       >
                         <FaRegHeart />
                       </li>
                       <Link to={`/product/details/${p.slug}`}>
-                        <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                        <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                           <FaEye />
                         </li>
                       </Link>
                       <li
                         onClick={() => add_cart(p._id)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-slate-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                       >
                         <RiShoppingCartLine />
                       </li>
                     </ul>
                   </div>
                   <div
-                    className={`my-2 text-slate-700 dark:text-slate-300 ${
+                    className={`my-2 text-zinc-700 dark:text-zinc-300 ${
                       styles === "grid" ? "w-full" : "w-3/4 pl-2 md:pl-4"
                     }`}
                   >
@@ -193,7 +193,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                     <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg">
                       {p.discount > 0 ? (
                         <>
-                          <span className="line-through text-slate-500">
+                          <span className="line-through text-zinc-500">
                             ₹{p.price}
                           </span>
                           <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -204,12 +204,12 @@ const ShopProducts = ({ products, loader, styles }) => {
                           </span>
                         </>
                       ) : (
-                        <span className="text-black font-semibold dark:text-slate-300">
+                        <span className="text-black font-semibold dark:text-zinc-300">
                           ₹{p.price.toLocaleString("en-IN")}
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400">
                       {p.description &&
                         (p.description.length > 20
                           ? `${p.description.substring(0, 80)}...`
@@ -232,7 +232,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               src="/images/noproducts.png"
               alt="Empty Feature Image"
             />
-            <h4 className="font-bold text-lg md:text-2xl text-center text-gray-600">
+            <h4 className="font-bold text-lg md:text-2xl text-center text-zinc-600">
               Try refreshing again
             </h4>
           </motion.div>

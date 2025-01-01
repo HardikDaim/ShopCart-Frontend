@@ -42,12 +42,12 @@ const OrderDetails = () => {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-200">
+      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200">
         <main className="container mx-auto p-4">
           <h2 className="text-xl font-semibold mb-4">Order Details</h2>
           {loader ? (
             <>
-              <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 px-2 py-4 md:p-4 rounded-lg shadow-md">
+              <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 px-2 py-4 md:p-4 rounded-lg shadow-md">
               <Skeleton height={30} width={200} className="mb-4" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -81,22 +81,22 @@ const OrderDetails = () => {
             </div>
             </>
           ) : orderDetails ? (
-            <div className="bg-white dark:bg-slate-800 border dark:border-slate-700 px-2 py-4 md:p-4 rounded-lg shadow-md">
+            <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 px-2 py-4 md:p-4 rounded-lg shadow-md">
               <h3 className="text-lg font-bold mb-2">
                 Order ID: {orderDetails?._id}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Customer ID:</span>{" "}
                     {orderDetails?.customerId}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Price:</span>{" "}
                     {formatPrice(orderDetails?.price)} (Including Shipping
                     Charges)
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Payment Status:</span>{" "}
                     <span
                       className={`capitalize ${
@@ -108,7 +108,7 @@ const OrderDetails = () => {
                       {orderDetails?.payment_status}
                     </span>
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Order Status:</span>{" "}
                     <span
                       className={`capitalize ${
@@ -122,7 +122,7 @@ const OrderDetails = () => {
                       {orderDetails?.delivery_status}
                     </span>
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Order Date:</span>{" "}
                     {orderDetails?.date}
                   </p>
@@ -131,36 +131,36 @@ const OrderDetails = () => {
                   <h4 className="text-lg font-semibold mb-2">
                     Shipping Information:
                   </h4>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Deliver to:</span>{" "}
                     {orderDetails?.shippingInfo?.firstName}{" "}
                     {orderDetails?.shippingInfo?.lastName}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Address:</span>{" "}
                     {orderDetails?.shippingInfo?.address}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">City:</span>{" "}
                     {orderDetails?.shippingInfo?.city}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">State:</span>{" "}
                     {orderDetails?.shippingInfo?.state}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Postal Code:</span>{" "}
                     {orderDetails?.shippingInfo?.postalCode}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Country:</span>{" "}
                     {orderDetails?.shippingInfo?.country}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Phone:</span>{" "}
                     {orderDetails?.shippingInfo?.phone}
                   </p>
-                  <p className="text-slate-700 dark:text-slate-300">
+                  <p className="text-zinc-700 dark:text-zinc-300">
                     <span className="font-semibold">Email:</span>{" "}
                     {orderDetails?.shippingInfo?.email}
                   </p>
@@ -173,7 +173,7 @@ const OrderDetails = () => {
                     orderDetails?.products.map((product, index) => (
                       <li
                         key={index}
-                        className="text-slate-700 dark:text-slate-300 mb-2"
+                        className="text-zinc-700 dark:text-zinc-300 mb-2"
                       >
                         <span className="font-semibold">{product?.name}</span> -{" "}
                         <span className="line-through mr-2">

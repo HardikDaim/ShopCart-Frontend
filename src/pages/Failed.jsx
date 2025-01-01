@@ -9,7 +9,7 @@ const Failed = () => {
     <>
     <Header />
     <div className="bg-red-100 dark:bg-red-800 p-6 md:p-12 min-h-screen flex items-center justify-center">
-      <div className="border dark:border-red-600 shadow-lg rounded-2xl p-6 md:p-8 max-w-lg mx-auto bg-white dark:bg-slate-900">
+      <div className="border dark:border-red-600 shadow-lg rounded-2xl p-6 md:p-8 max-w-lg mx-auto bg-white dark:bg-zinc-900">
         <div className="text-center mb-6">
           <FaTimesCircle className="text-red-500 dark:text-red-400 text-5xl mx-auto mb-4" />
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-red-700 dark:text-red-300">

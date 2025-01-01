@@ -6,14 +6,14 @@ const ReturnsAndRefunds = () => {
   return (
     <>
       <Header />
-      <div className="bg-white dark:bg-slate-900 p-6 md:p-12 min-h-screen">
-        <div className="border dark:border-slate-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-6 text-center text-slate-900 dark:text-slate-100">
+      <div className="bg-white dark:bg-zinc-900 p-6 md:p-12 min-h-screen">
+        <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-6 text-center text-zinc-900 dark:text-zinc-100">
             Returns & Refunds Policy
           </h1>
-          <div className="text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+          <div className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-slate-800 dark:text-slate-200">
+              <h2 className="text-2xl font-semibold mb-2 text-zinc-800 dark:text-zinc-200">
                 Return Policy
               </h2>
               <p className="mb-4">
@@ -29,7 +29,7 @@ const ReturnsAndRefunds = () => {
               </p>
             </section>
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-slate-800 dark:text-slate-200">
+              <h2 className="text-2xl font-semibold mb-2 text-zinc-800 dark:text-zinc-200">
                 Refund Policy
               </h2>
               <p className="mb-4">
@@ -46,7 +46,7 @@ const ReturnsAndRefunds = () => {
               </p>
             </section>
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-slate-800 dark:text-slate-200">
+              <h2 className="text-2xl font-semibold mb-2 text-zinc-800 dark:text-zinc-200">
                 Exchanges
               </h2>
               <p className="mb-4">
@@ -57,7 +57,7 @@ const ReturnsAndRefunds = () => {
               </p>
             </section>
             <section className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-slate-800 dark:text-slate-200">
+              <h2 className="text-2xl font-semibold mb-2 text-zinc-800 dark:text-zinc-200">
                 Contact Us
               </h2>
               <p className="mb-4">

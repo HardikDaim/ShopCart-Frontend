@@ -249,7 +249,7 @@ const Details = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
       <Header />
       <div className="mx-auto  px-4 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
@@ -271,13 +271,13 @@ const Details = () => {
                       <>
                         <button
                           onClick={handlePrevImage}
-                          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 lg:-translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          className="absolute left-0 top-1/2 transform -tranzinc-y-1/2 -tranzinc-x-4 lg:-tranzinc-x-4 bg-zinc-800 hover:bg-zinc-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
                         >
                           &lt;
                         </button>
                         <button
                           onClick={handleNextImage}
-                          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 lg:translate-x-4 bg-slate-800 hover:bg-slate-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                          className="absolute right-0 top-1/2 transform -tranzinc-y-1/2 tranzinc-x-4 lg:tranzinc-x-4 bg-zinc-800 hover:bg-zinc-700 hover:bg-opacity-50 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
                         >
                           &gt;
                         </button>
@@ -363,7 +363,7 @@ const Details = () => {
                 <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
                   {product?.discount !== 0 ? (
                     <>
-                      <span className="line-through text-slate-500">
+                      <span className="line-through text-zinc-500">
                         {formatPrice(product?.price)}
                       </span>{" "}
                       <span>
@@ -382,20 +382,20 @@ const Details = () => {
                     <button
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content="Stock"
-                      className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-slate-300 dark:bg-slate-700 rounded-xl"
+                      className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       In Stock
                     </button>
                     <button
                       onClick={dec}
-                      className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                      className="px-2 py-0 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
                     >
                       -
                     </button>
                     <span>{quantity}</span>
                     <button
                       onClick={inc}
-                      className="px-2 py-0 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl text-slate-800 dark:text-slate-200"
+                      className="px-2 py-0 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
                     >
                       +
                     </button>
@@ -403,20 +403,20 @@ const Details = () => {
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content="Add to Wishlist"
                       onClick={() => add_wishlist(product)}
-                      className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                      className="py-2 px-3 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       <FaHeart />
                     </button>
                   </div>
                 ) : (
                   <div className="mt-2 flex items-center space-x-3">
-                    <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-slate-300 dark:bg-slate-700 rounded-xl">
+                    <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl">
                       Out of Stock
                     </button>
 
                     <button
                       onClick={() => add_wishlist(product)}
-                      className="py-2 px-3 text-[28px] bg-slate-300 dark:bg-slate-700 rounded-xl"
+                      className="py-2 px-3 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       <FaHeart />
                     </button>
@@ -456,12 +456,12 @@ const Details = () => {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
           <h2 className="text-2xl font-semibold">Details & Specifications</h2>
         </div>
         <div
           ref={reviewSectionRef}
-          className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8"
+          className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8"
         >
           <h2 className="text-2xl font-semibold">Customer's Ratings</h2>
           <div className="mt-8">
@@ -471,14 +471,14 @@ const Details = () => {
                   <span className="text-6xl font-semibold">
                     {product?.rating}
                   </span>
-                  <span className="text-3xl font-semibold text-slate-600 dark:text-slate-50 ">
+                  <span className="text-3xl font-semibold text-zinc-600 dark:text-zinc-50 ">
                     /5
                   </span>
                 </div>
                 <div className="flex text-3xl ">
                   <Rating ratings={product?.rating} />
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-50 ">
+                <p className="text-sm text-zinc-600 dark:text-zinc-50 ">
                   {totalReview} Reviews
                 </p>
               </div>
@@ -488,7 +488,7 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={5} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div
                       style={{
                         width: `${Math.floor(
@@ -498,7 +498,7 @@ const Details = () => {
                       className="h-full bg-yellow-500 w-[0%]"
                     ></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     {rating_review[0]?.sum}
                   </p>
                 </div>
@@ -507,7 +507,7 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={4} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div
                       style={{
                         width: `${Math.floor(
@@ -517,7 +517,7 @@ const Details = () => {
                       className="h-full bg-yellow-500 w-[0%]"
                     ></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     {rating_review[1]?.sum}
                   </p>
                 </div>
@@ -526,7 +526,7 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={3} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div
                       style={{
                         width: `${Math.floor(
@@ -536,7 +536,7 @@ const Details = () => {
                       className="h-full bg-yellow-500 w-[0%]"
                     ></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     {rating_review[2]?.sum}
                   </p>
                 </div>
@@ -545,7 +545,7 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={2} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div
                       style={{
                         width: `${Math.floor(
@@ -555,7 +555,7 @@ const Details = () => {
                       className="h-full bg-yellow-500 w-[0%]"
                     ></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     {rating_review[3]?.sum}
                   </p>
                 </div>
@@ -564,7 +564,7 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={1} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div
                       style={{
                         width: `${Math.floor(
@@ -574,7 +574,7 @@ const Details = () => {
                       className="h-full bg-yellow-500 w-[0%]"
                     ></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     {rating_review[4]?.sum}
                   </p>
                 </div>
@@ -583,10 +583,10 @@ const Details = () => {
                   <div className="text-md flex gap-1 w-[93px]">
                     <RatingTemp rating={0} />
                   </div>
-                  <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                  <div className="w-[200px] h-[14px] bg-zinc-200 relative">
                     <div className="h-full bg-yellow-500 w-[0%]"></div>
                   </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-50 w-[0%]">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-50 w-[0%]">
                     0
                   </p>
                 </div>
@@ -638,7 +638,7 @@ const Details = () => {
                   <textarea
                     value={re}
                     onChange={(e) => setRe(e.target.value)}
-                    className="border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-colors duration-300"
+                    className="border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-colors duration-300"
                     name=""
                     id=""
                     cols="30"
@@ -669,7 +669,7 @@ const Details = () => {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
           <h2 className="text-2xl font-semibold">Related Products</h2>
           <div>
             <Swiper
@@ -686,7 +686,7 @@ const Details = () => {
             >
               {relatedProducts.map((relatedProduct, i) => (
                 <SwiperSlide key={i}>
-                  <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                  <div className="bg-white relative dark:bg-zinc-700 m-4 p-4 rounded-lg shadow-md">
                     {relatedProduct?.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
                         {relatedProduct?.discount}%
@@ -712,7 +712,7 @@ const Details = () => {
                       <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
                         {relatedProduct?.discount > 0 ? (
                           <>
-                            <span className="line-through text-slate-500">
+                            <span className="line-through text-zinc-500">
                               ₹{relatedProduct?.price}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -726,7 +726,7 @@ const Details = () => {
                             </span>
                           </>
                         ) : (
-                          <span className="text-black font-semibold dark:text-slate-300">
+                          <span className="text-black font-semibold dark:text-zinc-300">
                             ₹{relatedProduct?.price}
                           </span>
                         )}
@@ -741,7 +741,7 @@ const Details = () => {
             <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
           <h2 className="text-2xl font-semibold">More Products</h2>
           <div>
             <Swiper
@@ -758,7 +758,7 @@ const Details = () => {
             >
               {moreProducts.map((relatedProduct, i) => (
                 <SwiperSlide key={i}>
-                  <div className="bg-white relative dark:bg-slate-700 m-4 p-4 rounded-lg shadow-md">
+                  <div className="bg-white relative dark:bg-zinc-700 m-4 p-4 rounded-lg shadow-md">
                     {relatedProduct?.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
                         {relatedProduct?.discount}%
@@ -784,7 +784,7 @@ const Details = () => {
                       <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
                         {relatedProduct?.discount > 0 ? (
                           <>
-                            <span className="line-through text-slate-500">
+                            <span className="line-through text-zinc-500">
                               ₹{relatedProduct?.price}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -798,7 +798,7 @@ const Details = () => {
                             </span>
                           </>
                         ) : (
-                          <span className="text-black font-semibold dark:text-slate-300">
+                          <span className="text-black font-semibold dark:text-zinc-300">
                             ₹{relatedProduct?.price}
                           </span>
                         )}

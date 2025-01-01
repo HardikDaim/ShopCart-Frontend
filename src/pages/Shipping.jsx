@@ -140,7 +140,7 @@ const Shipping = () => {
   return (
     <>
       {loader && <LoaderOverlay />}
-      <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <h2 className="text-3xl font-bold mb-8 text-center">
@@ -148,7 +148,7 @@ const Shipping = () => {
           </h2>
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="w-full lg:w-2/3">
-              <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-8 mb-8">
+              <div className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-8 mb-8">
                 {!isSubmitted ? (
                   <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -165,7 +165,7 @@ const Shipping = () => {
                           id="firstName"
                           value={formState.firstName}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.firstName && (
@@ -187,7 +187,7 @@ const Shipping = () => {
                           id="lastName"
                           value={formState.lastName}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.lastName && (
@@ -210,7 +210,7 @@ const Shipping = () => {
                         id="address"
                         value={formState.address}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.address && (
@@ -231,7 +231,7 @@ const Shipping = () => {
                           id="city"
                           value={formState.city}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.city && (
@@ -251,7 +251,7 @@ const Shipping = () => {
                           id="state"
                           value={formState.state}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.state && (
@@ -273,7 +273,7 @@ const Shipping = () => {
                           id="postalCode"
                           value={formState.postalCode}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.postalCode && (
@@ -295,7 +295,7 @@ const Shipping = () => {
                           id="country"
                           value={formState.country}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.country && (
@@ -316,7 +316,7 @@ const Shipping = () => {
                         id="phone"
                         value={formState.phone}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.phone && (
@@ -336,7 +336,7 @@ const Shipping = () => {
                         id="email"
                         value={formState.email}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-slate-300 dark:border-slate-700 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.email && (
@@ -383,7 +383,7 @@ const Shipping = () => {
                   products.map((p, i) => (
                     <div
                       key={i}
-                      className="bg-white dark:bg-slate-800 rounded-lg shadow-md p-4"
+                      className="bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4"
                     >
                       <div className="flex justify-start items-center mb-4">
                         <h2 className="text-sm md:text-md font-bold">
@@ -404,12 +404,12 @@ const Shipping = () => {
                             <h3 className="text-lg font-semibold">
                               {pt.productInfo.name}
                             </h3>
-                            <span className="text-sm text-gray-500 mr-2">
+                            <span className="text-sm text-zinc-500 mr-2">
                               Brand: {pt.productInfo?.brand}
                             </span>
                             {pt.productInfo?.discount > 0 ? (
                               <>
-                                <span className="text-slate-600 mr-2 text-sm dark:text-slate-400 line-through">
+                                <span className="text-zinc-600 mr-2 text-sm dark:text-zinc-400 line-through">
                                   {formatPrice(pt.productInfo.price)}
                                 </span>
                                 <span className="text-blue-600 dark:text-blue-400">
@@ -449,11 +449,11 @@ const Shipping = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-600">No products in cart.</p>
+                  <p className="text-zinc-600">No products in cart.</p>
                 )}
               </div>
             </div>
-            <div className="w-full lg:w-1/3 bg-white dark:bg-slate-800 rounded-lg shadow-md p-4">
+            <div className="w-full lg:w-1/3 bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
               <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
               <div className="space-y-2">
                 <div className="flex justify-between">
@@ -468,7 +468,7 @@ const Shipping = () => {
                   <span>Delivery Charges</span>
                   <span>{formatPrice(shipping_fee)}</span>
                 </div>
-                <div className="border-t border-slate-300 dark:border-slate-700 my-2"></div>
+                <div className="border-t border-zinc-300 dark:border-zinc-700 my-2"></div>
                 <div className="flex justify-between font-semibold">
                   <span>Total</span>
                   <span>{formatPrice(price + shipping_fee)}</span>

@@ -8,18 +8,18 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { pathname } = useLocation();
   return (
     <div
-      className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-50 transition-opacity duration-300 ${
+      className={`fixed inset-0 bg-zinc-800 bg-opacity-75 z-50 transition-opacity duration-300 ${
         isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div
-        className={`fixed inset-y-0 left-0 bg-white dark:bg-slate-800 w-64 p-4 transition-transform duration-300 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-y-0 left-0 bg-white dark:bg-zinc-800 w-64 p-4 transition-transform duration-300 transform ${
+          isOpen ? "tranzinc-x-0" : "-tranzinc-x-full"
         }`}
       >
         <button
           onClick={toggleSidebar}
-          className="mb-4 text-right w-full transition-colors duration-300 hover:text-slate-500"
+          className="mb-4 text-right w-full transition-colors duration-300 hover:text-zinc-500"
         >
           <svg
             className="w-6 h-6 inline-block"
@@ -42,8 +42,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`${
               pathname === "/"
                 ? "text-blue-500 dark:text-blue-300"
-                : "text-slate-600 dark:text-slate-400"
-            } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
+                : "text-zinc-600 dark:text-zinc-400"
+            } transition-colors duration-300 hover:text-zinc-500 dark:hover:text-zinc-300`}
           >
             Home
           </Link>
@@ -52,8 +52,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`${
               pathname === "/shops"
                 ? "text-blue-500 dark:text-blue-300"
-                : "text-slate-600 dark:text-slate-400"
-            } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
+                : "text-zinc-600 dark:text-zinc-400"
+            } transition-colors duration-300 hover:text-zinc-500 dark:hover:text-zinc-300`}
           >
             Shop
           </Link>
@@ -62,8 +62,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`${
               pathname === "/about-us"
                 ? "text-blue-500 dark:text-blue-300"
-                : "text-slate-600 dark:text-slate-400"
-            } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
+                : "text-zinc-600 dark:text-zinc-400"
+            } transition-colors duration-300 hover:text-zinc-500 dark:hover:text-zinc-300`}
           >
             About
           </Link>
@@ -72,13 +72,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             className={`${
               pathname === "/contact-us"
                 ? "text-blue-500 dark:text-blue-300"
-                : "text-slate-600 dark:text-slate-400"
-            } transition-colors duration-300 hover:text-slate-500 dark:hover:text-slate-300`}
+                : "text-zinc-600 dark:text-zinc-400"
+            } transition-colors duration-300 hover:text-zinc-500 dark:hover:text-zinc-300`}
           >
             Contact
           </Link>
-          <div className="flex items-center justify-start gap-2 text-slate-500 dark:text-slate-400">
-            <span className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
+          <div className="flex items-center justify-start gap-2 text-zinc-500 dark:text-zinc-400">
+            <span className="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
               <FaGithub />
             </span>
             <span>|</span>
@@ -93,8 +93,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
               <FaInstagram />
             </span>
           </div>
-          <div className="flex justify-start items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"><span><FaPhoneAlt /></span>+91-95182-13371<span></span></div>
-          <div className="flex justify-start items-center gap-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"><span><SiGmail /></span>hardikdaim@gmail.com<span></span></div>
+          <div className="flex justify-start items-center gap-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"><span><FaPhoneAlt /></span>+91-95182-13371<span></span></div>
+          <div className="flex justify-start items-center gap-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"><span><SiGmail /></span>hardikdaim@gmail.com<span></span></div>
         </nav>
       </div>
     </div>

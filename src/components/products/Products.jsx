@@ -30,21 +30,21 @@ const Products = ({ title, products, loader }) => {
   const ButtonGroup = ({ next, previous }) => {
     return (
       <div className="flex justify-between items-center">
-        <div className="text-xl font-bold text-slate-700 dark:text-slate-300">
+        <div className="text-xl font-bold text-zinc-700 dark:text-zinc-300">
           {title}
         </div>
-        <div className="flex justify-center items-center gap-2 text-slate-600">
+        <div className="flex justify-center items-center gap-2 text-zinc-600">
           <button
             onClick={() => previous()}
-            className="w-8 h-8 flex justify-center items-center bg-slate-300 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors duration-200"
+            className="w-8 h-8 flex justify-center items-center bg-zinc-300 dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-full hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors duration-200"
           >
-            <IoIosArrowBack className="text-slate-700 dark:text-slate-300" />
+            <IoIosArrowBack className="text-zinc-700 dark:text-zinc-300" />
           </button>
           <button
             onClick={() => next()}
-            className="w-8 h-8 flex justify-center items-center bg-slate-300 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors duration-200"
+            className="w-8 h-8 flex justify-center items-center bg-zinc-300 dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 rounded-full hover:bg-zinc-400 dark:hover:bg-zinc-600 transition-colors duration-200"
           >
-            <IoIosArrowForward className="text-slate-700 dark:text-slate-300" />
+            <IoIosArrowForward className="text-zinc-700 dark:text-zinc-300" />
           </button>
         </div>
       </div>
@@ -96,7 +96,7 @@ const Products = ({ title, products, loader }) => {
                         alt={pl.name}
                       />
                     </div>
-                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs text-slate-700 dark:text-slate-400">
+                    <div className="px-3 flex justify-start items-start gap-1 flex-col text-xs text-zinc-700 dark:text-zinc-400">
                       <h2 className="font-bold">
                         {pl.name.length > 75
                           ? `${pl.name.substring(0, 75)}...`
@@ -108,7 +108,7 @@ const Products = ({ title, products, loader }) => {
                       <div className="flex justify-start items-center gap-2">
                         {pl.discount > 0 ? (
                           <>
-                            <span className="line-through text-slate-500">
+                            <span className="line-through text-zinc-500">
                               ₹{pl.price}
                             </span>
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
@@ -116,7 +116,7 @@ const Products = ({ title, products, loader }) => {
                             </span>
                           </>
                         ) : (
-                          <span className="text-black font-semibold dark:text-slate-300">
+                          <span className="text-black font-semibold dark:text-zinc-300">
                             ₹{pl.price}
                           </span>
                         )}
