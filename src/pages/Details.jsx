@@ -28,7 +28,7 @@ import {
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../components/styles.css";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 const Details = () => {
   const { slug } = useParams();
@@ -38,6 +38,7 @@ const Details = () => {
   const { product, relatedProducts, moreProducts, loader } = useSelector(
     (state) => state.home
   );
+  const [details, setDetails] = useState(false);
 
   const {
     loader: cartLoader,
@@ -76,7 +77,6 @@ const Details = () => {
       prevIndex < product.images.length - 1 ? prevIndex + 1 : 0
     );
   };
-
 
   const [quantity, setQuantity] = useState(1);
   const inc = () => {
@@ -252,14 +252,17 @@ const Details = () => {
 
   return (
     <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
-
       <Helmet>
-        <title>{product.name ? product.name : 'Loading...'}</title>
+        <title>
+          {product.name
+            ? product.name + " | ShopCart - An E-Commerce Platform"
+            : "Loading..."}
+        </title>
         <meta
           name="description"
           content={
             product.description?.length > 150
-              ? product.description.slice(0, 150).concat('...')
+              ? product.description.slice(0, 150).concat("...")
               : product.description
           }
         />
@@ -267,19 +270,20 @@ const Details = () => {
           name="keywords"
           content={
             product.name
-              ? product.name.split(' ').join(', ')
-              : 'product, ecommerce, shop'
+              ? product.name.split(" ").join(", ")
+              : "product, ecommerce, shop"
           }
         />
         <meta
           property="og:title"
-          content={product ? product.name : 'Loading...'}
+          content={product ? product.name : "Loading..."}
         />
+        <meta property="og:type" content="product" />
         <meta
           property="og:description"
           content={
             product.description?.length > 150
-              ? product.description.slice(0, 150).concat('...')
+              ? product.description.slice(0, 150).concat("...")
               : product.description
           }
         />
@@ -287,6 +291,10 @@ const Details = () => {
         <meta
           property="og:url"
           content={`https://shop-cart-ten-chi.app/product/details/${slug}`}
+        />
+        <link
+          rel="canonical"
+          href={`https://shop-cart-ten-chi.vercel.app/product/details${slug}`}
         />
       </Helmet>
       <Header />
@@ -431,9 +439,7 @@ const Details = () => {
                     <>₹{product?.price}</>
                   )}
                 </p>
-                <p className="text-xs md:text-sm text-justify">
-                  {product?.description}
-                </p>
+                <p className="text-xs md:text-sm">{product?.description}</p>
                 {product?.stock > 0 ? (
                   <div className="mt-2 flex items-center space-x-3">
                     <button
@@ -513,9 +519,11 @@ const Details = () => {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-          <h2 className="text-2xl font-semibold">Details & Specifications</h2>
-        </div>
+        {details && (
+          <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+            <h2 className="text-2xl font-semibold">Details & Specifications</h2>
+          </div>
+        )}
         <div
           ref={reviewSectionRef}
           className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8"
@@ -726,47 +734,33 @@ const Details = () => {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-          <h2 className="text-2xl font-semibold">Related Products</h2>
-          <div>
-            <Swiper
-              spaceBetween={25}
-              slidesPerView="auto"
-              breakpoints={{
-                1280: { slidesPerView: 3 },
-                565: { slidesPerView: 2 },
-              }}
-              loop={true}
-              pagination={{ clickable: true, el: ".custom_bullet" }}
-              modules={[Pagination]}
-              className="mySwipper"
-            >
+        {relatedProducts.length > 0 && (
+          <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+            <h2 className="text-2xl font-semibold">Related Products</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {relatedProducts.map((relatedProduct, i) => (
-                <SwiperSlide key={i}>
-                  <div className="bg-white relative dark:bg-zinc-700 m-4 p-4 rounded-lg shadow-md">
+                <Link to={`/product/details/${relatedProduct.slug}`} key={i}>
+                  <div className="bg-white relative dark:bg-zinc-800 m-4 p-4">
                     {relatedProduct?.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
                         {relatedProduct?.discount}%
                       </div>
                     )}
-                    <Link
-                      className="w-full flex-shrink-0"
-                      to={`/product/details/${relatedProduct.slug}`}
-                    >
+                    <div className="flex">
                       <img
-                        className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                        className="w-full h-60 object-contain flex-shrink-0 cursor-pointer rounded-lg mb-4"
                         src={relatedProduct.images[0]}
                         alt={relatedProduct.name}
                       />
-                    </Link>
-                    <h3 className="text-lg font-semibold mb-2">
+                    </div>
+                    <h3 className="text-sm font-semibold mb-2">
                       {relatedProduct?.name}
                     </h3>
                     <span className="flex">
                       <Rating ratings={relatedProduct?.rating} />
                     </span>
                     <div className="flex justify-start items-center gap-2">
-                      <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                         {relatedProduct?.discount > 0 ? (
                           <>
                             <span className="line-through text-zinc-500">
@@ -790,55 +784,41 @@ const Details = () => {
                       </span>
                     </div>
                   </div>
-                </SwiperSlide>
+                </Link>
               ))}
-            </Swiper>
+            </div>
+            <div className="w-full flex justify-center items-center">
+              <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+            </div>
           </div>
-          <div className="w-full flex justify-center items-center">
-            <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
-          </div>
-        </div>
-        <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
-          <h2 className="text-2xl font-semibold">More Products</h2>
-          <div>
-            <Swiper
-              spaceBetween={25}
-              slidesPerView="auto"
-              breakpoints={{
-                1280: { slidesPerView: 3 },
-                565: { slidesPerView: 2 },
-              }}
-              loop={true}
-              pagination={{ clickable: true, el: ".custom_bullet" }}
-              modules={[Pagination]}
-              className="mySwipper"
-            >
+        )}
+        {moreProducts.length > 0 && (
+          <div className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8">
+            <h2 className="text-2xl font-semibold">More Products</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {moreProducts.map((relatedProduct, i) => (
-                <SwiperSlide key={i}>
-                  <div className="bg-white relative dark:bg-zinc-700 m-4 p-4 rounded-lg shadow-md">
+                <Link to={`/product/details/${relatedProduct.slug}`} key={i}>
+                  <div className="bg-white relative dark:bg-zinc-800 m-4 p-4">
                     {relatedProduct?.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs -left-4 -top-4">
                         {relatedProduct?.discount}%
                       </div>
                     )}
-                    <Link
-                      className="w-28 flex-shrink-0"
-                      to={`/product/details/${relatedProduct.slug}`}
-                    >
+                    <div className="flex">
                       <img
-                        className="w-full h-60 md:h-72 lg:h-96 object-cover cursor-pointer rounded-lg mb-4"
+                        className="w-full h-60 object-contain flex-shrink-0 cursor-pointer rounded-lg mb-4"
                         src={relatedProduct.images[0]}
                         alt={relatedProduct.name}
                       />
-                    </Link>
-                    <h3 className="text-lg font-semibold mb-2">
+                    </div>
+                    <h3 className="text-sm font-semibold mb-2">
                       {relatedProduct?.name}
                     </h3>
                     <span className="flex">
                       <Rating ratings={relatedProduct?.rating} />
                     </span>
                     <div className="flex justify-start items-center gap-2">
-                      <span className="text-md font-semibold text-blue-600 dark:text-blue-400">
+                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                         {relatedProduct?.discount > 0 ? (
                           <>
                             <span className="line-through text-zinc-500">
@@ -862,14 +842,14 @@ const Details = () => {
                       </span>
                     </div>
                   </div>
-                </SwiperSlide>
+                </Link>
               ))}
-            </Swiper>
+            </div>
+            <div className="w-full flex justify-center items-center ">
+              <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
+            </div>
           </div>
-          <div className="w-full flex justify-center items-center ">
-            <div className="custom_bullet flex justify-center gap-3 w-auto"></div>
-          </div>
-        </div>
+        )}
       </div>
       <Footer />
     </div>

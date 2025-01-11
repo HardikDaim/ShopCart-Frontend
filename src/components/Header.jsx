@@ -53,7 +53,7 @@ const Header = () => {
     <>
       <header className="sticky top-0 z-20 w-full bg-white border-b border-zinc-300 dark:border-zinc-700  dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200">
         {userInfo && (
-          <div className="header-top hidden md:flex  justify-between items-center p-2 bg-zinc-200 dark:bg-zinc-800  text-[9px] px-4">
+          <div className="header-top hidden md:flex  justify-between items-center p-2 bg-zinc-200 dark:bg-zinc-800 text-[9px] px-4">
             <div className="flex items-center justify-start gap-2 text-zinc-500 dark:text-zinc-400">
               <span>
                 This project is purely made by <strong>Hardik Daim</strong>. You
@@ -102,7 +102,7 @@ const Header = () => {
           </div>
         )}
         <div className="main-header flex justify-between items-center px-4 pt-3 pb-2">
-          <Link to="/" className="logo text-2xl font-bold flex items-center">
+          <Link to="/" className="logo text-xl lg:text-2xl font-bold flex items-center">
             <motion.span
               className="text-blue-700 dark:text-blue-600"
               animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
@@ -116,8 +116,9 @@ const Header = () => {
               <SiTheregister />
             </motion.span>
             <span className="ml-1">ShopCart</span>
+            <h1 className=" hidden">ShopCart - An E-commerce Platform</h1>
           </Link>
-          <nav className="hidden md:flex space-x-4 text-xs font-medium">
+          <nav className="hidden xl:flex space-x-4 text-xs font-medium">
             <Link
               to="/"
               className={`${
@@ -159,7 +160,7 @@ const Header = () => {
               Contact
             </Link>
           </nav>
-          <div className="hidden md:flex flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <button className="hidden md:flex">
               <ThemeToggle />
             </button>
@@ -442,7 +443,7 @@ const Header = () => {
                 </form>
               </div>
               <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
-                <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                <span className="text-xs text-zinc-600 dark:text-zinc-400">
                   Founder & CEO - <strong>Hardik Daim</strong>
                 </span>
                 <span className="text-xs text-zinc-600 dark:text-zinc-400">

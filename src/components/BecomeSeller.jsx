@@ -15,10 +15,10 @@ const BecomeSeller = () => {
       } bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 lg:py-2  flex items-center justify-between`}
     >
       <div className="flex items-center space-x-4">
-        <h2 className="text-sm md:text-lg font-bold">
+        <h2 className="text-xs md:text-md lg:text-lg font-bold">
           Become a Seller at ShopCart
         </h2>
-        <p className="hidden sm:block text-[9px] mt-0">
+        <p className="hidden sm:block sm:text-[9px] mt-0">
           Join our platform and reach thousands of customers!
         </p>
       </div>

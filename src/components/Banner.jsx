@@ -71,7 +71,7 @@ const Banner = ({ loader }) => {
   return (
     <div
       ref={bannerRef}
-      className="relative h-96 lg:h-[600px] w-full overflow-hidden rounded-lg"
+      className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[700px] w-full overflow-hidden rounded-lg"
     >
       {loader ? (
         <Skeleton
