@@ -47,9 +47,9 @@ const Categories = ({ categories, loader }) => {
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-5 md:pt-10">
         <div className="w-full">
-          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-zinc-700 dark:text-zinc-300">
+          <div className="flex font-bold relative justify-center items-center flex-col text-md sm:text-lg md:text-xl text-center text-zinc-700 dark:text-zinc-300">
             <h2>{loader ? <Skeleton width={150} /> : "Top Categories"}</h2>
-            <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
+            <div className="w-[60px] h-[4px] md:w-[100px] md:h-[6px] bg-blue-600 my-1 md:my-2 rounded-lg"></div>
           </div>
         </div>
       </div>
@@ -87,11 +87,10 @@ const Categories = ({ categories, loader }) => {
               ? Array.from({ length: 20 }).map((_, index) => (
                   <div
                     key={index}
-                    className="flex-shrink-0 w-24 md:w-40 lg:w-60 text-center"
+                    className="flex-shrink-0 w-20 md:w-36 lg:w-48 text-center"
                   >
                     <Skeleton
-                      height={80}
-                      className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
+                      className="w-full h-16 md:h-28 lg:h-32 rounded-lg"
                     />
                     <Skeleton
                       width="60%"
@@ -102,13 +101,13 @@ const Categories = ({ categories, loader }) => {
                 ))
               : categories.map((category, index) => (
                   <Link to={`/products?category=${category.name}`} key={index}>
-                    <div className="flex-shrink-0 w-24 md:w-40 lg:w-60 text-center transition-transform duration-500 hover:scale-110 cursor-pointer">
+                    <div className="flex-shrink-0 w-20 md:w-36 lg:w-48 text-center transition-transform duration-500 hover:scale-110 cursor-pointer">
                       <img
                         src={category.image}
                         alt={category.name}
-                        className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
+                        className="w-full h-16 md:h-28 lg:h-32 rounded-lg"
                       />
-                      <div className="mt-2 text-xs text-zinc-700 dark:text-zinc-300">
+                      <div className="mt-2 text-[8px] md:text-xs text-zinc-700 dark:text-zinc-300">
                         {category.name}
                       </div>
                     </div>

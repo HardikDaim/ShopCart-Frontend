@@ -139,12 +139,12 @@ const Shops = () => {
               }`}
             >
               <div className="flex justify-between items-center">
-                <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
+                <h2 className="text-md font-bold text-zinc-700 dark:text-zinc-300">
                   Category
                 </h2>
                 <button
                   onClick={() => setFilter(!filter)}
-                  className="text-xl p-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 md:hidden rounded-full "
+                  className="text-md p-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 md:hidden rounded-full "
                 >
                   <IoMdClose />
                 </button>
@@ -172,7 +172,7 @@ const Shops = () => {
                         id={c.name}
                       />
                       <label
-                        className="text-zinc-700 dark:text-zinc-300 block cursor-pointer"
+                        className="text-zinc-700 dark:text-zinc-300 text-xs block cursor-pointer"
                         htmlFor={c.name}
                       >
                         {c.name}
@@ -182,7 +182,7 @@ const Shops = () => {
                 )}
               </div>
               <div className="flex flex-col py-2 gap-5">
-                <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
+                <h2 className="text-md font-bold mb-3 text-zinc-700 dark:text-zinc-300">
                   Price
                 </h2>
                 <Range
@@ -206,7 +206,7 @@ const Shops = () => {
                     />
                   )}
                 />
-                <div className="flex justify-between text-zinc-700 dark:text-zinc-300">
+                <div className="flex justify-between text-zinc-700 text-xs dark:text-zinc-300">
                   {loader ? (
                     <>
                       <Skeleton width={80} height={20} className="my-2" />
@@ -222,12 +222,12 @@ const Shops = () => {
               </div>
               <div className="flex flex-col py-2 gap-5">
                 <div className="flex justify-between">
-                  <h2 className="text-3xl font-bold mb-3 text-zinc-700 dark:text-zinc-300">
+                  <h2 className="text-md font-bold mb-3 text-zinc-700 dark:text-zinc-300">
                     Rating
                   </h2>
                   <button
                     onClick={resetRating}
-                    className="font-medium underline  mb-3 text-zinc-700 dark:text-zinc-300"
+                    className="text-xs font-medium underline  mb-3 text-zinc-700 dark:text-zinc-300"
                   >
                     Reset Rating
                   </button>
@@ -239,7 +239,7 @@ const Shops = () => {
                     <>
                       <div
                         onClick={() => setRating(5)}
-                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xs items-start"
                       >
                         <span>
                           <AiFillStar />
@@ -259,7 +259,7 @@ const Shops = () => {
                       </div>
                       <div
                         onClick={() => setRating(4)}
-                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xs items-start"
                       >
                         <span>
                           <AiFillStar />
@@ -279,7 +279,7 @@ const Shops = () => {
                       </div>
                       <div
                         onClick={() => setRating(3)}
-                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xs items-start"
                       >
                         <span>
                           <AiFillStar />
@@ -299,7 +299,7 @@ const Shops = () => {
                       </div>
                       <div
                         onClick={() => setRating(2)}
-                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xs items-start"
                       >
                         <span>
                           <AiFillStar />
@@ -319,7 +319,7 @@ const Shops = () => {
                       </div>
                       <div
                         onClick={() => setRating(1)}
-                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xl items-start"
+                        className="text-yellow-500 dark:text-yellow-300 flex justify-start gap-2 cursor-pointer text-xs items-start"
                       >
                         <span>
                           <AiFillStar />
@@ -350,22 +350,22 @@ const Shops = () => {
               </div>
             </div>
             {/* Placeholder for product list */}
-            <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out ">
-              <div className=" py-2 px-1 md:py-4 mb-10 md:px-3 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
+            <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out">
+              <div className="p-2 mb-4 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
                 {loader ? (
                   <Skeleton height={24} width={100} />
                 ) : (
-                  <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
+                  <h2 className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                     {totalProducts} Products
                   </h2>
                 )}
                 <div className="flex justify-center items-center gap-3">
                   <div className="relative">
                     <button
-                      className="flex items-center justify-between  px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
+                      className="flex items-center justify-between p-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                       onClick={toggleDropdown}
                     >
-                      <span className="text-xs md:text-sm">
+                      <span className="text-xs">
                         {selectedOption.label}
                       </span>
                       {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -375,7 +375,7 @@ const Shops = () => {
                         {options.map((option) => (
                           <div
                             key={option.value}
-                            className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                            className="px-4 py-2 cursor-pointer text-xs md:text-xs hover:bg-zinc-100 dark:hover:bg-zinc-700"
                             onClick={() => handleOptionClick(option)}
                           >
                             {option.label}
@@ -389,7 +389,7 @@ const Shops = () => {
                       onClick={() => setStyles("grid")}
                       className={`p-2 ${
                         styles === "grid" && "bg-zinc-300 dark:bg-zinc-500"
-                      } rounded-md text-zinc-600 text-xs md:text-sm dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
+                      } rounded-md text-zinc-600 text-xs md:text-xs dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
                     >
                       <BsFillGridFill />
                     </button>
@@ -399,7 +399,7 @@ const Shops = () => {
                       onClick={() => setStyles("list")}
                       className={`p-2 ${
                         styles === "list" && "bg-zinc-300 dark:bg-zinc-500"
-                      } rounded-md text-zinc-600 text-xs md:text-sm dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
+                      } rounded-md text-zinc-600 text-xs md:text-xs dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-500`}
                     >
                       {" "}
                       <FaThList />

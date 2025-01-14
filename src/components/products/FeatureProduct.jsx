@@ -105,9 +105,9 @@ const FeatureProduct = ({ products, loader }) => {
     <>
       <div className="w-[85%] flex flex-wrap mx-auto pt-0 md:pt-10">
         <div className="w-full">
-          <div className="flex font-bold relative justify-center items-center flex-col text-2xl md:text-4xl text-center text-zinc-700 dark:text-zinc-300">
+          <div className="flex font-bold relative justify-center items-center flex-col text-md sm:text-lg md:text-xl text-center text-zinc-700 dark:text-zinc-300">
             <h2>{loader ? <Skeleton width={150} /> : "Featured Products"}</h2>
-            <div className="w-[60px] h-[4px] md:w-[100px] md:h-[8px] bg-blue-600 my-2 md:my-5 rounded-lg"></div>
+            <div className="w-[60px] h-[4px] md:w-[100px] md:h-[6px] bg-blue-600 my-1 md:my-2 rounded-lg"></div>
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@ const FeatureProduct = ({ products, loader }) => {
 
         <div
           ref={scrollRef}
-          className="w-full overflow-x-auto pl-4 py-4 hide-scrollbar scroll-smooth"
+          className="w-full overflow-x-auto pl-4 py-2 hide-scrollbar scroll-smooth"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           <div className="flex space-x-4 md:space-x-8 lg:space-x-12">
@@ -147,16 +147,15 @@ const FeatureProduct = ({ products, loader }) => {
               ? Array.from({ length: 20 }).map((_, index) => (
                   <div
                     key={index}
-                    className="relative mt-4 w-24 md:w-40 lg:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
+                    className="relative mt-4 w-20 md:w-36 lg:w-48 flex-shrink-0 cursor-pointer group"
                   >
                     <Skeleton
                       height={80}
                       className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
                     />
                     <div className="my-2 text-zinc-700 dark:text-zinc-300">
-                      <Skeleton width={120} height={20} className="font-bold" />
+                      <Skeleton width={190} height={20} className="mt-2" />
                       <Skeleton width={80} height={20} className="mt-2" />
-                      <Skeleton width={60} height={20} className="mt-2" />
                     </div>
                   </div>
                 ))
@@ -167,10 +166,10 @@ const FeatureProduct = ({ products, loader }) => {
                   return (
                     <div
                       key={index}
-                      className="relative mt-4 w-24 md:w-40 lg:w-60 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
+                      className="relative mt-4 w-20 md:w-36 lg:w-48 flex-shrink-0 transition-all duration-500 hover:transform hover:scale-110 cursor-pointer group"
                     >
                       {product.discount > 0 && (
-                        <div className="flex justify-center z-10 items-center absolute text-white w-[25px] h-[25px] md:w-[38px] md:h-[38px] p-2 rounded-full bg-red-500 font-semibold text-[7px] md:text-xs -left-4 -top-4">
+                        <div className="flex justify-center z-10 items-center absolute text-white w-[20px] h-[20px] md:w-[30px] md:h-[30px] rounded-full bg-red-500 font-semibold text-[4px] md:text-[6px] -left-2 -top-2">
                           {product.discount}% off
                         </div>
                       )}
@@ -179,7 +178,7 @@ const FeatureProduct = ({ products, loader }) => {
                           <img
                             src={product.images[0]}
                             alt={product.name}
-                            className="w-full h-20 md:h-32 lg:h-40 rounded-lg"
+                            className="w-full h-16 md:h-28 lg:h-32 rounded-lg"
                           />
                         </Link>
                         <ul className="hidden transition-all duration-700 -bottom-12 justify-center items-center gap-2 absolute w-full opacity-0 group-hover:bottom-3 group-hover:opacity-100">
@@ -203,7 +202,7 @@ const FeatureProduct = ({ products, loader }) => {
                         </ul>
                       </div>
 
-                      <div className="my-2 text-zinc-700 dark:text-zinc-300 text-xs">
+                      <div className="my-2 text-zinc-700 dark:text-zinc-300 text-[8px] md:text-[10px]">
                         <h2 className="font-bold">
                           {product.name.length > 30
                             ? `${product.name.substring(0, 30)}...`

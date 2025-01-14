@@ -85,11 +85,11 @@ const Orders = () => {
         <main className="container mx-auto p-4">
           <div className="py-2 px-1 md:py-4 md:px-3 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
             {orderLoader || loader ? (
-              <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
+              <h2 className="text-xs md:text-sm font-semibold text-zinc-700 dark:text-zinc-300">
                 <Skeleton width="10%" className="rounded-lg" />
               </h2>
             ) : (
-              <h2 className="text-sm md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
+              <h2 className="text-xs md:text-lg font-semibold text-zinc-700 dark:text-zinc-300">
                 My Orders
               </h2>
             )}
@@ -98,7 +98,7 @@ const Orders = () => {
                 className="flex items-center justify-between px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md w-32 md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                 onClick={toggleDropdown}
               >
-                <span className="text-xs md:text-sm">
+                <span className="text-xs md:text-xs">
                   {selectedOption.label}
                 </span>
                 {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
@@ -108,7 +108,7 @@ const Orders = () => {
                   {options.map((option) => (
                     <div
                       key={option.value}
-                      className="px-4 py-2 cursor-pointer text-xs md:text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                      className="px-4 py-2 cursor-pointer text-xs md:text-xs hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       onClick={() => handleOptionClick(option)}
                     >
                       {option.label}
@@ -163,13 +163,13 @@ const Orders = () => {
                       Latest
                     </motion.div>
                   )}
-                  <h3 className="text-sm md:text-lg font-medium text-zinc-700 dark:text-zinc-300">
+                  <h3 className="text-xs  font-medium text-zinc-700 dark:text-zinc-300">
                     Order ID: #{o._id}
                   </h3>
-                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300">
+                  <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
                     Price: {formatPrice(o.price)}
                   </p>
-                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
+                  <p className="text-xs  font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                     Payment Status:{" "}
                     <span
                       className={`${
@@ -181,7 +181,7 @@ const Orders = () => {
                       {o.payment_status}
                     </span>
                   </p>
-                  <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
+                  <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                     Order Status:{" "}
                     <span
                       className={`${
@@ -219,7 +219,7 @@ const Orders = () => {
                   className="w-64 h-64 mb-4"
                 />
               </motion.div>
-              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
+              <p className="text-sm md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
                 You haven't placed any orders yet! Start shopping and your
                 orders will appear here.
               </p>

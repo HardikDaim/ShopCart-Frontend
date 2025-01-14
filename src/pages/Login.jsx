@@ -75,24 +75,24 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Link
             to="/"
-            className="logo text-5xl py-4 font-bold flex items-center justify-center text-zinc-700 dark:text-zinc-100 "
+            className="logo text-4xl py-4 font-bold flex items-center justify-center text-zinc-700 dark:text-zinc-100 "
           >
             <span className="text-blue-700">
               <SiTheregister />
             </span>
             <span className="ml-1">ShopCart</span>
           </Link>
-          <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-blue-600 dark:text-blue-400">
+          <h2 className="text-center text-md font-bold leading-9 tracking-tight text-blue-600 dark:text-blue-400">
             Please Login to your account
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-zinc-700 dark:text-zinc-300"
+                className="block text-xs font-medium leading-6 text-zinc-700 dark:text-zinc-300"
               >
                 E-Mail
               </label>
@@ -103,17 +103,17 @@ const Login = () => {
                   id="email"
                   onChange={handleInput}
                   value={state.email}
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-xs sm:leading-6"
                 />
                 {formErrors.email && (
-                  <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+                  <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
                 )}
               </div>
             </div>
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-6 text-zinc-700 dark:text-zinc-300"
+                className="block text-xs font-medium leading-6 text-zinc-700 dark:text-zinc-300"
               >
                 Password
               </label>
@@ -124,7 +124,7 @@ const Login = () => {
                   id="password"
                   onChange={handleInput}
                   value={state.password}
-                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block transition duration-150 ease-in-out w-full rounded-md border-0 outline-none p-1.5 caret-blue-500 text-zinc-900 dark:text-zinc-300 dark:bg-zinc-800 shadow-sm ring-1 ring-inset ring-zinc-300 dark:ring-zinc-600 dark:focus:ring-blue-600 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-xs sm:leading-6"
                 />
                 <div
                   className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
@@ -134,17 +134,17 @@ const Login = () => {
                 </div>
               </div>
                   {formErrors.password && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
+                    <p className="text-red-500 text-xs mt-1">{formErrors.password}</p>
                   )}
             </div>
             <div>
               <button
                 type="submit"
-                className="transition w-full flex justify-center duration-500 outline-none ease-in-out text-white font-semibold rounded-md leading-6 shadow-sm bg-blue-600 dark:bg-blue-500 hover:bg-red-600 dark:hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 px-3 py-1.5 sm:px-4 sm:py-3"
+                className="transition w-full flex justify-center duration-500 outline-none ease-in-out text-sm text-white font-semibold rounded-md leading-6 shadow-sm bg-blue-600 dark:bg-blue-500 hover:bg-red-600 dark:hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 p-2"
               >
                 Login Now
               </button>
-              <p className="block text-sm font-medium leading-6 text-zinc-900 dark:text-zinc-300 py-2">
+              <p className="block text-xs font-medium leading-6 text-zinc-900 dark:text-zinc-300 py-2">
                 Don't have an account?
                 <Link
                   to="/register"

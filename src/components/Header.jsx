@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 w-full bg-white border-b border-zinc-300 dark:border-zinc-700  dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200">
+      <header className="sticky top-0 z-20 w-full bg-white   dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200">
         {userInfo && (
           <div className="header-top hidden md:flex  justify-between items-center p-2 bg-zinc-200 dark:bg-zinc-800 text-[9px] px-4">
             <div className="flex items-center justify-start gap-2 text-zinc-500 dark:text-zinc-400">
@@ -101,8 +101,8 @@ const Header = () => {
             </div>
           </div>
         )}
-        <div className="main-header flex justify-between items-center px-4 pt-3 pb-2">
-          <Link to="/" className="logo text-xl lg:text-2xl font-bold flex items-center">
+        <div className="main-header flex justify-between items-center px-4 pt-2 pb-2 sm:pb-2">
+          <Link to="/" className="logo text-xl font-bold flex items-center">
             <motion.span
               className="text-blue-700 dark:text-blue-600"
               animate={{ scale: [1, 1.1, 1], rotate: [0, 10, -10, 0] }}
@@ -118,7 +118,7 @@ const Header = () => {
             <span className="ml-1">ShopCart</span>
             <h1 className=" hidden">ShopCart - An E-commerce Platform</h1>
           </Link>
-          <nav className="hidden xl:flex space-x-4 text-xs font-medium">
+          <nav className="hidden xl:flex space-x-4 text-[10px] font-medium">
             <Link
               to="/"
               className={`${
@@ -160,7 +160,7 @@ const Header = () => {
               Contact
             </Link>
           </nav>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <button className="hidden md:flex">
               <ThemeToggle />
             </button>
@@ -174,21 +174,21 @@ const Header = () => {
                 <Link
                   to="/login"
                   type="button"
-                  className="md:flex justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600  shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
+                  className="md:flex justify-center items-center px-4 py-2 text-[10px] font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600  shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
                   type="button"
-                  className="md:flex  justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
+                  className="md:flex justify-center items-center px-4 py-2 text-[10px] font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600  shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
                 >
                   Register
                 </Link>
               </>
             )}
           </div>
-          <div className="flex gap-2 md:hidden">
+          <div className="flex gap-3 md:hidden">
             <button className="flex md:hidden">
               <ThemeToggle />
             </button>
@@ -198,7 +198,7 @@ const Header = () => {
               <Link
                 to="/login"
                 type="button"
-                className="md:flex  justify-center items-center gap-2 px-4 py-2 text-xs font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
+                className="md:flex  justify-center items-center gap-2 px-4 py-2 text-[10px] font-medium rounded-full text-zinc-900 dark:text-zinc-100 bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 shadow-sm hover:bg-zinc-200 dark:hover:bg-zinc-700 focus:outline-none"
               >
                 Login
               </Link>
@@ -208,7 +208,7 @@ const Header = () => {
               className="md:hidden transition-colors duration-300 hover:text-zinc-500"
             >
               <svg
-                className="w-8 h-8"
+                className="w-7 h-7"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -224,14 +224,14 @@ const Header = () => {
             </button>
           </div>
         </div>
-        <div className="bg-white dark:bg-zinc-900 pb-3  shadow-md">
+        <div className="bg-white dark:bg-zinc-900 pb-2 shadow-md">
           <div className="w-full mx-auto px-4">
             <div className="grid  grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
               <div
                 onClick={() => setShowCategory(!showCategory)}
                 className="relative hidden md:block"
               >
-                <div className="flex bg-blue-700 rounded-md dark:bg-blue-700 items-center p-4 justify-center gap-2 text-xs font-medium cursor-pointer">
+                <div className="flex bg-gradient-to-r from-blue-600 to-blue-700 rounded-full items-center px-4 py-2 justify-center gap-2 text-[10px] font-medium cursor-pointer">
                   <span className="text-zinc-100 dark:text-zinc-200">
                     <FaList />
                   </span>
@@ -244,8 +244,8 @@ const Header = () => {
                 </div>
                 <div
                   className={`transition-all duration-500 ease-in-out ${
-                    showCategory ? "max-h-96" : "max-h-0 invisible"
-                  } overflow-auto absolute z-20 bg-white dark:bg-zinc-800 w-full border-2 border-t-0 dark:border-zinc-500`}
+                    showCategory ? "max-h-96 mt-1" : "max-h-0 invisible"
+                  } overflow-auto absolute z-20 bg-white dark:bg-zinc-800 w-full rounded-lg border-2 dark:border-zinc-600`}
                 >
                   {categories &&
                     categories.map((c, i) => (
@@ -260,7 +260,7 @@ const Header = () => {
                               alt={c.name}
                               className="w-8 h-8 mr-4"
                             />
-                            <button className="text-xs text-zinc-700 dark:text-zinc-200">
+                            <button className="text-[10px] text-zinc-700 dark:text-zinc-200">
                               {c.name}
                             </button>
                           </li>
@@ -276,7 +276,7 @@ const Header = () => {
                   <div className="flex">
                     <button
                       onClick={() => setShowDropdown(!showDropdown)}
-                      className="hidden lg:flex gap-1 flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-zinc-500 bg-zinc-100 dark:bg-zinc-600 border border-zinc-300 rounded-s-lg dark:text-zinc-300 dark:border-zinc-700 hover:bg-zinc-200 focus:outline-none"
+                      className="hidden lg:inline-flex gap-1 flex-shrink-0 z-10 items-center px-2 text-[9px] font-medium text-center text-zinc-500 bg-zinc-100 dark:bg-zinc-700 border border-zinc-300 rounded-s-lg dark:text-zinc-300 dark:border-zinc-700 hover:bg-zinc-200 focus:outline-none"
                       type="button"
                     >
                       {category || "All categories"}
@@ -287,9 +287,9 @@ const Header = () => {
                     <div
                       className={`z-20 transition-all duration-500 ease-in-out ${
                         showDropdown ? "max-h-96" : "hidden"
-                      } overflow-auto absolute mt-12 bg-white divide-y divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700`}
+                      } overflow-auto absolute mt-12 bg-white divide-y border divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700`}
                     >
-                      <ul aria-labelledby="dropdown-button" className="text-xs">
+                      <ul aria-labelledby="dropdown-button" className="text-[10px]">
                         <li
                           key="all-categories"
                           className="inline-flex border-b dark:border-zinc-900 w-full px-4 py-2 text-zinc-500 dark:text-zinc-300 dark:hover:bg-zinc-900 hover:bg-zinc-100"
@@ -330,16 +330,16 @@ const Header = () => {
                         onClick={() => setShowSuggestions(true)}
                         onBlur={() => setShowSuggestions(false)}
                         type="search"
-                        className="block p-2.5 w-full z-20 text-xs text-zinc-900 bg-zinc-50 rounded-e-lg border-s-zinc-50 border-s-2 border border-zinc-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700 focus:ring-zinc-300"
+                        className="block p-2 w-full z-20 text-[8px] text-zinc-900 bg-zinc-50 rounded-e-lg border-s-zinc-50 border-s-2 border border-zinc-300 focus:ring-blue-500 outline-none focus:border-blue-500 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700 focus:ring-zinc-300"
                         placeholder="Search..."
                         value={searchValue}
                       />
                       <button
                         type="submit"
-                        className="absolute top-0 end-0 p-2.5 text-xs font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                        className="absolute top-0 end-0 p-2 text-[8px] font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                       >
                         <svg
-                          className="w-4 h-4"
+                          className="w-3 h-3"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -372,8 +372,8 @@ const Header = () => {
                                   navigate(`/products?category=${cat.name}`);
                                 }}
                               >
-                                <FaSearch className="mr-2" />
-                                <p className="text-xs text-zinc-900 dark:text-zinc-300">
+                                <FaSearch className="mr-2 text-[10px]" />
+                                <p className="text-[9px] text-zinc-900 dark:text-zinc-300">
                                   {cat.name}
                                 </p>
                               </li>
@@ -398,10 +398,10 @@ const Header = () => {
                                     src={suggestion.images[0]}
                                   />
                                   <div className="ml-3">
-                                    <p className="text-xs text-zinc-900 dark:text-zinc-300">
+                                    <p className="text-[10px] text-zinc-900 dark:text-zinc-300">
                                       {suggestion.name}
                                     </p>
-                                    <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                                    <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
                                       {suggestion?.discount !== 0 ? (
                                         <>
                                           <span className="line-through text-zinc-500">
@@ -431,7 +431,7 @@ const Header = () => {
                             })
                           ) : (
                             <div className="flex items-center justify-center py-2">
-                              <p className="text-xs text-zinc-900 dark:text-zinc-300">
+                              <p className="text-[10px] text-zinc-900 dark:text-zinc-300">
                                 No results found
                               </p>
                             </div>
@@ -442,11 +442,11 @@ const Header = () => {
                   </div>
                 </form>
               </div>
-              <div className="hidden md:flex flex-col col-span-1 items-center justify-center space-y-2">
-                <span className="text-xs text-zinc-600 dark:text-zinc-400">
+              <div className="hidden md:flex flex-col col-span-1 items-center justify-center">
+                <span className="text-[8px] text-zinc-600 dark:text-zinc-400">
                   Founder & CEO - <strong>Hardik Daim</strong>
                 </span>
-                <span className="text-xs text-zinc-600 dark:text-zinc-400">
+                <span className="text-[8px] text-zinc-600 dark:text-zinc-400">
                   E-Mail - <strong> hardikdaim@gmail.com</strong>
                 </span>
               </div>

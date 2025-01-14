@@ -7,8 +7,10 @@ const AboutUs = () => {
     <>
       <Header />
       <div className="bg-white dark:bg-zinc-900 p-6 md:p-12 min-h-screen">
-      <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">          <h1 className="text-4xl font-bold mb-4 text-center">About Me</h1>
-          <div className="text-lg">
+        <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">
+          {" "}
+          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-center">About Me</h1>
+          <div className="text-sm">
             <p className="mb-4">
               Hello! I'm Hardik Daim, a passionate software developer with a
               knack for creating seamless and intuitive user experiences. With a

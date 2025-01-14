@@ -76,16 +76,16 @@ const ShopProducts = ({ products, loader, styles }) => {
         <div
           className={`w-full ${
             styles === "grid"
-              ? "grid grid-cols-2 md::grid-cols-3 xl:grid-cols-4 gap-3"
+              ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
               : "flex flex-col gap-3"
           }`}
         >
-          {Array.from({ length: products.length || 4 }).map((_, index) => (
+          {Array.from({ length: products.length || 20 }).map((_, index) => (
             <div
               key={index}
               className={`w-full ${
                 styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
-              } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
+              } rounded-md transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
             >
               <Skeleton height={200} width="100%" className="rounded-lg" />
               <div
@@ -111,11 +111,11 @@ const ShopProducts = ({ products, loader, styles }) => {
           ))}
         </div>
       ) : (
-        products.length > 0 ? (
+        products && products.length > 0 ? (
           <div
             className={`w-full ${
               styles === "grid"
-                ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3"
+                ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
                 : "flex flex-col gap-3"
             }`}
           >
@@ -129,7 +129,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                     styles !== "grid"
                       ? "flex items-start justify-start p-2"
                       : "p-1"
-                  } rounded-md transition-all duration-1000 hover:shadow-md hover:-translate-y-3`}
+                  } rounded-md md:transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
                 >
                   <div
                     className={`${
@@ -145,7 +145,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                     )}
                     <Link to={`/product/details/${p.slug}`}>
                       <img
-                        className="rounded-lg w-full h-28 md:w-full md:h-40 lg:h-60"
+                        className="rounded-lg w-full h-32"
                         src={p.images[0]}
                         alt={p.name}
                       />
@@ -153,18 +153,18 @@ const ShopProducts = ({ products, loader, styles }) => {
                     <ul className="hidden lg:flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
                       <li
                         onClick={() => add_wishlist(p)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                        className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                       >
                         <FaRegHeart />
                       </li>
                       <Link to={`/product/details/${p.slug}`}>
-                        <li className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                        <li className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
                           <FaEye />
                         </li>
                       </Link>
                       <li
                         onClick={() => add_cart(p._id)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                        className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                       >
                         <RiShoppingCartLine />
                       </li>
@@ -175,7 +175,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                       styles === "grid" ? "w-full" : "w-3/4 pl-2 md:pl-4"
                     }`}
                   >
-                    <h2 className="font-bold text-xs lg:text-sm">
+                    <h2 className="font-bold text-xs">
                       {p.name &&
                         (p.name.length > 40
                           ? `${p.name.substring(0, 40)}...`
@@ -185,7 +185,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                       className={`${
                         styles === "grid"
                           ? " flex gap-0"
-                          : "flex text-sm md:text-lg"
+                          : "flex text-xs"
                       }`}
                     >
                       <Rating ratings={p.rating} />
@@ -209,7 +209,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                    <p className="text-[8px] text-zinc-600 dark:text-zinc-400">
                       {p.description &&
                         (p.description.length > 20
                           ? `${p.description.substring(0, 80)}...`

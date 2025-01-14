@@ -54,11 +54,11 @@ const Dashboard = () => {
               Welcome back, {userInfo.name}!
             </h2>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
             <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
-                  <h3 className="text-lg font-bold mb-2">
+                  <h3 className="text-xs font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
@@ -67,7 +67,7 @@ const Dashboard = () => {
                 </>
               ) : (
                 <>
-                  <h3 className="text-lg font-bold mb-2">Total Orders</h3>
+                  <h3 className="text-sm font-bold mb-2">Total Orders</h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
                     You have {totalOrders} total orders.
                   </p>
@@ -77,7 +77,7 @@ const Dashboard = () => {
             <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
-                  <h3 className="text-lg font-bold mb-2">
+                  <h3 className="text-xs font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
@@ -86,7 +86,7 @@ const Dashboard = () => {
                 </>
               ) : (
                 <>
-                  <h3 className="text-lg font-bold mb-2">Pending Orders</h3>
+                  <h3 className="text-sm font-bold mb-2">Pending Orders</h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
                     You have {pendingOrders} pending orders.
                   </p>
@@ -96,7 +96,7 @@ const Dashboard = () => {
             <div className="bg-white dark:bg-zinc-800 border dark:border-zinc-700 p-6 rounded-lg shadow">
               {loader ? (
                 <>
-                  <h3 className="text-lg font-bold mb-2">
+                  <h3 className="text-sm font-bold mb-2">
                     <Skeleton width="20%" className="rounded-lg" />
                   </h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
@@ -105,7 +105,7 @@ const Dashboard = () => {
                 </>
               ) : (
                 <>
-                  <h3 className="text-lg font-bold mb-2">Cancelled Orders</h3>
+                  <h3 className="text-sm font-bold mb-2">Cancelled Orders</h3>
                   <p className="text-zinc-700 dark:text-zinc-300">
                     You have {cancelledOrders} cancelled orders.
                   </p>
@@ -120,17 +120,17 @@ const Dashboard = () => {
               <Skeleton width="8%" className="rounded-lg" />
             ) : (
               <div className="flex justify-between">
-                <h3 className="text-lg font-bold mb-2">Recent Orders</h3>
+                <h3 className="text-xs font-bold mb-2">Recent Orders</h3>
                 <button
                   onClick={() => navigate(`/my-orders`)}
-                  className="text-blue-700 font-medium dark:text-blue-600 hover:underline cursor-pointer"
+                  className="text-xs text-blue-700 font-medium dark:text-blue-600 hover:underline cursor-pointer"
                 >
                   View All
                 </button>
               </div>
             )}
             {loader ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 ">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div
                     key={i}
@@ -173,13 +173,13 @@ const Dashboard = () => {
                           Latest
                         </motion.div>
                       )}
-                      <h3 className="text-sm md:text-lg font-medium text-zinc-700 dark:text-zinc-300">
+                      <h3 className="text-xs md:text-xs font-medium text-zinc-700 dark:text-zinc-300">
                         Order ID: #{o._id}
                       </h3>
-                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300">
+                      <p className="text-xs md:text-md font-medium text-zinc-700 dark:text-zinc-300">
                         Price: {formatPrice(o.price)}
                       </p>
-                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
+                      <p className="text-xs md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                         Payment Status:{" "}
                         <span
                           className={`${
@@ -191,7 +191,7 @@ const Dashboard = () => {
                           {o.payment_status}
                         </span>
                       </p>
-                      <p className="text-sm md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
+                      <p className="text-xs md:text-md font-medium text-zinc-700 dark:text-zinc-300 capitalize">
                         Order Status:{" "}
                         <span
                           className={`${
@@ -230,7 +230,7 @@ const Dashboard = () => {
                     className="w-64 h-64 mb-4"
                   />
                 </motion.div>
-                <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
+                <p className="text-xs md:text-xl text-zinc-700 dark:text-zinc-300 text-center">
                   You haven't placed any orders yet! Start shopping and your
                   orders will appear here.
                 </p>

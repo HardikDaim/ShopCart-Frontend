@@ -302,7 +302,7 @@ const Details = () => {
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-1/2">
             {loader ? (
-              <Skeleton height="600px" width="100%" className="rounded-lg" />
+              <Skeleton height="450px" width="100%" className="rounded-lg" />
             ) : (
               <>
                 {product?.images && product?.images?.length > 0 && (
@@ -318,7 +318,7 @@ const Details = () => {
                           key={index}
                           src={image}
                           alt={product.name}
-                          className="w-full h-auto max-h-[600px] rounded-lg shadow-lg object-contain flex-shrink-0"
+                          className="w-full h-auto max-h-[600px] xl:max-h-[450px] rounded-lg shadow-lg object-contain flex-shrink-0"
                         />
                       ))}
                     </div>
@@ -399,20 +399,20 @@ const Details = () => {
             ) : (
               <>
                 <div className="flex justify-between items-center">
-                  <h1 className="text-xl md:text-3xl font-bold">
+                  <h1 className="text-lg md:text-xl font-bold">
                     {product?.name}
                   </h1>
                   <button
                     data-tooltip-id="my-tooltip"
                     data-tooltip-content="Share"
                     onClick={share}
-                    className="text-2xl font-bold"
+                    className="text-xl font-bold"
                   >
                     <IoShareSocialOutline />
                   </button>
                 </div>
-                <div className="flex justify-start items-center gap-4">
-                  <div className="text-xl flex">
+                <div className="flex justify-start items-center gap-2 text-xs">
+                  <div className="flex">
                     <Rating ratings={product?.rating} />
                   </div>
                   <span
@@ -425,7 +425,7 @@ const Details = () => {
                     <span className="hover:underline cursor-pointer">chat</span>
                   </Link> */}
                 </div>
-                <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
+                <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
                   {product?.discount !== 0 ? (
                     <>
                       <span className="line-through text-zinc-500">
@@ -439,26 +439,26 @@ const Details = () => {
                     <>₹{product?.price}</>
                   )}
                 </p>
-                <p className="text-xs md:text-sm">{product?.description}</p>
+                <p className="text-xs">{product?.description}</p>
                 {product?.stock > 0 ? (
                   <div className="mt-2 flex items-center space-x-3">
                     <button
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content="Stock"
-                      className="py-2 px-3 text-xl text-green-600 dark:text-green-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl"
+                      className="py-2 px-3 text-xs text-green-600 dark:text-green-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       In Stock
                     </button>
                     <button
                       onClick={dec}
-                      className="px-2 py-0 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
+                      className="px-2 py-0 text-[18px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
                     >
                       -
                     </button>
                     <span>{quantity}</span>
                     <button
                       onClick={inc}
-                      className="px-2 py-0 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
+                      className="px-2 py-0 text-[18px] bg-zinc-300 dark:bg-zinc-700 rounded-xl text-zinc-800 dark:text-zinc-200"
                     >
                       +
                     </button>
@@ -466,33 +466,33 @@ const Details = () => {
                       data-tooltip-id="my-tooltip"
                       data-tooltip-content="Add to Wishlist"
                       onClick={() => add_wishlist(product)}
-                      className="py-2 px-3 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
+                      className="py-2 px-3 text-[18px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       <FaHeart />
                     </button>
                   </div>
                 ) : (
                   <div className="mt-2 flex items-center space-x-3">
-                    <button className="py-2 px-3 text-xl text-red-600 dark:text-red-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl">
+                    <button className="py-2 px-3 text-xs text-red-600 dark:text-red-400 bg-zinc-300 dark:bg-zinc-700 rounded-xl">
                       Out of Stock
                     </button>
 
                     <button
                       onClick={() => add_wishlist(product)}
-                      className="py-2 px-3 text-[28px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
+                      className="py-2 px-3 text-[18px] bg-zinc-300 dark:bg-zinc-700 rounded-xl"
                     >
                       <FaHeart />
                     </button>
                   </div>
                 )}
                 {product?.stock <= 10 && product?.stock > 0 ? (
-                  <p className="text-red-600 dark:text-red-400">
+                  <p className="text-xs text-red-600 dark:text-red-400">
                     Hurry up, only {product?.stock} piece(s) left
                   </p>
                 ) : (
                   ""
                 )}
-                <div className="flex gap-1 font-semibold">
+                <div className="flex gap-1 font-semibold text-xs">
                   <span>Seller:</span>
                   <span className="hover:underline cursor-pointer">
                     {product?.shopName}
@@ -504,13 +504,13 @@ const Details = () => {
                 <div className="flex flex-col space-y-4">
                   <button
                     onClick={() => add_cart(product._id)}
-                    className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                    className="py-2 px-4 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                   >
                     Add to Cart
                   </button>
                   <button
                     onClick={buyNow}
-                    className="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
+                    className="py-2 px-4 text-xs bg-green-600 text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500"
                   >
                     Buy Now
                   </button>
@@ -528,22 +528,22 @@ const Details = () => {
           ref={reviewSectionRef}
           className="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-lg space-y-4 mt-8"
         >
-          <h2 className="text-2xl font-semibold">Customer's Ratings</h2>
+          <h2 className="text-lg font-semibold">Customer's Ratings</h2>
           <div className="mt-8">
             <div className="flex flex-col md:flex-row md:justify-between gap-10 md-lg:flex-col">
               <div className="flex flex-col gap-2 justify-start items-center md:items-start py-4">
                 <div>
-                  <span className="text-6xl font-semibold">
+                  <span className="text-3xl font-semibold">
                     {product?.rating}
                   </span>
-                  <span className="text-3xl font-semibold text-zinc-600 dark:text-zinc-50 ">
+                  <span className="text-xl font-semibold text-zinc-600 dark:text-zinc-50 ">
                     /5
                   </span>
                 </div>
                 <div className="flex text-3xl ">
                   <Rating ratings={product?.rating} />
                 </div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-50 ">
+                <p className="text-xs text-zinc-600 dark:text-zinc-50 ">
                   {totalReview} Reviews
                 </p>
               </div>
@@ -659,26 +659,26 @@ const Details = () => {
             </div>
           </div>
           <div>
-            <h2 className="text-lg md:text-3xl font-semibold">
+            <h2 className="text-lg font-semibold">
               Product Reviews ({totalReview})
             </h2>
             <div className="flex flex-col gap-8 pt-4 pb-10">
               {reviews.map((r, i) => (
                 <div key={i} className="flex flex-col gap-1">
                   <div className="flex justify-between items-center">
-                    <div className="flex gap-1 text-xl">
+                    <div className="flex gap-1 text-sm">
                       <RatingTemp rating={r.rating} />
                     </div>
-                    <span className="">{r.date}</span>
+                    <span className="text-xs">{r.date}</span>
                   </div>
-                  <span className=" text-md">{r.name}</span>
-                  <p className=" text-sm">{r.review}</p>
+                  <span className=" text-sm">{r.name}</span>
+                  <p className=" text-xs">{r.review}</p>
                 </div>
               ))}
             </div>
             {userInfo ? (
               <div className="flex flex-col gap-3">
-                <h2 className="text-lg md:text-3xl font-semibold">
+                <h2 className="text-lg font-semibold">
                   Submit your Review
                 </h2>
                 <form onSubmit={reviewSubmit}>
@@ -688,12 +688,12 @@ const Details = () => {
                       value={rat}
                       initialRating={rat}
                       emptySymbol={
-                        <span className="text-4xl">
+                        <span className="text-2xl">
                           <CiStar />
                         </span>
                       }
                       fullSymbol={
-                        <span className="text-yellow-500 dark:text-yellow-300 text-4xl">
+                        <span className="text-yellow-500 dark:text-yellow-300 text-2xl">
                           <FaStar />
                         </span>
                       }
@@ -703,7 +703,7 @@ const Details = () => {
                   <textarea
                     value={re}
                     onChange={(e) => setRe(e.target.value)}
-                    className="border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-colors duration-300"
+                    className="border border-zinc-300 text-xs dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-3 w-full rounded-md focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 outline-none transition-colors duration-300"
                     name=""
                     id=""
                     cols="30"
@@ -714,7 +714,7 @@ const Details = () => {
                   <div className="mt-2 flex items-center justify-center">
                     <button
                       type="submit"
-                      className="py-1 px-5 bg-blue-600 text-white rounded-lg"
+                      className="py-1 px-5 bg-blue-600 text-white text-xs rounded-lg"
                     >
                       Submit
                     </button>
@@ -725,7 +725,7 @@ const Details = () => {
               <div>
                 <Link
                   to="/login"
-                  className="py-1 px-5 bg-red-500 text-white rounded-lg"
+                  className="py-1 px-5 text-xs bg-red-500 text-white rounded-lg"
                 >
                   {" "}
                   Login First to submit review{" "}

@@ -71,7 +71,7 @@ const Banner = ({ loader }) => {
   return (
     <div
       ref={bannerRef}
-      className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[700px] w-full overflow-hidden rounded-lg"
+      className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[550px] 2xl:h-[640px] w-full overflow-hidden rounded-lg"
     >
       {loader ? (
         <Skeleton
@@ -107,7 +107,7 @@ const Banner = ({ loader }) => {
             <Link
               to="/shops"
               type="button"
-              className="p-2 md:px-6 md:py-3 mt-4 text-xs rounded-lg bg-blue-600 text-white font-semibold hover:bg-red-700 transition duration-300 hover:-translate-y-1 hover:scale-105 dark:bg-blue-600 dark:hover:bg-red-600"
+              className="p-2 md:px-6 md:py-3 mt-4 text-[8px] md:text-xs rounded-lg bg-blue-600 text-white font-semibold hover:bg-red-700 transition duration-300 hover:-translate-y-1 hover:scale-105 dark:bg-blue-600 dark:hover:bg-red-600"
             >
               Shop Now
             </Link>

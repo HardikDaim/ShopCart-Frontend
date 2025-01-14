@@ -25,18 +25,18 @@ const Footer = () => {
               <span className="ml-1">ShopCart</span>
             </div>
             <div className="my-4">
-              <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-sm">
+              <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-xs">
                Founder & CEO - <strong>Hardik Daim</strong>.
               </p>
-              <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-sm">
+              <p className="text-zinc-500 dark:text-zinc-400 text-xs md:text-xs">
                 For any query contact me at{" "}
                 <strong>hardikdaim@gmail.com</strong>
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 md:gap-32 sm:gap-6 md:grid-cols-2 text-xs md:text-sm">
+          <div className="grid grid-cols-2 gap-8 md:gap-32 sm:gap-6 md:grid-cols-2 text-xs">
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-zinc-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-xs font-semibold text-zinc-900 uppercase dark:text-white">
                 Support
               </h2>
               <ul className="text-zinc-500 dark:text-zinc-400 font-medium">
@@ -63,7 +63,7 @@ const Footer = () => {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-zinc-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-xs font-semibold text-zinc-900 uppercase dark:text-white">
                 About Us
               </h2>
               <ul className="text-zinc-500 dark:text-zinc-400 font-medium">
@@ -94,7 +94,7 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-zinc-200 sm:mx-auto dark:border-zinc-700 lg:my-8" />
         <div className="flex items-center justify-center">
-          <span className="text-sm text-zinc-500 sm:text-center dark:text-zinc-400">
+          <span className="text-xs text-zinc-500 sm:text-center dark:text-zinc-400">
             © {new Date().getFullYear()}{" "}
             <Link to="/" className="hover:underline">
               ShopCart

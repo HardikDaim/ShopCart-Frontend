@@ -44,7 +44,7 @@ const ThemeToggle = () => {
         <FaMoon />
       </button>
       {dropdownOpen && (
-        <div className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 divide-y divide-zinc-100 dark:divide-zinc-700 rounded-md shadow-lg outline-none">
+        <div className="absolute -right-16 z-50 w-56 mt-2 origin-top-right bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 divide-y divide-zinc-100 dark:divide-zinc-700 rounded-md shadow-lg outline-none">
           <div className="py-1">
             <button
               onClick={() => handleThemeChange('light')}

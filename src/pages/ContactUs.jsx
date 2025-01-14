@@ -35,8 +35,10 @@ const ContactUs = () => {
     <>
       <Header />
       <div className="text-zinc-900 dark:text-zinc-200 p-6 md:p-12 min-h-screen">
-      <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">          <h1 className="text-4xl font-bold mb-4 text-center">Contact Us</h1>
-          <div className="text-lg">
+        <div className="border dark:border-zinc-700 shadow-lg rounded-2xl p-6 md:p-12 max-w-4xl mx-auto">
+          {" "}
+          <h1 className="text-2xl md:text-4xl font-bold mb-4 text-center">Contact Us</h1>
+          <div className="text-xs">
             <p className="mb-4">
               We would love to hear from you! Whether you have a question about
               our services, need assistance, or just want to give feedback, feel
@@ -45,7 +47,7 @@ const ContactUs = () => {
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label
-                  className="block mb-2 text-sm font-medium"
+                  className="block mb-2 text-xs font-medium"
                   htmlFor="name"
                 >
                   Name
@@ -62,7 +64,7 @@ const ContactUs = () => {
               </div>
               <div>
                 <label
-                  className="block mb-2 text-sm font-medium"
+                  className="block mb-2 text-xs font-medium"
                   htmlFor="email"
                 >
                   Email
@@ -79,7 +81,7 @@ const ContactUs = () => {
               </div>
               <div>
                 <label
-                  className="block mb-2 text-sm font-medium"
+                  className="block mb-2 text-xs font-medium"
                   htmlFor="message"
                 >
                   Message
@@ -96,7 +98,7 @@ const ContactUs = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-blue-700 dark:bg-blue-600 text-white font-semibold rounded hover:bg-blue-800 dark:hover:bg-blue-700"
+                className="w-full p-2 bg-blue-700 dark:bg-blue-600 text-white font-semibold rounded hover:bg-blue-800 dark:hover:bg-blue-700"
               >
                 Send Message
               </button>

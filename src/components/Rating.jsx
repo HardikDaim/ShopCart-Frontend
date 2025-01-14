@@ -4,7 +4,7 @@ import { CiStar } from 'react-icons/ci';
 
 const Rating = ({ratings}) => {
     return (
-        <>
+        <div className='flex text-xs'>
             {ratings >= 1 ? <span className='text-yellow-500 dark:text-yellow-300'><FaStar /></span>: 
             ratings >= .5 ? <span className='text-yellow-500 dark:text-yellow-300'><FaStarHalfAlt /></span>:
             <span className='text-zinc-700 dark:text-zinc-300'><CiStar /></span>
@@ -25,7 +25,7 @@ const Rating = ({ratings}) => {
             ratings >= 4.5 ? <span className='text-yellow-500 dark:text-yellow-300'><FaStarHalfAlt /></span>:
             <span className='text-zinc-700 dark:text-zinc-300'><CiStar /></span>
             }
-        </>
+        </div>
     );
 };
 
