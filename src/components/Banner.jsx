@@ -69,7 +69,7 @@ const Banner = ({ loader }) => {
   }, []);
 
   return (
-    <div className="mx-2 md:mx-4 mt-2 md:mt-4">
+    <div className="mx-4 mt-2 md:mt-4">
       <div
         ref={bannerRef}
         className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[550px] 2xl:h-[640px] w-full overflow-hidden rounded-lg"
