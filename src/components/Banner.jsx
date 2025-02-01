@@ -69,59 +69,67 @@ const Banner = ({ loader }) => {
   }, []);
 
   return (
-    <div
-      ref={bannerRef}
-      className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[550px] 2xl:h-[640px] w-full overflow-hidden rounded-lg"
-    >
-      {loader ? (
-        <Skeleton
-          height="100%"
-          width="100%"
-          className="absolute top-0 left-0 w-full h-full rounded-lg"
-        />
-      ) : (
-        <>
-          {!isVideoReady && (
-            <img
-              src="/images/banner-image.jpg" // Your fallback banner image
-              alt="Banner"
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
-            />
-          )}
-          <video
-            ref={videoRef}
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg ${
-              isVideoReady ? "" : "hidden"
-            }`}
-            src="/videos/banner.mp4"
-            loop
-            muted={isMuted}
-            autoPlay // Ensure autoplay on load
-            onCanPlay={() => setIsVideoReady(true)} // Set video as ready when it can play
+    <div className="mx-2 md:mx-4 mt-2 md:mt-4">
+      <div
+        ref={bannerRef}
+        className="relative h-56 sm:h-80 md:h-[500px] lg:h-[600px] xl:h-[550px] 2xl:h-[640px] w-full overflow-hidden rounded-lg"
+      >
+        {loader ? (
+          <Skeleton
+            height="100%"
+            width="100%"
+            className="absolute top-0 left-0 w-full h-full rounded-lg"
           />
-        </>
-      )}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/60 via-transparent to-black/60 flex items-end justify-center rounded-lg dark:from-black/80 dark:via-transparent dark:to-black/80">
-        <div className="text-center p-4 md:p-8">
-          {!loader && (
-            <Link
-              to="/shops"
-              type="button"
-              className="p-2 md:px-6 md:py-3 mt-4 text-[8px] md:text-xs rounded-lg bg-blue-600 text-white font-semibold hover:bg-red-700 transition duration-300 hover:-translate-y-1 hover:scale-105 dark:bg-blue-600 dark:hover:bg-red-600"
-            >
-              Shop Now
-            </Link>
-          )}
-        </div>
-      </div>
-      {!loader && (
-        <button
-          onClick={toggleMute}
-          className="absolute top-4 right-4 p-2 bg-transparent border-2 border-white text-white rounded-full hover:bg-gray-900 dark:hover:bg-gray-900 focus:outline-none transition duration-300"
+        ) : (
+          <>
+            {!isVideoReady && (
+              <img
+                src="/images/banner-image.jpg" // Your fallback banner image
+                alt="Banner"
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+              />
+            )}
+            <video
+              ref={videoRef}
+              className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover rounded-lg ${
+                isVideoReady ? "" : "hidden"
+              }`}
+              src="/videos/banner.mp4"
+              loop
+              muted={isMuted}
+              autoPlay // Ensure autoplay on load
+              onCanPlay={() => setIsVideoReady(true)} // Set video as ready when it can play
+            />
+          </>
+        )}
+        <div
+          className={`${
+            isVideoReady
+              ? "absolute top-0 left-0 w-full h-full flex items-end justify-center rounded-lg"
+              : "hidden"
+          }`}
         >
-          {isMuted ? <IoVolumeMuteOutline /> : <VscUnmute />}
-        </button>
-      )}
+          <div className="text-center p-4 md:p-8">
+            {!loader && (
+              <Link
+                to="/shops"
+                type="button"
+                className="p-2 md:px-6 md:py-3 mt-4 text-[8px] md:text-xs rounded-tr rounded-bl rounded-lg bg-gradient-to-tr from-blue-500 to-blue-700 xl:hover:from-red-500 xl:hover:to-red-700 text-white font-semibold transition-colors duration-300"
+              >
+                Shop Now
+              </Link>
+            )}
+          </div>
+        </div>
+        {!loader && (
+          <button
+            onClick={toggleMute}
+            className="absolute top-2 md:top-4 right-2 md:right-4 p-2 bg-transparent text-xs md:text-sm border md:border-2 border-white text-white rounded-full hover:bg-gray-900 dark:hover:bg-gray-900 focus:outline-none transition duration-300"
+          >
+            {isMuted ? <IoVolumeMuteOutline /> : <VscUnmute />}
+          </button>
+        )}
+      </div>
     </div>
   );
 };
