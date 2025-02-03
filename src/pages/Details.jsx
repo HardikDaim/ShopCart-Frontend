@@ -436,7 +436,7 @@ const Details = () => {
                       </span>
                     </>
                   ) : (
-                    <>₹{product?.price}</>
+                    <>{formatPrice(product?.price)}</>
                   )}
                 </p>
                 <p className="text-xs">{product?.description}</p>
@@ -678,9 +678,7 @@ const Details = () => {
             </div>
             {userInfo ? (
               <div className="flex flex-col gap-3">
-                <h2 className="text-lg font-semibold">
-                  Submit your Review
-                </h2>
+                <h2 className="text-lg font-semibold">Submit your Review</h2>
                 <form onSubmit={reviewSubmit}>
                   <div className="flex gap-1">
                     <RatingReact
@@ -764,21 +762,20 @@ const Details = () => {
                         {relatedProduct?.discount > 0 ? (
                           <>
                             <span className="line-through text-zinc-500">
-                              ₹{relatedProduct?.price}
+                              {formatPrice(relatedProduct?.price)}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹
-                              {(
+                              {formatPrice(
                                 relatedProduct.price -
-                                (relatedProduct.price *
-                                  relatedProduct.discount) /
-                                  100
-                              ).toFixed(2)}
+                                  (relatedProduct.price *
+                                    relatedProduct.discount) /
+                                    100
+                              )}
                             </span>
                           </>
                         ) : (
                           <span className="text-black font-semibold dark:text-zinc-300">
-                            ₹{relatedProduct?.price}
+                            ₹{formatPrice(relatedProduct?.price)}
                           </span>
                         )}
                       </span>
@@ -822,21 +819,20 @@ const Details = () => {
                         {relatedProduct?.discount > 0 ? (
                           <>
                             <span className="line-through text-zinc-500">
-                              ₹{relatedProduct?.price}
+                              {formatPrice(relatedProduct?.price)}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹
-                              {(
+                              {formatPrice(
                                 relatedProduct.price -
-                                (relatedProduct.price *
-                                  relatedProduct.discount) /
-                                  100
-                              ).toFixed(2)}
+                                  (relatedProduct.price *
+                                    relatedProduct.discount) /
+                                    100
+                              )}
                             </span>
                           </>
                         ) : (
                           <span className="text-black font-semibold dark:text-zinc-300">
-                            ₹{relatedProduct?.price}
+                            {formatPrice(relatedProduct?.price)}
                           </span>
                         )}
                       </span>

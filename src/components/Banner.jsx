@@ -112,7 +112,7 @@ const Banner = ({ loader }) => {
           <div className="text-center p-4 md:p-8">
             {!loader && (
               <Link
-                to="/shops"
+                to="/products/search?search=s25&&category="
                 type="button"
                 className="p-2 md:px-6 md:py-3 mt-4 text-[8px] md:text-xs rounded-tr rounded-bl rounded-lg bg-gradient-to-tr from-blue-500 to-blue-700 xl:hover:from-red-500 xl:hover:to-red-700 text-white font-semibold transition-colors duration-300"
               >
