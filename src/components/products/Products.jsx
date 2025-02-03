@@ -51,6 +51,12 @@ const Products = ({ title, products, loader }) => {
     );
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
   return (
     <div className="flex gap-8 flex-col-reverse">
       <Carousel
@@ -83,7 +89,11 @@ const Products = ({ title, products, loader }) => {
                   pl.price - (pl.price * pl.discount) / 100;
 
                 return (
-                  <Link to={`/product/details/${pl.slug}`} key={j} className="flex relative justify-start items-start overflow-x-auto">
+                  <Link
+                    to={`/product/details/${pl.slug}`}
+                    key={j}
+                    className="flex relative justify-start items-start overflow-x-auto"
+                  >
                     {pl.discount > 0 && (
                       <div className="flex justify-center items-center absolute text-white bg-red-500 font-semibold text-xs -left-0 rounded-md -top-0 w-8 h-5 shadow-lg">
                         {pl.discount}%
@@ -106,20 +116,14 @@ const Products = ({ title, products, loader }) => {
                         <Rating ratings={pl.rating} />
                       </div>
                       <div className="flex justify-start items-center gap-2">
-                        {pl.discount > 0 ? (
-                          <>
-                            <span className="line-through text-zinc-500">
-                              ₹{pl.price}
-                            </span>
-                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              ₹{discountedPrice.toLocaleString("en-IN")}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="text-black font-semibold dark:text-zinc-300">
-                            ₹{pl.price}
+                        <>
+                          <span className="line-through text-zinc-500">
+                            {formatPrice(pl.price)}
                           </span>
-                        )}
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                            {formatPrice(discountedPrice)}
+                          </span>
+                        </>
                       </div>
                     </div>
                   </Link>

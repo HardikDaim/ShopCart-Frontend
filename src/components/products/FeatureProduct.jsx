@@ -20,7 +20,7 @@ const FeatureProduct = ({ products, loader }) => {
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
 
   const scrollRef = useRef(null); // Create a reference for the scroll container
- const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const updateScrollButtons = () => {
@@ -45,8 +45,8 @@ const FeatureProduct = ({ products, loader }) => {
       }
     };
   }, []);
-   // Function to scroll left
-   const scroll = (direction) => {
+  // Function to scroll left
+  const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
       if (direction === "left") {
@@ -99,7 +99,11 @@ const FeatureProduct = ({ products, loader }) => {
     }
   };
 
-
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
 
   return (
     <>
@@ -115,26 +119,25 @@ const FeatureProduct = ({ products, loader }) => {
       <div className="relative w-full overflow-hidden group">
         {/* Left Scroll Button */}
         {canScrollLeft && (
-        <button
-          onClick={() => scroll("left")}
-          className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6 md:w-8 md:h-8"
+          <button
+            onClick={() => scroll("left")}
+            className="absolute hidden md:block left-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
         )}
 
         <div
@@ -213,20 +216,14 @@ const FeatureProduct = ({ products, loader }) => {
                           <Rating ratings={product.rating} />
                         </div>
                         <div className="flex justify-start items-center gap-2">
-                          {product.discount > 0 ? (
-                            <>
-                              <span className="line-through text-zinc-500 hidden md:flex">
-                                ₹{product.price}
-                              </span>{" "}
-                              <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                                ₹{discountedPrice.toLocaleString("en-IN")}
-                              </span>
-                            </>
-                          ) : (
-                            <span className="text-black font-semibold dark:text-zinc-300">
-                              ₹{product.price}
+                          <>
+                            <span className="line-through text-zinc-500 hidden md:flex">
+                              {formatPrice(product.price)}
+                            </span>{" "}
+                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                              {formatPrice(discountedPrice)}
                             </span>
-                          )}
+                          </>
                         </div>
                       </div>
                     </div>
@@ -237,27 +234,25 @@ const FeatureProduct = ({ products, loader }) => {
 
         {/* Right Scroll Button */}
         {canScrollRight && (
-
-        <button
-          onClick={() => scroll("right")}
-          className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6 md:w-8 md:h-8"
+          <button
+            onClick={() => scroll("right")}
+            className="absolute hidden md:block right-0 top-1/2 transform -translate-y-1/2 z-10 bg-gradient-to-l from-blue-500 to-blue-700 text-white p-3 md:p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 focus:outline-none opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         )}
       </div>
     </>

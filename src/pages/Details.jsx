@@ -426,18 +426,14 @@ const Details = () => {
                   </Link> */}
                 </div>
                 <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
-                  {product?.discount !== 0 ? (
-                    <>
-                      <span className="line-through text-zinc-500">
-                        {formatPrice(product?.price)}
-                      </span>{" "}
-                      <span>
-                        {formatPrice(discountedPrice)} (-{product?.discount}%)
-                      </span>
-                    </>
-                  ) : (
-                    <>{formatPrice(product?.price)}</>
-                  )}
+                  <>
+                    <span className="line-through text-zinc-500">
+                      {formatPrice(product?.price)}
+                    </span>{" "}
+                    <span>
+                      {formatPrice(discountedPrice)} (-{product?.discount}%)
+                    </span>
+                  </>
                 </p>
                 <p className="text-xs">{product?.description}</p>
                 {product?.stock > 0 ? (
@@ -759,25 +755,19 @@ const Details = () => {
                     </span>
                     <div className="flex justify-start items-center gap-2">
                       <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                        {relatedProduct?.discount > 0 ? (
-                          <>
-                            <span className="line-through text-zinc-500">
-                              {formatPrice(relatedProduct?.price)}
-                            </span>{" "}
-                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              {formatPrice(
-                                relatedProduct.price -
-                                  (relatedProduct.price *
-                                    relatedProduct.discount) /
-                                    100
-                              )}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="text-black font-semibold dark:text-zinc-300">
-                            ₹{formatPrice(relatedProduct?.price)}
+                        <>
+                          <span className="line-through text-zinc-500">
+                            {formatPrice(relatedProduct?.price)}
+                          </span>{" "}
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                            {formatPrice(
+                              relatedProduct.price -
+                                (relatedProduct.price *
+                                  relatedProduct.discount) /
+                                  100
+                            )}
                           </span>
-                        )}
+                        </>
                       </span>
                     </div>
                   </div>
@@ -816,25 +806,19 @@ const Details = () => {
                     </span>
                     <div className="flex justify-start items-center gap-2">
                       <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                        {relatedProduct?.discount > 0 ? (
-                          <>
-                            <span className="line-through text-zinc-500">
-                              {formatPrice(relatedProduct?.price)}
-                            </span>{" "}
-                            <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              {formatPrice(
-                                relatedProduct.price -
-                                  (relatedProduct.price *
-                                    relatedProduct.discount) /
-                                    100
-                              )}
-                            </span>
-                          </>
-                        ) : (
-                          <span className="text-black font-semibold dark:text-zinc-300">
+                        <>
+                          <span className="line-through text-zinc-500">
                             {formatPrice(relatedProduct?.price)}
+                          </span>{" "}
+                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                            {formatPrice(
+                              relatedProduct.price -
+                                (relatedProduct.price *
+                                  relatedProduct.discount) /
+                                  100
+                            )}
                           </span>
-                        )}
+                        </>
                       </span>
                     </div>
                   </div>
