@@ -86,7 +86,7 @@ const ShopProducts = ({ products, loader, styles }) => {
               : "flex flex-col gap-3"
           }`}
         >
-          {Array.from({ length: products.length || 20 }).map((_, index) => (
+          {Array.from({ length: products.length || 40 }).map((_, index) => (
             <div
               key={index}
               className={`w-full ${
@@ -219,14 +219,14 @@ const ShopProducts = ({ products, loader, styles }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="flex flex-col justify-center items-center gap-4"
+          className="flex flex-col justify-center items-center gap-y-4 w-full h-96"
         >
           <img
-            className="w-52 h-52 md:w-80 md:h-80 object-cover"
-            src="/images/noproducts.png"
-            alt="Empty Feature Image"
+            className="w-36 h-36  object-cover"
+            src="/images/empty-cart.png"
+            alt="No Products Found"
           />
-          <h4 className="font-bold text-lg md:text-2xl text-center text-zinc-600">
+          <h4 className="font-bold text-sm md:text-lg text-center text-zinc-600">
             Try refreshing again
           </h4>
         </motion.div>

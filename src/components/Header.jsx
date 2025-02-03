@@ -49,6 +49,12 @@ const Header = () => {
     }
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
   return (
     <>
       <header className="sticky top-0 z-20 w-full bg-white   dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200">
@@ -289,7 +295,10 @@ const Header = () => {
                         showDropdown ? "max-h-96" : "hidden"
                       } overflow-auto absolute mt-12 bg-white divide-y border divide-zinc-100 rounded-lg shadow w-44 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700`}
                     >
-                      <ul aria-labelledby="dropdown-button" className="text-[10px]">
+                      <ul
+                        aria-labelledby="dropdown-button"
+                        className="text-[10px]"
+                      >
                         <li
                           key="all-categories"
                           className="inline-flex border-b dark:border-zinc-900 w-full px-4 py-2 text-zinc-500 dark:text-zinc-300 dark:hover:bg-zinc-900 hover:bg-zinc-100"
@@ -388,8 +397,9 @@ const Header = () => {
                                   key={suggestion.id}
                                   className="flex items-center p-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 cursor-pointer"
                                   onClick={() => {
+                                    setSearchValue("");
                                     navigate(
-                                      `/product/details/${suggestion.slug}`
+                                      `/products/search/?search=${suggestion.slug.split("-").slice(0,3).join(" ")}&&category=${suggestion.category}`
                                     );
                                   }}
                                 >
@@ -402,28 +412,15 @@ const Header = () => {
                                       {suggestion.name}
                                     </p>
                                     <p className="text-[10px] text-zinc-500 dark:text-zinc-400">
-                                      {suggestion?.discount !== 0 ? (
-                                        <>
-                                          <span className="line-through text-zinc-500">
-                                            ₹
-                                            {suggestion?.price.toLocaleString(
-                                              "en-IN"
-                                            )}
-                                          </span>{" "}
-                                          <span className="text-blue-700 dark:text-blue-500">
-                                            ₹
-                                            {discountedPrice.toLocaleString(
-                                              "en-IN"
-                                            )}{" "}
-                                            (-
-                                            {suggestion?.discount}%)
-                                          </span>
-                                        </>
-                                      ) : (
+                                      <>
+                                        <span className="line-through text-zinc-500">
+                                          {formatPrice(suggestion?.price)}
+                                        </span>{" "}
                                         <span className="text-blue-700 dark:text-blue-500">
-                                          ₹{suggestion?.price}
+                                          {formatPrice(discountedPrice)} (-
+                                          {suggestion?.discount}%)
                                         </span>
-                                      )}
+                                      </>
                                     </p>
                                   </div>
                                 </li>
