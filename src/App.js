@@ -1,26 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import Cart from "./pages/Cart";
-import Shipping from "./pages/Shipping";
-import Details from "./pages/Details";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
 import { get_category } from "./store/reducers/homeReducer";
-import CategoryShop from "./pages/CategoryShop";
-import SearchProducts from "./pages/SearchProducts";
-import Payment from "./pages/Payment";
 import ProtectUser from "./utils/ProtectUser";
-import Dashboard from "./pages/Dashboard";
-import Orders from "./pages/Orders";
 import ChangePassword from "./pages/ChangePassword";
-import Wishlist from "./pages/Wishlist";
-import OrderDetails from "./pages/OrderDetails";
 import ScrollToTop from "./scrollToTop";
-import Chat from "./pages/Chat";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { SkeletonTheme } from "react-loading-skeleton";
@@ -37,8 +23,23 @@ import GoogleAd from "./components/GoogleAd";
 import Success from "./pages/Success";
 import Failed from "./pages/Failed";
 import NetworkStatusPopup from "./components/NetworkStatusPopup";
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, DotLoader } from "react-spinners";
+
+const Home = lazy(() => import("./pages/Home"));
 const Shops = lazy(() => import("./pages/Shops"));
+const CategoryShop = lazy(() => import("./pages/CategoryShop"));
+const SearchProducts = lazy(() => import("./pages/SearchProducts"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Shipping = lazy(() => import("./pages/Shipping"));
+const Details = lazy(() => import("./pages/Details"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const Payment = lazy(() => import("./pages/Payment"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Orders = lazy(() => import("./pages/Orders"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const OrderDetails = lazy(() => import("./pages/OrderDetails"));
+const Chat = lazy(() => import("./pages/Chat"));
 
 function App() {
   const dispatch = useDispatch();
@@ -84,9 +85,9 @@ function App() {
 
   const LoadingSpinner = () => (
     <div className="flex justify-center items-center h-screen">
-      <ClipLoader
+      <DotLoader
         size={50}
-        color={isDarkTheme ? "#fff" : "#000"}
+        color="#1D4ED8"
         loading={true}
       />
     </div>
@@ -146,8 +147,22 @@ function App() {
               element={<ReturnsAndRefunds />}
             />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Login />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <Suspense fallback={<LoadingSpinner />}>
+                  <Register />
+                </Suspense>
+              }
+            />
             <Route
               path="/shops"
               element={
@@ -185,18 +200,71 @@ function App() {
 
             {/* Protected Routes */}
             <Route element={<ProtectUser />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/my-orders" element={<Orders />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Dashboard />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/my-orders"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Orders />
+                  </Suspense>
+                }
+              />
               <Route path="/change-password" element={<ChangePassword />} />
-              <Route path="/my-wishlist" element={<Wishlist />} />
+              <Route
+                path="/my-wishlist"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Wishlist />
+                  </Suspense>
+                }
+              />
               <Route
                 path="/order/details/:orderId"
-                element={<OrderDetails />}
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <OrderDetails />
+                  </Suspense>
+                }
               />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/shipping" element={<Shipping />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/chat/:sellerId" element={<Chat />} />
+              <Route
+                path="/cart"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Cart />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/shipping"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Shipping />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Chat />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="/chat/:sellerId"
+                element={
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Chat />
+                  </Suspense>
+                }
+              />
               <Route
                 path="/payment"
                 element={

@@ -49,7 +49,7 @@ const Shops = () => {
     { value: "low-to-high", label: "Low to High Price" },
     { value: "high-to-low", label: "High to Low Price" },
   ];
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(options[1]);
   const [styles, setStyles] = useState("grid");
   const [category, setCategory] = useState("");
 
