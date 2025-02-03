@@ -428,10 +428,10 @@ const Details = () => {
                 <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
                   <>
                     <span className="line-through text-zinc-500">
-                      {formatPrice(product?.price)}
+                      {formatPrice(Math.round(product?.price))}
                     </span>{" "}
                     <span>
-                      {formatPrice(discountedPrice)} (-{product?.discount}%)
+                      {formatPrice(Math.round(discountedPrice))} (-{product?.discount}%)
                     </span>
                   </>
                 </p>
@@ -757,15 +757,15 @@ const Details = () => {
                       <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                         <>
                           <span className="line-through text-zinc-500">
-                            {formatPrice(relatedProduct?.price)}
+                            {formatPrice(Math.round(relatedProduct?.price))}
                           </span>{" "}
                           <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                            {formatPrice(
+                            {formatPrice(Math.round(
                               relatedProduct.price -
                                 (relatedProduct.price *
                                   relatedProduct.discount) /
                                   100
-                            )}
+                            ))}
                           </span>
                         </>
                       </span>
@@ -808,15 +808,15 @@ const Details = () => {
                       <span className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                         <>
                           <span className="line-through text-zinc-500">
-                            {formatPrice(relatedProduct?.price)}
+                            {formatPrice(Math.round(relatedProduct?.price))}
                           </span>{" "}
                           <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                            {formatPrice(
+                            {formatPrice(Math.round(
                               relatedProduct.price -
                                 (relatedProduct.price *
                                   relatedProduct.discount) /
                                   100
-                            )}
+                            ))}
                           </span>
                         </>
                       </span>

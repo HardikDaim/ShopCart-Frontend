@@ -70,9 +70,15 @@ const ShopProducts = ({ products, loader, styles }) => {
     }
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
   return (
     <>
-      {(loading || loader) ? ( // Show skeleton if loading or loader is true
+      {loading || loader ? ( // Show skeleton if loading or loader is true
         <div
           className={`w-full ${
             styles === "grid"
@@ -110,133 +116,120 @@ const ShopProducts = ({ products, loader, styles }) => {
             </div>
           ))}
         </div>
-      ) : (
-        products && products.length > 0 ? (
-          <div
-            className={`w-full ${
-              styles === "grid"
-                ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
-                : "flex flex-col gap-3"
-            }`}
-          >
-            {products.map((p, i) => {
-              const discountedPrice = p.price - (p.price * p.discount) / 100;
-              return (
+      ) : products && products.length > 0 ? (
+        <div
+          className={`w-full ${
+            styles === "grid"
+              ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
+              : "flex flex-col gap-3"
+          }`}
+        >
+          {products.map((p, i) => {
+            const discountedPrice = p.price - (p.price * p.discount) / 100;
+            return (
+              <div
+                key={i}
+                onClick={() => navigate(`/product/details/${p.slug}`)}
+                className={`w-full ${
+                  styles !== "grid"
+                    ? "flex items-start justify-start p-2"
+                    : "p-1"
+                } rounded-md md:transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
+              >
                 <div
-                  key={i}
-                  onClick={() => navigate(`/product/details/${p.slug}`)}
-                  className={`w-full ${
-                    styles !== "grid"
-                      ? "flex items-start justify-start p-2"
-                      : "p-1"
-                  } rounded-md md:transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
+                  className={`${
+                    styles === "grid"
+                      ? "w-full relative group overflow-hidden"
+                      : "w-1/4 relative group overflow-hidden"
+                  }`}
                 >
-                  <div
-                    className={`${
-                      styles === "grid"
-                        ? "w-full relative group overflow-hidden"
-                        : "w-1/4 relative group overflow-hidden"
-                    }`}
-                  >
-                    {p.discount > 0 && (
-                      <div className="flex justify-center items-center absolute text-white w-[30px] h-[20px] md:w-[38px] md:h-[38px] md:rounded-full bg-red-500 font-semibold text-xs -left-0 -top-1">
-                        {p.discount}%
-                      </div>
-                    )}
-                    <Link to={`/product/details/${p.slug}`}>
-                      <img
-                        className="rounded-lg w-full h-32"
-                        src={p.images[0]}
-                        alt={p.name}
-                      />
-                    </Link>
-                    <ul className="hidden lg:flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
-                      <li
-                        onClick={() => add_wishlist(p)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
-                      >
-                        <FaRegHeart />
-                      </li>
-                      <Link to={`/product/details/${p.slug}`}>
-                        <li className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
-                          <FaEye />
-                        </li>
-                      </Link>
-                      <li
-                        onClick={() => add_cart(p._id)}
-                        className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
-                      >
-                        <RiShoppingCartLine />
-                      </li>
-                    </ul>
-                  </div>
-                  <div
-                    className={`my-2 text-zinc-700 dark:text-zinc-300 ${
-                      styles === "grid" ? "w-full" : "w-3/4 pl-2 md:pl-4"
-                    }`}
-                  >
-                    <h2 className="font-bold text-xs">
-                      {p.name &&
-                        (p.name.length > 40
-                          ? `${p.name.substring(0, 40)}...`
-                          : p.name)}
-                    </h2>
-                    <span
-                      className={`${
-                        styles === "grid"
-                          ? " flex gap-0"
-                          : "flex text-xs"
-                      }`}
-                    >
-                      <Rating ratings={p.rating} />
-                    </span>
-                    <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg">
-                      {p.discount > 0 ? (
-                        <>
-                          <span className="line-through text-zinc-500">
-                            ₹{p.price}
-                          </span>
-                          <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                            ₹
-                            {Math.round(discountedPrice).toLocaleString(
-                              "en-IN"
-                            )}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-black font-semibold dark:text-zinc-300">
-                          ₹{p.price.toLocaleString("en-IN")}
-                        </span>
-                      )}
+                  {p.discount > 0 && (
+                    <div className="flex justify-center items-center absolute text-white w-[30px] h-[20px] md:w-[38px] md:h-[38px] md:rounded-full bg-red-500 font-semibold text-xs -left-0 -top-1">
+                      {p.discount}%
                     </div>
-                    <p className="text-[8px] text-zinc-600 dark:text-zinc-400">
-                      {p.description &&
-                        (p.description.length > 20
-                          ? `${p.description.substring(0, 80)}...`
-                          : p.description)}
-                    </p>
-                  </div>
+                  )}
+                  <Link to={`/product/details/${p.slug}`}>
+                    <img
+                      className="rounded-lg w-full h-32"
+                      src={p.images[0]}
+                      alt={p.name}
+                    />
+                  </Link>
+                  <ul className="hidden lg:flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
+                    <li
+                      onClick={() => add_wishlist(p)}
+                      className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                    >
+                      <FaRegHeart />
+                    </li>
+                    <Link to={`/product/details/${p.slug}`}>
+                      <li className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all">
+                        <FaEye />
+                      </li>
+                    </Link>
+                    <li
+                      onClick={() => add_cart(p._id)}
+                      className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
+                    >
+                      <RiShoppingCartLine />
+                    </li>
+                  </ul>
                 </div>
-              );
-            })}
-          </div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col justify-center items-center gap-4"
-          >
-            <img
-              className="w-52 h-52 md:w-80 md:h-80 object-cover"
-              src="/images/noproducts.png"
-              alt="Empty Feature Image"
-            />
-            <h4 className="font-bold text-lg md:text-2xl text-center text-zinc-600">
-              Try refreshing again
-            </h4>
-          </motion.div>
-        )
+                <div
+                  className={`my-2 text-zinc-700 dark:text-zinc-300 ${
+                    styles === "grid" ? "w-full" : "w-3/4 pl-2 md:pl-4"
+                  }`}
+                >
+                  <h2 className="font-bold text-xs">
+                    {p.name &&
+                      (p.name.length > 40
+                        ? `${p.name.substring(0, 40)}...`
+                        : p.name)}
+                  </h2>
+                  <span
+                    className={`${
+                      styles === "grid" ? " flex gap-0" : "flex text-xs"
+                    }`}
+                  >
+                    <Rating ratings={p.rating} />
+                  </span>
+                  <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg">
+                    <>
+                      <span className="line-through text-zinc-500">
+                        {formatPrice(p.price)}
+                      </span>
+                      <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                        {formatPrice(Math.round(discountedPrice))}
+                      </span>
+                    </>
+                  </div>
+                  <p className="text-[8px] text-zinc-600 dark:text-zinc-400">
+                    {p.description &&
+                      (p.description.length > 20
+                        ? `${p.description.substring(0, 80)}...`
+                        : p.description)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="flex flex-col justify-center items-center gap-4"
+        >
+          <img
+            className="w-52 h-52 md:w-80 md:h-80 object-cover"
+            src="/images/noproducts.png"
+            alt="Empty Feature Image"
+          />
+          <h4 className="font-bold text-lg md:text-2xl text-center text-zinc-600">
+            Try refreshing again
+          </h4>
+        </motion.div>
       )}
     </>
   );

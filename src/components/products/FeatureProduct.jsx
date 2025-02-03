@@ -218,10 +218,10 @@ const FeatureProduct = ({ products, loader }) => {
                         <div className="flex justify-start items-center gap-2">
                           <>
                             <span className="line-through text-zinc-500 hidden md:flex">
-                              {formatPrice(product.price)}
+                              {formatPrice(Math.round(product.price))}
                             </span>{" "}
                             <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                              {formatPrice(discountedPrice)}
+                              {formatPrice(Math.round(discountedPrice))}
                             </span>
                           </>
                         </div>
