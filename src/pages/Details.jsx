@@ -318,7 +318,7 @@ const Details = () => {
                           key={index}
                           src={image}
                           alt={product.name}
-                          className="w-full h-auto max-h-[600px] xl:max-h-[450px] rounded-lg shadow-lg object-contain flex-shrink-0"
+                          className="w-full h-auto max-h-[600px] xl:max-h-[450px] rounded-lg object-contain flex-shrink-0"
                         />
                       ))}
                     </div>
@@ -329,7 +329,7 @@ const Details = () => {
                           className={`${
                             currentImageIndex === 0
                               ? "hidden"
-                              : "absolute left-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                              : "absolute left-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full focus:outline-none"
                           }`}
                         >
                           &lt;
@@ -339,7 +339,7 @@ const Details = () => {
                           className={`${
                             currentImageIndex === product.images.length - 1
                               ? "hidden"
-                              : "absolute right-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full shadow-lg focus:outline-none"
+                              : "absolute right-1 top-1/2 transform -translate-y-1/2 bg-zinc-800 hover:bg-zinc-700 bg-opacity-50 text-white p-2 rounded-full focus:outline-none"
                           }`}
                         >
                           &gt;
@@ -384,7 +384,7 @@ const Details = () => {
           </div>
 
           {/* Details Section */}
-          <div className="w-full lg:w-1/2 flex flex-col space-y-4">
+          <div className="w-full lg:w-1/2 flex flex-col space-y-4 border-2 bg-white dark:bg-zinc-800 dark:border-zinc-700 p-2 rounded-2xl">
             {loader ? (
               <div className="flex flex-col space-y-4">
                 <Skeleton height={40} width="100%" className="rounded-lg" />
