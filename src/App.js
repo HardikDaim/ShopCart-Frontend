@@ -24,6 +24,7 @@ import Success from "./pages/Success";
 import Failed from "./pages/Failed";
 import NetworkStatusPopup from "./components/NetworkStatusPopup";
 import { ClipLoader, DotLoader } from "react-spinners";
+import ProductAdModal from "./ads/ProductAdModal";
 
 const Home = lazy(() => import("./pages/Home"));
 const Shops = lazy(() => import("./pages/Shops"));
@@ -111,6 +112,7 @@ function App() {
 
         <BrowserRouter>
           <ScrollToTop />
+          <ProductAdModal />
           {process.env.NODE_ENV === "production" && (
             <>
               <Analytics />
