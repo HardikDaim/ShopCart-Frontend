@@ -85,11 +85,7 @@ function App() {
 
   const LoadingSpinner = () => (
     <div className="flex justify-center items-center h-screen">
-      <DotLoader
-        size={50}
-        color="#1D4ED8"
-        loading={true}
-      />
+      <DotLoader size={50} color="#1D4ED8" loading={true} />
     </div>
   );
 
@@ -257,14 +253,7 @@ function App() {
                   </Suspense>
                 }
               />
-              <Route
-                path="/chat/:sellerId"
-                element={
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Chat />
-                  </Suspense>
-                }
-              />
+              <Route path="/chat/:sellerId" element={<Chat />} />
               <Route
                 path="/payment"
                 element={

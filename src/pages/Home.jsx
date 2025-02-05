@@ -18,11 +18,11 @@ const Home = () => {
     loader,
     errorMessage,
     successMessage,
+    categories,
     products,
     latestProducts,
     topRatedProducts,
     discountProducts,
-    categories,
   } = useSelector((state) => state.home);
 
   useEffect(() => {

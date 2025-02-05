@@ -124,7 +124,7 @@ const Header = () => {
             <span className="ml-1">ShopCart</span>
             <h1 className=" hidden">ShopCart - An E-commerce Platform</h1>
           </Link>
-          <nav className="hidden xl:flex space-x-4 text-[10px] font-medium">
+          <nav className="hidden xl:flex space-x-4 text-xs font-medium">
             <Link
               to="/"
               className={`${
@@ -343,6 +343,15 @@ const Header = () => {
                         placeholder="Search..."
                         value={searchValue}
                       />
+
+                      {searchValue !== "" && (
+                        <button
+                          onClick={() => setSearchValue("")}
+                          className="absolute inset-y-0 right-8 flex text-xs items-center p-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+                        >
+                          ✕
+                        </button>
+                      )}
                       <button
                         type="submit"
                         className="absolute top-0 end-0 p-2 text-[8px] font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
@@ -398,8 +407,22 @@ const Header = () => {
                                   className="flex items-center p-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 cursor-pointer"
                                   onClick={() => {
                                     setSearchValue("");
+
+                                    const words = suggestion.slug.split("-");
+                                    const operatorRegex = /[+\-*/()]/; // Regex to detect any operator sign
+                                    const operatorIndex = words.findIndex(
+                                      (word) => operatorRegex.test(word)
+                                    );
+
+                                    const slicedWords =
+                                      operatorIndex > 0
+                                        ? words
+                                            .slice(0, operatorIndex)
+                                            .join(" ")
+                                        : words.slice(0, 3).join(" ");
+
                                     navigate(
-                                      `/products/search/?search=${suggestion.slug.split("-").slice(0,3).join(" ")}&&category=${suggestion.category}`
+                                      `/products/search/?search=${slicedWords}&&category=${suggestion.category}`
                                     );
                                   }}
                                 >
