@@ -19,7 +19,7 @@ const productAds = [
     id: 2,
     image:
       "https://img.global.news.samsung.com/in/wp-content/uploads/2022/04/11630_Neo_Qled_Banner_3000x2000.jpg",
-    title: "Samsung Neo QLED 8K - Ultimate Viewing Experience!",
+    title: "Samsung Neo QLED 8K - Ultimate View!",
     description:
       "Enjoy breathtaking visuals with the latest Neo QLED 8K TV. Limited stock available!",
     link: "/products?category=Smart TV",
@@ -72,13 +72,13 @@ const ProductAdModal = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
-          className="relative bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-96 md:w-[80vh] mx-4 text-center border border-gray-200 dark:border-zinc-700"
+          className="relative bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-96 md:w-[80vh] mx-4 text-center border border-zinc-200 dark:border-zinc-700"
         >
           <button
             onClick={() => setIsOpen(false)}
-            className="absolute -top-2 -right-2 p-2 rounded-full border dark:border-zinc-700 bg-gray-100 dark:bg-zinc-700 hover:bg-gray-200 dark:hover:bg-zinc-600 transition"
+            className="absolute -top-2 -right-2 p-2 rounded-full border dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 transition"
           >
-            <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            <X className="w-4 h-4 md:w-5 md:h-5 text-zinc-700 dark:text-zinc-300" />
           </button>
           <Link
             to={productAds[currentAdIndex].link}
@@ -89,11 +89,11 @@ const ProductAdModal = () => {
               alt="Product Ad"
               className="w-full h-auto object-cover rounded-t-xl shadow-md"
             />
-            <div className="px-4 py-6">
-              <h2 className="text-lg md:text-2xl font-semibold text-zinc-900 dark:text-white">
+            <div className="px-4 md:px-8 py-6">
+              <h2 className="text-sm md:text-2xl font-semibold text-zinc-900 dark:text-white">
                 {productAds[currentAdIndex].title}
               </h2>
-              <p className="text-sm md:text-md text-zinc-700 dark:text-zinc-300 mt-2">
+              <p className="text-xs md:text-lg text-zinc-700 dark:text-zinc-300 mt-2">
                 {productAds[currentAdIndex].description}
               </p>
             </div>

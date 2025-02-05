@@ -31,7 +31,7 @@ const Products = ({ title, products, loader }) => {
     return (
       <div className="flex justify-between items-center">
         <div className="text-md font-bold text-zinc-700 dark:text-zinc-300">
-          {title}
+          {loader ? <Skeleton width={120} /> : title}
         </div>
         <div className="flex justify-center items-center gap-2 text-zinc-600">
           <button
