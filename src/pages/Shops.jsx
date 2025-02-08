@@ -28,7 +28,6 @@ const Shops = () => {
   const {
     loader,
     errorMessage,
-    products,
     categories,
     latestProducts,
     priceRange,
@@ -118,6 +117,13 @@ const Shops = () => {
     );
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
+
   return (
     <div>
       <Header />
@@ -134,7 +140,7 @@ const Shops = () => {
           </div>
           <div className="w-full flex flex-wrap">
             <div
-              className={`w-full md:w-5/12 lg:w-3/12 md:pr-8 md:pl-2 transition-all duration-300 ease-in-out ${
+              className={`w-full md:w-4/12 lg:w-3/12 md:pr-8 md:pl-2 transition-all duration-300 ease-in-out ${
                 filter ? "max-h-0 overflow-hidden md:max-h-full" : "max-h-full"
               }`}
             >
@@ -214,8 +220,8 @@ const Shops = () => {
                     </>
                   ) : (
                     <>
-                      <span>₹{state.values[0]}</span>
-                      <span>₹{state.values[1]}</span>
+                      <span>{formatPrice(state.values[0])}</span>
+                      <span>{formatPrice(state.values[1])}</span>
                     </>
                   )}
                 </div>
@@ -350,7 +356,7 @@ const Shops = () => {
               </div>
             </div>
             {/* Placeholder for product list */}
-            <div className="w-full md:w-7/12 lg:w-9/12  md:pl-2 transition-all duration-300 ease-in-out">
+            <div className="w-full md:w-8/12 lg:w-9/12 md:pl-2 transition-all duration-300 ease-in-out">
               <div className="p-2 mb-4 rounded-md flex justify-between items-center border dark:border-zinc-600 bg-white dark:bg-zinc-800">
                 {loader ? (
                   <Skeleton height={24} width={100} />
@@ -439,7 +445,6 @@ const Shops = () => {
                   }
                 >
                   <ShopProducts
-                    products={products}
                     loader={loader}
                     styles={styles}
                   />

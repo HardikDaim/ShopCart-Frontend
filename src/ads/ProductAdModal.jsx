@@ -4,9 +4,19 @@ import { X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const productAds = [
-  // OnePlus 13
+  // MacBook Pro
   {
     id: 1,
+    image:
+      "https://miro.medium.com/v2/resize:fit:1400/1*5gSoG8WLGQujOOo-EJhYBg.png",
+    title: "MacBook Pro - Power Meets Performance!",
+    description:
+      "Unleash your creativity with the powerful MacBook Pro. Order yours today!",
+    link: "/products/search?search=MacBook&&category=Laptops",
+  },
+  // OnePlus 13
+  {
+    id: 2,
     image:
       "https://images.indianexpress.com/2025/01/OnePlus-13-OnePlus-13R-India-Launch-LIVE-Updates-1.jpg",
     title: "OnePlus 13 - The Future of Smartphones!",
@@ -16,23 +26,13 @@ const productAds = [
   },
   // Samsung Neo QLED 8K
   {
-    id: 2,
+    id: 3,
     image:
       "https://img.global.news.samsung.com/in/wp-content/uploads/2022/04/11630_Neo_Qled_Banner_3000x2000.jpg",
     title: "Samsung Neo QLED 8K - Ultimate View!",
     description:
       "Enjoy breathtaking visuals with the latest Neo QLED 8K TV. Limited stock available!",
     link: "/products?category=Smart TV",
-  },
-  // MacBook Pro
-  {
-    id: 3,
-    image:
-      "https://miro.medium.com/v2/resize:fit:1400/1*5gSoG8WLGQujOOo-EJhYBg.png",
-    title: "MacBook Pro - Power Meets Performance!",
-    description:
-      "Unleash your creativity with the powerful MacBook Pro. Order yours today!",
-    link: "/products/search?search=MacBook&&category=Laptops",
   },
 ];
 

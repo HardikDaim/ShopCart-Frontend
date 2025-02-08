@@ -30,8 +30,6 @@ const CategoryShop = () => {
     loader,
     errorMessage,
     successMessage,
-    products,
-    categories,
     latestProducts,
     priceRange,
     totalProducts,
@@ -112,6 +110,12 @@ const CategoryShop = () => {
     );
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
   return (
     <div>
       <Header />
@@ -138,7 +142,7 @@ const CategoryShop = () => {
                   </h2>
                   <button
                     onClick={() => setFilter(!filter)}
-                    className="text-xs p-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 md:hidden rounded-full "
+                    className="text-md p-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 md:hidden rounded-full "
                   >
                     <IoMdClose />
                   </button>
@@ -165,8 +169,8 @@ const CategoryShop = () => {
                   )}
                 />
                 <div className="text-xs flex justify-between text-zinc-700 dark:text-zinc-300">
-                  <span>₹{state.values[0]}</span>
-                  <span>₹{state.values[1]}</span>
+                  <span>{formatPrice(state.values[0])}</span>
+                  <span>{formatPrice(state.values[1])}</span>
                 </div>
               </div>
               <div className="flex flex-col py-2 gap-5">
@@ -374,7 +378,6 @@ const CategoryShop = () => {
                   }
                 >
                   <ShopProducts
-                    products={products}
                     loader={loader}
                     styles={styles}
                   />

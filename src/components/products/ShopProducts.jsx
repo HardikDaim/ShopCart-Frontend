@@ -14,10 +14,12 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
 
-const ShopProducts = ({ products, loader, styles }) => {
+const ShopProducts = ({ loader, styles }) => {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const { products } = useSelector((state) => state.home);
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
   const [loading, setLoading] = useState(true); // New loading state
 
@@ -82,11 +84,11 @@ const ShopProducts = ({ products, loader, styles }) => {
         <div
           className={`w-full ${
             styles === "grid"
-              ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
+              ? "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3"
               : "flex flex-col gap-3"
           }`}
         >
-          {Array.from({ length: products.length || 40 }).map((_, index) => (
+          {Array.from({ length: products.length || 30 }).map((_, index) => (
             <div
               key={index}
               className={`w-full ${
@@ -120,7 +122,7 @@ const ShopProducts = ({ products, loader, styles }) => {
         <div
           className={`w-full ${
             styles === "grid"
-              ? "grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3"
+              ? "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3"
               : "flex flex-col gap-3"
           }`}
         >
@@ -140,7 +142,7 @@ const ShopProducts = ({ products, loader, styles }) => {
                   className={`${
                     styles === "grid"
                       ? "w-full relative group overflow-hidden"
-                      : "w-1/4 relative group overflow-hidden"
+                      : "w-1/3 sm:w-1/4 md:w-1/3 lg:w-1/6 relative group overflow-hidden"
                   }`}
                 >
                   {p.discount > 0 && (
