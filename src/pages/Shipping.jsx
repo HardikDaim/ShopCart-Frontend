@@ -15,9 +15,7 @@ const Shipping = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  const { loader, errorMessage } = useSelector(
-    (state) => state.order
-  );
+  const { loader, errorMessage } = useSelector((state) => state.order);
 
   const [formState, setFormState] = useState({
     firstName: "",
@@ -131,16 +129,16 @@ const Shipping = () => {
   };
 
   useEffect(() => {
-    if(errorMessage) {
+    if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
     }
-  },[])
+  }, []);
 
   return (
     <>
       {loader && <LoaderOverlay />}
-      <div className="min-h-screen bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
+      <div className="bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200">
         <Header />
         <div className="container mx-auto px-4 py-8">
           <h2 className="text-3xl font-bold mb-8 text-center">
@@ -154,7 +152,7 @@ const Shipping = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="firstName"
                         >
                           First Name <span className="text-red-500">*</span>
@@ -165,7 +163,7 @@ const Shipping = () => {
                           id="firstName"
                           value={formState.firstName}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.firstName && (
@@ -176,7 +174,7 @@ const Shipping = () => {
                       </div>
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="lastName"
                         >
                           Last Name <span className="text-red-500">*</span>
@@ -187,7 +185,7 @@ const Shipping = () => {
                           id="lastName"
                           value={formState.lastName}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.lastName && (
@@ -199,7 +197,7 @@ const Shipping = () => {
                     </div>
                     <div className="flex flex-col">
                       <label
-                        className="text-lg font-semibold mb-2"
+                        className="text-xs font-semibold mb-2"
                         htmlFor="address"
                       >
                         Address <span className="text-red-500">*</span>
@@ -210,7 +208,7 @@ const Shipping = () => {
                         id="address"
                         value={formState.address}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.address && (
@@ -220,7 +218,7 @@ const Shipping = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="city"
                         >
                           City <span className="text-red-500">*</span>
@@ -231,7 +229,7 @@ const Shipping = () => {
                           id="city"
                           value={formState.city}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.city && (
@@ -240,7 +238,7 @@ const Shipping = () => {
                       </div>
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="state"
                         >
                           State <span className="text-red-500">*</span>
@@ -251,7 +249,7 @@ const Shipping = () => {
                           id="state"
                           value={formState.state}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.state && (
@@ -262,7 +260,7 @@ const Shipping = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="postalCode"
                         >
                           Postal Code <span className="text-red-500">*</span>
@@ -273,7 +271,7 @@ const Shipping = () => {
                           id="postalCode"
                           value={formState.postalCode}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.postalCode && (
@@ -284,7 +282,7 @@ const Shipping = () => {
                       </div>
                       <div className="flex flex-col">
                         <label
-                          className="text-lg font-semibold mb-2"
+                          className="text-xs font-semibold mb-2"
                           htmlFor="country"
                         >
                           Country <span className="text-red-500">*</span>
@@ -295,7 +293,7 @@ const Shipping = () => {
                           id="country"
                           value={formState.country}
                           onChange={handleInputChange}
-                          className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                          className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                           required
                         />
                         {errors.country && (
@@ -305,7 +303,7 @@ const Shipping = () => {
                     </div>
                     <div className="flex flex-col">
                       <label
-                        className="text-lg font-semibold mb-2"
+                        className="text-xs font-semibold mb-2"
                         htmlFor="phone"
                       >
                         Phone Number <span className="text-red-500">*</span>
@@ -316,7 +314,7 @@ const Shipping = () => {
                         id="phone"
                         value={formState.phone}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.phone && (
@@ -325,7 +323,7 @@ const Shipping = () => {
                     </div>
                     <div className="flex flex-col">
                       <label
-                        className="text-lg font-semibold mb-2"
+                        className="text-xs font-semibold mb-2"
                         htmlFor="email"
                       >
                         Email <span className="text-red-500">*</span>
@@ -336,7 +334,7 @@ const Shipping = () => {
                         id="email"
                         value={formState.email}
                         onChange={handleInputChange}
-                        className="p-3 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="p-1 rounded border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                         required
                       />
                       {errors.email && (
@@ -346,7 +344,7 @@ const Shipping = () => {
                     <div className="flex justify-end">
                       <button
                         type="submit"
-                        className="py-3 px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
+                        className="py-3 px-6 text-xs font-semibold bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500"
                       >
                         Save Changes
                       </button>
@@ -355,7 +353,7 @@ const Shipping = () => {
                 ) : (
                   <div className="space-y-4">
                     <div className="flex flex-col gap-1">
-                      <h2 className="text-lg font-semibold mb-2">
+                      <h2 className="text-xs font-semibold mb-2">
                         Deliver to: {formState.firstName} {formState.lastName}
                       </h2>
                       <p>
@@ -400,40 +398,35 @@ const Shipping = () => {
                             alt={pt.productInfo.name}
                             className="w-30 h-20 object-cover rounded-lg mb-4 sm:mb-0 sm:mr-4"
                           />
-                          <div className="flex-1">
-                            <h3 className="text-lg font-semibold">
+                          <div className="flex-1 text-xs">
+                            <h3 className="text-xs font-semibold">
                               {pt.productInfo.name}
                             </h3>
-                            <span className="text-sm text-zinc-500 mr-2">
+                            <span className="text-xs text-zinc-500 mr-2">
                               Brand: {pt.productInfo?.brand}
                             </span>
-                            {pt.productInfo?.discount > 0 ? (
-                              <>
-                                <span className="text-zinc-600 mr-2 text-sm dark:text-zinc-400 line-through">
-                                  {formatPrice(pt.productInfo.price)}
-                                </span>
-                                <span className="text-blue-600 dark:text-blue-400">
-                                  {formatPrice(
-                                    pt.productInfo.price -
-                                      Math.floor(
-                                        (pt.productInfo.price *
-                                          pt.productInfo.discount) /
-                                          100
-                                      )
-                                  )}
-                                </span>
-                              </>
-                            ) : (
-                              <p className="text-blue-600 dark:text-blue-400">
+                            <>
+                              <span className="text-zinc-600 mr-2 text-sm dark:text-zinc-400 line-through">
                                 {formatPrice(pt.productInfo.price)}
-                              </p>
-                            )}
+                              </span>
+                              <span className="text-blue-600 dark:text-blue-400">
+                                {formatPrice(
+                                  pt.productInfo.price -
+                                    Math.floor(
+                                      (pt.productInfo.price *
+                                        pt.productInfo.discount) /
+                                        100
+                                    )
+                                )}
+                              </span>
+                            </>
+
                             <div className="flex items-center space-x-2">
                               <span>Quantity: {pt.quantity}</span>
                             </div>
                           </div>
                           <div className="ml-0 sm:ml-4 mt-4 sm:mt-0">
-                            <p className="text-lg font-semibold text-blue-600 dark:text-blue-400">
+                            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">
                               {formatPrice(
                                 pt.productInfo.price -
                                   Math.floor(
@@ -453,9 +446,9 @@ const Shipping = () => {
                 )}
               </div>
             </div>
-            <div className="w-full lg:w-1/3 bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
+            <div className="w-full lg:w-1/3 lg:h-[275px] xl:h-[260px] bg-white dark:bg-zinc-800 rounded-lg shadow-md p-4">
               <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
-              <div className="space-y-2">
+              <div className="space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span>Items</span>
                   <span>{items}</span>
@@ -474,11 +467,11 @@ const Shipping = () => {
                   <span>{formatPrice(price + shipping_fee)}</span>
                 </div>
               </div>
-              <p className="pt-2">
+              <p className="pt-2 text-xs">
                 Note: The prices are inclusive of GST and other taxes.
               </p>
               <button
-                className={`w-full mt-6 py-2 text-white rounded ${
+                className={`w-full mt-6 py-2 text-white rounded font-semibold ${
                   isSubmitted
                     ? "cursor-pointer bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-500"
                     : "cursor-not-allowed bg-blue-600 dark:bg-blue-500 hover:bg-blue-700"

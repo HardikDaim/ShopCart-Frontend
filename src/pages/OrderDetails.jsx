@@ -59,7 +59,7 @@ const OrderDetails = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold mb-2">
-                    Shipping Information:
+                  <Skeleton height={20} width={200} className="mb-2" />
                   </h4>
                   <Skeleton height={20} width={200} className="mb-2" />
                   <Skeleton height={20} width={200} className="mb-2" />
@@ -177,14 +177,14 @@ const OrderDetails = () => {
                       >
                         <span className="font-semibold">{product?.name}</span> -{" "}
                         <span className="line-through mr-2">
-                          ₹{product?.price}
+                          {formatPrice(product?.price)}
                         </span>
                         <span className="text-blue-700 dark:text-blue-600">
-                          {formatPrice(
+                          {formatPrice(Math.round(
                             product?.price -
                               Math.floor(product?.price * product?.discount) /
                                 100
-                          )}{" "}
+                          ))}{" "}
                         </span>
                         x {product?.quantity}
                         <div className="flex mt-2 items-center flex-shrink-0">
@@ -215,7 +215,7 @@ const OrderDetails = () => {
               </div>
               <div className="mt-4 flex justify-center items-center">
                 <button
-                  className="bg-blue-700 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
+                  className="bg-blue-700 font-semibold text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
                   onClick={() =>
                     navigate(`/payment`, {
                       state: {

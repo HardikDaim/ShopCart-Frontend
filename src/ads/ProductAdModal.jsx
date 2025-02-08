@@ -41,7 +41,7 @@ const ProductAdModal = () => {
   const [currentAdIndex, setCurrentAdIndex] = useState(0);
 
   useEffect(() => {
-    const showModalTimeout = setTimeout(() => setIsOpen(true), 10000);
+    const showModalTimeout = setTimeout(() => setIsOpen(true), 30000);
     return () => clearTimeout(showModalTimeout);
   }, []);
 
@@ -57,7 +57,7 @@ const ProductAdModal = () => {
       setCurrentAdIndex((prevIndex) =>
         prevIndex === productAds.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000);
+    }, 3000);
 
     return () => {
       clearInterval(interval);

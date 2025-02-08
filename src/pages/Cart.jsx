@@ -76,6 +76,12 @@ const Cart = () => {
     }
   };
 
+  const formatPrice = (price) => {
+    return price
+      ? "₹" + price.toLocaleString("en-IN", { maximumFractionDigits: 2 })
+      : "N/A";
+  };
+
   return (
     <>
       <Header />
@@ -150,28 +156,21 @@ const Cart = () => {
                             <span className="text-xs text-gray-500 mr-2">
                               Brand: {pt.productInfo?.brand}
                             </span>
-                            {pt.productInfo?.discount > 0 ? (
-                              <>
-                                <span className="text-zinc-600 mr-2 text-xs dark:text-zinc-400 line-through">
-                                  ₹{pt.productInfo.price.toFixed(2)}
-                                </span>
-                                <span className="text-blue-600 dark:text-blue-400">
-                                  ₹
-                                  {(
-                                    pt.productInfo.price -
-                                    Math.floor(
-                                      (pt.productInfo.price *
-                                        pt.productInfo.discount) /
-                                        100
-                                    )
-                                  ).toFixed(2)}
-                                </span>
-                              </>
-                            ) : (
-                              <p className="text-blue-600 dark:text-blue-400">
-                                ₹{pt.productInfo.price.toFixed(2)}
-                              </p>
-                            )}
+
+                            <span className="text-zinc-600 mr-2 text-xs dark:text-zinc-400 line-through">
+                              {formatPrice(pt.productInfo.price)}
+                            </span>
+                            <span className="text-blue-600 dark:text-blue-400">
+                              {formatPrice(
+                                pt.productInfo.price -
+                                  Math.floor(
+                                    (pt.productInfo.price *
+                                      pt.productInfo.discount) /
+                                      100
+                                  )
+                              )}
+                            </span>
+
                             <div className="mt-2 flex items-center space-x-2">
                               <button
                                 onClick={() => dec(pt.quantity, pt._id)}
@@ -192,15 +191,14 @@ const Cart = () => {
                           </div>
                           <div className="ml-0 sm:ml-4 mt-4 sm:mt-0 text-xs">
                             <p className="font-semibold text-blue-600 dark:text-blue-400">
-                              ₹
-                              {(
+                              {formatPrice(
                                 pt.productInfo.price -
-                                Math.floor(
-                                  (pt.productInfo.price *
-                                    pt.productInfo.discount) /
-                                    100
-                                )
-                              ).toFixed(2)}
+                                  Math.floor(
+                                    (pt.productInfo.price *
+                                      pt.productInfo.discount) /
+                                      100
+                                  )
+                              )}
                             </p>
                             <button
                               onClick={() =>
@@ -248,28 +246,20 @@ const Cart = () => {
                             Brand: {p.products[0].brand}
                           </span>
                           <span className="text-zinc-600 dark:text-zinc-400">
-                            {p.products[0]?.discount > 0 ? (
-                              <>
-                                <span className="text-zinc-600 mr-2 text-xs dark:text-zinc-400 line-through">
-                                  ₹{p.products[0].price.toFixed(2)}
-                                </span>
-                                <span className="text-blue-600 dark:text-blue-400">
-                                  ₹
-                                  {(
-                                    p.products[0].price -
-                                    Math.floor(
-                                      (p.products[0].price *
-                                        p.products[0].discount) /
-                                        100
-                                    )
-                                  ).toFixed(2)}
-                                </span>
-                              </>
-                            ) : (
-                              <p className="text-blue-600 dark:text-blue-400">
-                                ₹{p.products[0].price.toFixed(2)}
-                              </p>
-                            )}
+                            <span className="text-zinc-600 mr-2 text-xs dark:text-zinc-400 line-through">
+                              {formatPrice(p.products[0].price)}
+                            </span>
+                            <span className="text-blue-600 dark:text-blue-400">
+                              
+                              {formatPrice(
+                                p.products[0].price -
+                                Math.floor(
+                                  (p.products[0].price *
+                                    p.products[0].discount) /
+                                    100
+                                )
+                              )}
+                            </span>
                           </span>
                           <div className="mt-2 flex items-center space-x-2">
                             <button
@@ -286,14 +276,14 @@ const Cart = () => {
                         </div>
                         <div className="ml-0 sm:ml-4 mt-4 sm:mt-0">
                           <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">
-                            ₹
-                            {(
+                            
+                            {formatPrice(
                               p.products[0].price -
                               Math.floor(
                                 (p.products[0].price * p.products[0].discount) /
                                   100
                               )
-                            ).toFixed(2)}
+                            )}
                           </p>
                           <button
                             onClick={() => dispatch(delete_cart_product(p._id))}
@@ -320,16 +310,16 @@ const Cart = () => {
                   </div>
                   <div className="flex justify-between">
                     <span> Discounted Price</span>
-                    <span>₹{price.toFixed(2)}</span>
+                    <span>{formatPrice(price)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Delivery Charges</span>
-                    <span>₹{shipping_fee.toFixed(2)}</span>
+                    <span>{formatPrice(shipping_fee)}</span>
                   </div>
                   <div className="border-t border-zinc-300 dark:border-zinc-700 my-2"></div>
                   <div className="flex justify-between font-semibold">
                     <span>Total</span>
-                    <span>₹{(price + shipping_fee).toFixed(2)}</span>
+                    <span>{formatPrice((price + shipping_fee))}</span>
                   </div>
                 </div>
 

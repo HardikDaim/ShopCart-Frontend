@@ -18,8 +18,6 @@ const Home = () => {
     loader,
     errorMessage,
     successMessage,
-    categories,
-    products,
     latestProducts,
     topRatedProducts,
     discountProducts,
@@ -44,8 +42,8 @@ const Home = () => {
       <BecomeSeller />
       <Header />
       <Banner loader={loader} />
-      <Categoires categories={categories} loader={loader} />
-      <FeatureProduct products={products} loader={loader} />
+      <Categoires loader={loader} />
+      <FeatureProduct loader={loader} />
       <div className="w-[85%] flex flex-wrap mx-auto sm:pt-4">
         <div className="w-full">
           <div className="flex mb-2  font-bold relative justify-center items-center flex-col text-md sm:text-lg md:text-xl text-center text-zinc-700 dark:text-zinc-300">

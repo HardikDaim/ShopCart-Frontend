@@ -3,9 +3,11 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useSelector } from "react-redux";
 
-const Categories = ({ categories, loader }) => {
+const Categories = ({ loader }) => {
   const scrollRef = useRef(null);
+  const { categories } = useSelector((state) => state.home);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
@@ -89,9 +91,7 @@ const Categories = ({ categories, loader }) => {
                     key={index}
                     className="flex-shrink-0 w-20 md:w-36 lg:w-48 text-center"
                   >
-                    <Skeleton
-                      className="w-full h-16 md:h-28 lg:h-32 rounded-lg"
-                    />
+                    <Skeleton className="w-full h-16 md:h-28 lg:h-32 rounded-lg" />
                     <Skeleton
                       width="60%"
                       height={20}

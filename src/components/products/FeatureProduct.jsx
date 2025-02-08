@@ -13,9 +13,10 @@ import { toast } from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const FeatureProduct = ({ products, loader }) => {
+const FeatureProduct = ({ loader }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.home);
   const { userInfo } = useSelector((state) => state.auth);
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
 
