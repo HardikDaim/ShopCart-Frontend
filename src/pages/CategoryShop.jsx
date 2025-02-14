@@ -378,7 +378,6 @@ const CategoryShop = () => {
                   }
                 >
                   <ShopProducts
-                    loader={loader}
                     styles={styles}
                   />
                 </Suspense>

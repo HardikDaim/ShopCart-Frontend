@@ -310,9 +310,7 @@ const SearchProducts = () => {
                       className="flex items-center justify-between  px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                       onClick={toggleDropdown}
                     >
-                      <span className="text-xs">
-                        {selectedOption.label}
-                      </span>
+                      <span className="text-xs">{selectedOption.label}</span>
                       {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
                     </button>
                     {isOpen && (
@@ -353,10 +351,7 @@ const SearchProducts = () => {
                 </div>
               </div>
               <div className="pb-8">
-                <ShopProducts
-                  loader={loader}
-                  styles={styles}
-                />
+                <ShopProducts styles={styles} />
                 <div className="py-4 flex justify-end items-center">
                   {totalProducts > perPage && (
                     <Pagination

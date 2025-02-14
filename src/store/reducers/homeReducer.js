@@ -103,6 +103,7 @@ const homeReducer = createSlice({
     loader: false,
     categories: [],
     products: [],
+    isFetching: false,
     latestProducts: [],
     topRatedProducts: [],
     discountProducts: [],
@@ -176,11 +177,13 @@ const homeReducer = createSlice({
       // Query Products
       .addCase(query_products.pending, (state) => {
         state.loader = true;
+        state.isFetching = true;
         state.errorMessage = "";
         state.successMessage = "";
       })
       .addCase(query_products.fulfilled, (state, action) => {
         state.loader = false;
+        state.isFetching = false;
         state.successMessage = action.payload.message;
         state.products = action.payload?.products;
         state.totalProducts = action.payload?.totalProducts;
@@ -188,6 +191,7 @@ const homeReducer = createSlice({
       })
       .addCase(query_products.rejected, (state, action) => {
         state.loader = false;
+        state.isFetching = false;
         state.errorMessage = action.payload?.error;
       })
       // Product details

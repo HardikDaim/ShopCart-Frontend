@@ -123,11 +123,9 @@ const Shops = () => {
       : "N/A";
   };
 
-
   return (
     <div>
       <Header />
-      {/* <Banner loader={loader}/> */}
       <section className="py-6 mx-4">
         <div className="h-full mx-auto">
           <div className="block md:hidden mb-6">
@@ -371,9 +369,7 @@ const Shops = () => {
                       className="flex items-center justify-between p-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-md   md:w-48 focus:outline-none focus:ring focus:ring-blue-500"
                       onClick={toggleDropdown}
                     >
-                      <span className="text-xs">
-                        {selectedOption.label}
-                      </span>
+                      <span className="text-xs">{selectedOption.label}</span>
                       {isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
                     </button>
                     {isOpen && (
@@ -414,41 +410,8 @@ const Shops = () => {
                 </div>
               </div>
               <div className="pb-8">
-                <Suspense
-                  fallback={
-                    <div className="flex items-center justify-center p-2 mb-8 bg-yellow-200 text-blue-700 dark:text-blue-700 font-semibold rounded-lg">
-                      <svg
-                        className="w-6 h-6 mr-2 animate-spin text-blue-700"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          d="M4 12a8 8 0 1 0 16 0A8 8 0 0 0 4 12z"
-                        ></path>
-                      </svg>
-                      Loading...
-                    </div>
-                  }
-                >
-                  <ShopProducts
-                    loader={loader}
-                    styles={styles}
-                  />
-                </Suspense>
+                <ShopProducts styles={styles} />
+
                 <div className="py-4 flex justify-end items-center">
                   {totalProducts > perPage && (
                     <Pagination

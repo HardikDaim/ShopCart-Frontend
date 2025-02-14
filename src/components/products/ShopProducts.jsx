@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from "../Rating";
@@ -14,21 +14,22 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { motion } from "framer-motion";
 
-const ShopProducts = ({ loader, styles }) => {
-
+const ShopProducts = ({ styles }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
-  const { products } = useSelector((state) => state.home);
+  const { loader, products, isFetching } = useSelector((state) => state.home);
   const { successMessage, errorMessage } = useSelector((state) => state.cart);
-  const [loading, setLoading] = useState(true); // New loading state
+
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
-    // Set loading to false only after products are received
-    if (products && products.length > 0) {
-      setLoading(false);
+    if (isFetching) {
+      setIsInitialLoad(true);
+    } else {
+      setIsInitialLoad(false);
     }
-  }, [products]);
+  }, [isFetching]);
 
   const add_cart = (id) => {
     if (userInfo) {
@@ -80,45 +81,47 @@ const ShopProducts = ({ loader, styles }) => {
 
   return (
     <>
-      {loading || loader ? ( // Show skeleton if loading or loader is true
+      {(loader || isInitialLoad) ? (
+        // Skeleton Loading State
         <div
-          className={`w-full ${
-            styles === "grid"
-              ? "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3"
-              : "flex flex-col gap-3"
-          }`}
-        >
-          {Array.from({ length: products.length || 30 }).map((_, index) => (
+        className={`w-full ${
+          styles === "grid"
+            ? "grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3"
+            : "flex flex-col gap-3"
+        }`}
+      >
+        {Array.from({ length: products.length || 30 }).map((_, index) => (
+          <div
+            key={index}
+            className={`w-full ${
+              styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
+            } rounded-md transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
+          >
+            <Skeleton height={200} width="100%" className="rounded-lg" />
             <div
-              key={index}
-              className={`w-full ${
-                styles !== "grid" ? "flex items-start justify-start p-2" : "p-1"
-              } rounded-md transition-all duration-1000 hover:shadow-md md:hover:-translate-y-3`}
+              className={`${
+                styles === "grid"
+                  ? "w-full relative group overflow-hidden"
+                  : "w-1/3 relative group overflow-hidden"
+              }`}
+            ></div>
+            <div
+              className={`my-2 text-zinc-700 dark:text-zinc-300 ${
+                styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
+              }`}
             >
-              <Skeleton height={200} width="100%" className="rounded-lg" />
-              <div
-                className={`${
-                  styles === "grid"
-                    ? "w-full relative group overflow-hidden"
-                    : "w-1/3 relative group overflow-hidden"
-                }`}
-              ></div>
-              <div
-                className={`my-2 text-zinc-700 dark:text-zinc-300 ${
-                  styles === "grid" ? "w-full" : "w-2/3 pl-2 md:pl-4"
-                }`}
-              >
-                <Skeleton height={20} width="60%" className="mb-2" />
-                <Skeleton height={15} width="40%" />
-                <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg mt-2">
-                  <Skeleton height={20} width="30%" />
-                </div>
-                <Skeleton count={2} height={15} width="90%" className="mt-2" />
+              <Skeleton height={20} width="60%" className="mb-2" />
+              <Skeleton height={15} width="40%" />
+              <div className="flex justify-start items-center gap-2 text-xs md:text-sm lg:text-lg mt-2">
+                <Skeleton height={20} width="30%" />
               </div>
+              <Skeleton count={2} height={15} width="90%" className="mt-2" />
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
       ) : products && products.length > 0 ? (
+        // Products Grid/List View
         <div
           className={`w-full ${
             styles === "grid"
@@ -159,7 +162,10 @@ const ShopProducts = ({ loader, styles }) => {
                   </Link>
                   <ul className="hidden lg:flex transition-all duration-700 -bottom-20 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
                     <li
-                      onClick={() => add_wishlist(p)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        add_wishlist(p);
+                      }}
                       className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                     >
                       <FaRegHeart />
@@ -170,7 +176,10 @@ const ShopProducts = ({ loader, styles }) => {
                       </li>
                     </Link>
                     <li
-                      onClick={() => add_cart(p._id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        add_cart(p._id);
+                      }}
                       className="w-10 h-10 md:w-12 md:h-12 lg:w-10 lg:h-10 cursor-pointer bg-white dark:bg-zinc-800 flex justify-center items-center rounded-full hover:bg-blue-600 hover:text-white hover:rotate-[720deg] transition-all"
                     >
                       <RiShoppingCartLine />
@@ -217,21 +226,24 @@ const ShopProducts = ({ loader, styles }) => {
           })}
         </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-col justify-center items-center gap-y-4 w-full h-96"
-        >
-          <img
-            className="w-36 h-36  object-cover"
-            src="/images/empty-cart.png"
-            alt="No Products Found"
-          />
-          <h4 className="font-bold text-sm md:text-lg text-center text-zinc-600">
-            Try refreshing again
-          </h4>
-        </motion.div>
+        // No Products Found State
+        !isInitialLoad && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col justify-center items-center gap-y-4 w-full h-96"
+          >
+            <img
+              className="w-36 h-36 object-cover"
+              src="/images/empty-cart.png"
+              alt="No Products Found"
+            />
+            <h4 className="font-bold text-sm md:text-lg text-center text-zinc-600">
+              No Products Found
+            </h4>
+          </motion.div>
+        )
       )}
     </>
   );

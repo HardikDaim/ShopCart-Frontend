@@ -161,38 +161,10 @@ function App() {
                 </Suspense>
               }
             />
-            <Route
-              path="/shops"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Shops />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/product/details/:slug"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <Details />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/products?"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <CategoryShop />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/products/search?"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <SearchProducts />
-                </Suspense>
-              }
-            />
+            <Route path="/shops" element={<Shops />} />
+            <Route path="/product/details/:slug" element={<Details />} />
+            <Route path="/products?" element={<CategoryShop />} />
+            <Route path="/products/search?" element={<SearchProducts />} />
             <Route path="/success" element={<Success />} />
             <Route path="/failed" element={<Failed />} />
 
